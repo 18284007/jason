@@ -18,10 +18,11 @@ var config = {
 
 var game = new Phaser.Game(config);
 
-/* The currentLevel variable is currently located in the html file. 
- * The level is selected by choosing a particular HTML file. 
- * This can be changed later.
- */ 
+/* The currentLevel variable is currently located in the html file.  
+ * It is controlled by the user selecting a level on a html page 
+ * and a <script> tag setting the variable. 
+ * This can be changed later. 
+ */
 //var currentLevel = "assets/map.json";
 
 function preload ()

@@ -1,14 +1,31 @@
 <html> 
-    <head> 
+    <head>
+        <style>
+            body {margin: auto; width: 1024px;}
+            #htmlForm {text-align: center;, margin: auto;}
+        </style>
     </head>
     <body>        
-    	<script>
-    		var currentLevel = "assets/map.json";
-    		var playerShip = false;
-    	</script>        
+        <section id="htmlForm">
+            <h1>Jason and the Argonauts</h1>
+            <button onclick="loadLevel('assets/map.json', false)">Test Level</button><br/>
+            <button onclick="loadLevel('assets/siren.json', true)">Siren Level</button>
+        </section>
+        <script>
+            var currentLevel;
+            var playerShip; 
+            function loadLevel(tempLevel, tempShip){
+                var htmlForm = document.getElementById('htmlForm');
+                htmlForm.style.display = 'none';
+                currentLevel = tempLevel;
+                playerShip = tempShip;
+                var gameScript = document.createElement("script");
+                gameScript.src = "code/base.js."; 
+                document.getElementsByTagName("head")[0].appendChild(gameScript);
+            }
+        </script>
         <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
         <script src="code/engine/level.js" type="text/javascript"></script>
         <script src="code/engine/player.js" type="text/javascript"></script>
-        <script src="code/base.js" type="text/javascript"></script>
     </body>
 </html>
