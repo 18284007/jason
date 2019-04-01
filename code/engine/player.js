@@ -1,7 +1,7 @@
 //Game variables relating to the player.
 var health = 100;
 var playerSprite = 'jason'; //Controls the current player sprite. 
-var playerJumpVelocity = 550; 
+var playerJumpVelocity = 500; 
 var playerWalkVelocity = 200; 
 //var playerShip = false; //Is the player a ship or a person?
 var playerShipVelocity = 300;
@@ -77,7 +77,7 @@ function playerMovement() {
 
 function playerShipMovement() {
     player.setVelocityX(playerShipVelocity);
-    var tempVelocityY = -15; 
+    var tempVelocityY = 0; 
     if (cursors.up.isDown) {
         tempVelocityY -= playerShipVelocity;
     }

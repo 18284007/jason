@@ -67,19 +67,19 @@
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.03.13",
- "tileheight":70,
+ "tileheight":64,
  "tilesets":[
         {
          "columns":26,
          "firstgid":1,
          "image":"tilesheet-extruded.png",
-         "imageheight":72,
-         "imagewidth":1872,
-         "margin":1,
+         "imageheight":64,
+         "imagewidth":1664,
+         "margin":0,
          "name":"tilesheet-extruded",
-         "spacing":2,
+         "spacing":0,
          "tilecount":26,
-         "tileheight":70,
+         "tileheight":64,
          "tiles":[
                 {
                  "id":1,
@@ -109,6 +109,15 @@
                         }]
                 }, 
                 {
+                 "id":21,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":22,
                  "properties":[
                         {
@@ -117,9 +126,9 @@
                          "value":true
                         }]
                 }],
-         "tilewidth":70
+         "tilewidth":64
         }],
- "tilewidth":70,
+ "tilewidth":64,
  "type":"map",
  "version":1.2,
  "width":50

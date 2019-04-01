@@ -5,7 +5,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 900}, 
+            gravity: {y: 800}, 
             debug: false
         }
     },
@@ -106,6 +106,11 @@ function create ()
     //Create enemies - TEMPORARY STUFF. 
     enemies = this.physics.add.sprite(200, 450, 'tempEnemy');
     this.physics.add.collider(enemies, mapLayer); 
+
+    //If the player is a ship, disable gravity. 
+    if (playerShip) {
+        player.body.allowGravity = false;
+    }
 }
 
 function update ()
