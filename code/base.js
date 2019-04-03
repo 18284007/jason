@@ -5,7 +5,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 900}, 
+            gravity: {y: 800}, 
             debug: false
         }
     },
@@ -18,17 +18,24 @@ var config = {
 
 var game = new Phaser.Game(config);
 
-/* The currentLevel variable is currently located in the html file. 
- * The level is selected by choosing a particular HTML file. 
- * This can be changed later.
- */ 
+/* The currentLevel variable is currently located in the html file.  
+ * It is controlled by the user selecting a level on a html page 
+ * and a <script> tag setting the variable. 
+ * This can be changed later. 
+ */
 //var currentLevel = "assets/map.json";
 
 function preload ()
 {
+    createThis = this; 
+
     //Player sprites. 
     this.load.spritesheet('jason','assets/player/jason.png', 
        { frameWidth: 48, frameHeight: 48 });
+    this.load.image('ship','assets/player/ship.png');
+
+    this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
+    this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
 
     //Temporary enemy sprite. 
     this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
@@ -48,10 +55,14 @@ function create ()
     //Map
     this.map = this.make.tilemap({ key: "currentLevelTilemap" });
 
+    playerAlive = true; 
+
     //Render background. 
-    //const bganchor = this.map.findObject("Objects", obj => obj.name === "bganchor");
-    //var backgroundLayer0 = 'sky';
-    //background = this.add.image(bganchor.x, bganchor.y, backgroundLayer0);
+    bganchor = this.map.findObject("Objects", obj => obj.name === "bganchor");
+    var backgroundLayer0 = 'sky';
+    background = this.add.image(bganchor.x, bganchor.y, backgroundLayer0);
+    background.setOrigin(0.1,1);
+    background.scrollFactorX = 0;
     
     //Draw tileset/objects
     tileset = this.map.addTilesetImage("tilesheet-extruded","tiles");
@@ -61,6 +72,11 @@ function create ()
     //Spawn player.
     playerSpawnPoint = this.map.findObject("Objects", obj => obj.name === "Player Spawn");
     player = this.physics.add.sprite(playerSpawnPoint.x, playerSpawnPoint.y, playerSprite);
+
+    spiderBossSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderBoss");
+    if (spiderBossSpawnPoint !== null){    
+        spiderBossInit();
+    }
 
     //Collision Detection
     mapLayer.setCollisionByProperty({ collides: true });
@@ -98,23 +114,49 @@ function create ()
     jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
  
     //Camera
-    this.cameras.main.startFollow(player, true, 0.05, 0.03);
+    if (!playerShip) {
+        this.cameras.main.startFollow(player, true, 0.05, 0.03);
+    } else {
+        playerOffset = this.physics.add.sprite(playerSpawnPoint.x + 400, playerSpawnPoint.y, playerSprite);
+        this.cameras.main.startFollow(playerOffset, true, 0.05, 0.03);
+        playerOffset.alpha = 0; 
+        playerOffset.allowGravity = 0; 
+    }
     this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-    this.mainCamera = this.cameras.main;
 
-    //Create enemies - TEMPORARY STUFF. 
-    enemies = this.physics.add.sprite(200, 450, 'tempEnemy');
-    this.physics.add.collider(enemies, mapLayer); 
+    ////Create enemies - TEMPORARY STUFF. 
+    //enemies = this.physics.add.sprite(200, 450, 'tempEnemy');
+    //this.physics.add.collider(enemies, mapLayer); 
+
+    //If the player is a ship, disable gravity. 
+    if (playerShip) {
+        player.body.allowGravity = false;
+    }
 }
 
 function update ()
 {
     //Use the appropriate movement function for the level. 
-    if (!playerShip) {
+    if (!playerShip && playerAlive) {
         playerMovement();
-    } else {
+    } else if (playerShip && playerAlive) {
         playerShipMovement();
+    } else if (playerShip && !playerAlive) {
+        playerShipSink(); 
     }
 
-    playerEnemyCollision();
+    //Update the camera offset if playerShip is enabled. 
+    if (playerShip) {
+        playerOffset.x = player.x + playerShipOffsetX; 
+        playerOffset.y = player.y; 
+    }
+
+    //Enemy Movement
+    enemyMovement(); 
+
+    playerCheckForFall(); 
+
+    if (playerAlive) {
+        playerEnemyCollision();
+    }
 }
