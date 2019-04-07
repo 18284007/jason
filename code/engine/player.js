@@ -89,7 +89,9 @@ function playerShipMovement() {
     player.setVelocityY(tempVelocityY);
 
     if (player.body.blocked.right) {
-        playerAlive = false; 
+        playerAlive = false;
+        //Disabling collision prevents an issue where the ship can get stuck on a rock when falling.
+        player.body.checkCollision = false;  
     }
 }
 
