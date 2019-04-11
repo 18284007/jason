@@ -1,9 +1,9 @@
 function enemyMovement() {
-    if (spiderBossSpawnPoint !== null) {
-    	if (spiderBossAlive){
-        	spiderBossMovement();
-    	} 
-    }
+	if (spiderBossSpawnPoint !== null) {
+		if (spiderBossAlive){
+			spiderBossMovement();
+		} 
+	}
 }
 
 function spiderBossInit() {

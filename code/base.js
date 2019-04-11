@@ -23,11 +23,14 @@ var game = new Phaser.Game(config);
  * and a <script> tag setting the variable. 
  * This can be changed later. 
  */
-//var currentLevel = "assets/map.json";
 
 function preload ()
 {
     createThis = this; 
+    currentLevel = 'assets/' + currentLevelID + '.json';
+    currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
+
+    loadLevelDialogue(); 
 
     //Player sprites. 
     this.load.spritesheet('jason','assets/player/jason.png', 
@@ -37,18 +40,29 @@ function preload ()
     this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
     this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
 
+    //01
+    this.load.image('bonfireSprite','assets/bonfire.png');
+
+    //shrineScene
+    //shrineLoad();
+    this.load.image('medeaSprite', 'assets/NPC/Medea-inface.png');
+    this.load.image('shrineJason', 'assets/NPC/Jason-Pholder.png');
+    this.load.image('shrinePortal','assets/items/doorway.png');
+
     //Temporary enemy sprite. 
     this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
        { frameWidth: 48, frameHeight: 48 });
 
+    //Items
+    this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
+
     //LEVEL STUFF
     //Environment sprites - PLACEHOLDERS. 
     this.load.image('sky', 'assets/sky.png');
+    //this.load.image('sky', 'assets/stage/background/01.png');
     this.load.image("tiles", "assets/tilesheet-extruded.png");
     this.load.tilemapTiledJSON("currentLevelTilemap", currentLevel);
 }
-
-var map;
 
 function create ()
 {
@@ -112,6 +126,7 @@ function create ()
     cursors = this.input.keyboard.createCursorKeys();
     attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
     jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+    talkKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
  
     //Camera
     if (!playerShip) {
@@ -132,6 +147,39 @@ function create ()
     if (playerShip) {
         player.body.allowGravity = false;
     }
+
+    medeaSpawnPoint = this.map.findObject("Objects", obj => obj.name === "medea");
+    if (medeaSpawnPoint !== null) {
+        medea = this.physics.add.sprite(medeaSpawnPoint.x, medeaSpawnPoint.y, 'medeaSprite');
+        this.physics.add.collider(medea, mapLayer);
+        talkMedea = createThis.add.text(medeaSpawnPoint.x,550,'',{color: '#000000'});
+    }
+
+    crew01SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew01");
+    if (crew01SpawnPoint !== null) {
+        crew01 = this.physics.add.sprite(crew01SpawnPoint.x, crew01SpawnPoint.y, 'jason');
+        this.physics.add.collider(crew01, mapLayer);
+    }
+
+    crew02SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew02");
+    if (crew02SpawnPoint !== null) {
+        crew02 = this.physics.add.sprite(crew02SpawnPoint.x, crew02SpawnPoint.y, 'jason');
+        this.physics.add.collider(crew02, mapLayer);
+    }
+
+    bonfireSpawnPoint = this.map.findObject("Objects", obj => obj.name === "bonfire");
+    if (bonfireSpawnPoint !== null) {
+        bonfire = this.physics.add.sprite(bonfireSpawnPoint.x, bonfireSpawnPoint.y, 'bonfireSprite');
+        this.physics.add.collider(bonfire, mapLayer);
+    }
+
+    spiderFlowerSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderFlower");
+    if (spiderFlowerSpawnPoint !== null) {
+        //spiderFlower = new spiderFlowerItem(game, player.x, player.y); 
+        //console.log(spiderFlower.testvar);
+    }
+
+    parseLevelDialogue();
 }
 
 function update ()
@@ -154,9 +202,18 @@ function update ()
     //Enemy Movement
     enemyMovement(); 
 
+    //Check if a player has fallen below the map. 
     playerCheckForFall(); 
 
     if (playerAlive) {
         playerEnemyCollision();
+    }
+
+    if (medeaSpawnPoint !== null) {
+        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
+            playerNPCCollision();
+        } else if (dialogueActive) {
+            playerCheckDialogueWalkAway(); 
+        }
     }
 }
