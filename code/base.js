@@ -152,7 +152,7 @@ function create ()
     if (medeaSpawnPoint !== null) {
         medea = this.physics.add.sprite(medeaSpawnPoint.x, medeaSpawnPoint.y, 'medeaSprite');
         this.physics.add.collider(medea, mapLayer);
-        talkMedea = createThis.add.text(medeaSpawnPoint.x,550,'',{color: '#000000'});
+        npcDialogue = createThis.add.text(medeaSpawnPoint.x,550,'',{color: '#000000'});
     }
 
     crew01SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew01");
