@@ -53,18 +53,6 @@
                 {
                  "height":0,
                  "id":2,
-                 "name":"medea",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":360,
-                 "y":794
-                },
-                {
-                 "height":0,
-                 "id":3,
                  "name":"bganchor",
                  "point":true,
                  "rotation":0,
@@ -73,6 +61,30 @@
                  "width":0,
                  "x":35,
                  "y":997
+                }, 
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"farBoundary",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2240,
+                 "y":1024
+                }, 
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"medea",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":230,
+                 "y":810
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -81,7 +93,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":3,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
@@ -90,7 +102,7 @@
         {
          "columns":26,
          "firstgid":1,
-         "image":"tilesheet-extruded.png",
+         "image":"..\/..\/..\/jason-master\/htdocs\/assets\/tilesheet-extruded.png",
          "imageheight":64,
          "imagewidth":1664,
          "margin":0,
