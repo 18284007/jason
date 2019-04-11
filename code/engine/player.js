@@ -89,7 +89,9 @@ function playerShipMovement() {
     player.setVelocityY(tempVelocityY);
 
     if (player.body.blocked.right) {
-        playerAlive = false; 
+        playerAlive = false;
+        //Disabling collision prevents an issue where the ship can get stuck on a rock when falling.
+        player.body.checkCollision = false;  
     }
 }
 
@@ -133,11 +135,40 @@ function playerDamage(tempHealth) {
 function gameOver() {
     playerAlive = false; 
     createThis.cameras.main.fadeOut(1000);
-    setTimeout(window.location = "http://localhost:8000",20000);
+    setTimeout(window.location = "index.html",20000);
 }
 
 function playerCheckForFall() {
     if (player.y > bganchor.y) {
         gameOver();
     }
+}
+
+function playerNPCCollision() {
+    if (talkKey.isDown) {
+        if (!dialogueAlreadyEngaged) {
+            npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
+            dialoguex = player.x; 
+            if (currentDialogue == dialogueMax) {
+                currentDialogue = 0;
+            } else {
+                currentDialogue++; 
+            } 
+            dialogueAlreadyEngaged = true;
+            dialogueActive = true;  
+        }
+    } else {
+        dialogueAlreadyEngaged = false; 
+    }
+}
+
+function playerCheckDialogueWalkAway(){ 
+    //if (dialogueAlreadyEngaged) {
+        if ((player.x > dialoguex + dialogueWalkAway) || (player.x < dialoguex - dialogueWalkAway)) {
+            dialogueAlreadyEngaged = false; 
+            dialogueActive = false; 
+            npcDialogue.setText(''); 
+            currentDialogue = 0;
+        }
+    //}
 }
