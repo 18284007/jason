@@ -68,6 +68,12 @@ function create ()
 {
     //Map
     this.map = this.make.tilemap({ key: "currentLevelTilemap" });
+    
+    //set Boundary
+    boundaryEdge = this.map.findObject("Objects", obj => obj.name === "farBoundary");
+    var gameWidth = boundaryEdge.x;
+    var gameHeight = window.screen.Height;
+    this.physics.world.setBounds(0,0,gameWidth, gameHeight,64,true,true,false,false);
 
     playerAlive = true; 
 
@@ -86,6 +92,9 @@ function create ()
     //Spawn player.
     playerSpawnPoint = this.map.findObject("Objects", obj => obj.name === "Player Spawn");
     player = this.physics.add.sprite(playerSpawnPoint.x, playerSpawnPoint.y, playerSprite);
+    
+    //set Player Boundary
+    player.setCollideWorldBounds(true);
 
     spiderBossSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderBoss");
     if (spiderBossSpawnPoint !== null){    
