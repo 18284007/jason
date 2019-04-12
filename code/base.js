@@ -72,7 +72,7 @@ function create ()
     //set Boundary
     boundaryEdge = this.map.findObject("Objects", obj => obj.name === "farBoundary");
     var gameWidth = boundaryEdge.x;
-    var gameHeight = window.screen.Height;
+    var gameHeight = boundaryEdge.y;
     this.physics.world.setBounds(0,0,gameWidth, gameHeight,64,true,true,false,false);
 
     playerAlive = true; 
