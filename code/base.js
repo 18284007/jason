@@ -85,7 +85,7 @@ function create ()
     background.scrollFactorX = 0;
     
     //Draw tileset/objects
-    tileset = this.map.addTilesetImage("tilesheet-extruded","tiles");
+    tileset = this.map.addTilesetImage("tilesheet-extruded", "tiles", 64, 64, 1, 2);
     mapLayerBG = this.map.createStaticLayer("Layer_bg", tileset, 0, 0);
     mapLayer = this.map.createStaticLayer("Layer", tileset, 0, 0);
     
