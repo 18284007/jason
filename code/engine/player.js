@@ -125,6 +125,12 @@ function playerEnemyCollision() {
     }
 }
 
+function playerItemCollision() { 
+    if (spiderFlowerSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
+        spiderFlower.playerCollide(); 
+    }
+}
+
 function playerDamage(tempHealth) {
     health -= tempHealth; 
     if (health < 0) {

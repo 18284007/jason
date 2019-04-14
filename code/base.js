@@ -184,8 +184,12 @@ function create ()
 
     spiderFlowerSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderFlower");
     if (spiderFlowerSpawnPoint !== null) {
-        //spiderFlower = new spiderFlowerItem(game, player.x, player.y); 
-        //console.log(spiderFlower.testvar);
+        spiderFlower = new spiderFlower({
+            scene: this, 
+            x: spiderFlowerSpawnPoint.x, 
+            y: spiderFlowerSpawnPoint.y,
+            key: 'spiderFlowerSprite'
+        });
     }
 
     parseLevelDialogue();
@@ -216,6 +220,7 @@ function update ()
 
     if (playerAlive) {
         playerEnemyCollision();
+        playerItemCollision();
     }
 
     if (medeaSpawnPoint !== null) {
