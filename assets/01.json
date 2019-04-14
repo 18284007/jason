@@ -97,6 +97,18 @@
                  "width":0,
                  "x":893.272727272727,
                  "y":1772.93939393939
+                }, 
+                {
+                 "height":0,
+                 "id":10,
+                 "name":"farBoundary",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1663,
+                 "y":1919
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -105,10 +117,10 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":10,
+ "nextobjectid":11,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.03.13",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {
