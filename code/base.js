@@ -1,7 +1,11 @@
 var config = {
     type: Phaser.AUTO,
-    width: 1024,
-    height: 576,
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        mode: Phaser.Scale.FIT,
+        width: 1024,
+        height: 768
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -85,7 +89,7 @@ function create ()
     background.scrollFactorX = 0;
     
     //Draw tileset/objects
-    tileset = this.map.addTilesetImage("tilesheet-extruded","tiles");
+    tileset = this.map.addTilesetImage("tilesheet-extruded", "tiles", 64, 64, 1, 2);
     mapLayerBG = this.map.createStaticLayer("Layer_bg", tileset, 0, 0);
     mapLayer = this.map.createStaticLayer("Layer", tileset, 0, 0);
     
@@ -184,8 +188,12 @@ function create ()
 
     spiderFlowerSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderFlower");
     if (spiderFlowerSpawnPoint !== null) {
-        //spiderFlower = new spiderFlowerItem(game, player.x, player.y); 
-        //console.log(spiderFlower.testvar);
+        spiderFlower = new spiderFlower({
+            scene: this, 
+            x: spiderFlowerSpawnPoint.x, 
+            y: spiderFlowerSpawnPoint.y,
+            key: 'spiderFlowerSprite'
+        });
     }
 
     parseLevelDialogue();
@@ -216,6 +224,7 @@ function update ()
 
     if (playerAlive) {
         playerEnemyCollision();
+        playerItemCollision();
     }
 
     if (medeaSpawnPoint !== null) {

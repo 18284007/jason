@@ -8,6 +8,7 @@ function enemyMovement() {
 
 function spiderBossInit() {
 	//Define some variables that spiderBoss will use. 
+	spiderBossActive = false; 
 	spiderBossAlive = true; 
 	spiderBossMinY = spiderBossSpawnPoint.y - 350; 
 	spiderBossMaxY = spiderBossSpawnPoint.y; 
@@ -42,7 +43,9 @@ function spiderBossMovement() {
 		} else {
 			spiderBoss.setVelocityY(spiderBossVelocity);
 			spiderBossTravelUp = false; 
-			spiderBossShootWeb();
+			if (spiderBossActive) {
+				spiderBossShootWeb();
+			}
 		}
 	} else {
 		if (spiderBoss.y < spiderBossMaxY) {
@@ -50,7 +53,9 @@ function spiderBossMovement() {
 		} else {
 			spiderBoss.setVelocityY(-spiderBossVelocity);
 			spiderBossTravelUp = true; 
-			spiderBossShootWeb(); 
+			if (spiderBossActive) {
+				spiderBossShootWeb(); 
+			}
 		}
 	}
 	if (spiderBossHealth < 0){
