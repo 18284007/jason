@@ -84,18 +84,18 @@
  "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {
          "columns":26,
          "firstgid":1,
          "image":"tilesheet-extruded.png",
-         "imageheight":64,
-         "imagewidth":1664,
-         "margin":0,
+         "imageheight":66,
+         "imagewidth":1716,
+         "margin":1,
          "name":"tilesheet-extruded",
-         "spacing":0,
+         "spacing":2,
          "tilecount":26,
          "tileheight":64,
          "tiles":[
