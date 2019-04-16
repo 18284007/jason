@@ -102,12 +102,12 @@
         {
          "columns":26,
          "firstgid":1,
-         "image":"..\/..\/..\/jason-master\/htdocs\/assets\/tilesheet-extruded.png",
+         "image":"tilesheet-extruded.png",
          "imageheight":64,
          "imagewidth":1664,
-         "margin":0,
+         "margin":1,
          "name":"tilesheet-extruded",
-         "spacing":0,
+         "spacing":2,
          "tilecount":26,
          "tileheight":64,
          "tiles":[

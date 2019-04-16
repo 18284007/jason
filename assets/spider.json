@@ -117,9 +117,9 @@
          "image":"tilesheet-extruded.png",
          "imageheight":66,
          "imagewidth":1716,
-         "margin":0,
+         "margin":1,
          "name":"tilesheet-extruded",
-         "spacing":0,
+         "spacing":2,
          "tilecount":26,
          "tileheight":64,
          "tiles":[
