@@ -136,7 +136,7 @@ function create ()
     attackKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
     jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
     talkKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
- 
+    
     //Camera
     if (!playerShip) {
         this.cameras.main.startFollow(player, true, 0.05, 0.03);
@@ -161,7 +161,6 @@ function create ()
     if (medeaSpawnPoint !== null) {
         medea = this.physics.add.sprite(medeaSpawnPoint.x, medeaSpawnPoint.y, 'medeaSprite');
         this.physics.add.collider(medea, mapLayer);
-        npcDialogue = createThis.add.text(medeaSpawnPoint.x,550,'',{color: '#000000'});
     }
 
     crew01SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew01");
