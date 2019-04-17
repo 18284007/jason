@@ -2,25 +2,34 @@
     <head>
         <style>
             body {margin: auto; width: 1024px;}
-            #htmlForm {text-align: center;, margin: auto;}
+            #htmlForm, #controls {text-align: center;, margin: auto;}
         </style>
     </head>
     <body>        
         <section id="htmlForm">
             <h1>Jason and the Argonauts</h1>
-            <button onclick="loadLevel('assets/map.json', false, 'jason')">Test Level</button><br/>
-            <button onclick="loadLevel('assets/shrinemap.json', false, 'jason')">Shrine Level</button><br/>
-            <button onclick="loadLevel('assets/spider.json', false, 'jason')">Spider Boss</button><br/>
-            <button onclick="loadLevel('assets/siren.json', true, 'ship')">Siren Level</button>
+            <button onclick="loadLevel('01', false, 'jason')">Screen 01</button><br/>
+            <button onclick="loadLevel('shrine', false, 'jason')">Shrine Level</button><br/>
+            <button onclick="loadLevel('spider', false, 'jason')">Spider Boss</button><br/>
+            <button onclick="loadLevel('siren', true, 'ship')">Siren Level</button><br/>
+            <button onclick="loadLevel('placeholdertestmap', false, 'jason')">Test Level</button><br/>
+        </section>
+        <section id="controls">
+            <h2>Controls</h2>
+            <p>Arrow Keys - Move<br/>
+            Z - Attack<br/>
+            X - Jump<br/>
+            C - Talk</p>
         </section>
         <script>
-            var currentLevel;
+            var currentLevelID;
             var playerShip; 
             var playerSprite; 
             function loadLevel(tempLevel, tempShip, tempPlayerSprite){
                 var htmlForm = document.getElementById('htmlForm');
                 htmlForm.style.display = 'none';
-                currentLevel = tempLevel;
+                controls.style.display = 'none';
+                currentLevelID = tempLevel;
                 playerShip = tempShip;
                 playerSprite = tempPlayerSprite;
                 var gameScript = document.createElement("script");
@@ -32,5 +41,7 @@
         <script src="code/engine/level.js" type="text/javascript"></script>
         <script src="code/engine/player.js" type="text/javascript"></script>
         <script src="code/engine/enemy.js" type="text/javascript"></script>
+        <script src="code/engine/items.js" type="text/javascript"></script>
+        <script src="code/engine/dialogue.js" type="text/javascript"></script>
     </body>
 </html>
