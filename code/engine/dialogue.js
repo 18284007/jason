@@ -90,6 +90,11 @@ function drawDialogueBox()
 	//Right
 	dialogBox.lineBetween(diaBoxX+drawWidth-(swirlLength*0.75),diaBoxY+swirlLength,diaBoxX+drawWidth-(swirlLength*0.75),diaBoxY+drawHeight-swirlLength);
 	
+	//set text location
+	npcDialogue.x = diaBoxX+(swirlLength*1.5);
+	npcDialogue.y = diaBoxY+swirlLength;
+	dialogBox.setDepth(9);
+	npcDialogue.setDepth(10);
 }
 
 function clearDialogueBox ()
