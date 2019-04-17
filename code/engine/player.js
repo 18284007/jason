@@ -149,11 +149,19 @@ function playerNPCCollision() {
         if (!dialogueAlreadyEngaged) {
             npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
             dialoguex = player.x; 
-            if (currentDialogue == dialogueMax) {
+            if (currentDialogue === 0)
+            {
+                drawDialogueBox();
+                currentDialogue++; 
+            } 
+            else if (currentDialogue == dialogueMax) {
                 currentDialogue = 0;
+                clearDialogueBox();
             } else {
                 currentDialogue++; 
             } 
+            dialogueAlreadyEngaged = true;
+            dialogueActive = true;  
             dialogueAlreadyEngaged = true;
             dialogueActive = true;  
         }
@@ -169,6 +177,7 @@ function playerCheckDialogueWalkAway(){
             dialogueActive = false; 
             npcDialogue.setText(''); 
             currentDialogue = 0;
+            clearDialogueBox();
         }
     //}
 }
