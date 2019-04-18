@@ -47,7 +47,6 @@ function drawDialogueBox()
 	dialogBox.fillRect(diaBoxX,diaBoxY,drawWidth,drawHeight);
 	dialogBox.strokeRect(diaBoxX,diaBoxY,drawWidth,drawHeight);
 	
-	
 	//styling
 	//Top LHS
 	dialogBox.beginPath();

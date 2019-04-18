@@ -1,19 +1,13 @@
-/* spiderFlower
- * When the player picks up the flower, the spider boss will activate. 
- */
+class spiderFlowerItem extends Phaser.GameObjects.Sprite {
+	constructor (parameter) {
+        super(parameter.scene, parameter.x, parameter.y, parameter.key);
+        parameter.scene.physics.world.enable(this);
+        parameter.scene.add.existing(this);
+        this.body.allowGravity = false; 
+	}
 
-spiderFlowerItem = function (game, x, y){
-	Phaser.GameObjects.Sprite(this, game, x, y, 'spiderFlowerSprite');
-	this.testvar = 'asdf'; 
-	//super(this.x, this.y, 'assets/items/flower.png');
+	playerCollide() {
+		spiderBossActive = true;
+		this.destroy();
+	}
 }
-spiderFlowerItem.prototype = Object.create(Phaser.GameObjects.Sprite.prototype);
-spiderFlowerItem.prototype.constructor = spiderFlowerItem;
-
-/*
-class spiderFlower extends Phaser.GameObjects.Sprite {
-    constructor(tempX, tempY) {
-        super(tempX, tempY, 'assets/items/flower.png'); 
-    }
-}
-*/

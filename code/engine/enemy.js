@@ -8,6 +8,7 @@ function enemyMovement() {
 
 function spiderBossInit() {
 	//Define some variables that spiderBoss will use. 
+	spiderBossActive = false; 
 	spiderBossAlive = true; 
 	spiderBossMinY = spiderBossSpawnPoint.y - 350; 
 	spiderBossMaxY = spiderBossSpawnPoint.y; 
@@ -26,7 +27,6 @@ function spiderBossInit() {
     
     //Disable gravity.
     spiderBoss.body.allowGravity = false;
-
 }
 
 /* This function controls the movement of the spider boss.  
@@ -42,7 +42,9 @@ function spiderBossMovement() {
 		} else {
 			spiderBoss.setVelocityY(spiderBossVelocity);
 			spiderBossTravelUp = false; 
-			spiderBossShootWeb();
+			if (spiderBossActive) {
+				spiderBossShootWeb();
+			}
 		}
 	} else {
 		if (spiderBoss.y < spiderBossMaxY) {
@@ -50,7 +52,9 @@ function spiderBossMovement() {
 		} else {
 			spiderBoss.setVelocityY(-spiderBossVelocity);
 			spiderBossTravelUp = true; 
-			spiderBossShootWeb(); 
+			if (spiderBossActive) {
+				spiderBossShootWeb(); 
+			}
 		}
 	}
 	if (spiderBossHealth < 0){
@@ -60,7 +64,11 @@ function spiderBossMovement() {
 }
 
 function spiderBossShootWeb() {
-	spiderBossWeb = createThis.physics.add.sprite(spiderBoss.x, spiderBoss.y, 'spiderBossWebSprite').setVelocityX(-100);
-	spiderBossWeb.body.allowGravity = false; 
-	//spiderBossWebCount++;
-} 
+	spiderBossWeb = new projectile({
+        scene: createThis, 
+        x: spiderBoss.x, 
+        y: spiderBoss.y,
+        key: 'spiderBossWebSprite',
+        velocityX: -100
+    });
+}
