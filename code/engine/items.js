@@ -1,4 +1,4 @@
-class spiderFlower extends Phaser.GameObjects.Sprite {
+class spiderFlowerItem extends Phaser.GameObjects.Sprite {
 	constructor (parameter) {
         super(parameter.scene, parameter.x, parameter.y, parameter.key);
         parameter.scene.physics.world.enable(this);

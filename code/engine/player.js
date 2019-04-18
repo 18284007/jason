@@ -69,6 +69,16 @@ function playerMovement() {
     		player.setVelocityY(-playerJumpVelocity);
     	}
     }
+
+    //Move into portals. 
+    if (!playerShip && portalSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portal.getBounds())){
+        if (cursors.up.isDown) {
+            playerShip = false;
+            portal.destroy();
+            changeLevel(portalMap);
+            //temp 
+        }   
+    }
 }
 
 /* Ship Movement. 
@@ -92,6 +102,13 @@ function playerShipMovement() {
         playerAlive = false;
         //Disabling collision prevents an issue where the ship can get stuck on a rock when falling.
         player.body.checkCollision = false;  
+    }
+
+
+
+    //Check if ship win level 
+    if (player.x > boundaryEdge.x + 100) {
+        changeLevel('shrine'); 
     }
 }
 
@@ -140,8 +157,9 @@ function playerDamage(tempHealth) {
 
 function gameOver() {
     playerAlive = false; 
-    createThis.cameras.main.fadeOut(1000);
-    setTimeout(window.location = "index.html",20000);
+    //createThis.cameras.main.fadeOut(1000);
+    //setTimeout(window.location = "index.html",20000);\
+    createThis.scene.restart('playLevel');
 }
 
 function playerCheckForFall() {
@@ -155,11 +173,22 @@ function playerNPCCollision() {
         if (!dialogueAlreadyEngaged) {
             npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
             dialoguex = player.x; 
-            if (currentDialogue == dialogueMax) {
+            /*if (dialogueMax > 1) {
+                currentDialogue++; 
+            }*/
+            if (currentDialogue === 0)
+            {
+                drawDialogueBox();
+                currentDialogue++; 
+            } 
+            else if (currentDialogue == dialogueMax) {
                 currentDialogue = 0;
+                clearDialogueBox();
             } else {
                 currentDialogue++; 
             } 
+            dialogueAlreadyEngaged = true;
+            dialogueActive = true;  
             dialogueAlreadyEngaged = true;
             dialogueActive = true;  
         }
@@ -175,6 +204,7 @@ function playerCheckDialogueWalkAway(){
             dialogueActive = false; 
             npcDialogue.setText(''); 
             currentDialogue = 0;
+            clearDialogueBox();
         }
     //}
 }
