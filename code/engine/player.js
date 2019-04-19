@@ -179,6 +179,7 @@ function playerNPCCollision() {
             if (currentDialogue === 0)
             {
                 drawDialogueBox();
+                dialoguex = player.x;
                 if (dialogueMax === 0)
                 {
                 	currentDialogue = -1;
