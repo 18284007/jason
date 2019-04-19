@@ -85,6 +85,24 @@
                  "width":0,
                  "x":230,
                  "y":810
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"spider"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":111,
+                 "y":802
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -93,22 +111,22 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":5,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {
          "columns":26,
          "firstgid":1,
-         "image":"tilesheet-extruded.png",
+         "image":"..\/..\/..\/jason-master\/htdocs\/assets\/tilesheet-extruded.png",
          "imageheight":64,
          "imagewidth":1664,
-         "margin":1,
+         "margin":0,
          "name":"tilesheet-extruded",
-         "spacing":2,
-         "tilecount":26,
+         "spacing":0,
+         "tilecount":2,
          "tileheight":64,
          "tiles":[
                 {

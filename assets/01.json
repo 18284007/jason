@@ -109,6 +109,24 @@
                  "width":0,
                  "x":1663,
                  "y":1919
+                }, 
+                {
+                 "height":0,
+                 "id":11,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"shrine"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1483,
+                 "y":1748
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -117,7 +135,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":11,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",
@@ -129,9 +147,9 @@
          "image":"tilesheet-extruded.png",
          "imageheight":66,
          "imagewidth":1716,
-         "margin":1,
+         "margin":0,
          "name":"tilesheet-extruded",
-         "spacing":2,
+         "spacing":0,
          "tilecount":26,
          "tileheight":64,
          "tiles":[
