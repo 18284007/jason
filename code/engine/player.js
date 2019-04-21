@@ -102,13 +102,14 @@ function playerShipMovement() {
         playerAlive = false;
         //Disabling collision prevents an issue where the ship can get stuck on a rock when falling.
         player.body.checkCollision = false;  
+        player.setCollideWorldBounds(false);
     }
 
-
-
-    //Check if ship win level 
+    //Check if the player has won the level by flying offscreen.  
     if (player.x > boundaryEdge.x + 100) {
-        changeLevel('shrine'); 
+        playerShip = false; 
+        playerSprite = 'jason';
+        changeLevel(edgeMap); 
     }
 }
 
@@ -117,7 +118,7 @@ function playerShipMovement() {
  */ 
 function playerShipSink() {
     player.setVelocityX(0);
-    player.setVelocityY(250);
+    player.setVelocityY(300);
     player.angle += 5; 
 }
 

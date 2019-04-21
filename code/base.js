@@ -76,7 +76,9 @@ var playLevel = new Phaser.Class({
         var gameWidth = boundaryEdge.x;
         var gameHeight = boundaryEdge.y;
         if (!playerShip) {
-            this.physics.world.setBounds(0,0,gameWidth, gameHeight,64,true,true,false,false);
+            this.physics.world.setBounds(0, 0, gameWidth, gameHeight, 64, true, true, false, false);
+        } else { 
+            this.physics.world.setBounds(0, 0, gameWidth + 500, gameHeight, 64, true, true, false, false);
         }
 
         playerAlive = true; 
@@ -98,10 +100,8 @@ var playLevel = new Phaser.Class({
         playerSpawnPoint = this.map.findObject("Objects", obj => obj.name === "Player Spawn");
         player = this.physics.add.sprite(playerSpawnPoint.x, playerSpawnPoint.y, playerSprite);
         
-        //set Player Boundary
-        if (!playerShip){
-            player.setCollideWorldBounds(true);
-        }
+        //Set Player Boundary
+        player.setCollideWorldBounds(true);
 
         spiderBossSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderBoss");
         if (spiderBossSpawnPoint !== null){    
@@ -176,6 +176,8 @@ var playLevel = new Phaser.Class({
             portal.body.allowGravity = false;
             portal.setDepth(-10);
             portalMap = portalSpawnPoint.properties[0].value; 
+        } else if (playerShip) {
+            edgeMap = this.map.properties[0].value;
         }
 
         crew01SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew01");
@@ -229,8 +231,8 @@ var playLevel = new Phaser.Class({
         //Enemy Movement
         enemyMovement(); 
 
+        playerCheckForFall(); 
         if (playerAlive) {
-            playerCheckForFall(); 
             playerEnemyCollision();
             playerItemCollision();
         }
