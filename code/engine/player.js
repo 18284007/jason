@@ -171,17 +171,25 @@ function playerCheckForFall() {
 function playerNPCCollision() {
     if (talkKey.isDown) {
         if (!dialogueAlreadyEngaged) {
-            npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
-            dialoguex = player.x; 
-            /*if (dialogueMax > 1) {
-                currentDialogue++; 
-            }*/
+        	if (currentDialogue > -1)
+        	{
+        		npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
+        	}
+        	
             if (currentDialogue === 0)
             {
                 drawDialogueBox();
-                currentDialogue++; 
+                dialoguex = player.x;
+                if (dialogueMax === 0)
+                {
+                	currentDialogue = -1;
+                }
+                else
+                {
+                	currentDialogue++; 
+                } 
             } 
-            else if (currentDialogue == dialogueMax) {
+            else if (currentDialogue == dialogueMax || currentDialogue < 0) {
                 currentDialogue = 0;
                 clearDialogueBox();
             } else {
