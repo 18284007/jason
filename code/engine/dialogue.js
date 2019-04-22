@@ -49,7 +49,6 @@ function drawDialogueBox()
 	
 	//styling
 	//Top LHS
-	dialogBox.beginPath();
 	dialogBox.moveTo(diaBoxX+swirlLength,diaBoxY);
 	dialogBox.lineTo(diaBoxX+swirlLength,diaBoxY+swirlLength);
 	dialogBox.lineTo(diaBoxX+(swirlLength/2),diaBoxY+swirlLength);
@@ -57,7 +56,6 @@ function drawDialogueBox()
 	dialogBox.strokePath();
 
 	//Bottom LHS
-	dialogBox.beginPath();
 	dialogBox.moveTo(diaBoxX+swirlLength,drawHeight+diaBoxY);
 	dialogBox.lineTo(diaBoxX+swirlLength,drawHeight+diaBoxY-swirlLength);
 	dialogBox.lineTo(diaBoxX+(swirlLength/2),drawHeight+diaBoxY-swirlLength);
@@ -65,7 +63,6 @@ function drawDialogueBox()
 	dialogBox.strokePath();
 
 	//Top RHS
-	dialogBox.beginPath();
 	dialogBox.moveTo(diaBoxX+drawWidth-swirlLength,diaBoxY);
 	dialogBox.lineTo(diaBoxX+drawWidth-swirlLength,diaBoxY+swirlLength);
 	dialogBox.lineTo(diaBoxX+drawWidth-(swirlLength/2),diaBoxY+swirlLength);
@@ -73,7 +70,6 @@ function drawDialogueBox()
 	dialogBox.strokePath();
 
 	//Bottom RHS
-	dialogBox.beginPath();
 	dialogBox.moveTo(diaBoxX+drawWidth-swirlLength,drawHeight+diaBoxY);
 	dialogBox.lineTo(diaBoxX+drawWidth-swirlLength,drawHeight+diaBoxY-swirlLength);
 	dialogBox.lineTo(diaBoxX+drawWidth-(swirlLength/2),drawHeight+diaBoxY-swirlLength);
