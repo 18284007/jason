@@ -1,6 +1,6 @@
 /* The enemyBase class is used as a base for various enemies.  
  * This should not be spawned directly. 
- * Required parameters: scene, x, y, key, xMove, xVel, scale, enemyId.
+ * Required parameters: scene, x, y, key, xMove/yMove, xVel/yVel, scale, enemyId, gravity, health.
  */
 class enemyBase extends Phaser.GameObjects.Sprite {
 	constructor (parameter) {
@@ -9,34 +9,28 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         parameter.scene.add.existing(this);
 
         //Set variables. 
-        this.body.allowGravity = false; 
-        this.moveRight = true; 
-        this.xMin = parameter.x; 
-        this.xMax = parameter.x + parameter.xMove; 
-        this.xVel = parameter.xVel; 
+        this.body.allowGravity = parameter.gravity;
+        if (typeof parameter.xMove !== 'undefined'){ 
+        	this.moveRight = true; 
+	        this.xMin = parameter.x; 
+	        this.xMax = parameter.x + parameter.xMove; 
+	        this.xVel = parameter.xVel; 
+	        this.body.setVelocityX(this.xVel);
+        } else if (typeof parameter.yMove !== 'undefined'){
+			this.moveUp = false; 
+			this.yMin = parameter.y; 
+			this.yMax = parameter.y + parameter.yMove; 
+			this.yVel = parameter.yVel; 
+	        this.body.setVelocityY(this.yVel);
+        }
         this.scaleX = parameter.scale; 
         this.scaleY = parameter.scale; 
-        this.enemyId = parameter.enemyId; 
+        this.enemyId = parameter.enemyId;
+        this.health = parameter.health;
+		this.spiderBossAlive = true; 
 
         //Collision detection between the player and enemy. 
         createThis.physics.add.overlap(this, player, this.collision);
-
-        //Begin enemy movement.
-        this.body.setVelocityX(this.xVel);
-	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
 	}
 
 	collision(tempEnemy) {
@@ -61,13 +55,85 @@ class spiderMini extends enemyBase {
 			xMove: parameter.xMove,
 			xVel: 130, 
 			scale: 0.45, 
-			enemyId: parameter.enemyId
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 100
         });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
+/* Spider boss.
+ * Required parameters: x, y, yMove, enemyId
+ */
+class spiderBoss extends enemyBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			yMove: parameter.yMove,
+			yVel: 300, 
+			scale: 1, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 100
+        });
+		//spiderBossWebCount = 0; 
+
+		//Create a white line that represents the spider web. 
+	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
+	    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
+	    graphics.strokeLineShape(line);
+	}
+
+	movement() { 
+		if (this.moveUp) {
+			if (this.y < this.yMin) {
+				this.body.setVelocityY(this.yVel);
+				this.moveUp = false; 
+				if (spiderBossActive) {
+					this.shootWeb(); 
+				}
+			}
+		} else {
+			if (this.y > this.yMax) {
+				this.body.setVelocityY(-this.yVel);
+				this.moveUp = true; 
+				if (spiderBossActive) {
+					this.shootWeb(); 
+				}	
+			}
+		}
+	}
+
+	shootWeb() {
+		new projectile({
+	        scene: createThis, 
+	        x: this.x, 
+	        y: this.y,
+	        key: 'spiderBossWebSprite',
+	        velocityX: -100
+	    });
 	}
 }
 
 function enemyMovement() {
-	if (spiderBossSpawnPoint !== null) {
+	if (typeof spiderBossAlive != 'undefined') {
 		if (spiderBossAlive){
 			spiderBossMovement();
 		} 
@@ -77,71 +143,4 @@ function enemyMovement() {
 			enemies[i].movement();	
 		}
 	}
-}
-
-function spiderBossInit() {
-	//Define some variables that spiderBoss will use. 
-	spiderBossActive = false; 
-	spiderBossAlive = true; 
-	spiderBossMinY = spiderBossSpawnPoint.y - 350; 
-	spiderBossMaxY = spiderBossSpawnPoint.y; 
-	spiderBossTravelUp = true; 
-	spiderBossVelocity = 300; 
-	spiderBossHealth = 100; 
-	//spiderBossWebCount = 0; 
-
-	//Create a white line that represents the spider web. 
-    var line = new Phaser.Geom.Line(spiderBossSpawnPoint.x, spiderBossMinY, spiderBossSpawnPoint.x, spiderBossMaxY);
-    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
-    graphics.strokeLineShape(line);
-
-    //Create the spider boss. 
-    spiderBoss = createThis.physics.add.sprite(spiderBossSpawnPoint.x, spiderBossSpawnPoint.y, 'spiderBossSprite');
-    
-    //Disable gravity.
-    spiderBoss.body.allowGravity = false;
-}
-
-/* This function controls the movement of the spider boss.  
- * The spider boss will move up and down. 
- * The velocity and minimum and maximum Y values are defined in spiderBossInit(). 
- * The Y values are relative to the boss' spawn point. 
- * It is assumed that the spiderBoss object exists.
- */ 
-function spiderBossMovement() {
-	if (spiderBossTravelUp) {
-		if (spiderBoss.y > spiderBossMinY) {
-			spiderBoss.setVelocityY(-spiderBossVelocity);
-		} else {
-			spiderBoss.setVelocityY(spiderBossVelocity);
-			spiderBossTravelUp = false; 
-			if (spiderBossActive) {
-				spiderBossShootWeb();
-			}
-		}
-	} else {
-		if (spiderBoss.y < spiderBossMaxY) {
-			spiderBoss.setVelocityY(spiderBossVelocity);
-		} else {
-			spiderBoss.setVelocityY(-spiderBossVelocity);
-			spiderBossTravelUp = true; 
-			if (spiderBossActive) {
-				spiderBossShootWeb(); 
-			}
-		}
-	}
-	if (spiderBossHealth < 0){
-		spiderBossAlive = false; 
-		spiderBoss.body.allowGravity = true;
-	}
-}
-
-function spiderBossShootWeb() {
-	spiderBossWeb = new projectile({
-        scene: createThis, 
-        x: spiderBoss.x, 
-        y: spiderBoss.y,
-        key: 'spiderBossWebSprite',
-        velocityX: -100
-    });
 }

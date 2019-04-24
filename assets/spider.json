@@ -47,8 +47,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":126.27272727273,
-                 "y":1773.93939393939
+                 "x":41,
+                 "y":1771
                 }, 
                 {
                  "height":0,
@@ -67,12 +67,18 @@
                  "id":6,
                  "name":"spiderBoss",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"yMove",
+                         "type":"int",
+                         "value":350
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":3074.27272727273,
-                 "y":1774.93939393939
+                 "y":1424.94
                 }, 
                 {
                  "height":0,

@@ -32,6 +32,14 @@ function spawnObjects() {
             	break;
 
             case 'spiderBoss': 
+                enemies[enemyCount] = new spiderBoss({
+	                x: mapObjectArray[i].x, 
+	                y: mapObjectArray[i].y, 
+	                yMove: mapObjectArray[i].properties[0].value,
+	                enemyId: enemyCount
+            	});
+            	enemyCount++; 
+            	spiderBossActive = false; 
             	break;
 
             case 'spiderFlower': 

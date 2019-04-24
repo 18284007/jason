@@ -101,11 +101,6 @@ var playLevel = new Phaser.Class({
         //Set Player Boundary
         player.setCollideWorldBounds(true);
 
-        spiderBossSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderBoss");
-        if (spiderBossSpawnPoint !== null){    
-            spiderBossInit();
-        }
-
         //Collision Detection
         mapLayer.setCollisionByProperty({ collides: true });
         this.physics.add.collider(player, mapLayer); 

@@ -133,7 +133,7 @@ function playerEnemyCollision() {
             playerDamage(10);
         }
     }*/
-    if (spiderBossSpawnPoint !== null && spiderBossAlive && 
+    if (typeof spiderBossAlive !== 'undefined' && spiderBossAlive && 
         Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderBoss.getBounds())) {
         if (attackKey.isDown){
             spiderBossHealth -= 10; 
