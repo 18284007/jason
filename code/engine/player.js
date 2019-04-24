@@ -144,7 +144,7 @@ function playerEnemyCollision() {
 }
 
 function playerItemCollision() { 
-    if (spiderFlowerSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
+    if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
         spiderFlower.playerCollide(); 
     }
 }

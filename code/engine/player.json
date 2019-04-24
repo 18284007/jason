@@ -2,12 +2,12 @@
 	{ "name":"jason",
 	  "playerHasWings":"0",
 	  "playerShip":"0",
-	  "spritesheetPath":"assets/player/jason.png"
+	  "sprite":"assets/player/jason.png"
 	},
 	{ "name":"ship",
 	  "playerHasWings":"0",
 	  "playerShip":"1",
-	  "spritesheetPath":"assets/player/jason.png"
+	  "sprite":"assets/player/ship.png"
 	}
   ]
 }

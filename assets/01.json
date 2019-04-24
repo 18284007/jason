@@ -65,7 +65,7 @@
                 {
                  "height":0,
                  "id":7,
-                 "name":"crew01",
+                 "name":"crew",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -77,7 +77,7 @@
                 {
                  "height":0,
                  "id":8,
-                 "name":"crew02",
+                 "name":"crew",
                  "point":true,
                  "rotation":0,
                  "type":"",

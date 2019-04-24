@@ -8,7 +8,7 @@ var playLevel = new Phaser.Class({
         Phaser.Scene.call(this, { key: 'playLevel' });
     },
 
-    preload: function() //function preload ()
+    preload: function() 
     {
         createThis = this; 
         
@@ -59,11 +59,9 @@ var playLevel = new Phaser.Class({
         this.load.image('sky', 'assets/sky.png');
         //this.load.image('sky', 'assets/stage/background/01.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
-
-
     },
 
-    create: function() //function create ()
+    create: function() 
     {
         //Generate current Tilemap key. 
         currentTilemapKey = currentLevelID + 'Tilemap';
@@ -155,19 +153,9 @@ var playLevel = new Phaser.Class({
         }
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
-        ////Create enemies - TEMPORARY STUFF. 
-        //enemies = this.physics.add.sprite(200, 450, 'tempEnemy');
-        //this.physics.add.collider(enemies, mapLayer); 
-
         //If the player is a ship, disable gravity. 
         if (playerShip) {
             player.body.allowGravity = false;
-        }
-
-        medeaSpawnPoint = this.map.findObject("Objects", obj => obj.name === "medea");
-        if (medeaSpawnPoint !== null) {
-            medea = this.physics.add.sprite(medeaSpawnPoint.x, medeaSpawnPoint.y, 'medeaSprite');
-            this.physics.add.collider(medea, mapLayer);
         }
 
         portalSpawnPoint = this.map.findObject("Objects", obj => obj.name === "portal");
@@ -180,38 +168,12 @@ var playLevel = new Phaser.Class({
             edgeMap = this.map.properties[0].value;
         }
 
-        crew01SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew01");
-        if (crew01SpawnPoint !== null) {
-            crew01 = this.physics.add.sprite(crew01SpawnPoint.x, crew01SpawnPoint.y, 'jason');
-            this.physics.add.collider(crew01, mapLayer);
-        }
-
-        crew02SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew02");
-        if (crew02SpawnPoint !== null) {
-            crew02 = this.physics.add.sprite(crew02SpawnPoint.x, crew02SpawnPoint.y, 'jason');
-            this.physics.add.collider(crew02, mapLayer);
-        }
-
-        bonfireSpawnPoint = this.map.findObject("Objects", obj => obj.name === "bonfire");
-        if (bonfireSpawnPoint !== null) {
-            bonfire = this.physics.add.sprite(bonfireSpawnPoint.x, bonfireSpawnPoint.y, 'bonfireSprite');
-            this.physics.add.collider(bonfire, mapLayer);
-        }
-
-        spiderFlowerSpawnPoint = this.map.findObject("Objects", obj => obj.name === "spiderFlower");
-        if (spiderFlowerSpawnPoint !== null) {
-            spiderFlower = new spiderFlowerItem({
-                scene: this, 
-                x: spiderFlowerSpawnPoint.x, 
-                y: spiderFlowerSpawnPoint.y,
-                key: 'spiderFlowerSprite'
-            });
-        }
-
         parseLevelDialogue();
+
+        spawnObjects(); 
     },
 
-    update: function() //function update ()
+    update: function() 
     {
         //Use the appropriate movement function for the level. 
         if (!playerShip && playerAlive) {
@@ -237,7 +199,7 @@ var playLevel = new Phaser.Class({
             playerItemCollision();
         }
 
-        if (medeaSpawnPoint !== null) {
+        if (typeof medea != 'undefined') {
             if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
                 playerNPCCollision();
             } else if (dialogueActive) {
