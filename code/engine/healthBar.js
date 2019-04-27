@@ -9,15 +9,15 @@ var hbWidth;
 var hbHeight;
 var hbIncrement;
 var hbReady = true;
+var intervalVar;
 
 function parseHealthBarAnimate()
 {
 	hbReady = true;
 	healthDif = oldHealth - currentHealth;
-	while(healthDif != 0)
+	if(healthDif != 0)
 	{
-		setTimeout(oldHealthCtr(), 250);
-		parseHealthBar();
+		intervalVar = setInterval(oldHealthCtr(), 250);
 	}
 }
 
@@ -33,6 +33,11 @@ function oldHealthCtr()
 		healthDif++;
 		oldHealth++;
 	}
+	else
+	{
+		clearInterval(intervalVar);
+	}
+	parseHealthBar();
 }
 
 function parseHealthBar()
