@@ -1,6 +1,8 @@
 var healthBar;
-const maxHealth = 100;
+var maxHealth = 100;
 var currentHealth;
+var oldHealth;
+var healthDif;
 var hbX;
 var hbY;
 var hbWidth;
@@ -8,10 +10,29 @@ var hbHeight;
 var hbIncrement;
 var hbReady = true;
 
-function parseHealthBarSkipWait()
+function parseHealthBarAnimate()
 {
 	hbReady = true;
-	parseHealthBar();
+	healthDif = oldHealth - currentHealth;
+	while(healthDif != 0)
+	{
+		setTimeout(oldHealthCtr(), 250);
+		parseHealthBar();
+	}
+}
+
+function oldHealthCtr()
+{
+	if (healthDif > 0)
+	{
+		healthDif--;
+		oldHealth--;
+	}
+	else if (healthDif < 0)
+	{
+		healthDif++;
+		oldHealth++;
+	}
 }
 
 function parseHealthBar()
@@ -37,7 +58,7 @@ function drawHealthBar()
 	healthBar.fillStyle(ff0000,1);
 	if (currentHealth > 0)
 	{
-		healthBar.fillRect(hbX,hbY,hbIncrement*currenthealth,hbHeight);
+		healthBar.fillRect(hbX,hbY,hbIncrement*oldHealth,hbHeight);
 	}
 	healthBar.strokeRect(hbX,hbY,hbWidth,hbHeight);
 	
