@@ -9,6 +9,8 @@ var playerHasWings = false; //Can the player fly?
 
 var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
 
+var playerSwingSword = false; 
+
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
  */
@@ -35,7 +37,11 @@ function loadPlayerJSON() {
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
-    if (attackKey.isDown) {
+    if (attackKey.isDown && !playerSwingSword) {
+        playerSword();
+    }
+
+    if (playerSwingSword) {
         if (playerFacingRight) {
             player.anims.play('jasonAttackRight', true);
         } else {
@@ -216,4 +222,13 @@ function playerCheckDialogueWalkAway(){
             clearDialogueBox();
         }
     //}
+}
+
+function playerSword () {
+    playerSwingSword = true; 
+    setTimeout(playerSwordStop, 500);
+}
+
+function playerSwordStop () {
+    playerSwingSword = false; 
 }

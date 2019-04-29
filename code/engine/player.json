@@ -1,12 +1,12 @@
 { "characters":[
 	{ "name":"jason",
-	  "playerHasWings":"0",
-	  "playerShip":"0",
+	  "playerHasWings":false,
+	  "playerShip":false,
 	  "sprite":"assets/player/jason.png"
 	},
 	{ "name":"ship",
-	  "playerHasWings":"0",
-	  "playerShip":"1",
+	  "playerHasWings":false,
+	  "playerShip":true,
 	  "sprite":"assets/player/ship.png"
 	}
   ]

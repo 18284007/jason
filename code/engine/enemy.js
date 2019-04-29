@@ -28,16 +28,41 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.enemyId = parameter.enemyId;
         this.health = parameter.health;
 		this.spiderBossAlive = true; 
+		this.invulnerabilityWait = 1000; 
+		this.invulnerability = false; 
 
         //Collision detection between the player and enemy. 
         createThis.physics.add.overlap(this, player, this.collision);
 	}
 
+	/* If the enemy is in a state of temporary invulnerability, nothing happens. 
+	 * Otherwise, the player will damage the enemy if the sword is swung and the 
+	 * enemy will damage the player if the sword is not being swung. 
+	 * tempEnemy refers to the enemy object. 
+	 */
 	collision(tempEnemy) {
-		if (attackKey.isDown) {
-			enemies[tempEnemy.enemyId].destroy(); 
-		} else {
+		if (playerSwingSword && !tempEnemy.invulnerability) {
+			enemies[tempEnemy.enemyId].health -= 100;
+			enemies[tempEnemy.enemyId].invulnerability = true; 
+			enemies[tempEnemy.enemyId].alpha = 0.3; 
+			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
+		} else if (!playerSwingSword && !tempEnemy.invulnerability) {
 			playerDamage(10);
+		}
+	}
+
+	/* Stop enemy invulnerability. 
+	 * tempEnemyId refers to the enemy ID. 
+	 */
+	invulnerabilityStop(tempEnemyId) {
+		enemies[tempEnemyId].invulnerability = false; 
+		enemies[tempEnemyId].alpha = 1; 
+	}
+
+	//Enemy update routine. 
+	update() {
+		if (this.health < 0) {
+			enemies[this.enemyId].destroy(); 
 		}
 	}
 }
@@ -57,7 +82,7 @@ class spiderMini extends enemyBase {
 			scale: 0.45, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 100
+			health: 1
         });
 	}
 
@@ -91,9 +116,8 @@ class spiderBoss extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 100
+			health: 250
         });
-		//spiderBossWebCount = 0; 
 
 		//Create a white line that represents the spider web. 
 	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
@@ -141,6 +165,7 @@ function enemyMovement() {
 	if (enemyCount > 0){
 		for (i = 0; i < enemyCount; i++){
 			enemies[i].movement();	
+			enemies[i].update();
 		}
 	}
 }
