@@ -27,7 +27,6 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.scaleY = parameter.scale; 
         this.enemyId = parameter.enemyId;
         this.health = parameter.health;
-		this.spiderBossAlive = true; 
 		this.invulnerabilityWait = 1000; 
 		this.invulnerability = false; 
 
@@ -101,6 +100,223 @@ class spiderMini extends enemyBase {
 	}
 }
 
+class fox extends enemyBase { 
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
+			xVel: 130, 
+			scale: 0.45, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 1
+        });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
+class snake extends enemyBase { 
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
+			xVel: 130, 
+			scale: 0.45, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 1
+        });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
+class bats extends enemyBase { 
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
+			xVel: 130, 
+			scale: 0.45, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 1
+        });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
+class bullBoss extends enemyBase { 
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
+			xVel: 130, 
+			scale: 0.45, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 1
+        });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
+class medusaBoss extends enemyBase { 
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
+			xVel: 130, 
+			scale: 0.45, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 1
+        });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
+class minotaurBoss extends enemyBase { 
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
+			xVel: 130, 
+			scale: 0.45, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 1
+        });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
+class dragonBoss extends enemyBase { 
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
+			xVel: 130, 
+			scale: 0.45, 
+			enemyId: parameter.enemyId, 
+			gravity: false, 
+			health: 1
+        });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
+}
+
 /* Spider boss.
  * Required parameters: x, y, yMove, enemyId
  */
@@ -119,10 +335,38 @@ class spiderBoss extends enemyBase {
 			health: 250
         });
 
+		this.spiderBossAlive = true; 
+
 		//Create a white line that represents the spider web. 
 	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
 	    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
 	    graphics.strokeLineShape(line);
+	}
+
+	collision(tempEnemy) {
+		if (playerSwingSword && !tempEnemy.invulnerability) {
+			enemies[tempEnemy.enemyId].health -= 100;
+			enemies[tempEnemy.enemyId].invulnerability = true; 
+			enemies[tempEnemy.enemyId].alpha = 0.3; 
+			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
+		} else if (!playerSwingSword && !tempEnemy.invulnerability) {
+			playerDamage(10);
+		}
+
+		//If the attacks are inactive and the spider is attacked, it will become active.
+		if (!this.spiderBossActive) {
+			spiderBossActive = true; 
+		}
+	}
+
+	checkPhase() {
+		if (this.health <= 50){
+			return 2;
+		} else if (this.health <= 150){
+			return 1; 
+		} else {
+			return 0; 
+		}
 	}
 
 	movement() { 
@@ -130,7 +374,7 @@ class spiderBoss extends enemyBase {
 			if (this.y < this.yMin) {
 				this.body.setVelocityY(this.yVel);
 				this.moveUp = false; 
-				if (spiderBossActive) {
+				if (spiderBossActive && this.checkPhase() != 1) {
 					this.shootWeb(); 
 				}
 			}
@@ -138,7 +382,7 @@ class spiderBoss extends enemyBase {
 			if (this.y > this.yMax) {
 				this.body.setVelocityY(-this.yVel);
 				this.moveUp = true; 
-				if (spiderBossActive) {
+				if (spiderBossActive && this.checkPhase() != 0) {
 					this.shootWeb(); 
 				}	
 			}

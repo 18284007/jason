@@ -42,6 +42,76 @@ function spawnObjects() {
             	spiderBossActive = false; 
             	break;
 
+            case 'fox': 
+                enemies[enemyCount] = new fox({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    //xMove: mapObjectArray[i].properties[0].value,
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
+            case 'snake': 
+                enemies[enemyCount] = new snake({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    //xMove: mapObjectArray[i].properties[0].value,
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
+            case 'bats': 
+                enemies[enemyCount] = new bats({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    //xMove: mapObjectArray[i].properties[0].value,
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
+            case 'bullBoss': 
+                enemies[enemyCount] = new bullBoss({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    //xMove: mapObjectArray[i].properties[0].value,
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
+            case 'medusaBoss': 
+                enemies[enemyCount] = new medusaBoss({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    //xMove: mapObjectArray[i].properties[0].value,
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
+            case 'minotaurBoss': 
+                enemies[enemyCount] = new minotaurBoss({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    //xMove: mapObjectArray[i].properties[0].value,
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
+            case 'dragonBoss': 
+                enemies[enemyCount] = new dragonBoss({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    //xMove: mapObjectArray[i].properties[0].value,
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
             case 'spiderFlower': 
             	spiderFlower = new spiderFlowerItem({
 	                x: mapObjectArray[i].x, 
