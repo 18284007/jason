@@ -401,11 +401,6 @@ class spiderBoss extends enemyBase {
 }
 
 function enemyMovement() {
-	if (typeof spiderBossAlive != 'undefined') {
-		if (spiderBossAlive){
-			spiderBossMovement();
-		} 
-	}
 	if (enemyCount > 0){
 		for (i = 0; i < enemyCount; i++){
 			enemies[i].movement();	
