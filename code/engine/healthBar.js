@@ -56,7 +56,7 @@ function oldHealthCtr()
 	{
 		clearInterval(intervalVar);
 	}
-	parseHealthBar();
+	drawHealthBar();
 }
 
 function parseHealthBar()
