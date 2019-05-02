@@ -9,6 +9,8 @@ var playerHasWings = false; //Can the player fly?
 
 var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
 
+var playerSwingSword = false; 
+
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
  */
@@ -35,7 +37,11 @@ function loadPlayerJSON() {
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
-    if (attackKey.isDown) {
+    if (attackKey.isDown && !playerSwingSword) {
+        playerSword();
+    }
+
+    if (playerSwingSword) {
         if (playerFacingRight) {
             player.anims.play('jasonAttackRight', true);
         } else {
@@ -102,13 +108,14 @@ function playerShipMovement() {
         playerAlive = false;
         //Disabling collision prevents an issue where the ship can get stuck on a rock when falling.
         player.body.checkCollision = false;  
+        player.setCollideWorldBounds(false);
     }
 
-
-
-    //Check if ship win level 
+    //Check if the player has won the level by flying offscreen.  
     if (player.x > boundaryEdge.x + 100) {
-        changeLevel('shrine'); 
+        playerShip = false; 
+        playerSprite = 'jason';
+        changeLevel(edgeMap); 
     }
 }
 
@@ -117,7 +124,7 @@ function playerShipMovement() {
  */ 
 function playerShipSink() {
     player.setVelocityX(0);
-    player.setVelocityY(250);
+    player.setVelocityY(300);
     player.angle += 5; 
 }
 
@@ -132,7 +139,7 @@ function playerEnemyCollision() {
             playerDamage(10);
         }
     }*/
-    if (spiderBossSpawnPoint !== null && spiderBossAlive && 
+    if (typeof spiderBossAlive !== 'undefined' && spiderBossAlive && 
         Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderBoss.getBounds())) {
         if (attackKey.isDown){
             spiderBossHealth -= 10; 
@@ -143,7 +150,7 @@ function playerEnemyCollision() {
 }
 
 function playerItemCollision() { 
-    if (spiderFlowerSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
+    if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
         spiderFlower.playerCollide(); 
     }
 }
@@ -215,4 +222,13 @@ function playerCheckDialogueWalkAway(){
             clearDialogueBox();
         }
     //}
+}
+
+function playerSword () {
+    playerSwingSword = true; 
+    setTimeout(playerSwordStop, 500);
+}
+
+function playerSwordStop () {
+    playerSwingSword = false; 
 }

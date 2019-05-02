@@ -1,8 +1,8 @@
 class spiderFlowerItem extends Phaser.GameObjects.Sprite {
 	constructor (parameter) {
-        super(parameter.scene, parameter.x, parameter.y, parameter.key);
-        parameter.scene.physics.world.enable(this);
-        parameter.scene.add.existing(this);
+        super(createThis, parameter.x, parameter.y, parameter.key);
+        createThis.physics.world.enable(this);
+        createThis.add.existing(this);
         this.body.allowGravity = false; 
 	}
 
