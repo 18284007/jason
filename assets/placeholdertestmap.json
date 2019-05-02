@@ -89,8 +89,26 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1189.27272727273,
+                 "x":1398.27272727273,
                  "y":1741.93939393939
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"minotaurBoss",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":-200
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":955,
+                 "y":1737
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -99,7 +117,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":8,
+ "nextobjectid":9,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",

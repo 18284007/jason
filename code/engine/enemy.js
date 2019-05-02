@@ -261,28 +261,47 @@ class minotaurBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
-			xMove: parameter.xMove,
+			key: 'jason', //temp sprite 
+			xMove: 200,//parameter.xMove,
 			xVel: 130, 
-			scale: 0.45, 
+			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 1
+			health: 250
         });
+        this.swingSword = false; 
+        this.charging = false; //Is the minotaur charging at the player? 
 	}
 
 	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
+		if (this.charging && !this.swingSword) {
 			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
+				this.charging = false; 	
+				this.sword(); 
 			}
-		} 
+		} else if (!this.charging && !this.swingSword) {
+			if (this.x > this.xMax) {
+				this.charging = true; 
+				this.sword(); 
+			}
+		}
+	}
+
+	sword () {
+		this.body.setVelocityX(0);
+    	this.swingSword = true; 
+    	setTimeout(this.swordStop, 500, this);
+	}
+
+ 	swordStop (tempEnemy) {
+    	tempEnemy.swingSword = false; 
+    	tempEnemy.charging = !tempEnemy.charging; 
+
+		if (tempEnemy.charging) {
+			tempEnemy.body.setVelocityX(-tempEnemy.xVel);
+		} else {
+			tempEnemy.body.setVelocityX(tempEnemy.xVel);
+		}
 	}
 }
 
