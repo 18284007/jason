@@ -161,10 +161,16 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":4093.93939393939,
-                 "y":1778.78787878788
+                 "x":4130.30303030303,
+                 "y":1769.69696969697
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"portalMap",
+                 "type":"string",
+                 "value":"screen12"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,

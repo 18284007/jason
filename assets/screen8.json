@@ -189,6 +189,12 @@
                  "y":1954.54545454545
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"portalMap",
+                 "type":"string",
+                 "value":"shrine"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
