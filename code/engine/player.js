@@ -159,7 +159,7 @@ function playerItemCollision() {
 function playerDamage(tempHealth) {
     currentHealth -= tempHealth;
     parseHealthBarAnimate();
-    if (currentHealth < 0) {
+    if (currentHealth <= 0) {
         gameOver(); 
     }
 }
