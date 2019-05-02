@@ -83,7 +83,7 @@
                         {
                          "name":"portalMap",
                          "type":"string",
-                         "value":"01"
+                         "value":"argoLanding"
                         }],
                  "rotation":0,
                  "type":"",

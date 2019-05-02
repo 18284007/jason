@@ -15,7 +15,7 @@ var playLevel = new Phaser.Class({
         //currentLevel = 'assets/' + currentLevelID + '.json';
         currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
 
-        gameLevelList = ['01', '02', '03', '04', 'screen8', 'screen10', 'screen11', 'screen12', 'siren', 'shrine', 'spider', 'placeholdertestmap']; 
+        gameLevelList = ['argoLanding', 'roadToColchis', 'marketplace', 'palace', 'riverCrossing', 'gardenEntrance', 'gardenForest', 'gardenDungeon', 'gardenDungeonB', 'gardenFleece', 'siren', 'shrine', 'shrineForest', 'placeholdertestmap']; 
         for (i = 0; i < gameLevelList.length; i++){
             //Load Tilemap 
             this.load.tilemapTiledJSON(
