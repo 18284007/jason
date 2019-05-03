@@ -76,6 +76,20 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			enemies[this.enemyId].destroy(); 
 		}
 	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
 }
 
 /* Mini spider enemy.
@@ -96,20 +110,6 @@ class spiderMini extends enemyBase {
 			health: 1
         });
 	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
-	}
 }
 
 class fox extends enemyBase { 
@@ -127,20 +127,6 @@ class fox extends enemyBase {
 			health: 1
         });
 	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
-	}
 }
 
 class snake extends enemyBase { 
@@ -157,20 +143,6 @@ class snake extends enemyBase {
 			gravity: false, 
 			health: 1
         });
-	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
 	}
 }
 
@@ -190,19 +162,7 @@ class bats extends enemyBase {
         });
 	}
 
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
-	}
+	
 }
 
 class bullBoss extends enemyBase { 
@@ -220,20 +180,6 @@ class bullBoss extends enemyBase {
 			health: 1
         });
 	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
-	}
 }
 
 class medusaBoss extends enemyBase { 
@@ -250,20 +196,6 @@ class medusaBoss extends enemyBase {
 			gravity: false, 
 			health: 1
         });
-	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
 	}
 }
 
@@ -331,21 +263,7 @@ class dragonBoss extends enemyBase {
 			gravity: false, 
 			health: 1
         });
-	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
-	}
+	}	
 }
 
 /* Spider boss.
