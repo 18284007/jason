@@ -29,6 +29,16 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.health = parameter.health;
 		this.invulnerabilityWait = 1000; 
 		this.invulnerability = false; 
+		if (typeof parameter.hasSword !== 'undefined'){ 
+			this.hasSword = parameter.hasSword; 
+		} else {
+			this.hasSword = false; 
+		}
+		if (typeof parameter.damageTouch !== 'undefined'){ 
+			this.damageTouch = parameter.damageTouch; 
+		} else {
+			this.damageTouch = true; 
+		}
 
         //Collision detection between the player and enemy. 
         createThis.physics.add.overlap(this, player, this.collision);
@@ -45,7 +55,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			enemies[tempEnemy.enemyId].invulnerability = true; 
 			enemies[tempEnemy.enemyId].alpha = 0.3; 
 			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
-		} else if (!playerSwingSword && !tempEnemy.invulnerability) {
+		} else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
+			playerDamage(10);
+		} else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
 			playerDamage(10);
 		}
 	}
@@ -267,41 +279,41 @@ class minotaurBoss extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250
+			health: 250, 
+			damageTouch: false,
+			hasSword: true
         });
         this.swingSword = false; 
         this.charging = false; //Is the minotaur charging at the player? 
 	}
 
 	movement() {
-		if (this.charging && !this.swingSword) {
-			if (this.x < this.xMin) {
-				this.charging = false; 	
-				this.sword(); 
-			}
-		} else if (!this.charging && !this.swingSword) {
-			if (this.x > this.xMax) {
-				this.charging = true; 
-				this.sword(); 
-			}
+		if (typeof this.body !== 'undefined'){
+			if (this.charging && !this.swingSword) {
+				this.body.setVelocityX(-this.xVel);
+				if (this.x < this.xMin) {
+					this.sword(); 
+				}
+			} else if (!this.charging && !this.swingSword) {
+				this.body.setVelocityX(this.xVel);
+				if (this.x > this.xMax) {
+					this.sword(); 
+				}
+			}	
 		}
 	}
 
 	sword () {
-		this.body.setVelocityX(0);
-    	this.swingSword = true; 
-    	setTimeout(this.swordStop, 500, this);
+		if (typeof this !== 'undefined'){
+			this.body.setVelocityX(0);
+   			this.swingSword = true; 
+    		setTimeout(this.swordStop, 500, this);
+		}
 	}
 
  	swordStop (tempEnemy) {
     	tempEnemy.swingSword = false; 
     	tempEnemy.charging = !tempEnemy.charging; 
-
-		if (tempEnemy.charging) {
-			tempEnemy.body.setVelocityX(-tempEnemy.xVel);
-		} else {
-			tempEnemy.body.setVelocityX(tempEnemy.xVel);
-		}
 	}
 }
 
