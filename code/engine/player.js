@@ -12,30 +12,16 @@ var playerShipOffsetX = 500; //Camera offset for playerShip mode.
 
 var playerSwingSword = false; 
 
-
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false; 
 
+function loadCharacterMetaJSON() {
+    createThis.load.json('characterMetaJSON', 'code/engine/player.json');
+}
 
-/* This function would be used for importing player data from a JSON file. 
- * It is currently not working, so please do not use it. 
- */
-function loadPlayerJSON() {
-    //Request the JSON file. 
-    var playerJSONRequest = new XMLHttpRequest();
-    var playerJSONData;
-    playerJSONRequest.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            playerJSONData = JSON.parse(this.responseText);
-        }
-    };
-    playerJSONRequest.open("GET", "code/engine/player.json", true);
-    playerJSONRequest.send();
-
-    //Load spritesheets as specified in the JSON file. 
-    for (x in playerJSONData) {
-        this.load.spritesheet(playerJSONData[x].characterName, playerJSONData[x].spritesheetPath);
-    }
+function parseCharacterMetaJSON() {
+    characterMetaJSON = createThis.cache.json.get('characterMetaJSON');
+    characterMeta = characterMetaJSON.characters;
 }
 
 /* Player movement. 

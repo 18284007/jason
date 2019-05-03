@@ -12,6 +12,8 @@ var playLevel = new Phaser.Class({
     {
         createThis = this; 
         
+        loadCharacterMetaJSON(); 
+
         //currentLevel = 'assets/' + currentLevelID + '.json';
         currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
 
@@ -63,6 +65,8 @@ var playLevel = new Phaser.Class({
 
     create: function() 
     {
+        parseCharacterMetaJSON();
+
         //Generate current Tilemap key. 
         currentTilemapKey = currentLevelID + 'Tilemap';
 
