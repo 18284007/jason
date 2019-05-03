@@ -12,6 +12,11 @@ var playerShipOffsetX = 500; //Camera offset for playerShip mode.
 
 var playerSwingSword = false; 
 
+
+var playerInvulnerabilityWait = 1000; 
+var playerInvulnerability = false; 
+
+
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
  */
@@ -135,11 +140,22 @@ function playerItemCollision() {
     }
 }
 
+function playerInvulnerabilityStop() {
+    playerInvulnerability = false; 
+    player.alpha = 1; 
+}
+
+
 function playerDamage(tempHealth) {
-    currentHealth -= tempHealth;
-    parseHealthBarAnimate();
-    if (currentHealth <= 0) {
-        gameOver(); 
+    if (!playerInvulnerability){
+        playerInvulnerability = true; 
+        player.alpha = 0.3; 
+        setTimeout(playerInvulnerabilityStop, playerInvulnerabilityWait);
+        currentHealth -= tempHealth;
+        parseHealthBarAnimate();
+        if (currentHealth <= 0) {
+            gameOver(); 
+        }
     }
 }
 
