@@ -134,12 +134,6 @@ function playerShipSink() {
     player.angle += 5; 
 }
 
-function playerItemCollision() { 
-    if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
-        spiderFlower.playerCollide(); 
-    }
-}
-
 function playerInvulnerabilityStop() {
     playerInvulnerability = false; 
     player.alpha = 1; 

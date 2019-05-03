@@ -190,9 +190,6 @@ var playLevel = new Phaser.Class({
         enemyMovement(); 
 
         playerCheckForFall(); 
-        if (playerAlive) {
-            playerItemCollision();
-        }
 
         if (typeof medea != 'undefined') {
             if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
