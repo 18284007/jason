@@ -37,7 +37,7 @@ function parseHealthBarAnimate()
 	healthDif = oldHealth - currentHealth;
 	if(healthDif != 0)
 	{
-		intervalVar = setInterval(oldHealthCtr(), 250);
+		intervalVar = setInterval(oldHealthCtr, 50);
 	}
 }
 
@@ -80,7 +80,7 @@ function drawHealthBar()
 	healthBar.strokeRect(hbX,hbY,hbWidth,hbHeight);
 	if (currentHealth > 0)
 	{
-		healthBar.fillRect(hbX,hbY,hbIncrement*currentHealth,hbHeight);
+		healthBar.fillRect(hbX,hbY,hbIncrement*oldHealth,hbHeight);
 	}
 	
 }
