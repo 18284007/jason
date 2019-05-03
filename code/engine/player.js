@@ -12,6 +12,11 @@ var playerShipOffsetX = 500; //Camera offset for playerShip mode.
 
 var playerSwingSword = false; 
 
+
+var playerInvulnerabilityWait = 1000; 
+var playerInvulnerability = false; 
+
+
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
  */
@@ -129,38 +134,28 @@ function playerShipSink() {
     player.angle += 5; 
 }
 
-/* This function controls what happens when a player collides with an enemy. 
- */ 
-function playerEnemyCollision() {
-    /*if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), enemies.getBounds())) {
-        if (attackKey.isDown){
-            //Add a function here that hurts/kills the enemy. 
-            enemies.setVelocityY(99999999);
-        } else {
-            playerDamage(10);
-        }
-    }*/
-    if (typeof spiderBossAlive !== 'undefined' && spiderBossAlive && 
-        Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderBoss.getBounds())) {
-        if (attackKey.isDown){
-            spiderBossHealth -= 10; 
-        } else {
-            playerDamage(50);
-        }
-    }
-}
-
 function playerItemCollision() { 
     if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
         spiderFlower.playerCollide(); 
     }
 }
 
+function playerInvulnerabilityStop() {
+    playerInvulnerability = false; 
+    player.alpha = 1; 
+}
+
+
 function playerDamage(tempHealth) {
-    currentHealth -= tempHealth;
-    parseHealthBarAnimate();
-    if (currentHealth <= 0) {
-        gameOver(); 
+    if (!playerInvulnerability){
+        playerInvulnerability = true; 
+        player.alpha = 0.3; 
+        setTimeout(playerInvulnerabilityStop, playerInvulnerabilityWait);
+        currentHealth -= tempHealth;
+        parseHealthBarAnimate();
+        if (currentHealth <= 0) {
+            gameOver(); 
+        }
     }
 }
 

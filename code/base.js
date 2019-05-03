@@ -191,7 +191,6 @@ var playLevel = new Phaser.Class({
 
         playerCheckForFall(); 
         if (playerAlive) {
-            playerEnemyCollision();
             playerItemCollision();
         }
 

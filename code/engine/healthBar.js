@@ -17,6 +17,7 @@ function initHealthBar()
 	hbIncrement = hbWidth/maxHealth;
 	hbReady = true;
 	oldHealth = maxHealth;
+	healthBar.setDepth(500);
 }
 function maxHealthUpdate()
 {
@@ -79,7 +80,7 @@ function drawHealthBar()
 	healthBar.strokeRect(hbX,hbY,hbWidth,hbHeight);
 	if (currentHealth > 0)
 	{
-		healthBar.fillRect(hbX,hbY,hbIncrement*oldHealth,hbHeight);
+		healthBar.fillRect(hbX,hbY,hbIncrement*currentHealth,hbHeight);
 	}
 	
 }
