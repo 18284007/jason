@@ -339,12 +339,13 @@ class spiderBoss extends enemyBase {
 	}
 
 	shootWeb() {
-		new projectile({
+		projectiles[currentProjectile] = new projectile({
 	        scene: createThis, 
 	        x: this.x, 
 	        y: this.y,
 	        key: 'spiderBossWebSprite',
-	        velocityX: -100
+	        velocityX: -100,
+	        projectileId: currentProjectile
 	    });
 	}
 }
