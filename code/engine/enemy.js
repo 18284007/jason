@@ -72,7 +72,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 
 	//Enemy update routine. 
 	update() {
-		if (this.health < 0) {
+		if (this.health <= 0) {
 			enemies[this.enemyId].destroy(); 
 		}
 	}
