@@ -17,6 +17,7 @@ function initHealthBar()
 	hbIncrement = hbWidth/maxHealth;
 	hbReady = true;
 	oldHealth = maxHealth;
+	healthBar.setDepth(500);
 }
 function maxHealthUpdate()
 {
