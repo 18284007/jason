@@ -1,5 +1,6 @@
 //Game variables relating to the player.
-var health = 100;
+var maxHealth = 100;
+var currentHealth = 100;
 var playerJumpVelocity = 500; 
 var playerWalkVelocity = 200; 
 //var playerShip = false; //Is the player a ship or a person?
@@ -156,8 +157,9 @@ function playerItemCollision() {
 }
 
 function playerDamage(tempHealth) {
-    health -= tempHealth; 
-    if (health < 0) {
+    currentHealth -= tempHealth;
+    parseHealthBarAnimate();
+    if (currentHealth <= 0) {
         gameOver(); 
     }
 }
@@ -166,6 +168,8 @@ function gameOver() {
     playerAlive = false; 
     //createThis.cameras.main.fadeOut(1000);
     //setTimeout(window.location = "index.html",20000);\
+    currentHealth = maxHealth;
+    healthBarReset();
     createThis.scene.restart('playLevel');
 }
 

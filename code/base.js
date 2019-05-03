@@ -164,6 +164,7 @@ var playLevel = new Phaser.Class({
         }
 
         parseLevelDialogue();
+        initHealthBar();
 
         spawnObjects(); 
     },
@@ -201,6 +202,8 @@ var playLevel = new Phaser.Class({
                 playerCheckDialogueWalkAway(); 
             }
         }
+        
+        parseHealthBar();
     }
 })
 
