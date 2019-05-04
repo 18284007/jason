@@ -29,11 +29,26 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.health = parameter.health;
 		this.invulnerabilityWait = 1000; 
 		this.invulnerability = false; 
+
+		if (typeof parameter.spiderBoss !== 'undefined'){ 
+			this.spiderBoss = parameter.spiderBoss; 
+		} else {
+			this.spiderBoss = false; 
+		}
+
+
 		if (typeof parameter.hasSword !== 'undefined'){ 
 			this.hasSword = parameter.hasSword; 
 		} else {
 			this.hasSword = false; 
 		}
+
+		if (typeof parameter.stompable !== 'undefined'){ 
+			this.stompable = parameter.stompable; 
+		} else {
+			this.stompable = false; 
+		}
+
 		if (typeof parameter.damageTouch !== 'undefined'){ 
 			this.damageTouch = parameter.damageTouch; 
 		} else {
@@ -50,7 +65,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	 * tempEnemy refers to the enemy object. 
 	 */
 	collision(tempEnemy) {
-		if (playerSwingSword && !tempEnemy.invulnerability) {
+		if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
+			enemies[tempEnemy.enemyId].destroy();  
+		} else if (playerSwingSword && !tempEnemy.invulnerability) {
 			enemies[tempEnemy.enemyId].health -= 100;
 			enemies[tempEnemy.enemyId].invulnerability = true; 
 			enemies[tempEnemy.enemyId].alpha = 0.3; 
@@ -59,6 +76,11 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			playerDamage(10);
 		} else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
 			playerDamage(10);
+		}
+
+		//If the attacks are inactive and the spider is attacked, it will become active.
+		if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
+			spiderBossActive = true;
 		}
 	}
 
@@ -107,7 +129,8 @@ class spiderMini extends enemyBase {
 			scale: 0.45, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 1
+			health: 1, 
+			stompable: true
         });
 	}
 }
@@ -281,7 +304,8 @@ class spiderBoss extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250
+			health: 250,
+			spiderBoss: true
         });
 
 		this.spiderBossAlive = true; 
@@ -290,22 +314,6 @@ class spiderBoss extends enemyBase {
 	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
 	    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
 	    graphics.strokeLineShape(line);
-	}
-
-	collision(tempEnemy) {
-		if (playerSwingSword && !tempEnemy.invulnerability) {
-			enemies[tempEnemy.enemyId].health -= 100;
-			enemies[tempEnemy.enemyId].invulnerability = true; 
-			enemies[tempEnemy.enemyId].alpha = 0.3; 
-			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
-		} else if (!playerSwingSword && !tempEnemy.invulnerability) {
-			playerDamage(10);
-		}
-
-		//If the attacks are inactive and the spider is attacked, it will become active.
-		if (!this.spiderBossActive) {
-			spiderBossActive = true; 
-		}
 	}
 
 	checkPhase() {
