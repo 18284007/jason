@@ -68,7 +68,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
 			enemies[tempEnemy.enemyId].destroy();  
 		} else if (playerSwingSword && !tempEnemy.invulnerability) {
-			enemies[tempEnemy.enemyId].health -= 100;
+			enemies[tempEnemy.enemyId].health -= playerDamagePoints;
 			enemies[tempEnemy.enemyId].invulnerability = true; 
 			enemies[tempEnemy.enemyId].alpha = 0.3; 
 			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);

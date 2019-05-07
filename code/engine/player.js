@@ -11,6 +11,7 @@ var playerHasWings = false; //Can the player fly?
 var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
 
 var playerSwingSword = false; 
+var playerDamagePoints = 50; 
 
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false; 
