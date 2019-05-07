@@ -115,10 +115,16 @@ function spawnObjects() {
             case 'spiderFlower': 
             	spiderFlower = new spiderFlowerItem({
 	                x: mapObjectArray[i].x, 
-	                y: mapObjectArray[i].y,
-	                key: 'spiderFlowerSprite'
+	                y: mapObjectArray[i].y
             	});
             	break;
+
+            case 'healthItem': 
+                new healthItem({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y
+                });
+                break;
 
             case 'crew': 
             	crew = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'jason');

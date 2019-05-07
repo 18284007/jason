@@ -109,6 +109,18 @@
                  "width":0,
                  "x":955,
                  "y":1737
+                }, 
+                {
+                 "height":0,
+                 "id":9,
+                 "name":"healthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":256,
+                 "y":1742
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -117,7 +129,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":9,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",

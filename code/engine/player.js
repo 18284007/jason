@@ -139,6 +139,14 @@ function playerDamage(tempHealth) {
     }
 }
 
+function playerHeal(tempHealth){
+    currentHealth += tempHealth;
+    if (currentHealth > maxHealth){
+        currentHealth = maxHealth;
+    }
+    parseHealthBarAnimate();
+}
+
 function gameOver() {
     playerAlive = false; 
     //createThis.cameras.main.fadeOut(1000);
