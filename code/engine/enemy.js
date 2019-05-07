@@ -16,7 +16,8 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	        this.xMax = parameter.x + parameter.xMove; 
 	        this.xVel = parameter.xVel; 
 	        this.body.setVelocityX(this.xVel);
-        } else if (typeof parameter.yMove !== 'undefined'){
+        } 
+        if (typeof parameter.yMove !== 'undefined'){
 			this.moveUp = false; 
 			this.yMin = parameter.y; 
 			this.yMax = parameter.y + parameter.yMove; 
@@ -35,7 +36,6 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		} else {
 			this.spiderBoss = false; 
 		}
-
 
 		if (typeof parameter.hasSword !== 'undefined'){ 
 			this.hasSword = parameter.hasSword; 
@@ -183,9 +183,7 @@ class bats extends enemyBase {
 			gravity: false, 
 			health: 1
         });
-	}
-
-	
+	}	
 }
 
 class bullBoss extends enemyBase { 
@@ -280,13 +278,63 @@ class dragonBoss extends enemyBase {
 			y: parameter.y,
 			key: 'spiderBossSprite', 
 			xMove: parameter.xMove,
-			xVel: 130, 
-			scale: 0.45, 
+			xVel: 300, 
+			yMove: parameter.yMove, 
+			yVel: 300,
+			scale: 3, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 1
+			health: 300
         });
+
+        this.verticalMove = false; 
+        this.moveDirection = 0; 
+        this.body.setVelocityY(0);
+        this.invulnerabilityWait = 3000; 
 	}	
+
+	checkPhase() {
+		if (this.health <= 100){
+			return 2;
+		} else if (this.health <= 250){
+			return 1; 
+		} else {
+			return 0; 
+		}
+	}
+
+	movement() { 
+		if (!this.verticalMove && this.x > this.xMax) {
+			if (this.moveUp) {
+				this.body.setVelocityX(0);
+				this.body.setVelocityY(-this.yVel);
+				this.verticalMove = true; 
+			} else {
+				this.body.setVelocityX(0);
+				this.body.setVelocityY(this.yVel);
+				this.verticalMove = true; 
+			}
+		} else if (!this.verticalMove && this.x < this.xMin) {
+			this.body.setVelocityX(this.xVel);
+			this.body.setVelocityY(0);
+			this.shoot(); 
+		} else if (this.verticalMove) {
+			if (!this.moveUp && (this.y > this.yMax) || (this.y < this.yMin)) {
+				this.verticalMove = false;
+				this.body.setVelocityX(-this.xVel);
+				this.body.setVelocityY(0);
+				this.moveUp = !this.moveUp; 
+			}
+		}
+	}
+
+	shoot() {
+		projectiles[currentProjectile] = new dragonFire({
+	        x: this.x, 
+	        y: this.y,
+	        projectileId: currentProjectile
+	    });
+	}
 }
 
 /* Spider boss.
@@ -347,12 +395,9 @@ class spiderBoss extends enemyBase {
 	}
 
 	shootWeb() {
-		projectiles[currentProjectile] = new projectile({
-	        scene: createThis, 
+		projectiles[currentProjectile] = new spiderBossWeb({
 	        x: this.x, 
 	        y: this.y,
-	        key: 'spiderBossWebSprite',
-	        velocityX: -100,
 	        projectileId: currentProjectile
 	    });
 	}

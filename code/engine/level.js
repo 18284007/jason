@@ -106,7 +106,8 @@ function spawnObjects() {
                 enemies[enemyCount] = new dragonBoss({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    //xMove: mapObjectArray[i].properties[0].value,
+                    xMove: mapObjectArray[i].properties[0].value,
+                    yMove: mapObjectArray[i].properties[1].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
