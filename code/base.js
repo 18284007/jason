@@ -24,6 +24,7 @@ class controller extends Phaser.Scene
     preload()
     {
     	//Load assets used in all levels
+    	createThis = this;
     	//this.load.tilemapTiledJSON('argoLandingTilemap', 'assets/argoLanding.json');
         this.load.image('bonfireSprite','assets/bonfire.png');
         this.load.spritesheet('jason','assets/player/jason.png', 
@@ -39,6 +40,7 @@ class controller extends Phaser.Scene
 
     create()
     {
+    	firstInitHealthBar();
     	game.scene.run(currentLevelID);
     }
 
@@ -140,6 +142,8 @@ function loadMap()
         portal.setDepth(-10);
         portalMap = portalSpawnPoint.properties[0].value; 
     }
+
+    initHealthBar();
 }
 
 function callUpdateFuncs()
@@ -166,6 +170,7 @@ function callUpdateFuncs()
     if (playerAlive) {
         playerItemCollision();
     }
+    parseHealthBar();
     /*
     if (medeaSpawnPoint !== null) {
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
