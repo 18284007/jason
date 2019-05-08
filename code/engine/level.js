@@ -7,9 +7,12 @@ function shrineLoad()
 }
 
 function spawnObjects() {
-	enemies = []; 
-    enemyCount = 0; 
+	enemies = []; //Array with all enemy objects.
+    enemyCount = 0; //Enemy Count. Used to identify each enemy. 
 
+    /* Run through the list of objects in the map and spawn the appropriate object. 
+     * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
+     */
     mapObjectArray = createThis.map.objects[0].objects;
     for (i = 0; i < mapObjectArray.length; i++){
         switch (mapObjectArray[i].name){
