@@ -144,6 +144,7 @@ function loadMap()
     }
 
     initHealthBar();
+    spawnObjects();
 }
 
 function callUpdateFuncs()
@@ -164,7 +165,7 @@ function callUpdateFuncs()
     //}
 
     //Enemy Movement
-    //enemyMovement();
+    enemyMovement();
      
     playerCheckForFall(); 
     if (playerAlive) {
