@@ -1,21 +1,20 @@
-//Game variables relating to the player.
+//Game variables relating to the player on all levels.
 var maxHealth = 100;
 var currentHealth = 100;
+var playerAlive = true;
+// variables relating to normal levels
 var playerJumpVelocity = 500; 
 var playerWalkVelocity = 200; 
-var playerShip = false; //Is the player a ship or a person?
-var playerShipVelocity = 300;
 var playerFacingRight = true;
 var playerHasWings = false; //Can the player fly?
-var playerAlive = true;
-
-var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
-
-var playerSwingSword = false; 
-
-
+var playerSwingSword = false;
 var playerInvulnerabilityWait = 1000; 
-var playerInvulnerability = false; 
+var playerInvulnerability = false;  
+
+// variables relating to siren level
+var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
+var playerShip = false; //Is the player a ship or a person?
+var playerShipVelocity = 300;
 
 
 /* This function would be used for importing player data from a JSON file. 
@@ -82,16 +81,16 @@ function playerMovement() {
     		player.setVelocityY(-playerJumpVelocity);
     	}
     }
-    /*
+    
     //Move into portals. 
-    if (!playerShip && portalSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portal.getBounds())){
+    if(portalSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portal.getBounds())){
         if (cursors.up.isDown) {
             playerShip = false;
-            portal.destroy();
+            //portal.destroy();
             changeLevel(portalMap); 
         }   
     }
-    */
+    
 }
 
 /* Ship Movement. 
