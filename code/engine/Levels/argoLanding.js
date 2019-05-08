@@ -1,57 +1,52 @@
+var newGraphics;
+
+
 class argoLanding extends Phaser.Scene{
 
-    	constructor()
+    constructor()
 	{
-        	super({key: 'argoLanding', active: false });
+        super({key: 'argoLanding', active: false });
 	}
 
 	preload()
 	{
         
-        	createThis = this;
-
-        	this.load.tilemapTiledJSON('argoLandingTilemap', 'assets/argoLanding.json');
+        createThis = this;
+        currentLevelID = 'argoLanding';
+        this.load.tilemapTiledJSON('argoLandingTilemap', 'assets/argoLanding.json');
         
 	}
 
 	create()
 	{
 
-        	loadMap();
-        
-        	this.portalSpawnPoint = this.map.findObject("Objects", obj => obj.name === "portal");
-        
-        	if (this.portalSpawnPoint !== null) {
-            		portal = this.physics.add.sprite(this.portalSpawnPoint.x, this.portalSpawnPoint.y, 'portalSprite');
-            		portal.body.allowGravity = false;
-            	portal.setDepth(-10);
-            	//portalMap = portalSpawnPoint.properties[0].value; 
-        	}
+        loadMap();
         
         
 		this.crew01SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew01");
         
-        	if (this.crew01SpawnPoint !== null) {
-            		this.crew01 = this.physics.add.sprite(this.crew01SpawnPoint.x, this.crew01SpawnPoint.y, 'jason');
-            		this.physics.add.collider(this.crew01, mapLayer);
-        	}
+        if (this.crew01SpawnPoint !== null) {
+            this.crew01 = this.physics.add.sprite(this.crew01SpawnPoint.x, this.crew01SpawnPoint.y, 'jason');
+            this.physics.add.collider(this.crew01, mapLayer);
+        }
         
         
-        	this.crew02SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew02");
-        	if (this.crew02SpawnPoint !== null) {
-            		this.crew02 = this.physics.add.sprite(this.crew02SpawnPoint.x, this.crew02SpawnPoint.y, 'jason');
-            		this.physics.add.collider(this.crew02, mapLayer);
-        	}
-
-        	this.bonfireSpawnPoint = this.map.findObject("Objects", obj => obj.name === "bonfire");
-        	if (this.bonfireSpawnPoint !== null) {
-            		this.bonfire = this.physics.add.sprite(this.bonfireSpawnPoint.x, this.bonfireSpawnPoint.y, 'bonfireSprite');
-            		this.physics.add.collider(this.bonfire, mapLayer);
-        	}
+        this.crew02SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew02");
+        if (this.crew02SpawnPoint !== null) {
+            this.crew02 = this.physics.add.sprite(this.crew02SpawnPoint.x, this.crew02SpawnPoint.y, 'jason');
+            this.physics.add.collider(this.crew02, mapLayer);
         }
 
-    	update()
-    	{
-        	callUpdateFuncs();
-    	}
+        this.bonfireSpawnPoint = this.map.findObject("Objects", obj => obj.name === "bonfire");
+        if (this.bonfireSpawnPoint !== null) {
+            this.bonfire = this.physics.add.sprite(this.bonfireSpawnPoint.x, this.bonfireSpawnPoint.y, 'bonfireSprite');
+            this.physics.add.collider(this.bonfire, mapLayer);
+        }
+        
+    }
+
+    update()
+    {
+        callUpdateFuncs();
+    }
 }

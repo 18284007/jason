@@ -8,6 +8,7 @@ class roadToColchis extends Phaser.Scene{
 	preload()
 	{
         createThis = this;
+        currentLevelID = 'roadToColchis';
         this.load.tilemapTiledJSON('roadToColchisTilemap', 'assets/roadToColchis.json');
 	}
 

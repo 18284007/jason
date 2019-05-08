@@ -8,6 +8,7 @@ class marketplace extends Phaser.Scene{
 	preload()
 	{
         createThis = this;
+        currentLevelID = 'marketplace';
         this.load.tilemapTiledJSON('marketplaceTilemap', 'assets/marketplace.json');
 	}
 

@@ -8,6 +8,7 @@ class gardenForest extends Phaser.Scene{
 	preload()
 	{
         createThis = this;
+        currentLevelID = 'gardenForest';
         this.load.tilemapTiledJSON('gardenForestTilemap', 'assets/gardenForest.json');
 	}
 

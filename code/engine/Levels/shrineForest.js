@@ -8,6 +8,7 @@ class shrineForest extends Phaser.Scene{
     preload()
     {
         createThis = this;
+        currentLevelID = 'shrineForest';
         this.load.tilemapTiledJSON('shrineForestTilemap', 'assets/shrineForest.json');
     }
 
