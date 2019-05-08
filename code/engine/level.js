@@ -127,6 +127,20 @@ function spawnObjects() {
                 });
                 break;
 
+            case 'damageIncreaseItem': 
+                new damageIncreaseItem({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y
+                });
+                break;
+
+            case 'maxHealthItem': 
+                new maxHealthItem({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y
+                });
+                break;
+
             case 'crew': 
             	crew = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'jason');
             	createThis.physics.add.collider(crew, mapLayer);

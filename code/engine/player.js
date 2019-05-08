@@ -140,6 +140,17 @@ function playerDamage(tempHealth) {
     }
 }
 
+// Boosts max health by the number stated in tempHealth.
+function maxHealthBoost(tempHealth) {
+    maxHealth += tempHealth; 
+    currentHealth = maxHealth;
+    maxHealthUpdate();
+    parseHealthBarAnimate();
+}
+
+/* Heals player by the amount in tempHealth. 
+ * The player's health can not exceed maxHealth. 
+ */
 function playerHeal(tempHealth){
     currentHealth += tempHealth;
     if (currentHealth > maxHealth){
@@ -148,6 +159,7 @@ function playerHeal(tempHealth){
     parseHealthBarAnimate();
 }
 
+//The game is reset. 
 function gameOver() {
     playerAlive = false; 
     //createThis.cameras.main.fadeOut(1000);

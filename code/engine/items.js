@@ -44,6 +44,54 @@ class healthItem extends itemBase {
 	}
 }
 
+/* Max Health Item 
+ * This increases the player's maximum health by a predefined amount (currently 50).
+ * Required parameters: x, y
+ */
+
+class maxHealthItem extends itemBase {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			gravity: false
+		})
+
+		this.boostValue = 50; 
+	}
+
+	collision (tempItem){
+		maxHealthBoost(tempItem.boostValue);
+		tempItem.destroy();
+	}
+}
+
+/* Damage Increase Item 
+ * This increases the player's maximum damage by a predefined amount (currently 50).
+ * Required parameters: x, y
+ */
+
+class damageIncreaseItem extends itemBase {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			gravity: false
+		})
+
+		this.boostValue = 50; 
+	}
+
+	collision (tempItem){
+		playerDamagePoints += tempItem.boostValue;
+		tempItem.destroy();
+	}
+}
+
 /* Spider Flower 
  * The spider flower activates the spider boss' attack. 
  * Required parameters: x, y
