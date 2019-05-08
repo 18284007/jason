@@ -9,7 +9,7 @@ class gardenEntrance extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'gardenEntrance';
-        this.load.tilemapTiledJSON('gardenEntranceTilemap', 'assets/gardenEntrance.json');
+        commonPreload();
 	}
 
 	create()

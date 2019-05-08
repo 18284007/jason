@@ -13,7 +13,7 @@ class argoLanding extends Phaser.Scene{
         
         createThis = this;
         currentLevelID = 'argoLanding';
-        this.load.tilemapTiledJSON('argoLandingTilemap', 'assets/argoLanding.json');
+        commonPreload();
         
 	}
 

@@ -8,8 +8,8 @@ class colchisFields extends Phaser.Scene{
 	preload()
 	{
         createThis = this;
-        currentLevelID = 'colchisFields';
-        this.load.tilemapTiledJSON('colchisFieldsTilemap', 'assets/colchisFields.json');
+        currentLevelID = 'colchiesFields';
+        commonPreload();
 	}
 
 	create()
