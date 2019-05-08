@@ -41,6 +41,10 @@ class spiderBossWeb extends projectile {
     }
 }
 
+/* Dragon fire projectile. 
+ * If aimed is set to true, the projectile will aim towards the player. 
+ * Required parameters: x, y, projectileId, aimed.
+ */
 class dragonFire extends projectile {
     constructor (parameter) {
         super({
@@ -52,5 +56,9 @@ class dragonFire extends projectile {
             projectileId: parameter.projectileId,
             damage: 25
         })
+
+        if (parameter.aimed){
+            createThis.physics.accelerateToObject(this, player, 600);
+        }
     }
 }
