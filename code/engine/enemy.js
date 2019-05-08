@@ -270,6 +270,10 @@ class minotaurBoss extends enemyBase {
 	}
 }
 
+/* Dragon Boss. 
+ * Flies horizontally and vertically. 
+ * Required parameters: x, y, xMove, yMove, enemyId
+ */
 class dragonBoss extends enemyBase { 
 	constructor (parameter) {
 		super({
