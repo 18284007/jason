@@ -1,4 +1,6 @@
 //temp function
+var enemyCount;
+var enemies;
 function shrineLoad()
 {
 	medeaSprite = createThis.load.image('medea', 'assets/NPC/Medea-inface.png');
