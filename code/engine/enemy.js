@@ -420,10 +420,14 @@ class spiderBoss extends enemyBase {
 }
 
 function enemyMovement() {
+	
 	if (enemyCount > 0){
+		
 		for (i = 0; i < enemyCount; i++){
 			enemies[i].movement();	
 			enemies[i].update();
 		}
+		
 	}
+	
 }
