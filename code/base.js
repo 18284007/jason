@@ -132,6 +132,14 @@ function loadMap()
     if (playerShip) {
         player.body.allowGravity = false;
     }
+
+    portalSpawnPoint = createThis.map.findObject("Objects", obj => obj.name === "portal");
+    if (portalSpawnPoint !== null) {
+        portal = createThis.physics.add.sprite(portalSpawnPoint.x, portalSpawnPoint.y, 'portalSprite');
+        portal.body.allowGravity = false;
+        portal.setDepth(-10);
+        portalMap = portalSpawnPoint.properties[0].value; 
+    }
 }
 
 function callUpdateFuncs()
@@ -168,13 +176,13 @@ function callUpdateFuncs()
     }
     */
 }
-/*
+
 function changeLevel(tempNewLevelID) {
+	var oldLevelID = currentLevelID;
     game.scene.run(tempNewLevelID);
-    game.scene.stop(currentLevelID);
-    currentLevelID = tempNewLevelID;
+    game.scene.stop(oldLevelID);
 }
-*/
+
 
 
 var config = {
