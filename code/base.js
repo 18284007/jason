@@ -144,6 +144,7 @@ function loadMap()
     }
 
     initHealthBar();
+
     spawnObjects();
 }
 
