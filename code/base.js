@@ -8,6 +8,7 @@ var player;
 /*variables relating to map generation*/
 var mapLayer;
 var createThis;
+var currentLevelDialogueJSON;
 //var currentLevelID;
 /*variables relating to moving between levels*/
 var portal;
@@ -48,6 +49,16 @@ class controller extends Phaser.Scene
     {
     	
     }
+}
+
+function commonPreload()
+{
+	//load map
+	createThis.load.tilemapTiledJSON(currentLevelID + 'Tilemap', 'assets/'+ currentLevelID + '.json');
+
+	//load dialogue
+	currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
+	loadLevelDialogue();
 }
 
 function loadMap()
@@ -142,7 +153,7 @@ function loadMap()
         portal.setDepth(-10);
         portalMap = portalSpawnPoint.properties[0].value; 
     }
-
+    parseLevelDialogue();
     initHealthBar();
 
     spawnObjects();
@@ -173,15 +184,15 @@ function callUpdateFuncs()
         playerItemCollision();
     }
     parseHealthBar();
-    /*
-    if (medeaSpawnPoint !== null) {
+    
+    if (typeof medea != 'undefined') {
         if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
             playerNPCCollision();
         } else if (dialogueActive) {
             playerCheckDialogueWalkAway(); 
         }
     }
-    */
+    
 }
 
 function changeLevel(tempNewLevelID) {
