@@ -143,7 +143,8 @@ var playLevel = new Phaser.Class({
      
         //Camera
         if (!playerShip) {
-            this.cameras.main.startFollow(player, true, 0.05, 0.03);
+            this.cameras.main.startFollow(player, false, 0.05, 0.03); //new
+            //this.cameras.main.startFollow(player, true, 0.05, 0.03); //old
         } else {
             playerOffset = this.physics.add.sprite(playerSpawnPoint.x + 400, playerSpawnPoint.y, playerSprite);
             this.cameras.main.startFollow(playerOffset, true, 0.05, 0.03);
