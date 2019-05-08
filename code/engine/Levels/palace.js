@@ -9,7 +9,7 @@ class palace extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'palace';
-        this.load.tilemapTiledJSON('palaceTilemap', 'assets/palace.json');
+        commonPreload();
 	}
 
 	create()

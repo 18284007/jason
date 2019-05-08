@@ -9,7 +9,7 @@ class riverCrossing extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'riverCrossing';
-        this.load.tilemapTiledJSON('riverCrossingTilemap', 'assets/riverCrossing.json');
+        commonPreload();
 	}
 
 	create()

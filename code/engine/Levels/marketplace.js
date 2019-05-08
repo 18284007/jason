@@ -9,7 +9,7 @@ class marketplace extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'marketplace';
-        this.load.tilemapTiledJSON('marketplaceTilemap', 'assets/marketplace.json');
+        commonPreload();
 	}
 
 	create()

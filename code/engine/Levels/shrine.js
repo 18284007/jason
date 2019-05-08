@@ -9,7 +9,7 @@ class shrine extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'shrine';
-        this.load.tilemapTiledJSON('shrineTilemap', 'assets/shrine.json');
+        commonPreload();
 	}
 
 	create()
