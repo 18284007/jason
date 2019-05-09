@@ -162,6 +162,8 @@ function loadMap()
     initHealthBar();
 
     spawnObjects();
+
+    playerAlive = true;
 }
 
 function callUpdateFuncs()
