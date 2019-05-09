@@ -10,21 +10,18 @@ class shrineForest extends Phaser.Scene{
         createThis = this;
         currentLevelID = 'shrineForest';
         commonPreload();
+
+        //spiderBoss
+        this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
+        this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
+
+        
     }
 
     create()
     {
 
         loadMap();
-        /*
-        portalSpawnPoint = this.map.findObject("Objects", obj => obj.name === "portal");
-        if (portalSpawnPoint !== null) {
-            portal = this.physics.add.sprite(portalSpawnPoint.x, portalSpawnPoint.y, 'portalSprite');
-            portal.body.allowGravity = false;
-            portal.setDepth(-10);
-            portalMap = portalSpawnPoint.properties[0].value; 
-        }
-        */
     }
 
     update()

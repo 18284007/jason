@@ -12,6 +12,6 @@ export default class sirenScene extends Phaser.Scene
 
 	create ()
 	{
-		this.scene.start('preload');
+		
 	}
 }
