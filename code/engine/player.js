@@ -11,31 +11,18 @@ var playerHasWings = false; //Can the player fly?
 var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
 
 var playerSwingSword = false; 
-
+var playerDamagePoints = 50; 
 
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false; 
 
+function loadCharacterMetaJSON() {
+    createThis.load.json('characterMetaJSON', 'code/engine/player.json');
+}
 
-/* This function would be used for importing player data from a JSON file. 
- * It is currently not working, so please do not use it. 
- */
-function loadPlayerJSON() {
-    //Request the JSON file. 
-    var playerJSONRequest = new XMLHttpRequest();
-    var playerJSONData;
-    playerJSONRequest.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            playerJSONData = JSON.parse(this.responseText);
-        }
-    };
-    playerJSONRequest.open("GET", "code/engine/player.json", true);
-    playerJSONRequest.send();
-
-    //Load spritesheets as specified in the JSON file. 
-    for (x in playerJSONData) {
-        this.load.spritesheet(playerJSONData[x].characterName, playerJSONData[x].spritesheetPath);
-    }
+function parseCharacterMetaJSON() {
+    characterMetaJSON = createThis.cache.json.get('characterMetaJSON');
+    characterMeta = characterMetaJSON.characters;
 }
 
 /* Player movement. 
@@ -134,17 +121,10 @@ function playerShipSink() {
     player.angle += 5; 
 }
 
-function playerItemCollision() { 
-    if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
-        spiderFlower.playerCollide(); 
-    }
-}
-
 function playerInvulnerabilityStop() {
     playerInvulnerability = false; 
     player.alpha = 1; 
 }
-
 
 function playerDamage(tempHealth) {
     if (!playerInvulnerability){
@@ -159,6 +139,26 @@ function playerDamage(tempHealth) {
     }
 }
 
+// Boosts max health by the number stated in tempHealth.
+function maxHealthBoost(tempHealth) {
+    maxHealth += tempHealth; 
+    currentHealth = maxHealth;
+    maxHealthUpdate();
+    parseHealthBarAnimate();
+}
+
+/* Heals player by the amount in tempHealth. 
+ * The player's health can not exceed maxHealth. 
+ */
+function playerHeal(tempHealth){
+    currentHealth += tempHealth;
+    if (currentHealth > maxHealth){
+        currentHealth = maxHealth;
+    }
+    parseHealthBarAnimate();
+}
+
+//The game is reset. 
 function gameOver() {
     playerAlive = false; 
     //createThis.cameras.main.fadeOut(1000);

@@ -12,6 +12,8 @@ var playLevel = new Phaser.Class({
     {
         createThis = this; 
         
+        loadCharacterMetaJSON(); 
+
         //currentLevel = 'assets/' + currentLevelID + '.json';
         currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
 
@@ -70,6 +72,8 @@ var playLevel = new Phaser.Class({
 
     create: function() 
     {
+        parseCharacterMetaJSON();
+
         //Generate current Tilemap key. 
         currentTilemapKey = currentLevelID + 'Tilemap';
 
@@ -146,7 +150,8 @@ var playLevel = new Phaser.Class({
      
         //Camera
         if (!playerShip) {
-            this.cameras.main.startFollow(player, true, 0.05, 0.03);
+            this.cameras.main.startFollow(player, false, 0.05, 0.03); //new
+            //this.cameras.main.startFollow(player, true, 0.05, 0.03); //old
         } else {
             playerOffset = this.physics.add.sprite(playerSpawnPoint.x + 400, playerSpawnPoint.y, playerSprite);
             this.cameras.main.startFollow(playerOffset, true, 0.05, 0.03);
@@ -197,9 +202,6 @@ var playLevel = new Phaser.Class({
         enemyMovement(); 
 
         playerCheckForFall(); 
-        if (playerAlive) {
-            playerItemCollision();
-        }
 
         if (typeof medea != 'undefined') {
             if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
