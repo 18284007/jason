@@ -126,7 +126,6 @@ function playerInvulnerabilityStop() {
     player.alpha = 1; 
 }
 
-
 function playerDamage(tempHealth) {
     if (!playerInvulnerability){
         playerInvulnerability = true; 
