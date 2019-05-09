@@ -31,7 +31,10 @@ function healthBarReset()
 {
 	oldHealth = maxHealth;
 	healthDif = 0;
-	clearInterval(intervalVar);
+	if (intervalVar !== undefined)
+	{
+		clearInterval(intervalVar);
+	}
 }
 
 function parseHealthBarAnimate()

@@ -165,7 +165,7 @@ function gameOver() {
     //setTimeout(window.location = "index.html",20000);\
     currentHealth = maxHealth;
     healthBarReset();
-    createThis.scene.restart('playLevel');
+    createThis.scene.restart(currentLevelID);
 }
 
 function playerCheckForFall() {
