@@ -1,5 +1,6 @@
 var newGraphics;
-
+var oileus;
+var Iphiclus;
 
 class argoLanding extends Phaser.Scene{
 
@@ -14,6 +15,8 @@ class argoLanding extends Phaser.Scene{
         createThis = this;
         currentLevelID = 'argoLanding';
         commonPreload();
+
+        this.load.image('bonfireSprite','assets/bonfire.png');
         
 	}
 
