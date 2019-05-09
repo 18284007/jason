@@ -15,6 +15,8 @@ function spawnObjects() {
      */
     mapObjectArray = createThis.map.objects[0].objects;
     for (i = 0; i < mapObjectArray.length; i++){
+        //if item not in picked up array for level 
+        //if item's levelPhase == 0 || levelPhase == currentLevelPhase
         switch (mapObjectArray[i].name){
         	case 'spiderMini': 
                 enemies[enemyCount] = new spiderMini({
@@ -155,6 +157,11 @@ function spawnObjects() {
             	break; 
 
         	case 'portal':
+                /*new portal({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y,
+                    portalMap: mapObjectArray[i].-
+                });*/
         		break; 
         }
     }
