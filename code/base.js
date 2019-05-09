@@ -26,13 +26,18 @@ class controller extends Phaser.Scene
     {
     	//Load assets used in all levels
     	createThis = this;
-    	//this.load.tilemapTiledJSON('argoLandingTilemap', 'assets/argoLanding.json');
-        this.load.image('bonfireSprite','assets/bonfire.png');
+
+        //main characters
+    	this.load.image('medeaSprite', 'assets/NPC/Medea-inface.png');
         this.load.spritesheet('jason','assets/player/jason.png', 
            { frameWidth: 48, frameHeight: 48 });
+        //portal
         this.load.image('portalSprite','assets/items/portal.png');
+        //other (may remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
+        //Items (must be constantly loaded for inventory)
+        this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
         //LEVEL STUFF
         //Environment sprites - PLACEHOLDERS.
         this.load.image('sky', 'assets/sky.png');
@@ -162,20 +167,8 @@ function loadMap()
 function callUpdateFuncs()
 {
 	//Use the appropriate movement function for the level. 
-    //if (!playerShip && playerAlive) {
     playerMovement();
-    //} else if (playerShip && playerAlive) {
-        //playerShipMovement();
-    //} else if (playerShip && !playerAlive) {
-       // playerShipSink(); 
-    //}
-
-        //Update the camera offset if playerShip is enabled. 
-    //if (playerShip) {
-        //playerOffset.x = player.x + playerShipOffsetX; 
-        //playerOffset.y = player.y; 
-    //}
-
+    
     //Enemy Movement
     enemyMovement();
      
