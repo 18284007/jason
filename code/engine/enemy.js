@@ -230,13 +230,13 @@ class medusaBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
-			xMove: parameter.xMove,
+			key: 'medusaBossSprite', 
+			xMove: 300,
 			xVel: 130, 
-			scale: 0.45, 
+			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 1
+			health: 250
         });
 	}
 
@@ -252,6 +252,14 @@ class medusaBoss extends enemyBase {
 				this.moveRight = true; 
 			}
 		} 
+	}
+
+	shootWeb() {
+		projectiles[currentProjectile] = new spiderBossWeb({
+	        x: this.x, 
+	        y: this.y,
+	        projectileId: currentProjectile
+	    });
 	}
 }
 

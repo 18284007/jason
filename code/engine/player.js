@@ -1,5 +1,6 @@
 //Game variables relating to the player.
-var health = 100;
+var maxHealth = 100;
+var currentHealth = 100;
 var playerJumpVelocity = 500; 
 var playerWalkVelocity = 200; 
 //var playerShip = false; //Is the player a ship or a person?
@@ -10,6 +11,11 @@ var playerHasWings = false; //Can the player fly?
 var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
 
 var playerSwingSword = false; 
+
+
+var playerInvulnerabilityWait = 1000; 
+var playerInvulnerability = false; 
+
 
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
@@ -128,37 +134,28 @@ function playerShipSink() {
     player.angle += 5; 
 }
 
-/* This function controls what happens when a player collides with an enemy. 
- */ 
-function playerEnemyCollision() {
-    /*if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), enemies.getBounds())) {
-        if (attackKey.isDown){
-            //Add a function here that hurts/kills the enemy. 
-            enemies.setVelocityY(99999999);
-        } else {
-            playerDamage(10);
-        }
-    }*/
-    if (typeof spiderBossAlive !== 'undefined' && spiderBossAlive && 
-        Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderBoss.getBounds())) {
-        if (attackKey.isDown){
-            spiderBossHealth -= 10; 
-        } else {
-            playerDamage(50);
-        }
-    }
-}
-
 function playerItemCollision() { 
     if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
         spiderFlower.playerCollide(); 
     }
 }
 
+function playerInvulnerabilityStop() {
+    playerInvulnerability = false; 
+    player.alpha = 1; 
+}
+
+
 function playerDamage(tempHealth) {
-    health -= tempHealth; 
-    if (health < 0) {
-        gameOver(); 
+    if (!playerInvulnerability){
+        playerInvulnerability = true; 
+        player.alpha = 0.3; 
+        setTimeout(playerInvulnerabilityStop, playerInvulnerabilityWait);
+        currentHealth -= tempHealth;
+        parseHealthBarAnimate();
+        if (currentHealth <= 0) {
+            gameOver(); 
+        }
     }
 }
 
@@ -166,6 +163,8 @@ function gameOver() {
     playerAlive = false; 
     //createThis.cameras.main.fadeOut(1000);
     //setTimeout(window.location = "index.html",20000);\
+    currentHealth = maxHealth;
+    healthBarReset();
     createThis.scene.restart('playLevel');
 }
 

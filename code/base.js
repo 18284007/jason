@@ -37,6 +37,9 @@ var playLevel = new Phaser.Class({
 
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
+		
+		//medusaBoss
+		this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
 
         //01
         this.load.image('bonfireSprite','assets/bonfire.png');
@@ -59,6 +62,10 @@ var playLevel = new Phaser.Class({
         this.load.image('sky', 'assets/sky.png');
         //this.load.image('sky', 'assets/stage/background/01.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
+		
+		//end game image
+		this.load.image('endbg', 'assets/stage/background/endbg.png');
+		this.load.image('menubut', 'assets/stage/background/menubut.png');
     },
 
     create: function() 
@@ -164,6 +171,7 @@ var playLevel = new Phaser.Class({
         }
 
         parseLevelDialogue();
+        initHealthBar();
 
         spawnObjects(); 
     },
@@ -190,7 +198,6 @@ var playLevel = new Phaser.Class({
 
         playerCheckForFall(); 
         if (playerAlive) {
-            playerEnemyCollision();
             playerItemCollision();
         }
 
@@ -201,6 +208,8 @@ var playLevel = new Phaser.Class({
                 playerCheckDialogueWalkAway(); 
             }
         }
+        
+        parseHealthBar();
     }
 })
 
