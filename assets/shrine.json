@@ -47,8 +47,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2209,
-                 "y":799
+                 "x":2189,
+                 "y":797
                 }, 
                 {
                  "height":0,
@@ -84,7 +84,7 @@
                  "visible":true,
                  "width":0,
                  "x":230,
-                 "y":810
+                 "y":802
                 }, 
                 {
                  "height":0,
@@ -101,8 +101,26 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":111,
-                 "y":802
+                 "x":1097,
+                 "y":784
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"roadToColchis"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2154,
+                 "y":790
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -111,10 +129,10 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":6,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {
