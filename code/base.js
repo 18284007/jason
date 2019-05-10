@@ -33,20 +33,27 @@ class controller extends Phaser.Scene
            { frameWidth: 48, frameHeight: 48 });
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
-        //other (may remove later)
+        //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
+        this.load.image('bonfireSprite','assets/bonfire.png');
+        this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
+        this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
+        //medusaBoss
+        this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
         //Items (must be constantly loaded for inventory)
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
         //LEVEL STUFF
         //Environment sprites - PLACEHOLDERS.
         this.load.image('sky', 'assets/sky.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
+        loadCharacterMetaJSON();
     }
 
     create()
     {
     	firstInitHealthBar();
+        parseCharacterMetaJSON();
     	game.scene.run(currentLevelID);
     }
 
@@ -175,9 +182,7 @@ function callUpdateFuncs()
     enemyMovement();
      
     playerCheckForFall(); 
-    if (playerAlive) {
-        playerItemCollision();
-    }
+    
     parseHealthBar();
     
     if (typeof medea != 'undefined') {
@@ -210,7 +215,8 @@ var config = {
         }
     },
     scene: [controller, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
-    		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece] 
+    		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece]
+
     
 };
 
