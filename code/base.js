@@ -145,7 +145,7 @@ function loadMap()
 
     //Camera
     if (!playerShip) {
-    	createThis.cameras.main.startFollow(player, true, 0.05, 0.03);
+    	createThis.cameras.main.startFollow(player, false, 0.05, 0.03);
     } else {
         playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + 400, playerSpawnPoint.y, playerSprite);
         createThis.cameras.main.startFollow(playerOffset, true, 0.05, 0.03);
@@ -201,12 +201,16 @@ function changeLevel(tempNewLevelID) {
     game.scene.stop(oldLevelID);
 }
 
-
-
 var config = {
     type: Phaser.AUTO,
     width: 1024,
     height: 576,
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        mode: Phaser.Scale.FIT,
+        width: 1024,
+        height: 576
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -215,9 +219,8 @@ var config = {
         }
     },
     scene: [controller, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
-    		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece]
-
-    
+    		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
+            placeholdertestmap]
 };
 
 var game = new Phaser.Game(config);

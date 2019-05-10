@@ -57,14 +57,12 @@ function playerMovement() {
     
     //Horizontal movement 
     var tempVelocityX = 0; 
-    if (!attackKey.isDown && cursors.left.isDown) {
+    if (cursors.left.isDown) {
         tempVelocityX -= playerWalkVelocity;
-        player.anims.play('jasonLeft', true);
         playerFacingRight = false; 
     }
-    if (!attackKey.isDown && cursors.right.isDown) {
+    if (cursors.right.isDown) {
         tempVelocityX += playerWalkVelocity;
-        player.anims.play('jasonRight', true);
         playerFacingRight = true;
     }
     player.setVelocityX(tempVelocityX);
