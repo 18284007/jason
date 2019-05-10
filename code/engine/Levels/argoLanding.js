@@ -16,7 +16,8 @@ class argoLanding extends Phaser.Scene{
         currentLevelID = 'argoLanding';
         commonPreload();
 
-        this.load.image('bonfireSprite','assets/bonfire.png');
+        //Placeholder
+        //this.load.image('bonfireSprite','assets/bonfire.png');
         
 	}
 

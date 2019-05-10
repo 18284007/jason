@@ -12,8 +12,8 @@ class shrineForest extends Phaser.Scene{
         commonPreload();
 
         //spiderBoss
-        this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
-        this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
+        //this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
+        //this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
 
         
     }
