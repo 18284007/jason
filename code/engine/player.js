@@ -1,36 +1,36 @@
-//Game variables relating to the player.
-var health = 100;
+//Game variables relating to the player on all levels.
+var maxHealth = 100;
+var currentHealth = 100;
+var playerAlive = true;
+// variables relating to normal levels
 var playerJumpVelocity = 500; 
 var playerWalkVelocity = 200; 
-//var playerShip = false; //Is the player a ship or a person?
-var playerShipVelocity = 300;
 var playerFacingRight = true;
-var playerHasWings = false; //Can the player fly? 
+var playerHasWings = false; //Can the player fly?
+var playerSwingSword = false;
+var playerDamagePoints = 50;
+var playerInvulnerabilityWait = 1000; 
+var playerInvulnerability = false;
 
+
+// variables relating to siren level
 var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
+var playerShip = false; //Is the player a ship or a person?
+var playerShipVelocity = 300;
 
-var playerSwingSword = false; 
 
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
  */
-function loadPlayerJSON() {
-    //Request the JSON file. 
-    var playerJSONRequest = new XMLHttpRequest();
-    var playerJSONData;
-    playerJSONRequest.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            playerJSONData = JSON.parse(this.responseText);
-        }
-    };
-    playerJSONRequest.open("GET", "code/engine/player.json", true);
-    playerJSONRequest.send();
-
-    //Load spritesheets as specified in the JSON file. 
-    for (x in playerJSONData) {
-        this.load.spritesheet(playerJSONData[x].characterName, playerJSONData[x].spritesheetPath);
-    }
+function loadCharacterMetaJSON() {
+    createThis.load.json('characterMetaJSON', 'code/engine/player.json');
 }
+
+function parseCharacterMetaJSON() {
+    characterMetaJSON = createThis.cache.json.get('characterMetaJSON');
+    characterMeta = characterMetaJSON.characters;
+}
+
 
 /* Player movement. 
  * This is used when controlling a person. 
@@ -40,7 +40,7 @@ function playerMovement() {
     if (attackKey.isDown && !playerSwingSword) {
         playerSword();
     }
-
+    
     if (playerSwingSword) {
         if (playerFacingRight) {
             player.anims.play('jasonAttackRight', true);
@@ -54,7 +54,7 @@ function playerMovement() {
             player.anims.play('jasonLeft', true);
         }
     }
-
+    
     //Horizontal movement 
     var tempVelocityX = 0; 
     if (!attackKey.isDown && cursors.left.isDown) {
@@ -75,16 +75,16 @@ function playerMovement() {
     		player.setVelocityY(-playerJumpVelocity);
     	}
     }
-
+    
     //Move into portals. 
-    if (!playerShip && portalSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portal.getBounds())){
+    if(portalSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portal.getBounds())){
         if (cursors.up.isDown) {
             playerShip = false;
-            portal.destroy();
-            changeLevel(portalMap);
-            //temp 
+            //portal.destroy();
+            changeLevel(portalMap); 
         }   
     }
+    
 }
 
 /* Ship Movement. 
@@ -127,46 +127,58 @@ function playerShipSink() {
     player.setVelocityY(300);
     player.angle += 5; 
 }
-
-/* This function controls what happens when a player collides with an enemy. 
- */ 
-function playerEnemyCollision() {
-    /*if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), enemies.getBounds())) {
-        if (attackKey.isDown){
-            //Add a function here that hurts/kills the enemy. 
-            enemies.setVelocityY(99999999);
-        } else {
-            playerDamage(10);
-        }
-    }*/
-    if (typeof spiderBossAlive !== 'undefined' && spiderBossAlive && 
-        Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderBoss.getBounds())) {
-        if (attackKey.isDown){
-            spiderBossHealth -= 10; 
-        } else {
-            playerDamage(50);
-        }
-    }
-}
-
+/*
 function playerItemCollision() { 
     if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
         spiderFlower.playerCollide(); 
     }
 }
+*/
+function playerInvulnerabilityStop() {
+    playerInvulnerability = false; 
+    player.alpha = 1; 
+}
+
 
 function playerDamage(tempHealth) {
-    health -= tempHealth; 
-    if (health < 0) {
-        gameOver(); 
+    if (!playerInvulnerability){
+        playerInvulnerability = true; 
+        player.alpha = 0.3; 
+        setTimeout(playerInvulnerabilityStop, playerInvulnerabilityWait);
+        currentHealth -= tempHealth;
+        parseHealthBarAnimate();
+        if (currentHealth <= 0) {
+            gameOver(); 
+        }
     }
+}
+
+// Boosts max health by the number stated in tempHealth.
+function maxHealthBoost(tempHealth) {
+    maxHealth += tempHealth; 
+    currentHealth = maxHealth;
+    maxHealthUpdate();
+    parseHealthBarAnimate();
+}
+
+/* Heals player by the amount in tempHealth. 
+ * The player's health can not exceed maxHealth. 
+ */
+function playerHeal(tempHealth){
+    currentHealth += tempHealth;
+    if (currentHealth > maxHealth){
+        currentHealth = maxHealth;
+    }
+    parseHealthBarAnimate();
 }
 
 function gameOver() {
     playerAlive = false; 
     //createThis.cameras.main.fadeOut(1000);
     //setTimeout(window.location = "index.html",20000);\
-    createThis.scene.restart('playLevel');
+    currentHealth = maxHealth;
+    healthBarReset();
+    createThis.scene.restart(currentLevelID);
 }
 
 function playerCheckForFall() {
