@@ -1,8 +1,7 @@
 var dialogue; //Array containing dialogue strings. This is created from JSON file in parseLevelDialogue();. 
 var dialogueMax; //What is the maximum line in a dialogue entry being read? 
 var currentDialogue = 0; //What is the current line in a dialogue entry being read?
-var sceneNumber = 0;
-var npcDialogue;
+var sceneNumber = 0; 
 
 var dialoguex; //Position where player engages with dialogue box. Used for calculating if player walks away .
 var dialogueWalkAway = 100; //Distance that player must walk away for dialogue box to disappear. 

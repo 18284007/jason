@@ -1,6 +1,4 @@
 //temp function
-var enemyCount;
-var enemies;
 function shrineLoad()
 {
 	medeaSprite = createThis.load.image('medea', 'assets/NPC/Medea-inface.png');
@@ -9,8 +7,8 @@ function shrineLoad()
 }
 
 function spawnObjects() {
-	enemies = []; 
-    enemyCount = 0; 
+	enemies = []; //Array with all enemy objects.
+    enemyCount = 0; //Enemy Count. Used to identify each enemy. 
 
     /* Run through the list of objects in the map and spawn the appropriate object. 
      * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
@@ -20,34 +18,34 @@ function spawnObjects() {
         //if item not in picked up array for level 
         //if item's levelPhase == 0 || levelPhase == currentLevelPhase
         switch (mapObjectArray[i].name){
-            case 'spiderMini': 
+        	case 'spiderMini': 
                 enemies[enemyCount] = new spiderMini({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
-                    xMove: mapObjectArray[i].properties[0].value,
-                    enemyId: enemyCount
-                });
-                enemyCount++; 
-                break; 
+	                x: mapObjectArray[i].x, 
+	                y: mapObjectArray[i].y, 
+	                xMove: mapObjectArray[i].properties[0].value,
+	                enemyId: enemyCount
+            	});
+            	enemyCount++; 
+            	break; 
 
             case 'Player Spawn':
-                break; 
+            	break; 
 
             case 'medea': 
-                medea = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'medeaSprite');
-                createThis.physics.add.collider(medea, mapLayer);
-                break;
+            	medea = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'medeaSprite');
+            	createThis.physics.add.collider(medea, mapLayer);
+            	break;
 
             case 'spiderBoss': 
                 enemies[enemyCount] = new spiderBoss({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
-                    yMove: mapObjectArray[i].properties[0].value,
-                    enemyId: enemyCount
-                });
-                enemyCount++; 
-                spiderBossActive = false; 
-                break;
+	                x: mapObjectArray[i].x, 
+	                y: mapObjectArray[i].y, 
+	                yMove: mapObjectArray[i].properties[0].value,
+	                enemyId: enemyCount
+            	});
+            	enemyCount++; 
+            	spiderBossActive = false; 
+            	break;
 
             case 'fox': 
                 enemies[enemyCount] = new fox({
@@ -121,11 +119,11 @@ function spawnObjects() {
                 break;
 
             case 'spiderFlower': 
-                spiderFlower = new spiderFlowerItem({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y
-                });
-                break;
+            	spiderFlower = new spiderFlowerItem({
+	                x: mapObjectArray[i].x, 
+	                y: mapObjectArray[i].y
+            	});
+            	break;
 
             case 'healthItem': 
                 new healthItem({
@@ -149,22 +147,22 @@ function spawnObjects() {
                 break;
 
             case 'crew': 
-                crew = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'jason');
-                createThis.physics.add.collider(crew, mapLayer);
-                break;
+            	crew = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'jason');
+            	createThis.physics.add.collider(crew, mapLayer);
+            	break;
 
-            case 'bonfire':
-                bonfire = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'bonfireSprite');
-                createThis.physics.add.collider(bonfire, mapLayer);
-                break; 
+        	case 'bonfire':
+            	bonfire = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'bonfireSprite');
+            	createThis.physics.add.collider(bonfire, mapLayer);
+            	break; 
 
-            case 'portal':
+        	case 'portal':
                 /*new portal({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y,
                     portalMap: mapObjectArray[i].-
                 });*/
-                break; 
+        		break; 
         }
     }
 }
