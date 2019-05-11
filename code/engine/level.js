@@ -7,16 +7,11 @@ function shrineLoad()
 }
 
 function spawnObjects() {
-	enemies = []; //Array with all enemy objects.
-    enemyCount = 0; //Enemy Count. Used to identify each enemy. 
+	enemies = []; 
+    enemyCount = 0; 
 
-    /* Run through the list of objects in the map and spawn the appropriate object. 
-     * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
-     */
     mapObjectArray = createThis.map.objects[0].objects;
     for (i = 0; i < mapObjectArray.length; i++){
-        //if item not in picked up array for level 
-        //if item's levelPhase == 0 || levelPhase == currentLevelPhase
         switch (mapObjectArray[i].name){
         	case 'spiderMini': 
                 enemies[enemyCount] = new spiderMini({
@@ -111,8 +106,7 @@ function spawnObjects() {
                 enemies[enemyCount] = new dragonBoss({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    xMove: mapObjectArray[i].properties[0].value,
-                    yMove: mapObjectArray[i].properties[1].value,
+                    //xMove: mapObjectArray[i].properties[0].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -121,30 +115,10 @@ function spawnObjects() {
             case 'spiderFlower': 
             	spiderFlower = new spiderFlowerItem({
 	                x: mapObjectArray[i].x, 
-	                y: mapObjectArray[i].y
+	                y: mapObjectArray[i].y,
+	                key: 'spiderFlowerSprite'
             	});
             	break;
-
-            case 'healthItem': 
-                new healthItem({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y
-                });
-                break;
-
-            case 'damageIncreaseItem': 
-                new damageIncreaseItem({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y
-                });
-                break;
-
-            case 'maxHealthItem': 
-                new maxHealthItem({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y
-                });
-                break;
 
             case 'crew': 
             	crew = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'jason');
@@ -157,11 +131,6 @@ function spawnObjects() {
             	break; 
 
         	case 'portal':
-                /*new portal({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y,
-                    portalMap: mapObjectArray[i].-
-                });*/
         		break; 
         }
     }

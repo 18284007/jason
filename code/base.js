@@ -12,8 +12,6 @@ var playLevel = new Phaser.Class({
     {
         createThis = this; 
         
-        loadCharacterMetaJSON(); 
-
         //currentLevel = 'assets/' + currentLevelID + '.json';
         currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
 
@@ -39,9 +37,6 @@ var playLevel = new Phaser.Class({
 
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
-		
-		//medusaBoss
-		this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
 
         //01
         this.load.image('bonfireSprite','assets/bonfire.png');
@@ -64,20 +59,10 @@ var playLevel = new Phaser.Class({
         this.load.image('sky', 'assets/sky.png');
         //this.load.image('sky', 'assets/stage/background/01.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
-		
-		//end game image
-		this.load.image('endbg', 'assets/stage/background/endbg.png');
-		this.load.image('menubut', 'assets/stage/background/menubut.png');
-		
-		//title screen image
-		this.load.image('titlebackground', 'assets/stage/background/titlebackground.png');
-		this.load.image('playbut', 'assets/stage/background/playbut.png');
     },
 
     create: function() 
     {
-        parseCharacterMetaJSON();
-
         //Generate current Tilemap key. 
         currentTilemapKey = currentLevelID + 'Tilemap';
 
@@ -154,8 +139,7 @@ var playLevel = new Phaser.Class({
      
         //Camera
         if (!playerShip) {
-            this.cameras.main.startFollow(player, false, 0.05, 0.03); //new
-            //this.cameras.main.startFollow(player, true, 0.05, 0.03); //old
+            this.cameras.main.startFollow(player, true, 0.05, 0.03);
         } else {
             playerOffset = this.physics.add.sprite(playerSpawnPoint.x + 400, playerSpawnPoint.y, playerSprite);
             this.cameras.main.startFollow(playerOffset, true, 0.05, 0.03);
@@ -180,7 +164,6 @@ var playLevel = new Phaser.Class({
         }
 
         parseLevelDialogue();
-        initHealthBar();
 
         spawnObjects(); 
     },
@@ -206,6 +189,10 @@ var playLevel = new Phaser.Class({
         enemyMovement(); 
 
         playerCheckForFall(); 
+        if (playerAlive) {
+            playerEnemyCollision();
+            playerItemCollision();
+        }
 
         if (typeof medea != 'undefined') {
             if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
@@ -214,8 +201,6 @@ var playLevel = new Phaser.Class({
                 playerCheckDialogueWalkAway(); 
             }
         }
-        
-        parseHealthBar();
     }
 })
 

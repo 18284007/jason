@@ -16,8 +16,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	        this.xMax = parameter.x + parameter.xMove; 
 	        this.xVel = parameter.xVel; 
 	        this.body.setVelocityX(this.xVel);
-        } 
-        if (typeof parameter.yMove !== 'undefined'){
+        } else if (typeof parameter.yMove !== 'undefined'){
 			this.moveUp = false; 
 			this.yMin = parameter.y; 
 			this.yMax = parameter.y + parameter.yMove; 
@@ -31,30 +30,6 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		this.invulnerabilityWait = 1000; 
 		this.invulnerability = false; 
 
-		if (typeof parameter.spiderBoss !== 'undefined'){ 
-			this.spiderBoss = parameter.spiderBoss; 
-		} else {
-			this.spiderBoss = false; 
-		}
-
-		if (typeof parameter.hasSword !== 'undefined'){ 
-			this.hasSword = parameter.hasSword; 
-		} else {
-			this.hasSword = false; 
-		}
-
-		if (typeof parameter.stompable !== 'undefined'){ 
-			this.stompable = parameter.stompable; 
-		} else {
-			this.stompable = false; 
-		}
-
-		if (typeof parameter.damageTouch !== 'undefined'){ 
-			this.damageTouch = parameter.damageTouch; 
-		} else {
-			this.damageTouch = true; 
-		}
-
         //Collision detection between the player and enemy. 
         createThis.physics.add.overlap(this, player, this.collision);
 	}
@@ -65,22 +40,13 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	 * tempEnemy refers to the enemy object. 
 	 */
 	collision(tempEnemy) {
-		if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
-			enemies[tempEnemy.enemyId].destroy();  
-		} else if (playerSwingSword && !tempEnemy.invulnerability) {
-			enemies[tempEnemy.enemyId].health -= playerDamagePoints;
+		if (playerSwingSword && !tempEnemy.invulnerability) {
+			enemies[tempEnemy.enemyId].health -= 100;
 			enemies[tempEnemy.enemyId].invulnerability = true; 
 			enemies[tempEnemy.enemyId].alpha = 0.3; 
 			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
-		} else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
+		} else if (!playerSwingSword && !tempEnemy.invulnerability) {
 			playerDamage(10);
-		} else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
-			playerDamage(10);
-		}
-
-		//If the attacks are inactive and the spider is attacked, it will become active.
-		if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
-			spiderBossActive = true;
 		}
 	}
 
@@ -94,23 +60,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 
 	//Enemy update routine. 
 	update() {
-		if (this.health <= 0) {
+		if (this.health < 0) {
 			enemies[this.enemyId].destroy(); 
 		}
-	}
-
-	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-			}
-		} 
 	}
 }
 
@@ -129,9 +81,22 @@ class spiderMini extends enemyBase {
 			scale: 0.45, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 1, 
-			stompable: true
+			health: 1
         });
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
 	}
 }
 
@@ -150,6 +115,20 @@ class fox extends enemyBase {
 			health: 1
         });
 	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
 }
 
 class snake extends enemyBase { 
@@ -167,6 +146,20 @@ class snake extends enemyBase {
 			health: 1
         });
 	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
 }
 
 class bats extends enemyBase { 
@@ -183,7 +176,21 @@ class bats extends enemyBase {
 			gravity: false, 
 			health: 1
         });
-	}	
+	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
 }
 
 class bullBoss extends enemyBase { 
@@ -201,6 +208,20 @@ class bullBoss extends enemyBase {
 			health: 1
         });
 	}
+
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 	
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
+	}
 }
 
 class medusaBoss extends enemyBase { 
@@ -209,13 +230,13 @@ class medusaBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'medusaBossSprite', 
-			xMove: 300,
+			key: 'spiderBossSprite', 
+			xMove: parameter.xMove,
 			xVel: 130, 
-			scale: 1, 
+			scale: 0.45, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250
+			health: 1
         });
 	}
 
@@ -232,14 +253,6 @@ class medusaBoss extends enemyBase {
 			}
 		} 
 	}
-
-	shootWeb() {
-		projectiles[currentProjectile] = new spiderBossWeb({
-	        x: this.x, 
-	        y: this.y,
-	        projectileId: currentProjectile
-	    });
-	}
 }
 
 class minotaurBoss extends enemyBase { 
@@ -254,48 +267,44 @@ class minotaurBoss extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250, 
-			damageTouch: false,
-			hasSword: true
+			health: 250
         });
         this.swingSword = false; 
         this.charging = false; //Is the minotaur charging at the player? 
 	}
 
 	movement() {
-		if (typeof this.body !== 'undefined'){
-			if (this.charging && !this.swingSword) {
-				this.body.setVelocityX(-this.xVel);
-				if (this.x < this.xMin) {
-					this.sword(); 
-				}
-			} else if (!this.charging && !this.swingSword) {
-				this.body.setVelocityX(this.xVel);
-				if (this.x > this.xMax) {
-					this.sword(); 
-				}
-			}	
+		if (this.charging && !this.swingSword) {
+			if (this.x < this.xMin) {
+				this.charging = false; 	
+				this.sword(); 
+			}
+		} else if (!this.charging && !this.swingSword) {
+			if (this.x > this.xMax) {
+				this.charging = true; 
+				this.sword(); 
+			}
 		}
 	}
 
 	sword () {
-		if (typeof this !== 'undefined'){
-			this.body.setVelocityX(0);
-   			this.swingSword = true; 
-    		setTimeout(this.swordStop, 500, this);
-		}
+		this.body.setVelocityX(0);
+    	this.swingSword = true; 
+    	setTimeout(this.swordStop, 500, this);
 	}
 
  	swordStop (tempEnemy) {
     	tempEnemy.swingSword = false; 
     	tempEnemy.charging = !tempEnemy.charging; 
+
+		if (tempEnemy.charging) {
+			tempEnemy.body.setVelocityX(-tempEnemy.xVel);
+		} else {
+			tempEnemy.body.setVelocityX(tempEnemy.xVel);
+		}
 	}
 }
 
-/* Dragon Boss. 
- * Flies horizontally and vertically. 
- * Required parameters: x, y, xMove, yMove, enemyId
- */
 class dragonBoss extends enemyBase { 
 	constructor (parameter) {
 		super({
@@ -304,69 +313,26 @@ class dragonBoss extends enemyBase {
 			y: parameter.y,
 			key: 'spiderBossSprite', 
 			xMove: parameter.xMove,
-			xVel: 300, 
-			yMove: parameter.yMove, 
-			yVel: 300,
-			scale: 3, 
+			xVel: 130, 
+			scale: 0.45, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 300
+			health: 1
         });
-
-        this.verticalMove = false; 
-        this.moveDirection = 0; 
-        this.body.setVelocityY(0);
-        this.invulnerabilityWait = 3000; 
-	}	
-
-	checkPhase() {
-		if (this.health <= 100){
-			return 2;
-		} else if (this.health <= 250){
-			return 1; 
-		} else {
-			return 0; 
-		}
 	}
 
-	movement() { 
-		if (!this.verticalMove && this.x > this.xMax) {
-			if (this.moveUp) {
-				this.body.setVelocityX(0);
-				this.body.setVelocityY(-this.yVel);
-				this.verticalMove = true; 
-			} else {
-				this.body.setVelocityX(0);
-				this.body.setVelocityY(this.yVel);
-				this.verticalMove = true; 
-			}
-		} else if (!this.verticalMove && this.x < this.xMin) {
-			this.body.setVelocityX(this.xVel);
-			this.body.setVelocityY(0);
-			this.shoot(); 
-		} else if (this.verticalMove) {
-			if (!this.moveUp && (this.y > this.yMax) || (this.y < this.yMin)) {
-				this.verticalMove = false;
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
 				this.body.setVelocityX(-this.xVel);
-				this.body.setVelocityY(0);
-				this.moveUp = !this.moveUp; 
+				this.moveRight = false; 	
 			}
-		}
-	}
-
-	shoot() {
-		if (this.checkPhase() == 2){
-			var tempAimed = true; 
 		} else {
-			var tempAimed = false; 
-		}
-			
-		projectiles[currentProjectile] = new dragonFire({
-	        x: this.x, 
-	        y: this.y,
-	        projectileId: currentProjectile,
-	        aimed: tempAimed
-    	});
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+			}
+		} 
 	}
 }
 
@@ -385,8 +351,7 @@ class spiderBoss extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250,
-			spiderBoss: true
+			health: 250
         });
 
 		this.spiderBossAlive = true; 
@@ -395,6 +360,22 @@ class spiderBoss extends enemyBase {
 	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
 	    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
 	    graphics.strokeLineShape(line);
+	}
+
+	collision(tempEnemy) {
+		if (playerSwingSword && !tempEnemy.invulnerability) {
+			enemies[tempEnemy.enemyId].health -= 100;
+			enemies[tempEnemy.enemyId].invulnerability = true; 
+			enemies[tempEnemy.enemyId].alpha = 0.3; 
+			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
+		} else if (!playerSwingSword && !tempEnemy.invulnerability) {
+			playerDamage(10);
+		}
+
+		//If the attacks are inactive and the spider is attacked, it will become active.
+		if (!this.spiderBossActive) {
+			spiderBossActive = true; 
+		}
 	}
 
 	checkPhase() {
@@ -428,10 +409,12 @@ class spiderBoss extends enemyBase {
 	}
 
 	shootWeb() {
-		projectiles[currentProjectile] = new spiderBossWeb({
+		new projectile({
+	        scene: createThis, 
 	        x: this.x, 
 	        y: this.y,
-	        projectileId: currentProjectile
+	        key: 'spiderBossWebSprite',
+	        velocityX: -100
 	    });
 	}
 }

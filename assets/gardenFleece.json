@@ -55,23 +55,12 @@
                  "id":12,
                  "name":"dragonBoss",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"xMove",
-                         "type":"int",
-                         "value":800
-                        }, 
-                        {
-                         "name":"yMove",
-                         "type":"int",
-                         "value":350
-                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":547,
-                 "y":1273.66666666667
+                 "x":800,
+                 "y":1266.66666666667
                 }, 
                 {
                  "height":0,
@@ -107,7 +96,7 @@
  "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {
