@@ -113,3 +113,25 @@ class spiderFlowerItem extends itemBase {
 		tempItem.destroy();
 	}
 }
+
+/* Portal 
+ * 
+ */
+class portal extends Phaser.GameObjects.Sprite {
+	constructor (parameter) {
+		//Create the object. 
+        super(createThis, parameter.x, parameter.y, 'portalSprite');
+        createThis.physics.world.enable(this);
+        createThis.add.existing(this);
+        this.portalMap = parameter.portalMap; 
+        this.body.allowGravity = false;
+        this.setDepth(-100);
+
+        //Collision detection between the player and item. 
+        createThis.physics.add.overlap(this, player, this.collision);
+	}
+
+	collision (tempPortal){
+		portalMap = tempPortal.portalMap;
+	}
+}

@@ -11,8 +11,6 @@ var createThis;
 var currentLevelDialogueJSON;
 //var currentLevelID;
 /*variables relating to moving between levels*/
-var portal;
-var portalSpawnPoint;
 var portalMap;
 
 class controller extends Phaser.Scene
@@ -158,13 +156,6 @@ function loadMap()
         player.body.allowGravity = false;
     }
 
-    portalSpawnPoint = createThis.map.findObject("Objects", obj => obj.name === "portal");
-    if (portalSpawnPoint !== null) {
-        portal = createThis.physics.add.sprite(portalSpawnPoint.x, portalSpawnPoint.y, 'portalSprite');
-        portal.body.allowGravity = false;
-        portal.setDepth(-10);
-        portalMap = portalSpawnPoint.properties[0].value; 
-    }
     parseLevelDialogue();
     initHealthBar();
 

@@ -11,6 +11,8 @@ function shrineLoad()
 function spawnObjects() {
 	enemies = []; 
     enemyCount = 0; 
+    portals = []; 
+    portalCount = 0; 
 
     /* Run through the list of objects in the map and spawn the appropriate object. 
      * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
@@ -159,11 +161,12 @@ function spawnObjects() {
                 break; 
 
             case 'portal':
-                /*new portal({
+                portals[portalCount] = new portal({
                     x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y,
-                    portalMap: mapObjectArray[i].-
-                });*/
+                    y: mapObjectArray[i].y, 
+                    portalMap: mapObjectArray[i].properties[0].value
+                });
+                portalCount++;
                 break; 
         }
     }

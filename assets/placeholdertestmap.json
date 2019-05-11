@@ -145,6 +145,24 @@
                  "width":0,
                  "x":96,
                  "y":1725
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"shrine"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1667,
+                 "y":1418
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -153,7 +171,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":12,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",

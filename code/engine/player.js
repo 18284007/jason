@@ -74,15 +74,19 @@ function playerMovement() {
     	}
     }
     
-    //Move into portals. 
-    if(portalSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portal.getBounds())){
-        if (cursors.up.isDown) {
-            playerShip = false;
-            //portal.destroy();
-            changeLevel(portalMap); 
-        }   
-    }
-    
+    /* If there are portals in the map, iterate through them to check collision 
+     * and change map if the player is holding the up key.
+     */
+    if (portalCount > 0) { 
+        for (i = 0; i < portalCount; i++) {
+            if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portals[i].getBounds())){
+                if (cursors.up.isDown) {
+                    playerShip = false;
+                    changeLevel(portalMap); 
+                }   
+            }
+        }
+    } 
 }
 
 /* Ship Movement. 
