@@ -20,8 +20,8 @@ function spawnObjects() {
         /* Reads the properties of the current object and copies them to tempProperties. 
          * This allows a property to be addressed by name (e.g. tempProperties['xMove']) rather than by position. 
          */
+        tempProperties = []; 
         if (typeof mapObjectArray[i].properties !== 'undefined') {
-            tempProperties = []; 
             for (j = 0; j < mapObjectArray[i].properties.length; j++) {
                 tempProperties[mapObjectArray[i].properties[j].name] = mapObjectArray[i].properties[j].value;
             } 

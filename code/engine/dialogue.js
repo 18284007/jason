@@ -26,8 +26,6 @@ function loadLevelDialogue() {
 
 function parseLevelDialogue() {
 	levelJSON = createThis.cache.json.get('levelJSON');
-	dialogue = levelJSON.dialogue;
-	dialogueMax = dialogue.length - 1;
 	dialogBox = createThis.add.graphics();
 	npcDialogue = createThis.add.text(0,0,'',{color: '#000000'});
 }

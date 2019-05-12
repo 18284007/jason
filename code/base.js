@@ -176,12 +176,8 @@ function callUpdateFuncs()
     
     parseHealthBar();
     
-    if (typeof medea != 'undefined') {
-        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
-            playerNPCCollision();
-        } else if (dialogueActive) {
-            playerCheckDialogueWalkAway(); 
-        }
+    if (dialogueActive) {
+        playerCheckDialogueWalkAway(); 
     }
     
 }
