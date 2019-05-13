@@ -1,3 +1,9 @@
+/* NPC Base.  
+ * This is used as the base for several NPC classes. 
+ * Do not create this object directly. 
+ * Required parameters: scene, x, y, key.
+ * Optional parameters: dialogueKey.
+ */
 class npcBase extends Phaser.GameObjects.Sprite {
 	constructor (parameter) {
 		//Create the object. 
@@ -11,7 +17,7 @@ class npcBase extends Phaser.GameObjects.Sprite {
         //Does this character have dialogue? 
         this.hasDialogue = (typeof parameter.dialogueKey !== 'undefined');
 
-        //DialogueKey defines which conversation in the dialogue json file will be read. 
+        //DialogueKey defines which conversation in the dialogue JSON file will be read. 
 		this.dialogueKey = parameter.dialogueKey;
 
         //Collision detection between the player and item. 
@@ -27,6 +33,10 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 }
 
+/* Medea. 
+ * Required attributes: x, y. 
+ * Optional attributes: dialogueKey. 
+ */
 class medeaNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -39,6 +49,11 @@ class medeaNPC extends npcBase {
 	}
 }
 
+/* Process NPC dialogue. 
+ * The game will display one entry for char and speech in dialogue[currentDialogue]. 
+ * Doing this repeatedly will cycle through the contents of dialogue[currentDialogue].
+ * If the text is blank, a box will not appear. 
+ */
 function processNPCdialogue () {
 	if (talkKey.isDown) {
 		if (!dialogueAlreadyEngaged) {

@@ -2,12 +2,13 @@ var enemyCount;
 var enemies;
 
 function spawnObjects() {
-	enemies = []; 
-    enemyCount = 0; 
-    portals = []; 
-    portalCount = 0; 
-    npcs = []; 
-    npcCount = 0; 
+    //Arrays that store appropriate objects and a corresponding counter.
+    enemies = []; //Enemy array
+    enemyCount = 0; //Enemy counter
+    portals = []; //Portal array
+    portalCount = 0; //Portal counter
+    npcs = []; //NPC array
+    npcCount = 0; //NPC counter
 
     /* Run through the list of objects in the map and spawn the appropriate object. 
      * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
