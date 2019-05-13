@@ -79,6 +79,12 @@
                  "id":11,
                  "name":"medea",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"medea01"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -89,7 +95,7 @@
                 {
                  "height":0,
                  "id":12,
-                 "name":"crew01",
+                 "name":"kingAetios",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -108,7 +114,7 @@
  "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {

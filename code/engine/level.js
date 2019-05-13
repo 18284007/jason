@@ -52,6 +52,15 @@ function spawnObjects() {
                 npcCount++; 
                 break;
 
+            case 'kingAetios': 
+                npcs[npcCount] = new kingAetiosNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
+                break;
+
             case 'spiderBoss': 
                 enemies[enemyCount] = new spiderBoss({
                     x: mapObjectArray[i].x, 
