@@ -5,6 +5,7 @@ var jumpKey;
 var talkKey;
 /*variables relating to the players character*/
 var player;
+//var playerOffset;
 /*variables relating to map generation*/
 var mapLayer;
 var createThis;
@@ -186,8 +187,30 @@ function callUpdateFuncs()
     
 }
 
+function shipUpdate()
+{
+	if (playerAlive)
+	{
+		playerShipMovement();
+	}
+	else
+	{
+		playerShipSink();
+	}
+
+	playerOffset.x = player.x + playerShipOffsetX; 
+    playerOffset.y = player.y;
+
+	parseHealthBar();
+	playerCheckForFall();
+}
+
 function changeLevel(tempNewLevelID) {
 	var oldLevelID = currentLevelID;
+	if(playerShip)
+	{
+		playerShip = false;
+	}
     game.scene.run(tempNewLevelID);
     game.scene.stop(oldLevelID);
 }
@@ -211,7 +234,7 @@ var config = {
     },
     scene: [controller, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
-            placeholdertestmap]
+            placeholdertestmap, siren]
 };
 
 var game = new Phaser.Game(config);
