@@ -16,6 +16,8 @@ class argoLanding extends Phaser.Scene{
         currentLevelID = 'argoLanding';
         commonPreload();
 
+	this.load.audio('female', ['assets/stage/background/female.mp3']);	
+		
         //Placeholder
         //this.load.image('bonfireSprite','assets/bonfire.png');
         
@@ -26,6 +28,9 @@ class argoLanding extends Phaser.Scene{
 
         loadMap();
         
+	this.sound.pauseOnBlur = false;
+		this.sound.play('female',
+		{loop: true});
         
 		this.crew01SpawnPoint = this.map.findObject("Objects", obj => obj.name === "crew01");
         

@@ -1,18 +1,14 @@
-//temp function
 var enemyCount;
 var enemies;
-function shrineLoad()
-{
-	medeaSprite = createThis.load.image('medea', 'assets/NPC/Medea-inface.png');
-	createThis.load.image('shrineJason', 'assets/NPC/Jason-Pholder.png');
-	createThis.load.image('shrinePortal','assets/items/doorway.png');
-}
 
 function spawnObjects() {
-	enemies = []; 
-    enemyCount = 0; 
-    portals = []; 
-    portalCount = 0; 
+    //Arrays that store appropriate objects and a corresponding counter.
+    enemies = []; //Enemy array
+    enemyCount = 0; //Enemy counter
+    portals = []; //Portal array
+    portalCount = 0; //Portal counter
+    npcs = []; //NPC array
+    npcCount = 0; //NPC counter
 
     /* Run through the list of objects in the map and spawn the appropriate object. 
      * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
@@ -21,12 +17,24 @@ function spawnObjects() {
     for (i = 0; i < mapObjectArray.length; i++){
         //if item not in picked up array for level 
         //if item's levelPhase == 0 || levelPhase == currentLevelPhase
+
+        /* Reads the properties of the current object and copies them to tempProperties. 
+         * This allows a property to be addressed by name (e.g. tempProperties['xMove']) rather than by position. 
+         */
+        tempProperties = []; 
+        if (typeof mapObjectArray[i].properties !== 'undefined') {
+            for (j = 0; j < mapObjectArray[i].properties.length; j++) {
+                tempProperties[mapObjectArray[i].properties[j].name] = mapObjectArray[i].properties[j].value;
+            } 
+        }
+
+        //Spawn the appropriate object based on the object name. 
         switch (mapObjectArray[i].name){
             case 'spiderMini': 
                 enemies[enemyCount] = new spiderMini({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    xMove: mapObjectArray[i].properties[0].value,
+                    xMove: tempProperties['xMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -36,15 +44,28 @@ function spawnObjects() {
                 break; 
 
             case 'medea': 
-                medea = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'medeaSprite');
-                createThis.physics.add.collider(medea, mapLayer);
+                npcs[npcCount] = new medeaNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
+                break;
+
+            case 'kingAetios': 
+                npcs[npcCount] = new kingAetiosNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break;
 
             case 'spiderBoss': 
                 enemies[enemyCount] = new spiderBoss({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    yMove: mapObjectArray[i].properties[0].value,
+                    yMove: tempProperties['yMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -55,7 +76,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new fox({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    //xMove: mapObjectArray[i].properties[0].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -65,7 +85,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new snake({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    //xMove: mapObjectArray[i].properties[0].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -75,7 +94,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new bats({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    //xMove: mapObjectArray[i].properties[0].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -85,7 +103,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new bullBoss({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    //xMove: mapObjectArray[i].properties[0].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -95,7 +112,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new medusaBoss({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    //xMove: mapObjectArray[i].properties[0].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -105,7 +121,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new minotaurBoss({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    //xMove: mapObjectArray[i].properties[0].value,
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -115,8 +130,8 @@ function spawnObjects() {
                 enemies[enemyCount] = new dragonBoss({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    xMove: mapObjectArray[i].properties[0].value,
-                    yMove: mapObjectArray[i].properties[1].value,
+                    xMove: tempProperties['xMove'],
+                    yMove: tempProperties['yMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -164,7 +179,7 @@ function spawnObjects() {
                 portals[portalCount] = new portal({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    portalMap: mapObjectArray[i].properties[0].value
+                    portalMap: tempProperties['portalMap']
                 });
                 portalCount++;
                 break; 

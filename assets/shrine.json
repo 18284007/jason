@@ -79,6 +79,12 @@
                  "id":4,
                  "name":"medea",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"dialogue"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,

@@ -163,6 +163,42 @@
                  "width":0,
                  "x":1667,
                  "y":1418
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"medea",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"dialogue01"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1472,
+                 "y":1168
+                }, 
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"medea",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"dialogue02"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1280,
+                 "y":1167
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -171,7 +207,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":13,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",

@@ -21,13 +21,11 @@ var diaBoxY; //Y co-ordinate of dialogue box
  * This is currently non-functional. 
  */
 function loadLevelDialogue() { 
-	createThis.load.json('levelJSON', currentLevelDialogueJSON);
+	createThis.load.json(currentLevelID + 'dialogueJSON', currentLevelDialogueJSON);
 }
 
 function parseLevelDialogue() {
-	levelJSON = createThis.cache.json.get('levelJSON');
-	dialogue = levelJSON.dialogue;
-	dialogueMax = dialogue.length - 1;
+	levelJSON = createThis.cache.json.get(currentLevelID + 'dialogueJSON');
 	dialogBox = createThis.add.graphics();
 	npcDialogue = createThis.add.text(0,0,'',{color: '#000000'});
 }

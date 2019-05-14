@@ -131,13 +131,7 @@ function playerShipSink() {
     currentHealth = 1;
     parseHealthBarAnimate();
 }
-/*
-function playerItemCollision() { 
-    if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
-        spiderFlower.playerCollide(); 
-    }
-}
-*/
+
 function playerInvulnerabilityStop() {
     playerInvulnerability = false; 
     player.alpha = 1; 
@@ -178,8 +172,6 @@ function playerHeal(tempHealth){
 
 function gameOver() {
     playerAlive = false; 
-    //createThis.cameras.main.fadeOut(1000);
-    //setTimeout(window.location = "index.html",20000);\
     currentHealth = maxHealth;
     healthBarReset();
     createThis.scene.restart(currentLevelID);
@@ -191,53 +183,14 @@ function playerCheckForFall() {
     }
 }
 
-function playerNPCCollision() {
-    if (talkKey.isDown) {
-        if (!dialogueAlreadyEngaged) {
-        	if (currentDialogue > -1)
-        	{
-        		npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
-        	}
-        	
-            if (currentDialogue === 0)
-            {
-                drawDialogueBox();
-                dialoguex = player.x;
-                if (dialogueMax === 0)
-                {
-                	currentDialogue = -1;
-                }
-                else
-                {
-                	currentDialogue++; 
-                } 
-            } 
-            else if (currentDialogue == dialogueMax || currentDialogue < 0) {
-                currentDialogue = 0;
-                clearDialogueBox();
-            } else {
-                currentDialogue++; 
-            } 
-            dialogueAlreadyEngaged = true;
-            dialogueActive = true;  
-            dialogueAlreadyEngaged = true;
-            dialogueActive = true;  
-        }
-    } else {
+function playerCheckDialogueWalkAway(){
+    if ((player.x > dialoguex + dialogueWalkAway) || (player.x < dialoguex - dialogueWalkAway)) {
         dialogueAlreadyEngaged = false; 
+        dialogueActive = false; 
+        npcDialogue.setText(''); 
+        currentDialogue = 0;
+        clearDialogueBox();
     }
-}
-
-function playerCheckDialogueWalkAway(){ 
-    //if (dialogueAlreadyEngaged) {
-        if ((player.x > dialoguex + dialogueWalkAway) || (player.x < dialoguex - dialogueWalkAway)) {
-            dialogueAlreadyEngaged = false; 
-            dialogueActive = false; 
-            npcDialogue.setText(''); 
-            currentDialogue = 0;
-            clearDialogueBox();
-        }
-    //}
 }
 
 function playerSword () {

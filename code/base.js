@@ -177,12 +177,8 @@ function callUpdateFuncs()
     
     parseHealthBar();
     
-    if (typeof medea != 'undefined') {
-        if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), medea.getBounds())) {
-            playerNPCCollision();
-        } else if (dialogueActive) {
-            playerCheckDialogueWalkAway(); 
-        }
+    if (dialogueActive) {
+        playerCheckDialogueWalkAway(); 
     }
     
 }
@@ -232,7 +228,7 @@ var config = {
             debug: false
         }
     },
-    scene: [controller, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
+    scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
             placeholdertestmap, siren]
 };
