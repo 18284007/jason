@@ -173,8 +173,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3418.18181818182,
-                 "y":1772.72727272727
+                 "x":3423,
+                 "y":1750
                 }, 
                 {
                  "height":0,
@@ -187,6 +187,24 @@
                  "width":0,
                  "x":-12.1212121212121,
                  "y":1954.54545454545
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"colchisFields"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":107,
+                 "y":1744
                 }],
          "opacity":1,
          "properties":[
@@ -201,7 +219,7 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":20,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
