@@ -2,6 +2,7 @@
  * This should not be spawned directly. 
  * Required parameters: scene, x, y, key, xMove/yMove, xVel/yVel, scale, enemyId, gravity, health.
  */
+
 class enemyBase extends Phaser.GameObjects.Sprite {
 	constructor (parameter) {
         super(parameter.scene, parameter.x, parameter.y, parameter.key);

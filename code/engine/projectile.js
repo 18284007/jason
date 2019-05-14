@@ -1,5 +1,5 @@
-currentProjectile = 0;
-projectiles = [];
+var currentProjectile = 0;
+var projectiles = [];
 
 class projectile extends Phaser.GameObjects.Sprite {
     constructor (parameter) {

@@ -9,14 +9,17 @@ var hbIncrement;
 var hbReady;
 var intervalVar;
 
-function initHealthBar()
+function firstInitHealthBar()
 {
-	healthBar = createThis.add.graphics();
 	hbWidth = createThis.sys.game.config.width*0.20;
 	hbHeight = createThis.sys.game.config.height*0.05;
 	hbIncrement = hbWidth/maxHealth;
 	hbReady = true;
 	oldHealth = maxHealth;
+}
+function initHealthBar()
+{
+	healthBar = createThis.add.graphics();
 	healthBar.setDepth(500);
 }
 function maxHealthUpdate()
@@ -28,7 +31,10 @@ function healthBarReset()
 {
 	oldHealth = maxHealth;
 	healthDif = 0;
-	clearInterval(intervalVar);
+	if (intervalVar !== undefined)
+	{
+		clearInterval(intervalVar);
+	}
 }
 
 function parseHealthBarAnimate()
