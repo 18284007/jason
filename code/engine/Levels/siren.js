@@ -1,17 +1,28 @@
-export default class sirenScene extends Phaser.Scene
-{
-	constructor ()
-	{
+class siren extends Phaser.Scene{
 
-	}
+    constructor()
+    {
+        super({key: 'siren', active: false });
+    }
 
-	preload ()
-	{
-		this.load.image('ship','assets/player/ship.png');
-	}
+    preload()
+    {
+        createThis = this;
+        currentLevelID = 'siren';
+        playerShip = true;
+        this.load.image('ship','assets/player/ship.png');
+        commonPreload();
+        
+    }
 
-	create ()
-	{
-		
-	}
+    create()
+    {
+    	loadMap();
+        
+    }
+
+    update()
+    {
+        shipUpdate();
+    }
 }

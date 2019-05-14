@@ -117,7 +117,7 @@ function playerShipMovement() {
     if (player.x > boundaryEdge.x + 100) {
         playerShip = false; 
         playerSprite = 'jason';
-        changeLevel(edgeMap); 
+        changeLevel('argoLanding'); 
     }
 }
 
@@ -127,7 +127,9 @@ function playerShipMovement() {
 function playerShipSink() {
     player.setVelocityX(0);
     player.setVelocityY(300);
-    player.angle += 5; 
+    player.angle += 5;
+    currentHealth = 1;
+    parseHealthBarAnimate();
 }
 
 function playerInvulnerabilityStop() {
