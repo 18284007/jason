@@ -40,6 +40,8 @@ class controller extends Phaser.Scene
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
         //medusaBoss
         this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
+	//bullBoss
+        this.load.image('bullBossSprite','assets/enemy/bullBoss.png');
         //Items (must be constantly loaded for inventory)
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
         //LEVEL STUFF
