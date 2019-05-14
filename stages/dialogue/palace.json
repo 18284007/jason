@@ -1,7 +1,20 @@
 {
-	"dialogue":[
+	"medea01":[
+		{ "char":"Medea",
+			"speech":"Hello there strangers, may I ask why are you here?" 
+		},
+		{ "char":"Jason",
+			"speech":"Hello there, my name is Jason and it is a pleasure to meet a beauty such as yourself, we are here on a heroic quest from a city called lolcus as my uncle has usurped the throne" 
+		},
+		{ "char":"Medea",
+			"speech":"A long and weary quest for heroes, I am Medea daughter of King Aetios I hope your Journey found you well" 
+		},
+		{ "char":"King Aetios",
+			"speech":"WHO ARE THESE STRANGE MEN WHO INVADE MY HALLS?",
+			"_KINGAETIOSWALK":""
+		},
 		{ "char":"",
-			"speech":"" 
+			"speech":""
 		}
 	]
 }
