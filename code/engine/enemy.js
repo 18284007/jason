@@ -417,9 +417,10 @@ class spiderBoss extends enemyBase {
 		this.spiderBossAlive = true; 
 
 		//Create a white line that represents the spider web. 
-	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
-	    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
-	    graphics.strokeLineShape(line);
+	    this.webLine = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
+	    this.webGraphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
+	    this.webGraphics.strokeLineShape(this.webLine);
+	    this.webGraphics.setDepth(-20);
 	}
 
 	checkPhase() {
@@ -458,6 +459,15 @@ class spiderBoss extends enemyBase {
 	        y: this.y,
 	        projectileId: currentProjectile
 	    });
+	}
+
+
+	//Enemy update routine. 
+	update() {
+		if (this.health <= 0) {
+			enemies[this.enemyId].destroy(); 
+			this.webGraphics.alpha = 0;
+		}
 	}
 }
 
