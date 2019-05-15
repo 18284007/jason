@@ -90,9 +90,10 @@ function loadMap()
     //Render background. 
     bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
     var backgroundLayer0 = 'sky';
-    var background = createThis.add.image(bganchor.x, bganchor.y, backgroundLayer0);
+    var background = createThis.add.image(bganchor.x, 800, backgroundLayer0);
     background.setOrigin(0.1,1);
     background.scrollFactorX = 0;
+    background.scrollFactorY = 0;
     background.setDepth(-100);
 
     //Draw tileset/objects
