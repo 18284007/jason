@@ -12,6 +12,8 @@ function spawnObjects() {
     items = []; //Item array
     itemCount = 0; //Items counter
 
+    activeBosses = 0; 
+
     /* Run through the list of objects in the map and spawn the appropriate object. 
      * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
      */
@@ -144,6 +146,7 @@ function spawnObjects() {
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y
                 });
+                spiderFlowerPickedUp = false; 
                 break;
 
             case 'healthItem': 
@@ -184,7 +187,9 @@ function spawnObjects() {
                 portals[portalCount] = new portal({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    portalMap: tempProperties['portalMap']
+                    portalMap: tempProperties['portalMap'],
+                    spawnAfterSpiderFlower: tempProperties['spawnAfterSpiderFlower'],
+                    spawnAfterBossBattle: tempProperties['spawnAfterBossBattle']
                 });
                 portalCount++;
                 break; 

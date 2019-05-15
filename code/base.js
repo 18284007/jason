@@ -191,6 +191,8 @@ function callUpdateFuncs()
     enemyMovement();
      
     playerCheckForFall(); 
+
+    portalUpdate();
     
     if (dialogueActive) {
         playerCheckDialogueWalkAway(); 

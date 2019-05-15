@@ -83,7 +83,7 @@ function playerMovement() {
     if (portalCount > 0) { 
         for (i = 0; i < portalCount; i++) {
             if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portals[i].getBounds())){
-                if (cursors.up.isDown) {
+                if (cursors.up.isDown && portals[i].activePortal) {
                     playerShip = false;
                     changeLevel(portalMap); 
                 }   
