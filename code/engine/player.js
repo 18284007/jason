@@ -8,6 +8,7 @@ var playerWalkVelocity = 200;
 var playerFacingRight = true;
 var playerHasWings = false; //Can the player fly?
 var playerSwingSword = false;
+var playerSwungSword = false; 
 var playerDamagePoints = 50;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
@@ -37,8 +38,10 @@ function parseCharacterMetaJSON() {
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
-    if (attackKey.isDown && !playerSwingSword) {
+    if (attackKey.isDown && !playerSwingSword && !playerSwungSword && !playerInvulnerability) {
         playerSword();
+    } else if (!attackKey.isDown && !playerSwingSword && playerSwungSword) {
+        playerSwungSword = false; 
     }
     
     if (playerSwingSword) {
@@ -195,6 +198,7 @@ function playerCheckDialogueWalkAway(){
 
 function playerSword () {
     playerSwingSword = true; 
+    playerSwungSword = true; 
     setTimeout(playerSwordStop, 500);
 }
 
