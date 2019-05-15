@@ -18,7 +18,7 @@ class controller extends Phaser.Scene
 {
     constructor()
     {
-        super();
+        super({key: 'controller'});
     }
 
     preload()
