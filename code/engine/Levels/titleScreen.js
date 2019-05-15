@@ -9,7 +9,7 @@ class titleScreen extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'titleScreen';
-		commonPreload();
+	
 		
 		this.load.image('titlebg', 'assets/stage/background/titlebg.jpg');
 		this.load.image('playbut', 'assets/stage/background/playbut.png');
