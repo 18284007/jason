@@ -100,6 +100,8 @@ function loadMap()
     var mapLayerBG = createThis.map.createStaticLayer("Layer_bg", tileset, 0, 0);
     mapLayer = createThis.map.createStaticLayer("Layer", tileset, 0, 0);
     mapLayer.setDepth(-40);
+    mapLayerBG.setDepth(-50);
+
 
     //Spawn player.
     var playerSpawnPoint = createThis.map.findObject("Objects", obj => obj.name === "Player Spawn");
