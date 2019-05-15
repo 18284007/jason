@@ -15,7 +15,7 @@ var playerInvulnerability = false;
 
 
 // variables relating to siren level
-var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
+var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
 var playerShip = false; //Is the player a ship or a person?
 var playerShipVelocity = 300;
 
