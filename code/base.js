@@ -5,10 +5,10 @@ var jumpKey;
 var talkKey;
 /*variables relating to the players character*/
 var player;
-//var playerOffset;
 /*variables relating to map generation*/
 var mapLayer;
 var createThis;
+var userIntThis;
 var currentLevelDialogueJSON;
 //var currentLevelID;
 /*variables relating to moving between levels*/
@@ -25,6 +25,7 @@ class controller extends Phaser.Scene
     {
     	//Load assets used in all levels
     	createThis = this;
+	userIntThis = this;
 
         //main characters
     	this.load.image('medeaSprite', 'assets/NPC/Medea-inface.png');
@@ -54,8 +55,18 @@ class controller extends Phaser.Scene
     create()
     {
     	firstInitHealthBar();
+	
         parseCharacterMetaJSON();
     	game.scene.run(currentLevelID);
+	if (currentLevelID == 'titleScreen' || currentLevelID == 'endScreen')
+	{
+		userIntThis.scene.sendToBack('controller');	
+	}
+	else
+	{
+		userIntThis.scene.bringToTop('controller');
+	}
+		
     }
 
     update()
@@ -160,7 +171,7 @@ function loadMap()
     }
 
     parseLevelDialogue();
-    initHealthBar();
+    parseHealthBar();
 
     spawnObjects();
 
@@ -176,8 +187,6 @@ function callUpdateFuncs()
     enemyMovement();
      
     playerCheckForFall(); 
-    
-    parseHealthBar();
     
     if (dialogueActive) {
         playerCheckDialogueWalkAway(); 
@@ -199,7 +208,6 @@ function shipUpdate()
 	playerOffset.x = player.x + playerShipOffsetX; 
     playerOffset.y = player.y;
 
-	parseHealthBar();
 	playerCheckForFall();
 }
 
@@ -208,6 +216,14 @@ function changeLevel(tempNewLevelID) {
 	if(playerShip)
 	{
 		playerShip = false;
+	}
+	if (tempNewLevelID == 'titleScreen' || tempNewLevelID == 'endScreen')
+	{
+		userIntThis.scene.sendToBack('controller');	
+	}
+	else
+	{
+		userIntThis.scene.bringToTop('controller');
 	}
     game.scene.run(tempNewLevelID);
     game.scene.stop(oldLevelID);
