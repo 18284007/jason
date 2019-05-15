@@ -9,6 +9,8 @@ function spawnObjects() {
     portalCount = 0; //Portal counter
     npcs = []; //NPC array
     npcCount = 0; //NPC counter
+    items = []; //Item array
+    itemCount = 0; //Items counter
 
     /* Run through the list of objects in the map and spawn the appropriate object. 
      * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
@@ -145,24 +147,27 @@ function spawnObjects() {
                 break;
 
             case 'healthItem': 
-                new healthItem({
+                items[itemCount] = new healthItem({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y
                 });
+                itemCount++; 
                 break;
 
             case 'damageIncreaseItem': 
-                new damageIncreaseItem({
+                items[itemCount] = new damageIncreaseItem({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y
                 });
+                itemCount++; 
                 break;
 
             case 'maxHealthItem': 
-                new maxHealthItem({
+                items[itemCount] = new maxHealthItem({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y
                 });
+                itemCount++; 
                 break;
 
             case 'crew': 
