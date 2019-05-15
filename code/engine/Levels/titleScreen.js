@@ -29,7 +29,6 @@ class titleScreen extends Phaser.Scene{
 			
 		startGame.on("pointerup", ()=>{
 		this.scene.start('argoLanding');
-		this.sound.stop('water');
 		});
 			
 		this.sound.pauseOnBlur = false;
