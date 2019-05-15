@@ -11,15 +11,12 @@ var intervalVar;
 
 function firstInitHealthBar()
 {
-	hbWidth = createThis.sys.game.config.width*0.20;
-	hbHeight = createThis.sys.game.config.height*0.05;
+	hbWidth = userIntThis.sys.game.config.width*0.20;
+	hbHeight = userIntThis.sys.game.config.height*0.05;
 	hbIncrement = hbWidth/maxHealth;
 	hbReady = true;
 	oldHealth = maxHealth;
-}
-function initHealthBar()
-{
-	healthBar = createThis.add.graphics();
+	healthBar = userIntThis.add.graphics();
 	healthBar.setDepth(500);
 }
 function maxHealthUpdate()
@@ -79,8 +76,8 @@ function parseHealthBar()
 function drawHealthBar()
 {
 	healthBar.clear();
-	hbX = createThis.cameras.main.scrollX + createThis.sys.game.config.width*0.775;
-	hbY = createThis.cameras.main.scrollY + createThis.sys.game.config.height*0.0225;
+	hbX = userIntThis.cameras.main.scrollX + userIntThis.sys.game.config.width*0.775;
+	hbY = userIntThis.cameras.main.scrollY + userIntThis.sys.game.config.height*0.0225;
 	healthBar.lineStyle(1,0x000000,1);
 	healthBar.fillStyle(0xff0000,1);
 	healthBar.strokeRect(hbX,hbY,hbWidth,hbHeight);
