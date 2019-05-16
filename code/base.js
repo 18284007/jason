@@ -51,6 +51,8 @@ class controller extends Phaser.Scene
         //Environment sprites - PLACEHOLDERS.
         this.load.image('bgSky', 'assets/background/sky.png');
         this.load.image('bgDungeon', 'assets/background/dungeon.png');
+        this.load.image('bgForest', 'assets/background/forest.png');
+        this.load.image('bgMarket', 'assets/background/market.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
         loadCharacterMetaJSON();
     }
