@@ -101,15 +101,19 @@ function loadMap()
     //Render background. 
     bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
     var backgroundLayer0 = 'sky';
-    var background = createThis.add.image(bganchor.x, bganchor.y, backgroundLayer0);
+    var background = createThis.add.image(bganchor.x, 800, backgroundLayer0);
     background.setOrigin(0.1,1);
     background.scrollFactorX = 0;
+    background.scrollFactorY = 0;
     background.setDepth(-100);
 
     //Draw tileset/objects
     var tileset = createThis.map.addTilesetImage("tilesheet-extruded", "tiles", 64, 64, 1, 2);
     var mapLayerBG = createThis.map.createStaticLayer("Layer_bg", tileset, 0, 0);
     mapLayer = createThis.map.createStaticLayer("Layer", tileset, 0, 0);
+    mapLayer.setDepth(-40);
+    mapLayerBG.setDepth(-50);
+
 
     //Spawn player.
     var playerSpawnPoint = createThis.map.findObject("Objects", obj => obj.name === "Player Spawn");
@@ -159,8 +163,8 @@ function loadMap()
     if (!playerShip) {
     	createThis.cameras.main.startFollow(player, false, 0.05, 0.03);
     } else {
-        playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + 400, playerSpawnPoint.y, playerSprite);
-        createThis.cameras.main.startFollow(playerOffset, true, 0.05, 0.03);
+        playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + playerShipOffsetX, playerSpawnPoint.y, playerSprite);
+        createThis.cameras.main.startFollow(playerOffset, true, 0.5, 0.5);
         playerOffset.alpha = 0; 
         playerOffset.allowGravity = 0; 
     }
@@ -187,6 +191,8 @@ function callUpdateFuncs()
     enemyMovement();
      
     playerCheckForFall(); 
+
+    portalUpdate();
     
     if (dialogueActive) {
         playerCheckDialogueWalkAway(); 

@@ -111,6 +111,7 @@ class spiderFlowerItem extends itemBase {
 	collision (tempItem){
 		spiderBossActive = true;
 		tempItem.destroy();
+		spiderFlowerPickedUp = true; 
 	}
 }
 
@@ -127,11 +128,51 @@ class portal extends Phaser.GameObjects.Sprite {
         this.body.allowGravity = false;
         this.setDepth(-100);
 
+        if (typeof parameter.spawnAfterBossBattle !== 'undefined') {
+        	this.spawnAfterBossBattle = parameter.spawnAfterBossBattle;
+        } else {
+        	this.spawnAfterBossBattle = false; 
+        }
+
+        if (typeof parameter.spawnAfterSpiderFlower !== 'undefined') {
+        	this.spawnAfterSpiderFlower = parameter.spawnAfterSpiderFlower;
+        } else {
+        	this.spawnAfterSpiderFlower = false; 
+        }
+
+        this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower);
+
         //Collision detection between the player and item. 
         createThis.physics.add.overlap(this, player, this.collision);
 	}
 
 	collision (tempPortal){
 		portalMap = tempPortal.portalMap;
+	}
+
+	update (){
+		var tempPortalActive = true; 
+
+		if (tempPortalActive && this.spawnAfterSpiderFlower) {
+			tempPortalActive = spiderFlowerPickedUp; 
+		} 
+
+		if (tempPortalActive && this.spawnAfterBossBattle) {
+			tempPortalActive = (activeBosses <= 0); 
+		} 
+
+		if (tempPortalActive) {
+			this.activePortal = true; 
+			this.alpha = 1; 
+		} else {
+			this.activePortal = false; 
+			this.alpha = 0; 
+		}
+	}
+}
+
+function portalUpdate() {
+	for (i = 0; i < portalCount; i++) {
+		portals[i].update();
 	}
 }

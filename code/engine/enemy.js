@@ -31,11 +31,19 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.health = parameter.health;
 		this.invulnerabilityWait = 1000; 
 		this.invulnerability = false; 
+		this.alive = true;
 
 		if (typeof parameter.spiderBoss !== 'undefined'){ 
 			this.spiderBoss = parameter.spiderBoss; 
 		} else {
 			this.spiderBoss = false; 
+		}
+
+		if (typeof parameter.boss !== 'undefined'){ 
+			this.boss = parameter.boss;
+			activeBosses++; 
+		} else {
+			this.boss = false; 
 		}
 
 		if (typeof parameter.hasSword !== 'undefined'){ 
@@ -95,7 +103,16 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 
 	//Enemy update routine. 
 	update() {
-		if (this.health <= 0) {
+		if (this.alive && this.health <= 0) {
+			this.alive = false; 
+			if (this.boss) {
+				activeBosses--;
+			}
+
+			if (this.spiderBoss) {
+				this.webGraphics.alpha = 0;
+			}
+
 			enemies[this.enemyId].destroy(); 
 		}
 	}
@@ -199,7 +216,8 @@ class bullBoss extends enemyBase {
 			scale: 0.2, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250
+			health: 250, 
+			boss: true
         });
 	}
 	movement() {
@@ -240,7 +258,8 @@ class medusaBoss extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250
+			health: 250, 
+			boss: true
         });
 	}
 
@@ -281,7 +300,8 @@ class minotaurBoss extends enemyBase {
 			gravity: false, 
 			health: 250, 
 			damageTouch: false,
-			hasSword: true
+			hasSword: true, 
+			boss: true
         });
         this.swingSword = false; 
         this.charging = false; //Is the minotaur charging at the player? 
@@ -335,7 +355,8 @@ class dragonBoss extends enemyBase {
 			scale: 3, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 300
+			health: 300, 
+			boss: true
         });
 
         this.verticalMove = false; 
@@ -411,15 +432,17 @@ class spiderBoss extends enemyBase {
 			enemyId: parameter.enemyId, 
 			gravity: false, 
 			health: 250,
-			spiderBoss: true
+			spiderBoss: true, 
+			boss: true
         });
 
 		this.spiderBossAlive = true; 
 
 		//Create a white line that represents the spider web. 
-	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
-	    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
-	    graphics.strokeLineShape(line);
+	    this.webLine = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
+	    this.webGraphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
+	    this.webGraphics.strokeLineShape(this.webLine);
+	    this.webGraphics.setDepth(-20);
 	}
 
 	checkPhase() {

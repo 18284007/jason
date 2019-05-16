@@ -8,13 +8,14 @@ var playerWalkVelocity = 200;
 var playerFacingRight = true;
 var playerHasWings = false; //Can the player fly?
 var playerSwingSword = false;
+var playerSwungSword = false; 
 var playerDamagePoints = 50;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
 
 
 // variables relating to siren level
-var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
+var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
 var playerShip = false; //Is the player a ship or a person?
 var playerShipVelocity = 300;
 
@@ -37,8 +38,10 @@ function parseCharacterMetaJSON() {
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
-    if (attackKey.isDown && !playerSwingSword) {
+    if (attackKey.isDown && !playerSwingSword && !playerSwungSword && !playerInvulnerability) {
         playerSword();
+    } else if (!attackKey.isDown && !playerSwingSword && playerSwungSword) {
+        playerSwungSword = false; 
     }
     
     if (playerSwingSword) {
@@ -80,7 +83,7 @@ function playerMovement() {
     if (portalCount > 0) { 
         for (i = 0; i < portalCount; i++) {
             if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portals[i].getBounds())){
-                if (cursors.up.isDown) {
+                if (cursors.up.isDown && portals[i].activePortal) {
                     playerShip = false;
                     changeLevel(portalMap); 
                 }   
@@ -195,6 +198,7 @@ function playerCheckDialogueWalkAway(){
 
 function playerSword () {
     playerSwingSword = true; 
+    playerSwungSword = true; 
     setTimeout(playerSwordStop, 500);
 }
 
