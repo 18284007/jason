@@ -54,7 +54,8 @@ class medeaNPC extends npcBase {
 			y: parameter.y, 
 			key: 'medeaSprite',
 			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId
+			npcId: parameter.npcId, 
+			gravity: true
 		})
 	}
 }
