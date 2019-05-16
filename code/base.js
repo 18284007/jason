@@ -14,6 +14,8 @@ var currentLevelDialogueJSON;
 /*variables relating to moving between levels*/
 var portalMap;
 
+var backgroundLayer0;
+
 class controller extends Phaser.Scene
 {
     constructor()
@@ -47,7 +49,8 @@ class controller extends Phaser.Scene
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
         //LEVEL STUFF
         //Environment sprites - PLACEHOLDERS.
-        this.load.image('sky', 'assets/sky.png');
+        this.load.image('bgSky', 'assets/background/sky.png');
+        this.load.image('bgDungeon', 'assets/background/dungeon.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
         loadCharacterMetaJSON();
     }
@@ -100,9 +103,8 @@ function loadMap()
 
     //Render background. 
     bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
-    var backgroundLayer0 = 'sky';
-    var background = createThis.add.image(bganchor.x, 800, backgroundLayer0);
-    background.setOrigin(0.1,1);
+    background = createThis.add.image(1024, 576, backgroundLayer0);
+    background.setOrigin(1,1);
     background.scrollFactorX = 0;
     background.scrollFactorY = 0;
     background.setDepth(-100);

@@ -14,6 +14,7 @@ class argoLanding extends Phaser.Scene{
         
         createThis = this;
         currentLevelID = 'argoLanding';
+        backgroundLayer0 = 'bgSky';
         commonPreload();
 
 	this.load.audio('female', ['assets/stage/background/female.mp3']);	

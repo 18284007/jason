@@ -9,6 +9,7 @@ class gardenDungeon extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'gardenDungeon';
+        backgroundLayer0 = 'bgDungeon';
         commonPreload();
 	}
 

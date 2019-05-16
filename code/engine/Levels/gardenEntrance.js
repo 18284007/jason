@@ -9,6 +9,7 @@ class gardenEntrance extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'gardenEntrance';
+        backgroundLayer0 = 'bgSky';
         commonPreload();
 	}
 
