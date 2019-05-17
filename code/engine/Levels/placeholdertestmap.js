@@ -9,6 +9,7 @@ class placeholdertestmap extends Phaser.Scene{
     {
         createThis = this;
         currentLevelID = 'placeholdertestmap';
+        backgroundLayer0 = 'bgSky';
         commonPreload();
     }
 

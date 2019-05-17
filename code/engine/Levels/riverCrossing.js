@@ -9,6 +9,7 @@ class riverCrossing extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'riverCrossing';
+        backgroundLayer0 = 'bgSky';
         commonPreload();
 	}
 

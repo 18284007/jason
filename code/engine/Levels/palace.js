@@ -9,6 +9,7 @@ class palace extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'palace';
+        backgroundLayer0 = 'bgSky';
         commonPreload();
 	}
 

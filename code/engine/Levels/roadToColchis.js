@@ -9,6 +9,7 @@ class roadToColchis extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'roadToColchis';
+        backgroundLayer0 = 'bgSky';
         commonPreload();
 	}
 

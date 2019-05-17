@@ -9,6 +9,7 @@ class gardenFleece extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'gardenFleece';
+        backgroundLayer0 = 'bgSky';
         commonPreload();
 	}
 

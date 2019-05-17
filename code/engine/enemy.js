@@ -401,7 +401,7 @@ class dragonBoss extends enemyBase {
 	}
 
 	shoot() {
-		if (this.checkPhase() == 2){
+		if (this.checkPhase() > 0){
 			var tempAimed = true; 
 		} else {
 			var tempAimed = false; 
@@ -412,6 +412,20 @@ class dragonBoss extends enemyBase {
 	        y: this.y,
 	        projectileId: currentProjectile,
 	        aimed: tempAimed
+    	});
+
+    	if (this.checkPhase() == 2) {
+    		setTimeout(this.shootAgain, 200, this);
+    		setTimeout(this.shootAgain, 400, this);
+    	}
+	}
+
+	shootAgain(tempDragon) {
+		projectiles[currentProjectile] = new dragonFire({
+	        x: tempDragon.x, 
+	        y: tempDragon.y,
+	        projectileId: currentProjectile,
+	        aimed: true
     	});
 	}
 }

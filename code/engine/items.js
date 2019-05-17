@@ -31,7 +31,7 @@ class healthItem extends itemBase {
 			scene: createThis,
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			key: 'healthItemSprite', 
 			gravity: false
 		})
 
@@ -55,7 +55,7 @@ class maxHealthItem extends itemBase {
 			scene: createThis,
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			key: 'maxHealthItemSprite', 
 			gravity: false
 		})
 
@@ -79,7 +79,7 @@ class damageIncreaseItem extends itemBase {
 			scene: createThis,
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			key: 'damageIncreaseItemSprite', 
 			gravity: false
 		})
 
