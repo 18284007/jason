@@ -26,10 +26,12 @@ class endCutscene extends Phaser.Scene{
         dialogue = levelJSON['narration'];
 		dialogueMax = dialogue.length - 1;
 		this.processDialogue();
+		this.physics.world.setBounds(0, 0, boundaryEdge.x + 100, boundaryEdge.y, 64, true, true, false, false);
     }
 
     update()
     {
+    	//Control movement based on the phase.
     	if (endCutscenePhase == 0){
     		if (player.x < 474) {
     			player.body.setVelocityX(90);
@@ -43,6 +45,7 @@ class endCutscene extends Phaser.Scene{
     		player.body.setVelocityX(90);
     	} 
 
+    	//Control dialogue + images.
     	if (talkKey.isDown && !talkKeyPressed) {
     		if (endCutscenePhase < 2) {
     			this.processDialogue();
