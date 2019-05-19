@@ -1,7 +1,8 @@
 {
 	"medea01":[
 		{ "char":"Medea",
-			"speech":"Hello there strangers, may I ask why are you here?" 
+			"speech":"Hello there strangers, may I ask why are you here?",
+			"_KINGAETIOSRESETXY":""
 		},
 		{ "char":"Jason",
 			"speech":"Hello there, my name is Jason and it is a pleasure to meet a beauty such as yourself, we are here on a heroic quest from a city called lolcus as my uncle has usurped the throne" 
@@ -12,6 +13,43 @@
 		{ "char":"King Aetios",
 			"speech":"WHO ARE THESE STRANGE MEN WHO INVADE MY HALLS?",
 			"_KINGAETIOSWALK":""
+		},
+		{ "char":"Jason",
+			"speech":"I Am Jason, Son of Aeson. I am here to retrieve the golden fleece to reclaim my rightful spot upon my homelands throne" 
+		},
+		{ "char":"King Aetios",
+			"speech":"Your homelands throne? I believe it is MY THRONE that you are after, tell me, why should I not slay you where you stand?" 
+		},
+		{ "char":"Medea",
+			"speech":"Father please, his uncle has usurped his father as king, why would a stranger travel so far for a throne so foreign without an army?" 
+		},
+		{ "char":"Jason",
+			"speech":" King Pelias challenged me to deem my worth, The challenge stated to deem me more worthy than my uncle Pelias, I must retrieve the golden fleece and return it home" 
+		},
+		{ "char":"King Aetios",
+			"speech":"A challenge of worth? And you believe thee worthy of my fleece? Very well let us see your worth I give thee challenge three!" 
+		},
+		{ "char":"King Aetios",
+			"speech":"First you must plow the fields with 2 fire breathing golden hoofed bulls" 
+		},
+		{ "char":"King Aetios",
+			"speech":"Second you must sow the field with dragons teeth and slay the army that arises" 
+		},
+		{ "char":"King Aetios",
+			"speech":"Third, you must defeat the dragon guarding the fleece within the garden" 
+		},
+		{ "char":"King Aetios",
+			"speech":"If you complete these three tasks then you have my permission to take the fleece" 
+		},
+		{ "char":"Jason",
+			"speech":"Challenge accepted, I have not come this far to turn back now" 
+		},
+		{ "char":"King Aetios",
+			"speech":"Very well stranger, I look forward to watching this",
+			"_KINGAETIOSWALKAWAY":"" 
+		},
+		{ "char":"Medea",
+			"speech":"Meet me at the shrine of Hecate outside the city" 
 		},
 		{ "char":"",
 			"speech":""
