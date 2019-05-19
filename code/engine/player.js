@@ -184,7 +184,7 @@ function gameOver() {
 }
 
 function playerCheckForFall() {
-    if (player.y > bganchor.y) {
+    if (player.y > bganchor.y || player.y < 0) {
         gameOver();
     }
 }
