@@ -27,12 +27,14 @@ class controller extends Phaser.Scene
     {
     	//Load assets used in all levels
     	createThis = this;
-	userIntThis = this;
+        userIntThis = this;
 
         //main characters
-    	this.load.image('medeaSprite', 'assets/NPC/Medea-inface.png');
+        this.load.spritesheet('medeaSprite','assets/NPC/medea.png', 
+           { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('jason','assets/player/jason.png', 
-           { frameWidth: 48, frameHeight: 48 });
+           { frameWidth: 50, frameHeight: 64 });
+
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
         //other/Placeholders (may move/remove later)
@@ -43,7 +45,7 @@ class controller extends Phaser.Scene
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
         //medusaBoss
         this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
-	//bullBoss
+        //bullBoss
         this.load.image('bullBossSprite','assets/enemy/bullBoss.png');
         //Items (must be constantly loaded for inventory)
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
@@ -122,7 +124,6 @@ function loadMap()
     mapLayer.setDepth(-40);
     mapLayerBG.setDepth(-50);
 
-
     //Spawn player.
     var playerSpawnPoint = createThis.map.findObject("Objects", obj => obj.name === "Player Spawn");
     player = createThis.physics.add.sprite(playerSpawnPoint.x, playerSpawnPoint.y, playerSprite);
@@ -138,26 +139,51 @@ function loadMap()
     //Player sprite stuff. 
     createThis.anims.create({
         key: 'jasonLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 24, end: 31 }),
+        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 41 }),
         frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({
         key: 'jasonRight',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 8, end: 15 }),
+        frames: createThis.anims.generateFrameNumbers('jason', { start: 0, end: 11 }),
         frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({
         key: 'jasonAttackLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 36, end: 39 }),
+        frames: createThis.anims.generateFrameNumbers('jason', { start: 42, end: 59 }),
         frameRate: 15,
         repeat: -1
     });
     createThis.anims.create({
         key: 'jasonAttackRight',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 40, end: 43 }),
+        frames: createThis.anims.generateFrameNumbers('jason', { start: 12, end: 29 }),
         frameRate: 15,
+        repeat: -1
+    });
+    createThis.anims.create({
+        key: 'jasonIdleLeft',
+        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 30 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    createThis.anims.create({
+        key: 'jasonIdleRight',
+        frames: createThis.anims.generateFrameNumbers('jason', { start: 0, end: 0 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    createThis.anims.create({
+        key: 'medeaIdleLeft',
+        frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 8, end: 8 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    createThis.anims.create({
+        key: 'medeaIdleRight',
+        frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 0, end: 0 }),
+        frameRate: 10,
         repeat: -1
     });
 
@@ -201,6 +227,8 @@ function callUpdateFuncs()
     playerCheckForFall(); 
 
     portalUpdate();
+
+    npcUpdate();
     
     if (dialogueActive) {
         playerCheckDialogueWalkAway(); 

@@ -40,6 +40,10 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	dialogueUpdate () {
 
 	}
+
+	update () {
+
+	}
 }
 
 /* Medea. 
@@ -57,6 +61,16 @@ class medeaNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
+		//this.scaleX = playerScale; 
+		//this.scaleY = playerScale;
+	}
+
+	update () {
+		if (player.x < this.x && this.active) {
+			this.anims.play('medeaIdleLeft', true);
+		} else if (player.x > this.x && this.active) {
+			this.anims.play('medeaIdleRight', true);
+		}
 	}
 }
 
@@ -70,7 +84,7 @@ class kingAetiosNPC extends npcBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y, 
-			key: 'medeaSprite',
+			key: 'kingSprite',
 			dialogueKey: parameter.dialogueKey,
 			npcId: parameter.npcId, 
 			gravity: true
@@ -95,6 +109,9 @@ class kingAetiosNPC extends npcBase {
 			typeof dialogue[currentDialogue]._KINGAETIOSWALK !== 'undefined') {
 			this.walk(); 
 		}
+	}
+
+	update () {
 	}
 }
 
@@ -134,4 +151,11 @@ function processNPCdialogue () {
 	} else {
 		dialogueAlreadyEngaged = false; 
 	} 
+}
+
+
+function npcUpdate() {
+	for (i = 0; i < npcCount; i++) {
+		npcs[i].update();
+	}
 }

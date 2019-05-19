@@ -11,6 +11,22 @@ class palace extends Phaser.Scene{
         currentLevelID = 'palace';
         backgroundLayer0 = 'bgSky';
         commonPreload();
+
+        this.load.spritesheet('kingSprite','assets/NPC/king.png', 
+           { frameWidth: 40, frameHeight: 64 });
+
+        createThis.anims.create({
+            key: 'kingIdleLeft',
+            frames: createThis.anims.generateFrameNumbers('kingSprite', { start: 0, end: 0 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        createThis.anims.create({
+            key: 'kingIdleRight',
+            frames: createThis.anims.generateFrameNumbers('kingSprite', { start: 1, end: 1 }),
+            frameRate: 10,
+            repeat: -1
+        });
 	}
 
 	create()
