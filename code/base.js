@@ -152,13 +152,13 @@ function loadMap()
     createThis.anims.create({
         key: 'jasonAttackLeft',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 42, end: 59 }),
-        frameRate: 15,
+        frameRate: 30,
         repeat: -1
     });
     createThis.anims.create({
         key: 'jasonAttackRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 12, end: 29 }),
-        frameRate: 15,
+        frameRate: 30,
         repeat: -1
     });
     createThis.anims.create({
