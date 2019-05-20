@@ -31,7 +31,7 @@ class healthItem extends itemBase {
 			scene: createThis,
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			key: 'healthItemSprite', 
 			gravity: false
 		})
 
@@ -55,7 +55,7 @@ class maxHealthItem extends itemBase {
 			scene: createThis,
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			key: 'maxHealthItemSprite', 
 			gravity: false
 		})
 
@@ -79,7 +79,7 @@ class damageIncreaseItem extends itemBase {
 			scene: createThis,
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossWebSprite', //Temporary sprite - this must be changed.
+			key: 'damageIncreaseItemSprite', 
 			gravity: false
 		})
 
@@ -111,5 +111,68 @@ class spiderFlowerItem extends itemBase {
 	collision (tempItem){
 		spiderBossActive = true;
 		tempItem.destroy();
+		spiderFlowerPickedUp = true; 
+	}
+}
+
+/* Portal 
+ * 
+ */
+class portal extends Phaser.GameObjects.Sprite {
+	constructor (parameter) {
+		//Create the object. 
+        super(createThis, parameter.x, parameter.y, 'portalSprite');
+        createThis.physics.world.enable(this);
+        createThis.add.existing(this);
+        this.portalMap = parameter.portalMap; 
+        this.body.allowGravity = false;
+        this.setDepth(-100);
+
+        if (typeof parameter.spawnAfterBossBattle !== 'undefined') {
+        	this.spawnAfterBossBattle = parameter.spawnAfterBossBattle;
+        } else {
+        	this.spawnAfterBossBattle = false; 
+        }
+
+        if (typeof parameter.spawnAfterSpiderFlower !== 'undefined') {
+        	this.spawnAfterSpiderFlower = parameter.spawnAfterSpiderFlower;
+        } else {
+        	this.spawnAfterSpiderFlower = false; 
+        }
+
+        this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower);
+
+        //Collision detection between the player and item. 
+        createThis.physics.add.overlap(this, player, this.collision);
+	}
+
+	collision (tempPortal){
+		portalMap = tempPortal.portalMap;
+	}
+
+	update (){
+		var tempPortalActive = true; 
+
+		if (tempPortalActive && this.spawnAfterSpiderFlower) {
+			tempPortalActive = spiderFlowerPickedUp; 
+		} 
+
+		if (tempPortalActive && this.spawnAfterBossBattle) {
+			tempPortalActive = (activeBosses <= 0); 
+		} 
+
+		if (tempPortalActive) {
+			this.activePortal = true; 
+			this.alpha = 1; 
+		} else {
+			this.activePortal = false; 
+			this.alpha = 0; 
+		}
+	}
+}
+
+function portalUpdate() {
+	for (i = 0; i < portalCount; i++) {
+		portals[i].update();
 	}
 }

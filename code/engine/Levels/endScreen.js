@@ -18,12 +18,12 @@ class endScreen extends Phaser.Scene {
 		
 		this.add.image(0,0, "endbg").setOrigin(0).setDepth(0);
 		
-		this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "menubut").setDepth(1);
+		let toMenuButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "menubut").setDepth(1).setInteractive();
 		
-		toMenuButton.setInteractive();
+		
 		
 		toMenuButton.on("pointerup", ()=>{
-			this.scene.toMenu('titleScreen');
+			this.scene.start('titleScreen');
 		
 	});
 	}

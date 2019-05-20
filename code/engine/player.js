@@ -8,16 +8,15 @@ var playerWalkVelocity = 200;
 var playerFacingRight = true;
 var playerHasWings = false; //Can the player fly?
 var playerSwingSword = false;
+var playerSwungSword = false; 
 var playerDamagePoints = 50;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
 
-
 // variables relating to siren level
-var playerShipOffsetX = 500; //Camera offset for playerShip mode. 
+var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
 var playerShip = false; //Is the player a ship or a person?
 var playerShipVelocity = 300;
-
 
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
@@ -31,17 +30,24 @@ function parseCharacterMetaJSON() {
     characterMeta = characterMetaJSON.characters;
 }
 
-
 /* Player movement. 
  * This is used when controlling a person. 
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
-    if (attackKey.isDown && !playerSwingSword) {
+    if (attackKey.isDown && !playerSwingSword && !playerSwungSword && !playerInvulnerability) {
         playerSword();
+    } else if (!attackKey.isDown && !playerSwingSword && playerSwungSword) {
+        playerSwungSword = false; 
     }
     
-    if (playerSwingSword) {
+    if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
+        if (playerFacingRight) {
+            player.anims.play('jasonIdleRight', true);
+        } else {
+            player.anims.play('jasonIdleLeft', true);
+        }
+    } else if (playerSwingSword) {
         if (playerFacingRight) {
             player.anims.play('jasonAttackRight', true);
         } else {
@@ -57,14 +63,12 @@ function playerMovement() {
     
     //Horizontal movement 
     var tempVelocityX = 0; 
-    if (!attackKey.isDown && cursors.left.isDown) {
+    if (cursors.left.isDown) {
         tempVelocityX -= playerWalkVelocity;
-        player.anims.play('jasonLeft', true);
         playerFacingRight = false; 
     }
-    if (!attackKey.isDown && cursors.right.isDown) {
+    if (cursors.right.isDown) {
         tempVelocityX += playerWalkVelocity;
-        player.anims.play('jasonRight', true);
         playerFacingRight = true;
     }
     player.setVelocityX(tempVelocityX);
@@ -76,15 +80,19 @@ function playerMovement() {
     	}
     }
     
-    //Move into portals. 
-    if(portalSpawnPoint !== null && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portal.getBounds())){
-        if (cursors.up.isDown) {
-            playerShip = false;
-            //portal.destroy();
-            changeLevel(portalMap); 
-        }   
-    }
-    
+    /* If there are portals in the map, iterate through them to check collision 
+     * and change map if the player is holding the up key.
+     */
+    if (portalCount > 0) { 
+        for (i = 0; i < portalCount; i++) {
+            if (Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), portals[i].getBounds())){
+                if (cursors.up.isDown && portals[i].activePortal) {
+                    playerShip = false;
+                    changeLevel(portalMap); 
+                }   
+            }
+        }
+    } 
 }
 
 /* Ship Movement. 
@@ -115,7 +123,7 @@ function playerShipMovement() {
     if (player.x > boundaryEdge.x + 100) {
         playerShip = false; 
         playerSprite = 'jason';
-        changeLevel(edgeMap); 
+        changeLevel('argoLanding'); 
     }
 }
 
@@ -125,15 +133,11 @@ function playerShipMovement() {
 function playerShipSink() {
     player.setVelocityX(0);
     player.setVelocityY(300);
-    player.angle += 5; 
+    player.angle += 5;
+    currentHealth = 1;
+    parseHealthBarAnimate();
 }
-/*
-function playerItemCollision() { 
-    if (typeof spiderFlower != 'undefined' && Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), spiderFlower.getBounds())) {
-        spiderFlower.playerCollide(); 
-    }
-}
-*/
+
 function playerInvulnerabilityStop() {
     playerInvulnerability = false; 
     player.alpha = 1; 
@@ -174,70 +178,30 @@ function playerHeal(tempHealth){
 
 function gameOver() {
     playerAlive = false; 
-    //createThis.cameras.main.fadeOut(1000);
-    //setTimeout(window.location = "index.html",20000);\
     currentHealth = maxHealth;
     healthBarReset();
     createThis.scene.restart(currentLevelID);
 }
 
 function playerCheckForFall() {
-    if (player.y > bganchor.y) {
+    if (player.y > bganchor.y || player.y < 0) {
         gameOver();
     }
 }
 
-function playerNPCCollision() {
-    if (talkKey.isDown) {
-        if (!dialogueAlreadyEngaged) {
-        	if (currentDialogue > -1)
-        	{
-        		npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
-        	}
-        	
-            if (currentDialogue === 0)
-            {
-                drawDialogueBox();
-                dialoguex = player.x;
-                if (dialogueMax === 0)
-                {
-                	currentDialogue = -1;
-                }
-                else
-                {
-                	currentDialogue++; 
-                } 
-            } 
-            else if (currentDialogue == dialogueMax || currentDialogue < 0) {
-                currentDialogue = 0;
-                clearDialogueBox();
-            } else {
-                currentDialogue++; 
-            } 
-            dialogueAlreadyEngaged = true;
-            dialogueActive = true;  
-            dialogueAlreadyEngaged = true;
-            dialogueActive = true;  
-        }
-    } else {
+function playerCheckDialogueWalkAway(){
+    if ((player.x > dialoguex + dialogueWalkAway) || (player.x < dialoguex - dialogueWalkAway)) {
         dialogueAlreadyEngaged = false; 
+        dialogueActive = false; 
+        npcDialogue.setText(''); 
+        currentDialogue = 0;
+        clearDialogueBox();
     }
-}
-
-function playerCheckDialogueWalkAway(){ 
-    //if (dialogueAlreadyEngaged) {
-        if ((player.x > dialoguex + dialogueWalkAway) || (player.x < dialoguex - dialogueWalkAway)) {
-            dialogueAlreadyEngaged = false; 
-            dialogueActive = false; 
-            npcDialogue.setText(''); 
-            currentDialogue = 0;
-            clearDialogueBox();
-        }
-    //}
 }
 
 function playerSword () {
     playerSwingSword = true; 
+    playerSwungSword = true; 
     setTimeout(playerSwordStop, 500);
 }
 

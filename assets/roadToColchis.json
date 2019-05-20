@@ -76,7 +76,7 @@
                 }, 
                 {
                  "height":0,
-                 "id":13,
+                 "id":12,
                  "name":"portal",
                  "point":true,
                  "properties":[
@@ -89,12 +89,12 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2053.93939393939,
-                 "y":1747.51515151515
+                 "x":2013,
+                 "y":1746
                 }, 
                 {
                  "height":0,
-                 "id":14,
+                 "id":13,
                  "name":"portal",
                  "point":true,
                  "properties":[
@@ -107,12 +107,12 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":836.363636363636,
-                 "y":1742.42424242424
+                 "x":868,
+                 "y":1754
                 }, 
                 {
                  "height":0,
-                 "id":15,
+                 "id":14,
                  "name":"portal",
                  "point":true,
                  "properties":[
@@ -125,23 +125,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":75.7575757575757,
-                 "y":1745.45454545455
+                 "x":107,
+                 "y":1752
                 }],
          "opacity":1,
-         "properties":[
-                {
-                 "name":"portalMap",
-                 "type":"string",
-                 "value":"argoLanding"
-                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":16,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

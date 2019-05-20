@@ -1,7 +1,27 @@
 {
-	"dialogue":[
+	"dialogue01":[
+		{ "char":"Jason",
+			"speech":"I am full of glee that thee has summoned me,\ncome tell me, what is on your mind?" 
+		},
+		{ "char":"Medea",
+			"speech":"This task my father has given you is impossible,\nif the bulls do not slay you, the army will.\nIf the army does not slay you, the dragon will." 
+		},
+		{ "char":"Jason",
+			"speech":"Do not worry for me young beauty as I have the\nwill of the gods behind me." 
+		},
+		{ "char":"Medea",
+			"speech":"Not even the gods could prevent you from burning\nto death. Retrieve for  me the root of a two\nstalked flower, similar to the Corycian crocus,\nso that I can make a solution for you." 
+		},
 		{ "char":"",
 			"speech":"" 
+		}
+	],
+	"dialogue02":[
+		{ "char":"Medea",
+			"speech":"Hello. This is a test."
+		},
+		{ "char":"",
+			"speech":""
 		}
 	]
 }

@@ -31,11 +31,19 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.health = parameter.health;
 		this.invulnerabilityWait = 1000; 
 		this.invulnerability = false; 
+		this.alive = true;
 
 		if (typeof parameter.spiderBoss !== 'undefined'){ 
 			this.spiderBoss = parameter.spiderBoss; 
 		} else {
 			this.spiderBoss = false; 
+		}
+
+		if (typeof parameter.boss !== 'undefined'){ 
+			this.boss = parameter.boss;
+			activeBosses++; 
+		} else {
+			this.boss = false; 
 		}
 
 		if (typeof parameter.hasSword !== 'undefined'){ 
@@ -95,7 +103,16 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 
 	//Enemy update routine. 
 	update() {
-		if (this.health <= 0) {
+		if (this.alive && this.health <= 0) {
+			this.alive = false; 
+			if (this.boss) {
+				activeBosses--;
+			}
+
+			if (this.spiderBoss) {
+				this.webGraphics.alpha = 0;
+			}
+
 			enemies[this.enemyId].destroy(); 
 		}
 	}
@@ -193,15 +210,40 @@ class bullBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
-			xMove: parameter.xMove,
+			key: 'bullBossSprite', 
+			xMove: 300,
 			xVel: 130, 
-			scale: 0.45, 
+			scale: 0.2, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 1
+			health: 250, 
+			boss: true
         });
 	}
+	movement() {
+		if (this.moveRight) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 
+			}
+		} else {
+			if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+				this.shoot();
+				
+			}
+		} 
+	}
+
+	shoot() {
+		projectiles[currentProjectile] = new dragonFire({
+	        x: this.x, 
+	        y: this.y,
+	        projectileId: currentProjectile
+	    });
+	}
+	
 }
 
 class medusaBoss extends enemyBase { 
@@ -216,7 +258,8 @@ class medusaBoss extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 250
+			health: 250, 
+			boss: true
         });
 	}
 
@@ -230,6 +273,7 @@ class medusaBoss extends enemyBase {
 			if (this.x < this.xMin) {
 				this.body.setVelocityX(this.xVel);
 				this.moveRight = true; 
+				this.shootWeb();
 			}
 		} 
 	}
@@ -249,7 +293,7 @@ class minotaurBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'jason', //temp sprite 
+			key: 'tempEnemy', //temp sprite 
 			xMove: 200,//parameter.xMove,
 			xVel: 130, 
 			scale: 1, 
@@ -257,7 +301,8 @@ class minotaurBoss extends enemyBase {
 			gravity: false, 
 			health: 250, 
 			damageTouch: false,
-			hasSword: true
+			hasSword: true, 
+			boss: true
         });
         this.swingSword = false; 
         this.charging = false; //Is the minotaur charging at the player? 
@@ -311,7 +356,8 @@ class dragonBoss extends enemyBase {
 			scale: 3, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 300
+			health: 300, 
+			boss: true
         });
 
         this.verticalMove = false; 
@@ -356,7 +402,7 @@ class dragonBoss extends enemyBase {
 	}
 
 	shoot() {
-		if (this.checkPhase() == 2){
+		if (this.checkPhase() > 0){
 			var tempAimed = true; 
 		} else {
 			var tempAimed = false; 
@@ -367,6 +413,20 @@ class dragonBoss extends enemyBase {
 	        y: this.y,
 	        projectileId: currentProjectile,
 	        aimed: tempAimed
+    	});
+
+    	if (this.checkPhase() == 2) {
+    		setTimeout(this.shootAgain, 200, this);
+    		setTimeout(this.shootAgain, 400, this);
+    	}
+	}
+
+	shootAgain(tempDragon) {
+		projectiles[currentProjectile] = new dragonFire({
+	        x: tempDragon.x, 
+	        y: tempDragon.y,
+	        projectileId: currentProjectile,
+	        aimed: true
     	});
 	}
 }
@@ -387,15 +447,17 @@ class spiderBoss extends enemyBase {
 			enemyId: parameter.enemyId, 
 			gravity: false, 
 			health: 250,
-			spiderBoss: true
+			spiderBoss: true, 
+			boss: true
         });
 
 		this.spiderBossAlive = true; 
 
 		//Create a white line that represents the spider web. 
-	    var line = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
-	    var graphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
-	    graphics.strokeLineShape(line);
+	    this.webLine = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
+	    this.webGraphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
+	    this.webGraphics.strokeLineShape(this.webLine);
+	    this.webGraphics.setDepth(-20);
 	}
 
 	checkPhase() {

@@ -17,30 +17,39 @@ var lineStyleThick; //line thickness
 var diaBoxX; //X co-ordinate of dialogue box
 var diaBoxY; //Y co-ordinate of dialogue box
 
+var diaBoxTextStyle;
+
 /* Reads the level dialogue from an external JSON file. 
  * This is currently non-functional. 
  */
 function loadLevelDialogue() { 
-	createThis.load.json('levelJSON', currentLevelDialogueJSON);
+	createThis.load.json(currentLevelID + 'dialogueJSON', currentLevelDialogueJSON);
 }
 
 function parseLevelDialogue() {
-	levelJSON = createThis.cache.json.get('levelJSON');
-	dialogue = levelJSON.dialogue;
-	dialogueMax = dialogue.length - 1;
-	dialogBox = createThis.add.graphics();
-	npcDialogue = createThis.add.text(0,0,'',{color: '#000000'});
+	levelJSON = createThis.cache.json.get(currentLevelID + 'dialogueJSON');
+	dialogBox = userIntThis.add.graphics();
+	npcDialogue = userIntThis.add.text(0,0,'',diaBoxTextStyle);
 }
 
 function drawDialogueBox()
 {
-	
-	drawWidth = createThis.sys.game.config.width;
-	drawHeight = createThis.sys.game.config.height*0.30;
+	//dimensions
+	drawWidth = userIntThis.sys.game.config.width;
+	drawHeight = userIntThis.sys.game.config.height*0.30;
 	swirlLength = drawWidth*0.02;
 	lineStyleThick = swirlLength/5;
-	diaBoxX = createThis.cameras.main.scrollX;
-	diaBoxY = createThis.cameras.main.scrollY + createThis.sys.game.config.height*0.70;
+	diaBoxX = userIntThis.cameras.main.scrollX;
+	diaBoxY = userIntThis.cameras.main.scrollY + userIntThis.sys.game.config.height*0.70;
+	//text settings
+	diaBoxTextStyle = {
+		fontSize: drawHeight*0.12,
+		fontFamily: 'Arial',
+		align: "left",
+		color: '#000000',
+		wordWrap: {width: drawWidth*0.8, useAdvancedWrap: true} 
+	}
+	
 	
 	//draw outer rectangle
 	dialogBox.lineStyle(lineStyleThick,0x000000,1);	
@@ -92,6 +101,7 @@ function drawDialogueBox()
 	npcDialogue.y = diaBoxY+swirlLength;
 	dialogBox.setDepth(9);
 	npcDialogue.setDepth(10);
+	npcDialogue.setStyle(diaBoxTextStyle);
 }
 
 function clearDialogueBox ()

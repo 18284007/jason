@@ -12,26 +12,27 @@ class pause extends Phaser.Scene {
 	
 	create(){ 
 		createThis = this;
-        currentLevelID = 'pause';
+        game.scene.pause(currentLevelID);
 		
 		this.add.image(0,0, "menubut").setOrigin(0).setDepth(0);
 		
+		let toPauseButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "menubut").setDepth(1).setInteractive();
 		
-		
-		this.input.on('pointerup', function () {
+		 toPauseButton.on('pointerup', function () {
 			
 		
-			if (pauseKey.isDown) {
+			 
 				
-			let toPauseButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "menubut").setDepth(1).setInteractive();	
+				
 			
-			 this.scene.pause(currentLevelID);
+			 
 			
-			// this.scene.resume(currentLevelID);
-		}
-		}
+		 game.scene.resume(currentLevelID);
+		 game.scene.stop('pause');
+		
+		});
 
-	}	
+	}
 }	
 		
 	
