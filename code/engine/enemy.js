@@ -292,7 +292,7 @@ class minotaurBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'jason', //temp sprite 
+			key: 'tempEnemy', //temp sprite 
 			xMove: 200,//parameter.xMove,
 			xVel: 130, 
 			scale: 1, 

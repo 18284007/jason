@@ -40,6 +40,10 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	dialogueUpdate () {
 
 	}
+
+	update () {
+
+	}
 }
 
 /* Medea. 
@@ -57,6 +61,16 @@ class medeaNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
+		//this.scaleX = playerScale; 
+		//this.scaleY = playerScale;
+	}
+
+	update () {
+		if (player.x < this.x && this.active) {
+			this.anims.play('medeaIdleLeft', true);
+		} else if (player.x > this.x && this.active) {
+			this.anims.play('medeaIdleRight', true);
+		}
 	}
 }
 
@@ -70,13 +84,14 @@ class kingAetiosNPC extends npcBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y, 
-			key: 'medeaSprite',
+			key: 'kingSprite',
 			dialogueKey: parameter.dialogueKey,
 			npcId: parameter.npcId, 
 			gravity: true
 		})
 		this.isWalking = false; 
-		this.hasWalked = false; 
+		this.originalX = this.x; 
+		this.originalY = this.y; 
 	}
 
 	walk () {
@@ -85,16 +100,33 @@ class kingAetiosNPC extends npcBase {
 		setTimeout(this.stopWalk, 4200, this);
 	}
 
+	walkAway () {
+		this.isWalking = true; 
+		this.body.setVelocityX(150);
+		setTimeout(this.stopWalk, 4200, this);
+	}
+
 	stopWalk (tempNPC) {
 		tempNPC.body.setVelocityX(0);
-		tempNPC.hasWalked = true; 
+		tempNPC.isWalking = false;  
 	}
 
 	dialogueUpdate () {
-		if (!this.isWalking && !this.hasWalked && typeof dialogue !== 'undefined' && 
+		if (typeof dialogue !== 'undefined' && 
+			typeof dialogue[currentDialogue]._KINGAETIOSRESETXY !== 'undefined') {
+			this.x = this.originalX;
+			this.y = this.originalY; 
+			this.isWalking = false; 
+		} else if (!this.isWalking && typeof dialogue !== 'undefined' && 
 			typeof dialogue[currentDialogue]._KINGAETIOSWALK !== 'undefined') {
 			this.walk(); 
-		}
+		} else if (!this.isWalking && typeof dialogue !== 'undefined' && 
+			typeof dialogue[currentDialogue]._KINGAETIOSWALKAWAY !== 'undefined') {
+			this.walkAway(); 
+		} 
+	}
+
+	update () {
 	}
 }
 
@@ -134,4 +166,11 @@ function processNPCdialogue () {
 	} else {
 		dialogueAlreadyEngaged = false; 
 	} 
+}
+
+
+function npcUpdate() {
+	for (i = 0; i < npcCount; i++) {
+		npcs[i].update();
+	}
 }

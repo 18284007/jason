@@ -174,7 +174,7 @@ function spawnObjects() {
                 break;
 
             case 'crew': 
-                crew = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'jason');
+                crew = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'tempEnemy');
                 createThis.physics.add.collider(crew, mapLayer);
                 break;
 

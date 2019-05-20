@@ -13,12 +13,10 @@ var playerDamagePoints = 50;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
 
-
 // variables relating to siren level
 var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
 var playerShip = false; //Is the player a ship or a person?
 var playerShipVelocity = 300;
-
 
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
@@ -32,7 +30,6 @@ function parseCharacterMetaJSON() {
     characterMeta = characterMetaJSON.characters;
 }
 
-
 /* Player movement. 
  * This is used when controlling a person. 
  * This is not used for controlling a ship. 
@@ -44,7 +41,13 @@ function playerMovement() {
         playerSwungSword = false; 
     }
     
-    if (playerSwingSword) {
+    if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
+        if (playerFacingRight) {
+            player.anims.play('jasonIdleRight', true);
+        } else {
+            player.anims.play('jasonIdleLeft', true);
+        }
+    } else if (playerSwingSword) {
         if (playerFacingRight) {
             player.anims.play('jasonAttackRight', true);
         } else {
@@ -181,7 +184,7 @@ function gameOver() {
 }
 
 function playerCheckForFall() {
-    if (player.y > bganchor.y) {
+    if (player.y > bganchor.y || player.y < 0) {
         gameOver();
     }
 }
