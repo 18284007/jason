@@ -256,6 +256,8 @@ function shipUpdate()
 function changeLevel(tempNewLevelID) {
 	var oldLevelID = currentLevelID;
 	playerShip = false;
+    clearDialogueBox();
+    npcDialogue.text = '';
 	if (tempNewLevelID == 'titleScreen' || tempNewLevelID == 'endScreen')
 	{
 		userIntThis.scene.sendToBack('controller');	
