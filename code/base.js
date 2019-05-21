@@ -66,7 +66,7 @@ class controller extends Phaser.Scene
     create()
     {
     	firstInitHealthBar();
-	
+		initDialogueBox();
         parseCharacterMetaJSON();
     	game.scene.run(currentLevelID);
 	if (currentLevelID == 'titleScreen' || currentLevelID == 'endScreen')
