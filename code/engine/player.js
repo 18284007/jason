@@ -12,6 +12,8 @@ var playerSwungSword = false;
 var playerDamagePoints = 50;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
+var playerStunWait = 300; 
+var playerStun = false;
 
 // variables relating to siren level
 var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
@@ -35,7 +37,7 @@ function parseCharacterMetaJSON() {
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
-    if (attackKey.isDown && !playerSwingSword && !playerSwungSword && !playerInvulnerability) {
+    if (attackKey.isDown && !playerSwingSword && !playerSwungSword && !playerStun) {
         playerSword();
     } else if (!attackKey.isDown && !playerSwingSword && playerSwungSword) {
         playerSwungSword = false; 
@@ -143,12 +145,18 @@ function playerInvulnerabilityStop() {
     player.alpha = 1; 
 }
 
+function playerStunStop() {
+    playerStun = false; 
+    player.alpha = 0.6;
+}
 
 function playerDamage(tempHealth) {
     if (!playerInvulnerability){
         playerInvulnerability = true; 
+        playerStun = true; 
         player.alpha = 0.3; 
         setTimeout(playerInvulnerabilityStop, playerInvulnerabilityWait);
+        setTimeout(playerStunStop, playerStunWait);
         currentHealth -= tempHealth;
         parseHealthBarAnimate();
         if (currentHealth <= 0) {
