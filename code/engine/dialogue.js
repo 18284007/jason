@@ -25,11 +25,14 @@ var diaBoxTextStyle;
 function loadLevelDialogue() { 
 	createThis.load.json(currentLevelID + 'dialogueJSON', currentLevelDialogueJSON);
 }
+function initDialogueBox()
+{
+	dialogBox = userIntThis.add.graphics();
+	npcDialogue = userIntThis.add.text(0,0,'',undefined);
+}
 
 function parseLevelDialogue() {
 	levelJSON = createThis.cache.json.get(currentLevelID + 'dialogueJSON');
-	dialogBox = userIntThis.add.graphics();
-	npcDialogue = userIntThis.add.text(0,0,'',diaBoxTextStyle);
 }
 
 function drawDialogueBox()
@@ -47,7 +50,7 @@ function drawDialogueBox()
 		fontFamily: 'Arial',
 		align: "left",
 		color: '#000000',
-		wordWrap: {width: drawWidth*0.8, useAdvancedWrap: true} 
+		wordWrap: {width: drawWidth*0.95, useAdvancedWrap: true} 
 	}
 	
 	
