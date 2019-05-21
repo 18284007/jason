@@ -11,7 +11,7 @@ class titleScreen extends Phaser.Scene{
         currentLevelID = 'titleScreen';
 		
 		
-		this.load.image('titlebg', 'assets/stage/background/titlebg.jpg');
+		this.load.image('titlebg', 'assets/stage/background/titlebg.png');
 		this.load.image('playbut', 'assets/stage/background/playbut.png');
 		
 		this.load.audio('water', ['assets/stage/background/water.mp3']);
