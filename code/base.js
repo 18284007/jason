@@ -66,7 +66,7 @@ class controller extends Phaser.Scene
     create()
     {
     	firstInitHealthBar();
-	
+		initDialogueBox();
         parseCharacterMetaJSON();
     	game.scene.run(currentLevelID);
 	if (currentLevelID == 'titleScreen' || currentLevelID == 'endScreen')
@@ -289,7 +289,7 @@ var config = {
     },
     scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
-            placeholdertestmap, endCutscene, siren]
+            placeholdertestmap, endCutscene, endScreen, siren]
 };
 
 var game = new Phaser.Game(config);

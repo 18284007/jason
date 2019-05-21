@@ -7,8 +7,8 @@ class titleScreen extends Phaser.Scene{
 
 	preload()
 	{
-        	createThis = this;
-        	currentLevelID = 'titleScreen';
+        createThis = this;
+        currentLevelID = 'titleScreen';
 		
 		
 		this.load.image('titlebg', 'assets/stage/background/titlebg.jpg');
@@ -28,7 +28,7 @@ class titleScreen extends Phaser.Scene{
 		let startGame = this.add.image(this.game.renderer.width / 2, this.game.renderer.height *0.80, "playbut").setDepth(1).setInteractive();
 			
 		startGame.on("pointerup", ()=>{
-		this.scene.start('argoLanding');
+			changeLevel('argoLanding');
 		});
 			
 		this.sound.pauseOnBlur = false;

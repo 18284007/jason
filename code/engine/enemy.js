@@ -221,20 +221,20 @@ class bullBoss extends enemyBase {
         });
 	}
 	movement() {
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
+			if (this.x > player.x) {
 				this.body.setVelocityX(-this.xVel);
 				this.moveRight = false; 
 			}
-		} else {
-			if (this.x < this.xMin) {
+		 else {
+			if (this.x < player.x) {
 				this.body.setVelocityX(this.xVel);
 				this.moveRight = true; 
 				this.shoot();
 				
 			}
 		} 
-	}
+	}			
+	
 
 	shoot() {
 		projectiles[currentProjectile] = new dragonFire({
