@@ -1,7 +1,20 @@
 {
-	"dialogue":[
+	"oileus1":[
+		{ "char":"Oileus",
+			"speech":"A long boat ride, I always enjoy the soil of new lands" 
+		},
+		{ "char":"",
+			"speech":"" 
+		}
+	],
+	"iphiclus1":[
+		{
+			"char":"Iphiclus",
+			"speech":"We will stay here and protect the boat whilst you head to the palace"
+		},
 		{ "char":"",
 			"speech":"" 
 		}
 	]
+
 }

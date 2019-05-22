@@ -32,8 +32,11 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	collision (tempNPC){
 		if (tempNPC.hasDialogue){ 
 			dialogue = levelJSON[tempNPC.dialogueKey];
-			dialogueMax = dialogue.length - 1;
-			processNPCdialogue();
+			if (dialogue !== undefined)
+			{
+				dialogueMax = dialogue.length - 1;
+				processNPCdialogue();
+			}
 		}
 	}
 
@@ -127,6 +130,45 @@ class kingAetiosNPC extends npcBase {
 	}
 
 	update () {
+	}
+}
+class oileusNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'tempEnemy',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+		//this.scaleX = playerScale; 
+		//this.scaleY = playerScale;
+	}
+
+	update () {
+		
+	}
+}
+
+class iphiclusNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'tempEnemy',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+		//this.scaleX = playerScale; 
+		//this.scaleY = playerScale;
+	}
+
+	update () {
+		
 	}
 }
 

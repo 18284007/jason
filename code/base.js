@@ -10,6 +10,7 @@ var mapLayer;
 var createThis;
 var userIntThis;
 var currentLevelDialogueJSON;
+var levelProgress = 1;
 //var currentLevelID;
 /*variables relating to moving between levels*/
 var portalMap;
@@ -66,7 +67,7 @@ class controller extends Phaser.Scene
     create()
     {
     	firstInitHealthBar();
-		initDialogueBox();
+	initDialogueBox();
         parseCharacterMetaJSON();
 
     	game.scene.run(currentLevelID);

@@ -65,8 +65,14 @@
                 {
                  "height":0,
                  "id":7,
-                 "name":"crew",
+                 "name":"Oileus",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"oileus"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -77,8 +83,14 @@
                 {
                  "height":0,
                  "id":8,
-                 "name":"crew",
+                 "name":"Iphiclus",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"iphiclus"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
