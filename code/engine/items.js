@@ -1,3 +1,12 @@
+/* Inventory. 
+ * IDs: 0-8: Ritual Items. 
+ */
+inventory = [false, false, false, false, false, false, false, false, false]; 
+ritualItemCount = 9; 
+
+var ritualX; 
+var ritualY;
+
 /* itemBase 
  * This is used as a base for other item classes. Please do not create this object directly. 
  * Required parameters: scene, x, y, key, gravity.
@@ -14,6 +23,8 @@ class itemBase extends Phaser.GameObjects.Sprite {
 
         //Set gravity. 
         this.body.allowGravity = parameter.gravity;
+
+		this.inventoryKey = parameter.inventoryKey,
 
         //Collision detection between the player and item. 
         createThis.physics.add.overlap(this, player, this.collision);
@@ -112,6 +123,94 @@ class spiderFlowerItem extends itemBase {
 		spiderBossActive = true;
 		tempItem.destroy();
 		spiderFlowerPickedUp = true; 
+	}
+}
+
+//These ritual items are found in the game world. 
+class ritualItemFind extends itemBase {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderFlowerSprite',
+			inventoryKey: parameter.inventoryKey,
+			gravity: false
+		})
+	}
+
+	collision (tempItem){
+		inventory[tempItem.inventoryKey] = true; 
+		tempItem.destroy();
+	}
+}
+
+class ritualItemCutscene extends itemBase {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderFlowerSprite',
+			inventoryKey: parameter.inventoryKey,
+			gravity: false
+		})
+
+		createThis.physics.add.overlap(this, ritualFireObject, this.destroyMe);
+		this.moveToFire(ritualX, ritualY);
+		this.body.setVelocityY(100);
+	}
+
+	moveToFire (tempX, tempY) {
+		createThis.physics.accelerateToObject(this, ritualFireObject, 300);
+	}
+
+	destroyMe (tempItem) {
+		tempItem.destroy();
+	}
+}
+
+class ritualFire extends itemBase {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'bonfireSprite',
+			gravity: false
+		})
+
+		ritualX = this.x;
+		ritualY = this.y; 
+	
+		this.ritualBegun = false; 
+	}	
+
+	checkBeginRitual() {
+		var tempBeginRitual = true; 
+
+		for (i = 0; i < ritualItemCount; i++){
+			tempBeginRitual = tempBeginRitual && inventory[i];
+		}
+
+		return tempBeginRitual; 
+	}
+
+	ritual() {
+		for (i = 0; i < ritualItemCount; i++) {
+			new ritualItemCutscene({
+                x: this.x, 
+                y: this.y - (100 * (i + 1)),
+                inventoryKey: tempProperties[i]
+            });
+		}
+	}
+
+	collision (tempItem) {
+		if (!tempItem.ritualBegun && talkKey.isDown && tempItem.checkBeginRitual()) {
+			tempItem.ritual();
+			tempItem.ritualBegun = true; 
+		} 
 	}
 }
 
