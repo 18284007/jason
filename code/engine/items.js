@@ -171,6 +171,11 @@ class ritualItemCutscene extends itemBase {
 	}
 
 	destroyMe (tempItem) {
+		for (i = 0; i < portals.length; i++){
+			if (typeof portals[i].remainingPortals !== 'undefined'){
+				portals[i].remainingPortals--;
+			}
+		}
 		tempItem.destroy();
 	}
 }
@@ -230,7 +235,7 @@ class portal extends Phaser.GameObjects.Sprite {
         createThis.add.existing(this);
         this.portalMap = parameter.portalMap; 
         this.body.allowGravity = false;
-        this.setDepth(-100);
+        this.setDepth(-45);
 
         if (typeof parameter.spawnAfterBossBattle !== 'undefined') {
         	this.spawnAfterBossBattle = parameter.spawnAfterBossBattle;
@@ -242,6 +247,13 @@ class portal extends Phaser.GameObjects.Sprite {
         	this.spawnAfterSpiderFlower = parameter.spawnAfterSpiderFlower;
         } else {
         	this.spawnAfterSpiderFlower = false; 
+        }
+
+        if (typeof parameter.spawnAfterRitual !== 'undefined') {
+        	this.spawnAfterRitual = parameter.spawnAfterRitual;
+        	this.remainingPortals = ritualItemCount;
+        } else {
+        	this.spawnAfterRitual = false; 
         }
 
         this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower);
@@ -264,6 +276,10 @@ class portal extends Phaser.GameObjects.Sprite {
 		if (tempPortalActive && this.spawnAfterBossBattle) {
 			tempPortalActive = (activeBosses <= 0); 
 		} 
+
+		if (tempPortalActive && this.spawnAfterRitual) {
+			tempPortalActive = (this.remainingPortals <= 0);
+		}
 
 		if (tempPortalActive) {
 			this.activePortal = true; 
