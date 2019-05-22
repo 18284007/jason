@@ -10,7 +10,7 @@ var mapLayer;
 var createThis;
 var userIntThis;
 var currentLevelDialogueJSON;
-var levelProgress = 0;
+var levelProgress = 1;
 //var currentLevelID;
 /*variables relating to moving between levels*/
 var portalMap;
