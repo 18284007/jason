@@ -58,5 +58,15 @@
 		{ "char":"",
 			"speech":""
 		}
+	],
+	"aetios2":[
+		{
+		  "char":"King Aetios",
+			"speech":"I see you have come to fulfil your challenge, very well to the fields! The bulls await!"
+		},
+		{
+			"char":"",
+			"speech":""
+		}
 	]
 }
