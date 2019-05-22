@@ -169,6 +169,78 @@
                  "width":0,
                  "x":4130.30303030303,
                  "y":1769.69696969697
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":544,
+                 "y":1652
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1514,
+                 "y":1775
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2302,
+                 "y":1644
+                }, 
+                {
+                 "height":0,
+                 "id":21,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":3
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3935,
+                 "y":1777
                 }],
          "opacity":1,
          "properties":[
@@ -183,10 +255,10 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":18,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {

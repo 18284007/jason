@@ -175,6 +175,96 @@
                  "width":0,
                  "x":4104,
                  "y":1485
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":4
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":546,
+                 "y":753
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1158,
+                 "y":1382
+                }, 
+                {
+                 "height":0,
+                 "id":21,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":6
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":541,
+                 "y":1774
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":7
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2116,
+                 "y":1576
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"ritualItem",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"inventoryKey",
+                         "type":"int",
+                         "value":8
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2400,
+                 "y":1778
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -183,7 +273,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":19,
+ "nextobjectid":24,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",
