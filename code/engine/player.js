@@ -188,6 +188,11 @@ function gameOver() {
     playerAlive = false; 
     currentHealth = maxHealth;
     healthBarReset();
+
+    for (j = 0; j < inventory.length; j++) {
+        inventory[j] = (resetInventory[j]);
+    }
+    
     createThis.scene.restart(currentLevelID);
 }
 

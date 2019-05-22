@@ -2,6 +2,7 @@
  * IDs: 0-8: Ritual Items. 
  */
 inventory = [false, false, false, false, false, false, false, false, false]; 
+resetInventory = [false, false, false, false, false, false, false, false, false]; 
 ritualItemCount = 9; 
 
 var ritualX; 
@@ -24,7 +25,11 @@ class itemBase extends Phaser.GameObjects.Sprite {
         //Set gravity. 
         this.body.allowGravity = parameter.gravity;
 
-		this.inventoryKey = parameter.inventoryKey,
+		this.inventoryKey = parameter.inventoryKey;
+
+		if (typeof this.inventoryKey !== 'undefined' && inventory[this.inventoryKey]){
+			this.destroy();
+		}
 
         //Collision detection between the player and item. 
         createThis.physics.add.overlap(this, player, this.collision);
