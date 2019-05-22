@@ -1,30 +1,34 @@
 {
-	"medea01":[
+	"medea1":[
 		{ "char":"Medea",
 			"speech":"Hello there strangers, may I ask why are you here?",
 			"_KINGAETIOSRESETXY":""
 		},
 		{ "char":"Jason",
-			"speech":"Hello there, my name is Jason and it is a pleasure to meet a beauty such as yourself, we are here on a heroic quest from a city called lolcus as my uncle has usurped the throne" 
+			"speech":"Hello there, my name is Jason and it is a pleasure to meet a beauty such as yourself, we are here on a heroic quest from a city called lolcus" 
 		},
 		{ "char":"Medea",
-			"speech":"A long and weary quest for heroes, I am Medea daughter of King Aetios I hope your Journey found you well" 
+			"speech":"A long and weary quest for heroes, I am Medea daughter of King Aetios I hope your journey found you well" 
+		},
+		{
+		  "char":"Jason",
+			"speech":"An arduous adventure to reclaim my fathers throne from my treacherous uncle..."
 		},
 		{ "char":"King Aetios",
 			"speech":"WHO ARE THESE STRANGE MEN WHO INVADE MY HALLS?",
 			"_KINGAETIOSWALK":""
 		},
 		{ "char":"Jason",
-			"speech":"I Am Jason, Son of Aeson. I am here to retrieve the golden fleece to reclaim my rightful spot upon my homelands throne" 
+			"speech":"I am Jason, son of Aeson. I am here to retrieve the golden fleece as a challenge set by my uncle" 
 		},
 		{ "char":"King Aetios",
-			"speech":"Your homelands throne? I believe it is MY THRONE that you are after, tell me, why should I not slay you where you stand?" 
+			"speech":"So you have come from a city I have not heard of, on the challenge of a man I do not know.\n Foreign lies to take MY THRONE!" 
 		},
 		{ "char":"Medea",
 			"speech":"Father please, his uncle has usurped his father as king, why would a stranger travel so far for a throne so foreign without an army?" 
 		},
 		{ "char":"Jason",
-			"speech":" King Pelias challenged me to deem my worth, The challenge stated to deem me more worthy than my uncle Pelias, I must retrieve the golden fleece and return it home" 
+			"speech":" My uncle King Pelias challenged me to deem my worth, I must return with the fleece so my people know who is the true champion of lolcus!" 
 		},
 		{ "char":"King Aetios",
 			"speech":"A challenge of worth? And you believe thee worthy of my fleece? Very well let us see your worth I give thee challenge three!" 
