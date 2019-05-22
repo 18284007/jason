@@ -96,6 +96,30 @@
                  "width":0,
                  "x":14.6666666666666,
                  "y":1918.66666666667
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"healthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1184,
+                 "y":1512
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"healthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":482,
+                 "y":1454
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -104,10 +128,10 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":15,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {

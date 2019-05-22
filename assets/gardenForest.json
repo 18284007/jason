@@ -77,61 +77,91 @@
                 {
                  "height":0,
                  "id":11,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":90
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":869.69696969697,
-                 "y":1587.87878787879
+                 "x":801.69696969697,
+                 "y":1577.87878787879
                 }, 
                 {
                  "height":0,
                  "id":12,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":120
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1818.18181818182,
-                 "y":1772.72727272727
+                 "x":1826.18181818182,
+                 "y":1768.72727272727
                 }, 
                 {
                  "height":0,
                  "id":13,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":90
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2651.51515151515,
+                 "x":2591.51515151515,
                  "y":1645.45454545455
                 }, 
                 {
                  "height":0,
                  "id":14,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":120
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3039.39393939394,
-                 "y":1772.72727272727
+                 "x":2981.39393939394,
+                 "y":1774.72727272727
                 }, 
                 {
                  "height":0,
                  "id":15,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":90
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3536.12121212121,
+                 "x":3510.12121212121,
                  "y":1766.66666666667
                 }, 
                 {
@@ -169,6 +199,30 @@
                  "width":0,
                  "x":4130.30303030303,
                  "y":1769.69696969697
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"maxHealthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3928,
+                 "y":1764
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"healthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2912,
+                 "y":1768
                 }],
          "opacity":1,
          "properties":[
@@ -183,7 +237,7 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":18,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
