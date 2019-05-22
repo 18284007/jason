@@ -51,7 +51,7 @@ function spawnObjects() {
                 npcs[npcCount] = new medeaNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    dialogueKey: tempProperties['dialogueKey']
+                    dialogueKey: tempProperties['dialogueKey'] + levelProgress
                 });
                 npcCount++; 
                 break;
@@ -60,7 +60,7 @@ function spawnObjects() {
                 npcs[npcCount] = new kingAetiosNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    dialogueKey: tempProperties['dialogueKey']
+                    dialogueKey: tempProperties['dialogueKey'] + levelProgress
                 });
                 npcCount++; 
                 break;
