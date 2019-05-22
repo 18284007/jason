@@ -1,3 +1,4 @@
+var medeaActive = false;
 /* NPC Base.  
  * This is used as the base for several NPC classes. 
  * Do not create this object directly. 
@@ -66,13 +67,56 @@ class medeaNPC extends npcBase {
 		})
 		//this.scaleX = playerScale; 
 		//this.scaleY = playerScale;
+		this.medeaActive = false;
 	}
 
-	update () {
-		if (player.x < this.x && this.active) {
-			this.anims.play('medeaIdleLeft', true);
-		} else if (player.x > this.x && this.active) {
-			this.anims.play('medeaIdleRight', true);
+	makeInactive ()
+	{
+		medeaActive = false;
+	}
+
+	stopWalk (tempNPC) {
+		tempNPC.body.setVelocityX(0);
+		tempNPC.isWalking = false;
+	}
+
+	walk (tempNPC)
+	{
+		tempNPC.body.setVelocity(-150);
+		tempNPC.isWalking = true;
+	}
+
+	walkBack (tempNPC)
+	{
+		tempNPC.anims.play('medeaIdleRight', true);
+		tempNPC.body.setVelocity(150);
+		tempNPC.isWalking = true;
+	}
+
+	dialogueUpdate () {
+		if (typeof dialogue !== 'undefined' &&
+			typeof dialogue[currentDialogue]._MEDEAPREPAREOINTMENT !== 'undefined')
+		{
+			if(!medeaActive)
+				medeaActive = true;
+				this.anims.play('medeaIdleLeft', true);
+				this.walk(this);
+				setTimeout(this.stopWalk, 1000, this);
+				setTimeout(this.walkBack,2000,this);
+				setTimeout(this.stopWalk, 3000, this);
+				setTimeout(this.makeInactive,3100,this);
+		}
+	}
+
+	update () 
+	{
+		if (!medeaActive)
+		{
+			if (player.x < this.x && this.active) {
+				this.anims.play('medeaIdleLeft', true);
+			} else if (player.x > this.x && this.active) {
+				this.anims.play('medeaIdleRight', true);
+			}
 		}
 	}
 }
