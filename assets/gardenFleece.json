@@ -96,6 +96,29 @@
                  "width":0,
                  "x":14.6666666666666,
                  "y":1918.66666666667
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"endCutscene"
+                        }, 
+                        {
+                         "name":"spawnAfterBossBattle",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1346,
+                 "y":1753
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -104,7 +127,7 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":15,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",
