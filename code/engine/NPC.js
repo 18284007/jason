@@ -228,11 +228,6 @@ function processNPCdialogue () {
 	    	for (i = 0; i < npcCount; i++){
 				npcs[i].dialogueUpdate();
 			}
-			
-			//Some portals react to flags in dialogue.
-	    	for (i = 0; i < portalCount; i++){
-				portals[i].dialogueUpdate();
-			}
 
 			//Clear the existing dialogue box. 
 			clearDialogueBox();
