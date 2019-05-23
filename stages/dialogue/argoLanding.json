@@ -1,9 +1,11 @@
 {
 	"oileus1":[
-		{ "char":"Oileus",
+		{ 
+			"char":"Oileus",
 			"speech":"A long boat ride, I always enjoy the soil of new lands" 
 		},
-		{ "char":"",
+		{ 
+			"char":"",
 			"speech":"" 
 		}
 	],
@@ -12,9 +14,29 @@
 			"char":"Iphiclus",
 			"speech":"We will stay here and protect the boat whilst you head to the palace"
 		},
-		{ "char":"",
+		{ 
+			"char":"",
+			"speech":"" 
+		}
+	],
+	"oileus2":[
+		{
+			"char":"Oileus",
+			"speech":"Medea is a helpful one isn't she?"
+		},
+		{ 
+			"char":"",
+			"speech":"" 
+		}
+	],
+	"iphiclus2": [
+		{
+			"char":"Iphiclus",
+			"speech":"No challenge is too great for mighty Jason!"
+		},
+		{ 
+			"char":"",
 			"speech":"" 
 		}
 	]
-
 }
