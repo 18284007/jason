@@ -307,6 +307,11 @@ class portal extends Phaser.GameObjects.Sprite {
 			this.activePortal = false; 
 			this.alpha = 0; 
 		}
+
+		if (this.spawnAfterSpiderFlower && this.spawnAfterBossBattle && levelProgress == 1)
+		{
+			levelProgress++;
+		}
 	}
 }
 
