@@ -98,6 +98,7 @@ function spawnObjects() {
                 enemies[enemyCount] = new fox({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    xMove: tempProperties['xMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -107,6 +108,7 @@ function spawnObjects() {
                 enemies[enemyCount] = new snake({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    xMove: tempProperties['xMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -115,7 +117,8 @@ function spawnObjects() {
             case 'bats': 
                 enemies[enemyCount] = new bats({
                     x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
+                    y: mapObjectArray[i].y,
+                    xMove: tempProperties['xMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
