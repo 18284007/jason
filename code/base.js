@@ -10,7 +10,7 @@ var mapLayer;
 var createThis;
 var userIntThis;
 var currentLevelDialogueJSON;
-var levelProgress = 1;
+var levelProgress = 2;
 //var currentLevelID;
 /*variables relating to moving between levels*/
 var portalMap;
@@ -44,9 +44,6 @@ class controller extends Phaser.Scene
         this.load.image('bonfireSprite','assets/bonfire.png');
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
-        this.load.image('fox','assets/enemy/fox.png');	
-        this.load.image('bats','assets/enemy/bats.png');	
-        this.load.image('snake','assets/enemy/snake.png');
         //medusaBoss
         this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
         //bullBoss
@@ -72,7 +69,6 @@ class controller extends Phaser.Scene
     	firstInitHealthBar();
 	initDialogueBox();
         parseCharacterMetaJSON();
-
     	game.scene.run(currentLevelID);
 	if (currentLevelID == 'titleScreen' || currentLevelID == 'endScreen')
 	{
@@ -99,10 +95,6 @@ function commonPreload()
 	//load dialogue
 	currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
 	loadLevelDialogue();
-
-    for (j = 0; j < inventory.length; j++) {
-        resetInventory[j] = (inventory[j]);
-    }
 }
 
 function loadMap()
