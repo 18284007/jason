@@ -114,6 +114,11 @@
                          "name":"portalMap",
                          "type":"string",
                          "value":"colchisFields"
+                        }, 
+                        {
+                         "name":"spawnAfterTalkAetios",
+                         "type":"bool",
+                         "value":true
                         }],
                  "rotation":0,
                  "type":"",
