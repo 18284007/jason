@@ -273,6 +273,7 @@ class medusaBoss extends enemyBase {
 			if (this.x < this.xMin) {
 				this.body.setVelocityX(this.xVel);
 				this.moveRight = true; 
+				this.shootWeb();
 			}
 		} 
 	}
