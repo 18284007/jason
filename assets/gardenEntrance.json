@@ -89,14 +89,14 @@
                 {
                  "height":0,
                  "id":14,
-                 "name":"dogs",
+                 "name":"ritualFire",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3345.45454545455,
-                 "y":1715.15151515152
+                 "x":3260.45454545455,
+                 "y":1786.15151515152
                 }, 
                 {
                  "height":0,
@@ -174,6 +174,11 @@
                          "name":"portalMap",
                          "type":"string",
                          "value":"gardenFleece"
+                        }, 
+                        {
+                         "name":"spawnAfterRitual",
+                         "type":"bool",
+                         "value":true
                         }],
                  "rotation":0,
                  "type":"",
@@ -181,6 +186,18 @@
                  "width":0,
                  "x":3542,
                  "y":1743
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"dogs",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3348,
+                 "y":1708
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -189,10 +206,10 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":20,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {

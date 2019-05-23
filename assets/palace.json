@@ -97,12 +97,6 @@
                  "id":12,
                  "name":"kingAetios",
                  "point":true,
-                 "properties":[
-                        {
-                         "name":"dialogueKey",
-                         "type":"string",
-                         "value":"aetios"
-                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -120,11 +114,6 @@
                          "name":"portalMap",
                          "type":"string",
                          "value":"colchisFields"
-                        }, 
-                        {
-                         "name":"spawnAfterTalkAetios",
-                         "type":"bool",
-                         "value":true
                         }],
                  "rotation":0,
                  "type":"",
@@ -161,7 +150,7 @@
  "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {
