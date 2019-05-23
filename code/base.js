@@ -72,6 +72,7 @@ class controller extends Phaser.Scene
     	firstInitHealthBar();
 	initDialogueBox();
         parseCharacterMetaJSON();
+
     	game.scene.run(currentLevelID);
 	if (currentLevelID == 'titleScreen' || currentLevelID == 'endScreen')
 	{
@@ -98,6 +99,10 @@ function commonPreload()
 	//load dialogue
 	currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
 	loadLevelDialogue();
+
+    for (j = 0; j < inventory.length; j++) {
+        resetInventory[j] = (inventory[j]);
+    }
 }
 
 function loadMap()

@@ -56,6 +56,22 @@ function spawnObjects() {
                 npcCount++; 
                 break;
 
+            case 'ritualItem': 
+                items[itemCount] = new ritualItemFind({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    inventoryKey: tempProperties['inventoryKey']
+                });
+                itemCount++; 
+                break;
+
+            case 'ritualFire': 
+                ritualFireObject = new ritualFire({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                });
+                break;
+
             case 'kingAetios': 
                 npcs[npcCount] = new kingAetiosNPC({
                     x: mapObjectArray[i].x, 
@@ -210,7 +226,8 @@ function spawnObjects() {
                     y: mapObjectArray[i].y, 
                     portalMap: tempProperties['portalMap'],
                     spawnAfterSpiderFlower: tempProperties['spawnAfterSpiderFlower'],
-                    spawnAfterBossBattle: tempProperties['spawnAfterBossBattle']
+                    spawnAfterBossBattle: tempProperties['spawnAfterBossBattle'],
+                    spawnAfterRitual: tempProperties['spawnAfterRitual']
                 });
                 portalCount++;
                 break; 

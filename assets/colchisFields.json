@@ -102,6 +102,11 @@
                          "name":"portalMap",
                          "type":"string",
                          "value":"riverCrossing"
+                        }, 
+                        {
+                         "name":"spawnAfterBossBattle",
+                         "type":"bool",
+                         "value":true
                         }],
                  "rotation":0,
                  "type":"",
@@ -156,7 +161,7 @@
  "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {
