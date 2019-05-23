@@ -159,7 +159,7 @@ class fox extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'fox', 
+			key: 'spiderBossSprite', 
 			xMove: parameter.xMove,
 			xVel: 130, 
 			scale: 0.45, 
@@ -176,7 +176,7 @@ class snake extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'snake', 
+			key: 'spiderBossSprite', 
 			xMove: parameter.xMove,
 			xVel: 130, 
 			scale: 0.45, 
@@ -193,7 +193,7 @@ class bats extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'bats', 
+			key: 'spiderBossSprite', 
 			xMove: parameter.xMove,
 			xVel: 130, 
 			scale: 0.45, 
@@ -273,7 +273,6 @@ class medusaBoss extends enemyBase {
 			if (this.x < this.xMin) {
 				this.body.setVelocityX(this.xVel);
 				this.moveRight = true; 
-				this.shootWeb();
 			}
 		} 
 	}
@@ -502,10 +501,8 @@ class spiderBoss extends enemyBase {
 function enemyMovement() {
 	if (enemyCount > 0){
 		for (i = 0; i < enemyCount; i++){
-			if (enemies[i].alive){
-				enemies[i].movement();	
-				enemies[i].update();
-			}
+			enemies[i].movement();	
+			enemies[i].update();
 		}
 	}
 }

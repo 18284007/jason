@@ -56,22 +56,6 @@ function spawnObjects() {
                 npcCount++; 
                 break;
 
-            case 'ritualItem': 
-                items[itemCount] = new ritualItemFind({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
-                    inventoryKey: tempProperties['inventoryKey']
-                });
-                itemCount++; 
-                break;
-
-            case 'ritualFire': 
-                ritualFireObject = new ritualFire({
-                    x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
-                });
-                break;
-
             case 'kingAetios': 
                 npcs[npcCount] = new kingAetiosNPC({
                     x: mapObjectArray[i].x, 
@@ -114,7 +98,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new fox({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    xMove: tempProperties['xMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -124,7 +107,6 @@ function spawnObjects() {
                 enemies[enemyCount] = new snake({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
-                    xMove: tempProperties['xMove'],
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -133,8 +115,7 @@ function spawnObjects() {
             case 'bats': 
                 enemies[enemyCount] = new bats({
                     x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y,
-                    xMove: tempProperties['xMove'],
+                    y: mapObjectArray[i].y, 
                     enemyId: enemyCount
                 });
                 enemyCount++; 
@@ -227,7 +208,7 @@ function spawnObjects() {
                     portalMap: tempProperties['portalMap'],
                     spawnAfterSpiderFlower: tempProperties['spawnAfterSpiderFlower'],
                     spawnAfterBossBattle: tempProperties['spawnAfterBossBattle'],
-                    spawnAfterRitual: tempProperties['spawnAfterRitual']
+					spawnAfterTalkAetios: tempProperties['spawnAfterTalkAetios']
                 });
                 portalCount++;
                 break; 
