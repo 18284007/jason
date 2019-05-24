@@ -186,24 +186,6 @@
                          "name":"portalMap",
                          "type":"string",
                          "value":"shrine"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":42,
-                 "y":1756
-                }, 
-                {
-                 "height":0,
-                 "id":15,
-                 "name":"portal",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"portalMap",
-                         "type":"string",
-                         "value":"shrine"
                         }, 
                         {
                          "name":"spawnAfterBossBattle",
@@ -221,6 +203,24 @@
                  "width":0,
                  "x":3153,
                  "y":1754
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"shrine"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":42,
+                 "y":1756
                 }, 
                 {
                  "height":0,
