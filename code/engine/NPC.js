@@ -50,6 +50,52 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 }
 
+class artemisNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'medeaSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () 
+	{
+		if (player.x < this.x && this.active) {
+			this.anims.play('medeaIdleLeft', true);
+		} else if (player.x > this.x && this.active) {
+			this.anims.play('medeaIdleRight', true);
+		}
+	}
+}
+
+class artemisDogNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'medeaSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () 
+	{
+		if (player.x < this.x && this.active) {
+			this.anims.play('medeaIdleLeft', true);
+		} else if (player.x > this.x && this.active) {
+			this.anims.play('medeaIdleRight', true);
+		}
+	}
+}
+
 /* Medea. 
  * Required attributes: x, y. 
  * Optional attributes: dialogueKey. 

@@ -56,6 +56,24 @@ function spawnObjects() {
                 npcCount++; 
                 break;
 
+            case 'artemis': 
+                npcs[npcCount] = new artemisNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey'] + levelProgress
+                });
+                npcCount++; 
+                break;
+
+            case 'dogs': 
+                npcs[npcCount] = new artemisDogNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey'] + levelProgress
+                });
+                npcCount++; 
+                break;
+
             case 'ritualItem': 
                 items[itemCount] = new ritualItemFind({
                     x: mapObjectArray[i].x, 
