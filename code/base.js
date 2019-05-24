@@ -224,7 +224,7 @@ function loadMap()
     	createThis.cameras.main.startFollow(player, false, 0.05, 0.03);
     } else {
         playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + playerShipOffsetX, playerSpawnPoint.y, playerSprite);
-        createThis.cameras.main.startFollow(playerOffset, true, 0.5, 0.5);
+        createThis.cameras.main.startFollow(playerOffset, true, 1, 1);
         playerOffset.alpha = 0; 
         playerOffset.allowGravity = 0; 
     }
