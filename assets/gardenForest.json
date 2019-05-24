@@ -77,61 +77,91 @@
                 {
                  "height":0,
                  "id":11,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":90
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":869.69696969697,
-                 "y":1587.87878787879
+                 "x":797.69696969697,
+                 "y":1586.54545454546
                 }, 
                 {
                  "height":0,
                  "id":12,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":120
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1818.18181818182,
-                 "y":1772.72727272727
+                 "x":1767.51515151515,
+                 "y":1775.39393939394
                 }, 
                 {
                  "height":0,
                  "id":13,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":90
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2651.51515151515,
-                 "y":1645.45454545455
+                 "x":2596.84848484848,
+                 "y":1644.12121212122
                 }, 
                 {
                  "height":0,
                  "id":14,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":120
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3039.39393939394,
-                 "y":1772.72727272727
+                 "x":2982.06060606061,
+                 "y":1768.72727272727
                 }, 
                 {
                  "height":0,
                  "id":15,
-                 "name":"miniSnake",
+                 "name":"snake",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":90
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3536.12121212121,
+                 "x":3508.12121212121,
                  "y":1766.66666666667
                 }, 
                 {
@@ -241,6 +271,30 @@
                  "width":0,
                  "x":3935,
                  "y":1777
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"healthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2870.66666666667,
+                 "y":1774.66666666667
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"maxHealthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3865.33333333333,
+                 "y":1776
                 }],
          "opacity":1,
          "properties":[
@@ -255,10 +309,10 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":22,
+ "nextobjectid":24,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {

@@ -159,7 +159,7 @@ class fox extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
+			key: 'fox', 
 			xMove: parameter.xMove,
 			xVel: 130, 
 			scale: 0.45, 
@@ -176,7 +176,7 @@ class snake extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
+			key: 'snake', 
 			xMove: parameter.xMove,
 			xVel: 130, 
 			scale: 0.45, 
@@ -193,7 +193,7 @@ class bats extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
+			key: 'bats', 
 			xMove: parameter.xMove,
 			xVel: 130, 
 			scale: 0.45, 
@@ -213,33 +213,32 @@ class bullBoss extends enemyBase {
 			key: 'bullBossSprite', 
 			xMove: 300,
 			xVel: 130, 
-			scale: 0.2, 
+			scale: 0.18, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
 			health: 250, 
 			boss: true
         });
+		this.interval = setInterval(this.shoot, 1500, this);
 	}
+	
 	movement() {
-			if (this.x > player.x) {
-				this.body.setVelocityX(-this.xVel);
-				this.moveRight = false; 
-			}
-		 else {
-			if (this.x < player.x) {
-				this.body.setVelocityX(this.xVel);
-				this.moveRight = true; 
-				this.shoot();
-				
-			}
+		//An offset is derived from the enemyId so that the bulls have slightly different movement and do not stack on top of each other. 
+		if (((player.x - 60 + (this.enemyId * 30)) < this.x) && ((player.x + 60 + (this.enemyId * 50)) > this.x)) {
+			//var tempVelocityX = -50 +(Math.random() * 100);
+			this.body.setVelocityX(0);
+		} else if (player.x < this.x) {
+			this.body.setVelocityX(-this.xVel - (this.enemyId * 30));
+		} else if (player.x > this.x) {
+			this.body.setVelocityX(this.xVel + (this.enemyId * 30));
 		} 
 	}			
 	
 
-	shoot() {
+	shoot(tempBull) {
 		projectiles[currentProjectile] = new dragonFire({
-	        x: this.x, 
-	        y: this.y,
+	        x: tempBull.x, 
+	        y: tempBull.y,
 	        projectileId: currentProjectile
 	    });
 	}
@@ -273,6 +272,7 @@ class medusaBoss extends enemyBase {
 			if (this.x < this.xMin) {
 				this.body.setVelocityX(this.xVel);
 				this.moveRight = true; 
+				this.shootWeb();
 			}
 		} 
 	}

@@ -15,5 +15,27 @@
 		{ "char":"",
 			"speech":"" 
 		}
+	],
+	"medea2":[
+		{
+			"char":"Medea",
+			"speech":"*Prepares ointment*",
+			"_MEDEAPREPAREOINTMENT":""
+		},
+		{
+			"char":"Medea",
+			"speech":"When the task of plowing with bulls comes, place the ointment upon thee so that thou be resistant to their flames"
+		},
+		{
+			"char":"Jason",
+			"speech":"Thank you Medea"
+		},
+		{
+			"char":"Medea",
+			"speech":"Return to the palace, My father will have retrieved the dragonsteeth by now"
+		},
+		{ "char":"",
+			"speech":"" 
+		}
 	]
 }
