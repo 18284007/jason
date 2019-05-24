@@ -65,6 +65,18 @@ class controller extends Phaser.Scene
         this.load.image('maxHealthItemSprite', 'assets/items/maxHealth.png');
         this.load.image('healthItemSprite', 'assets/items/health.png');
         this.load.image('damageIncreaseItemSprite', 'assets/items/damageIncrease.png');
+	    
+	//SIGNS
+	this.load.image('signR2CSprite','assets/items/signR2C.png');
+	this.load.image('signMarketSprite','assets/items/signMarket.png');
+	this.load.image('signShrineSprite','assets/items/signShrine.png');
+	this.load.image('signShrineForestSprite','assets/items/signShrineForest.png');
+	this.load.image('signPalaceSprite','assets/items/signPalace.png');
+	this.load.image('signColchisFieldsSprite','assets/items/signColchisFields.png');
+	this.load.image('signRiverCrossingSprite','assets/items/signRiverCrossing.png');
+	this.load.image('signGardenEntranceSprite','assets/items/signGardenEntrance.png');
+	this.load.image('signDungeonSprite','assets/items/signDungeon.png');
+	this.load.image('signGardenForestSprite','assets/items/signGardenForest.png');
         loadCharacterMetaJSON();
     }
 

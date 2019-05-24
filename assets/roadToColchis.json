@@ -47,8 +47,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2014,
-                 "y":1714
+                 "x":72,
+                 "y":1740
                 }, 
                 {
                  "height":0,
@@ -89,8 +89,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2013,
-                 "y":1746
+                 "x":71,
+                 "y":1750
                 }, 
                 {
                  "height":0,
@@ -107,7 +107,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":868,
+                 "x":2048,
                  "y":1754
                 }, 
                 {
@@ -125,8 +125,32 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":107,
-                 "y":1752
+                 "x":1187,
+                 "y":1754
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"signMarket",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1972,
+                 "y":1742
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"signShrine",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1122,
+                 "y":1750
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -135,7 +159,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":15,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

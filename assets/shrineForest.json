@@ -221,6 +221,18 @@
                  "width":0,
                  "x":3153,
                  "y":1754
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"signShrine",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":123,
+                 "y":1764
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -229,10 +241,10 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":16,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {
