@@ -1,7 +1,3 @@
-var newGraphics;
-var oileus;
-var Iphiclus;
-
 class argoLanding extends Phaser.Scene{
 
     constructor()
@@ -17,7 +13,7 @@ class argoLanding extends Phaser.Scene{
         backgroundLayer0 = 'bgSky';
         commonPreload();
 
-	this.load.audio('female', ['assets/stage/background/female.mp3']);	
+		
 		
         //Placeholder
         //this.load.image('bonfireSprite','assets/bonfire.png');
@@ -28,10 +24,6 @@ class argoLanding extends Phaser.Scene{
 	{
 
         loadMap();
-        
-	this.sound.pauseOnBlur = false;
-		this.sound.play('female',
-		{loop: true});
         
     }
 
