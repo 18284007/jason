@@ -70,6 +70,7 @@ class controller extends Phaser.Scene
     create()
     {
     	firstInitHealthBar();
+	pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 	initDialogueBox();
         parseCharacterMetaJSON();
 
