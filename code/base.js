@@ -3,6 +3,7 @@ var cursors;
 var attackKey;
 var jumpKey;
 var talkKey;
+var pauseKey;
 /*variables relating to the players character*/
 var player;
 /*variables relating to map generation*/
@@ -82,6 +83,7 @@ class controller extends Phaser.Scene
     create()
     {
     	firstInitHealthBar();
+	pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 	initDialogueBox();
         parseCharacterMetaJSON();
 
@@ -99,7 +101,10 @@ class controller extends Phaser.Scene
 
     update()
     {
-    	
+	if (pauseKey.isDown) {
+				
+	game.scene.run('pause');
+	}
     }
 }
 
@@ -310,7 +315,7 @@ var config = {
     },
     scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
-            placeholdertestmap, endCutscene, endScreen, siren]
+            placeholdertestmap, endCutscene, endScreen, siren, pause]
 };
 
 var game = new Phaser.Game(config);
