@@ -216,17 +216,6 @@ function loadMap()
     jumpKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
     talkKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
-    //Camera
-    if (!playerShip) {
-    	createThis.cameras.main.startFollow(player, false, 0.05, 0.03);
-    } else {
-        playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + playerShipOffsetX, playerSpawnPoint.y, playerSprite);
-        createThis.cameras.main.startFollow(playerOffset, true, 1, 1);
-        playerOffset.alpha = 0; 
-        playerOffset.allowGravity = 0; 
-    }
-    createThis.cameras.main.setBounds(0, 0, createThis.map.widthInPixels, createThis.map.heightInPixels);
-
     if (playerShip) {
         player.body.allowGravity = false;
     }
@@ -235,6 +224,19 @@ function loadMap()
     parseHealthBar();
 
     spawnObjects();
+
+    playerCheckForPortal(); 
+
+    //Camera
+    if (!playerShip) {
+        createThis.cameras.main.startFollow(player, false, 0.05, 0.03);
+    } else {
+        playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + playerShipOffsetX, playerSpawnPoint.y, playerSprite);
+        createThis.cameras.main.startFollow(playerOffset, true, 1, 1);
+        playerOffset.alpha = 0; 
+        playerOffset.allowGravity = 0; 
+    }
+    createThis.cameras.main.setBounds(0, 0, createThis.map.widthInPixels, createThis.map.heightInPixels);
 
     playerAlive = true;
 }
@@ -277,7 +279,7 @@ function shipUpdate()
 }
 
 function changeLevel(tempNewLevelID) {
-	var oldLevelID = currentLevelID;
+	oldLevelID = currentLevelID;
 	playerShip = false;
     clearDialogueBox();
     npcDialogue.text = '';

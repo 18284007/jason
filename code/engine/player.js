@@ -199,6 +199,17 @@ function playerCheckForFall() {
     }
 }
 
+function playerCheckForPortal() {
+    if (typeof oldLevelID !== 'undefined'){
+        for (i = 0; i < portalCount; i++) {
+            if (portals[i].portalMap == oldLevelID) {
+                player.x = portals[i].x;
+                player.y = portals[i].y;
+            }
+        }
+    }
+}
+
 function playerCheckDialogueWalkAway(){
     if ((player.x > dialoguex + dialogueWalkAway) || (player.x < dialoguex - dialogueWalkAway)) {
         dialogueAlreadyEngaged = false; 
