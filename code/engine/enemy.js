@@ -222,6 +222,7 @@ class bullBoss extends enemyBase {
 			boss: true
         });
 		this.interval = setInterval(this.shoot, 1500, this);
+		this.shoot(this);
 	}
 	
 	movement() {
@@ -238,11 +239,14 @@ class bullBoss extends enemyBase {
 	
 
 	shoot(tempBull) {
-		projectiles[currentProjectile] = new dragonFire({
-	        x: tempBull.x, 
-	        y: tempBull.y,
-	        projectileId: currentProjectile
-	    });
+		if (tempBull.alive){
+			projectiles[currentProjectile] = new dragonFire({
+	        	x: tempBull.x, 
+	        	y: tempBull.y,
+	        	projectileId: currentProjectile
+	    	});
+	    	setTimeout(tempBull.shoot, 1500, tempBull);
+		}
 	}
 	
 }
