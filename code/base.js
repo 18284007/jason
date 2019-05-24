@@ -3,6 +3,7 @@ var cursors;
 var attackKey;
 var jumpKey;
 var talkKey;
+var pauseKey;
 /*variables relating to the players character*/
 var player;
 /*variables relating to map generation*/
