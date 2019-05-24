@@ -51,7 +51,7 @@ class dragonFire extends projectile {
             scene: createThis,
             x: parameter.x,
             y: parameter.y, 
-            key: 'bonfireSprite', //temp
+            key: 'fireballSprite', //temp
             velocityX: -150,
             projectileId: parameter.projectileId,
             damage: 25
