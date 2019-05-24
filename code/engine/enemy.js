@@ -29,7 +29,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.scaleY = parameter.scale; 
         this.enemyId = parameter.enemyId;
         this.health = parameter.health;
-		this.invulnerabilityWait = 1000; 
+		this.invulnerabilityWait = 1500; 
 		this.invulnerability = false; 
 		this.alive = true;
 		this.playerDamageCollision = 20;
@@ -357,7 +357,7 @@ class dragonBoss extends enemyBase {
 			scale: 3, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 300, 
+			health: 1000, 
 			boss: true
         });
 
@@ -368,9 +368,9 @@ class dragonBoss extends enemyBase {
 	}	
 
 	checkPhase() {
-		if (this.health <= 100){
+		if (this.health <= 300){
 			return 2;
-		} else if (this.health <= 250){
+		} else if (this.health <= 700){
 			return 1; 
 		} else {
 			return 0; 
