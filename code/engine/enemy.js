@@ -29,9 +29,11 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         this.scaleY = parameter.scale; 
         this.enemyId = parameter.enemyId;
         this.health = parameter.health;
-		this.invulnerabilityWait = 1000; 
+		this.invulnerabilityWait = 1500; 
 		this.invulnerability = false; 
 		this.alive = true;
+		this.playerDamageCollision = 20;
+		this.playerDamageSword = 40; 
 
 		if (typeof parameter.spiderBoss !== 'undefined'){ 
 			this.spiderBoss = parameter.spiderBoss; 
@@ -82,9 +84,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			enemies[tempEnemy.enemyId].alpha = 0.3; 
 			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
 		} else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
-			playerDamage(10);
+			playerDamage(tempEnemy.playerDamageCollision);
 		} else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
-			playerDamage(10);
+			playerDamage(tempEnemy.playerDamageSword);
 		}
 
 		//If the attacks are inactive and the spider is attacked, it will become active.
@@ -355,7 +357,7 @@ class dragonBoss extends enemyBase {
 			scale: 3, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
-			health: 300, 
+			health: 1000, 
 			boss: true
         });
 
@@ -366,9 +368,9 @@ class dragonBoss extends enemyBase {
 	}	
 
 	checkPhase() {
-		if (this.health <= 100){
+		if (this.health <= 300){
 			return 2;
-		} else if (this.health <= 250){
+		} else if (this.health <= 700){
 			return 1; 
 		} else {
 			return 0; 
@@ -401,17 +403,11 @@ class dragonBoss extends enemyBase {
 	}
 
 	shoot() {
-		if (this.checkPhase() > 0){
-			var tempAimed = true; 
-		} else {
-			var tempAimed = false; 
-		}
-			
 		projectiles[currentProjectile] = new dragonFire({
 	        x: this.x, 
 	        y: this.y,
 	        projectileId: currentProjectile,
-	        aimed: tempAimed
+	        aimed: (this.checkPhase() > 0)
     	});
 
     	if (this.checkPhase() == 2) {

@@ -12,13 +12,13 @@ var playerSwungSword = false;
 var playerDamagePoints = 50;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
-var playerStunWait = 300; 
-var playerStun = false;
 
 // variables relating to siren level
 var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
 var playerShip = false; //Is the player a ship or a person?
 var playerShipVelocity = 300;
+
+var playerVelocityYMax = 1350; //Maximum Y velocity - prevents clipping through floor when falling. 
 
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
@@ -37,10 +37,14 @@ function parseCharacterMetaJSON() {
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
-    if (attackKey.isDown && !playerSwingSword && !playerSwungSword && !playerStun) {
+    if (attackKey.isDown && !playerSwingSword && !playerSwungSword) {
         playerSword();
     } else if (!attackKey.isDown && !playerSwingSword && playerSwungSword) {
         playerSwungSword = false; 
+    }
+
+    if (player.body.velocity.y > playerVelocityYMax) {
+        player.body.velocity.y = playerVelocityYMax; 
     }
     
     if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
@@ -122,7 +126,7 @@ function playerShipMovement() {
     }
 
     //Check if the player has won the level by flying offscreen.  
-    if (player.x > boundaryEdge.x + 100) {
+    if (player.x > gameWidth + 100) {
         playerShip = false; 
         playerSprite = 'jason';
         changeLevel('argoLanding'); 
@@ -145,18 +149,11 @@ function playerInvulnerabilityStop() {
     player.alpha = 1; 
 }
 
-function playerStunStop() {
-    playerStun = false; 
-    player.alpha = 0.6;
-}
-
 function playerDamage(tempHealth) {
     if (!playerInvulnerability){
         playerInvulnerability = true; 
-        playerStun = true; 
         player.alpha = 0.3; 
         setTimeout(playerInvulnerabilityStop, playerInvulnerabilityWait);
-        setTimeout(playerStunStop, playerStunWait);
         currentHealth -= tempHealth;
         parseHealthBarAnimate();
         if (currentHealth <= 0) {
@@ -197,8 +194,19 @@ function gameOver() {
 }
 
 function playerCheckForFall() {
-    if (player.y > bganchor.y || player.y < 0) {
+    if (player.y > gameHeight + 100 ) {
         gameOver();
+    }
+}
+
+function playerCheckForPortal() {
+    if (typeof oldLevelID !== 'undefined'){
+        for (i = 0; i < portalCount; i++) {
+            if (portals[i].portalMap == oldLevelID) {
+                player.x = portals[i].x;
+                player.y = portals[i].y;
+            }
+        }
     }
 }
 

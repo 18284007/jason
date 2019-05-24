@@ -119,6 +119,48 @@
                  "width":0,
                  "x":1346,
                  "y":1753
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"healthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1274,
+                 "y":1760
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"healthItem",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":159,
+                 "y":1327
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"gardenEntrance"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":61,
+                 "y":1762
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -127,7 +169,7 @@
          "y":0
         }],
  "nextlayerid":20,
- "nextobjectid":16,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2019.04.03",

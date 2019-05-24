@@ -124,19 +124,20 @@ function commonPreload()
 
 function loadMap()
 {
+    createThis.physics.world.tileBias = 64; 
+
 	var currentTilemapKey = currentLevelID + 'Tilemap';
 
     createThis.map = createThis.make.tilemap({ key: currentTilemapKey });
+    
     //set Boundary
-    boundaryEdge = createThis.map.findObject("Objects", obj => obj.name === "farBoundary");
-    var gameWidth = boundaryEdge.x;
-    var gameHeight = boundaryEdge.y;
-    if (!playerShip) {
-        createThis.physics.world.setBounds(0,0,gameWidth, gameHeight,64,true,true,false,false);
-    }
+    //boundaryEdge = createThis.map.findObject("Objects", obj => obj.name === "farBoundary");
+    gameWidth = createThis.map.widthInPixels;
+    gameHeight = createThis.map.heightInPixels;
+    createThis.physics.world.setBounds(0, 0, gameWidth + (200 * playerShip), gameHeight, 64, true, true, false, false);
 
     //Render background. 
-    bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
+    //bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
     background = createThis.add.image(1024, 576, backgroundLayer0);
     background.setOrigin(1,1);
     background.scrollFactorX = 0;
@@ -153,12 +154,8 @@ function loadMap()
     //Spawn player.
     var playerSpawnPoint = createThis.map.findObject("Objects", obj => obj.name === "Player Spawn");
     player = createThis.physics.add.sprite(playerSpawnPoint.x, playerSpawnPoint.y, playerSprite);
-
-    if(!playerShip)
-    {
-    	player.setCollideWorldBounds(true);
-    }
-
+    player.setCollideWorldBounds(true);
+    
     mapLayer.setCollisionByProperty({ collides: true });
     createThis.physics.add.collider(player, mapLayer);
 
@@ -219,17 +216,6 @@ function loadMap()
     jumpKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
     talkKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
-    //Camera
-    if (!playerShip) {
-    	createThis.cameras.main.startFollow(player, false, 0.05, 0.03);
-    } else {
-        playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + playerShipOffsetX, playerSpawnPoint.y, playerSprite);
-        createThis.cameras.main.startFollow(playerOffset, true, 0.5, 0.5);
-        playerOffset.alpha = 0; 
-        playerOffset.allowGravity = 0; 
-    }
-    createThis.cameras.main.setBounds(0, 0, createThis.map.widthInPixels, createThis.map.heightInPixels);
-
     if (playerShip) {
         player.body.allowGravity = false;
     }
@@ -238,6 +224,19 @@ function loadMap()
     parseHealthBar();
 
     spawnObjects();
+
+    playerCheckForPortal(); 
+
+    //Camera
+    if (!playerShip) {
+        createThis.cameras.main.startFollow(player, false, 0.05, 0.03);
+    } else {
+        playerOffset = createThis.physics.add.sprite(playerSpawnPoint.x + playerShipOffsetX, playerSpawnPoint.y, playerSprite);
+        createThis.cameras.main.startFollow(playerOffset, true, 1, 1);
+        playerOffset.alpha = 0; 
+        playerOffset.allowGravity = 0; 
+    }
+    createThis.cameras.main.setBounds(0, 0, createThis.map.widthInPixels, createThis.map.heightInPixels);
 
     playerAlive = true;
 }
@@ -280,7 +279,7 @@ function shipUpdate()
 }
 
 function changeLevel(tempNewLevelID) {
-	var oldLevelID = currentLevelID;
+	oldLevelID = currentLevelID;
 	playerShip = false;
     clearDialogueBox();
     npcDialogue.text = '';
