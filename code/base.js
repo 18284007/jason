@@ -12,6 +12,8 @@ var createThis;
 var userIntThis;
 var currentLevelDialogueJSON;
 var levelProgress = 1;
+var music;
+var musicPlaying = false;
 //var currentLevelID;
 /*variables relating to moving between levels*/
 var portalMap;
@@ -39,6 +41,9 @@ class controller extends Phaser.Scene
 
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
+	//music
+        this.load.audio('female', ['assets/stage/background/female.mp3']);
+        this.load.audio('water', ['assets/stage/background/water.mp3']); 
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
@@ -105,6 +110,24 @@ class controller extends Phaser.Scene
 				
 	game.scene.run('pause');
 	}
+	/*Music*/
+        if(!musicPlaying)
+        {
+             if (currentLevelID == 'endScreen' || currentLevelID == 'titleScreen')
+            {
+                music = this.sound.add('water', {loop: true});
+                music.play();
+            }else if (currentLevelID == 'siren' || currentLevelID == 'endCutscene')
+            {
+                //empty for now
+            }else
+            {
+                music = this.sound.add('female', {loop: true});
+                music.play();
+            }
+            musicPlaying = true;
+        }
+	
     }
 }
 
@@ -281,6 +304,11 @@ function shipUpdate()
 function changeLevel(tempNewLevelID) {
 	oldLevelID = currentLevelID;
 	playerShip = false;
+    if (tempNewLevelID == 'argoLanding' && currentLevelID == 'titleScreen')
+    {
+        musicPlaying = false;
+        music.stop();
+    }
     clearDialogueBox();
     npcDialogue.text = '';
 	if (tempNewLevelID == 'titleScreen' || tempNewLevelID == 'endScreen')
