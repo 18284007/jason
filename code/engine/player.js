@@ -46,8 +46,6 @@ function playerMovement() {
     if (player.body.velocity.y > playerVelocityYMax) {
         player.body.velocity.y = playerVelocityYMax; 
     }
-
-    console.log(player.body.velocity.y);
     
     if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
         if (playerFacingRight) {
