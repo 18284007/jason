@@ -82,7 +82,7 @@ class medeaNPC extends npcBase {
 
 	walk (tempNPC)
 	{
-		tempNPC.body.setVelocity(-150);
+		tempNPC.body.setVelocityX(-150);
 		tempNPC.isWalking = true;
 	}
 
