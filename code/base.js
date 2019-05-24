@@ -3,6 +3,7 @@ var cursors;
 var attackKey;
 var jumpKey;
 var talkKey;
+var pauseKey;
 /*variables relating to the players character*/
 var player;
 /*variables relating to map generation*/
@@ -64,12 +65,25 @@ class controller extends Phaser.Scene
         this.load.image('maxHealthItemSprite', 'assets/items/maxHealth.png');
         this.load.image('healthItemSprite', 'assets/items/health.png');
         this.load.image('damageIncreaseItemSprite', 'assets/items/damageIncrease.png');
+	    
+	//SIGNS
+	this.load.image('signR2CSprite','assets/items/signR2C.png');
+	this.load.image('signMarketSprite','assets/items/signMarket.png');
+	this.load.image('signShrineSprite','assets/items/signShrine.png');
+	this.load.image('signShrineForestSprite','assets/items/signShrineForest.png');
+	this.load.image('signPalaceSprite','assets/items/signPalace.png');
+	this.load.image('signColchisFieldsSprite','assets/items/signColchisFields.png');
+	this.load.image('signRiverCrossingSprite','assets/items/signRiverCrossing.png');
+	this.load.image('signGardenEntranceSprite','assets/items/signGardenEntrance.png');
+	this.load.image('signDungeonSprite','assets/items/signDungeon.png');
+	this.load.image('signGardenForestSprite','assets/items/signGardenForest.png');
         loadCharacterMetaJSON();
     }
 
     create()
     {
     	firstInitHealthBar();
+	pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 	initDialogueBox();
         parseCharacterMetaJSON();
 
@@ -87,7 +101,10 @@ class controller extends Phaser.Scene
 
     update()
     {
-    	
+	if (pauseKey.isDown) {
+				
+	game.scene.run('pause');
+	}
     }
 }
 
@@ -298,7 +315,7 @@ var config = {
     },
     scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
-            placeholdertestmap, endCutscene, endScreen, siren]
+            placeholdertestmap, endCutscene, endScreen, siren, pause]
 };
 
 var game = new Phaser.Game(config);

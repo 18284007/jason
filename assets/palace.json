@@ -97,7 +97,7 @@
                  "id":12,
                  "name":"kingAetios",
                  "point":true,
-				 "properties":[
+                 "properties":[
                         {
                          "name":"dialogueKey",
                          "type":"string",
@@ -150,6 +150,30 @@
                  "width":0,
                  "x":76,
                  "y":1747
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"signMarket",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":160,
+                 "y":1748
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"signColchisFields",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2238,
+                 "y":1556
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -158,10 +182,10 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":15,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {

@@ -315,6 +315,122 @@ class portal extends Phaser.GameObjects.Sprite {
 	}
 }
 
+
+//SIGNS
+
+class signR2C extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signR2CSprite',
+			gravity: false
+		})
+	}
+}
+class signMarket extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signMarketSprite',
+			gravity: false
+		})
+	}
+}
+class signShrine extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signShrineSprite',
+			gravity: false
+		})
+	}
+}
+class signShrineForest extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signShrineForestSprite',
+			gravity: false
+		})
+	}
+}
+class signPalace extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signPalaceSprite',
+			gravity: false
+		})
+	}
+}
+class signColchisFields extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signColchisFieldsSprite',
+			gravity: false
+		})
+	}
+}
+class signRiverCrossing extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signRiverCrossingSprite',
+			gravity: false
+		})
+	}
+}
+class signGardenEntrance extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signGardenEntranceSprite',
+			gravity: false
+		})
+	}
+}
+class signDungeon extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signDungeonSprite',
+			gravity: false
+		})
+	}
+}
+class signGardenForest extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'signGardenForestSprite',
+			gravity: false
+		})
+	}
+}
+
+
+
 function portalUpdate() {
 	for (i = 0; i < portalCount; i++) {
 		portals[i].update();

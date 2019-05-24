@@ -198,6 +198,42 @@
                  "width":0,
                  "x":3348,
                  "y":1708
+                }, 
+                {
+                 "height":0,
+                 "id":21,
+                 "name":"signRiverCrossing",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":203,
+                 "y":1757
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"signGardenForest",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1880,
+                 "y":1112
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"signDungeon",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1208,
+                 "y":1114
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -206,10 +242,10 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":21,
+ "nextobjectid":24,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {

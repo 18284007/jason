@@ -47,8 +47,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":100,
-                 "y":1397
+                 "x":52,
+                 "y":1415
                 }, 
                 {
                  "height":0,
@@ -89,8 +89,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":111,
-                 "y":1422
+                 "x":65,
+                 "y":1426
                 }, 
                 {
                  "height":0,
@@ -112,7 +112,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1593,
+                 "x":1621,
                  "y":1428
                 }, 
                 {
@@ -150,6 +150,30 @@
                  "width":0,
                  "x":940,
                  "y":1750
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"signPalace",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":152,
+                 "y":1426
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"signRiverCrossing",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1548,
+                 "y":1426
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -158,10 +182,10 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":15,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {
