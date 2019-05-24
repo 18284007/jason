@@ -291,7 +291,6 @@ class bullBoss extends enemyBase {
 			health: 250, 
 			boss: true
         });
-		this.interval = setInterval(this.shoot, 1500, this);
 		this.shoot(this);
 	}
 	
