@@ -48,6 +48,7 @@ class controller extends Phaser.Scene
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
         this.load.image('bonfireSprite','assets/bonfire.png');
+	this.load.image('fireballSprite','assets/fireball.png');
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
         this.load.image('fox','assets/enemy/fox.png');	
