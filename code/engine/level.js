@@ -301,6 +301,11 @@ function spawnObjects() {
                 signGardenForest = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signGardenForestSprite');
                 createThis.physics.add.collider(signGardenForest, mapLayer);
                 break; 
+			
+				case 'plow':
+                plow = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'plowSprite');
+                createThis.physics.add.collider(plow, mapLayer);
+                break; 
         }
     }
 }
