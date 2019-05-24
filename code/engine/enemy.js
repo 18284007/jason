@@ -32,6 +32,8 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		this.invulnerabilityWait = 1000; 
 		this.invulnerability = false; 
 		this.alive = true;
+		this.playerDamageCollision = 20;
+		this.playerDamageSword = 40; 
 
 		if (typeof parameter.spiderBoss !== 'undefined'){ 
 			this.spiderBoss = parameter.spiderBoss; 
@@ -82,9 +84,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			enemies[tempEnemy.enemyId].alpha = 0.3; 
 			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
 		} else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
-			playerDamage(10);
+			playerDamage(tempEnemy.playerDamageCollision);
 		} else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
-			playerDamage(10);
+			playerDamage(tempEnemy.playerDamageSword);
 		}
 
 		//If the attacks are inactive and the spider is attacked, it will become active.
