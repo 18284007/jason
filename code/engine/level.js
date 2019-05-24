@@ -227,6 +227,7 @@ function spawnObjects() {
                     portalMap: tempProperties['portalMap'],
                     spawnAfterSpiderFlower: tempProperties['spawnAfterSpiderFlower'],
                     spawnAfterBossBattle: tempProperties['spawnAfterBossBattle'],
+                    spawnAfterTalkAetios: tempProperties['spawnAfterTalkAetios'],
                     spawnAfterRitual: tempProperties['spawnAfterRitual']
                 });
                 portalCount++;

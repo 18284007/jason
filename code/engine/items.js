@@ -248,6 +248,14 @@ class portal extends Phaser.GameObjects.Sprite {
         } else {
         	this.spawnAfterSpiderFlower = false; 
         }
+		
+	if (typeof parameter.spawnAfterTalkAetios !== 'undefined') {
+        	this.spawnAfterTalkAetios = true;
+			this.spawnAfterTalkAetiosWaiting = true; 
+        } else {
+        	this.spawnAfterTalkAetios = false; 
+			this.spawnAfterTalkAetiosWaiting = false; 
+        }
 
         if (typeof parameter.spawnAfterRitual !== 'undefined') {
         	this.spawnAfterRitual = parameter.spawnAfterRitual;
@@ -256,7 +264,7 @@ class portal extends Phaser.GameObjects.Sprite {
         	this.spawnAfterRitual = false; 
         }
 
-        this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower);
+        this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower || this.spawnAfterTalkAetios);
 
         //Collision detection between the player and item. 
         createThis.physics.add.overlap(this, player, this.collision);
@@ -264,6 +272,13 @@ class portal extends Phaser.GameObjects.Sprite {
 
 	collision (tempPortal){
 		portalMap = tempPortal.portalMap;
+	}
+	
+	dialogueUpdate() {
+		if (typeof dialogue !== 'undefined' && 
+			typeof dialogue[currentDialogue]._SPAWNAFTERTALKAETIOS !== 'undefined') {
+			this.spawnAfterTalkAetiosWaiting = false;
+		}
 	}
 
 	update (){
@@ -276,6 +291,10 @@ class portal extends Phaser.GameObjects.Sprite {
 		if (tempPortalActive && this.spawnAfterBossBattle) {
 			tempPortalActive = (activeBosses <= 0); 
 		} 
+		
+		if (tempPortalActive && this.spawnAfterTalkAetios && this.spawnAfterTalkAetiosWaiting) {
+			tempPortalActive = false;
+		}
 
 		if (tempPortalActive && this.spawnAfterRitual) {
 			tempPortalActive = (this.remainingPortals <= 0);
@@ -287,6 +306,11 @@ class portal extends Phaser.GameObjects.Sprite {
 		} else {
 			this.activePortal = false; 
 			this.alpha = 0; 
+		}
+
+		if (this.spawnAfterSpiderFlower && this.spawnAfterBossBattle && levelProgress == 1)
+		{
+			levelProgress++;
 		}
 	}
 }
