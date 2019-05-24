@@ -289,6 +289,42 @@
                  "width":0,
                  "x":2402.66666666666,
                  "y":1653.21212121212
+                }, 
+                {
+                 "height":0,
+                 "id":25,
+                 "name":"signColchisFields",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":70
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":203,
+                 "y":1745
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"signGardenEntrance",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":70
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3377,
+                 "y":1745
                 }],
          "opacity":1,
          "properties":[
@@ -303,10 +339,10 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":25,
+ "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {
