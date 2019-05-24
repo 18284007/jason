@@ -401,17 +401,11 @@ class dragonBoss extends enemyBase {
 	}
 
 	shoot() {
-		if (this.checkPhase() > 0){
-			var tempAimed = true; 
-		} else {
-			var tempAimed = false; 
-		}
-			
 		projectiles[currentProjectile] = new dragonFire({
 	        x: this.x, 
 	        y: this.y,
 	        projectileId: currentProjectile,
-	        aimed: tempAimed
+	        aimed: (this.checkPhase() > 0)
     	});
 
     	if (this.checkPhase() == 2) {
