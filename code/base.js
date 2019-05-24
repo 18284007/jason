@@ -92,7 +92,7 @@ class controller extends Phaser.Scene
 	if (pauseKey.isDown) {
 				
 	game.scene.run('pause');
-    	
+	}
     }
 }
 
