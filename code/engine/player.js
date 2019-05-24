@@ -18,6 +18,8 @@ var playerShipOffsetX = 300; //Camera offset for playerShip mode.
 var playerShip = false; //Is the player a ship or a person?
 var playerShipVelocity = 300;
 
+var playerVelocityYMax = 1350; //Maximum Y velocity - prevents clipping through floor when falling. 
+
 /* This function would be used for importing player data from a JSON file. 
  * It is currently not working, so please do not use it. 
  */
@@ -40,6 +42,12 @@ function playerMovement() {
     } else if (!attackKey.isDown && !playerSwingSword && playerSwungSword) {
         playerSwungSword = false; 
     }
+
+    if (player.body.velocity.y > playerVelocityYMax) {
+        player.body.velocity.y = playerVelocityYMax; 
+    }
+
+    console.log(player.body.velocity.y);
     
     if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
         if (playerFacingRight) {
