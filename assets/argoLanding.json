@@ -139,6 +139,18 @@
                  "width":0,
                  "x":141,
                  "y":1754
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"signR2C",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":209.121212121212,
+                 "y":1753.51515151515
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -147,7 +159,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":12,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
