@@ -51,9 +51,6 @@ class controller extends Phaser.Scene
 	this.load.image('fireballSprite','assets/fireball.png');
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
-        this.load.image('fox','assets/enemy/fox.png');	
-        this.load.image('bats','assets/enemy/bats.png');	
-        this.load.image('snake','assets/enemy/snake.png');
         //medusaBoss
         this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
         //bullBoss
