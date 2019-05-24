@@ -95,9 +95,8 @@ class medeaNPC extends npcBase {
 
 	dialogueUpdate () {
 		if (typeof dialogue !== 'undefined' &&
-			typeof dialogue[currentDialogue]._MEDEAPREPAREOINTMENT !== 'undefined')
-		{
-			if(!medeaActive)
+			typeof dialogue[currentDialogue]._MEDEAPREPAREOINTMENT !== 'undefined' && 
+			!medeaActive) {
 				medeaActive = true;
 				this.anims.play('medeaIdleLeft', true);
 				this.walk(this);
@@ -105,7 +104,7 @@ class medeaNPC extends npcBase {
 				setTimeout(this.walkBack,2000,this);
 				setTimeout(this.stopWalk, 3000, this);
 				setTimeout(this.makeInactive,3100,this);
-		}
+			}
 	}
 
 	update () 
