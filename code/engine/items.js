@@ -429,6 +429,18 @@ class signGardenForest extends Phaser.GameObjects.Sprite {
 	}
 }
 
+class plow extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super({
+			scene: createThis,
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'plowSprite',
+			gravity: false
+		})
+	}
+}
+
 
 
 function portalUpdate() {
