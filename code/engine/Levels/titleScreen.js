@@ -14,7 +14,7 @@ class titleScreen extends Phaser.Scene{
 		this.load.image('titlebg', 'assets/stage/background/titlebg.png');
 		this.load.image('playbut', 'assets/stage/background/playbut.png');
 		
-		this.load.audio('water', ['assets/stage/background/water.mp3']);
+		
 		
 	}
 
@@ -31,9 +31,6 @@ class titleScreen extends Phaser.Scene{
 			changeLevel('argoLanding');
 		});
 			
-		this.sound.pauseOnBlur = false;
-		this.sound.play('water',
-		{loop: true});	
 		
 
 		
