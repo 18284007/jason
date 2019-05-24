@@ -128,7 +128,7 @@ function playerShipMovement() {
     }
 
     //Check if the player has won the level by flying offscreen.  
-    if (player.x > boundaryEdge.x + 100) {
+    if (player.x > gameWidth + 100) {
         playerShip = false; 
         playerSprite = 'jason';
         changeLevel('argoLanding'); 
@@ -196,7 +196,7 @@ function gameOver() {
 }
 
 function playerCheckForFall() {
-    if (player.y > bganchor.y || player.y < 0) {
+    if (player.y > gameHeight + 100 ) {
         gameOver();
     }
 }

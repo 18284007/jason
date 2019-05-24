@@ -129,16 +129,15 @@ function loadMap()
 	var currentTilemapKey = currentLevelID + 'Tilemap';
 
     createThis.map = createThis.make.tilemap({ key: currentTilemapKey });
+    
     //set Boundary
-    boundaryEdge = createThis.map.findObject("Objects", obj => obj.name === "farBoundary");
-    var gameWidth = boundaryEdge.x;
-    var gameHeight = boundaryEdge.y;
-    if (!playerShip) {
-        createThis.physics.world.setBounds(0,0,gameWidth, gameHeight,64,true,true,false,false);
-    }
+    //boundaryEdge = createThis.map.findObject("Objects", obj => obj.name === "farBoundary");
+    gameWidth = createThis.map.widthInPixels;
+    gameHeight = createThis.map.heightInPixels;
+    createThis.physics.world.setBounds(0, 0, gameWidth + (200 * playerShip), gameHeight, 64, true, true, false, false);
 
     //Render background. 
-    bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
+    //bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
     background = createThis.add.image(1024, 576, backgroundLayer0);
     background.setOrigin(1,1);
     background.scrollFactorX = 0;
@@ -155,12 +154,8 @@ function loadMap()
     //Spawn player.
     var playerSpawnPoint = createThis.map.findObject("Objects", obj => obj.name === "Player Spawn");
     player = createThis.physics.add.sprite(playerSpawnPoint.x, playerSpawnPoint.y, playerSprite);
-
-    if(!playerShip)
-    {
-    	player.setCollideWorldBounds(true);
-    }
-
+    player.setCollideWorldBounds(true);
+    
     mapLayer.setCollisionByProperty({ collides: true });
     createThis.physics.add.collider(player, mapLayer);
 
