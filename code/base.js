@@ -149,7 +149,7 @@ function commonPreload()
 
 function loadMap()
 {
-    createThis.physics.world.tileBias = 64; 
+    createThis.physics.world.TILE_BIAS = 64; 
 
 	var currentTilemapKey = currentLevelID + 'Tilemap';
 
