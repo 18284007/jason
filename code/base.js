@@ -186,33 +186,15 @@ function loadMap()
 
     //Player sprite stuff. 
     createThis.anims.create({
-        key: 'jasonLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 41 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'jasonRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 0, end: 11 }),
         frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({
-        key: 'jasonAttackLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 42, end: 59 }),
-        frameRate: 30,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'jasonAttackRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 12, end: 29 }),
         frameRate: 30,
-        repeat: -1
-    });
-    createThis.anims.create({
-        key: 'jasonIdleLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 30 }),
-        frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({

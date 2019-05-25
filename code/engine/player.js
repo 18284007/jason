@@ -47,33 +47,32 @@ function playerMovement() {
         player.body.velocity.y = playerVelocityYMax; 
     }
     
+    player.flipX = !(playerFacingRight); 
+
     if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
+        player.anims.play('jasonIdleRight', true);
         if (playerFacingRight) {
-            player.anims.play('jasonIdleRight', true);
             player.setSize(20, 64);
             player.setOffset(0, 0);
         } else {
-            player.anims.play('jasonIdleLeft', true);
             player.setSize(20, 64);
             player.setOffset(29, 0);
         }
     } else if (playerSwingSword) {
+        player.anims.play('jasonAttackRight', true);
         if (playerFacingRight) {
-            player.anims.play('jasonAttackRight', true);
             player.setSize(60, 64);
             player.setOffset(0, 0);
         } else {
-            player.anims.play('jasonAttackLeft', true);
             player.setSize(60, 64);
             player.setOffset(-12, 0);
         }
     } else {
-    	if (playerFacingRight) {
-            player.anims.play('jasonRight', true);
+        player.anims.play('jasonRight', true);
+        if (playerFacingRight) {
             player.setSize(20, 64);
             player.setOffset(0, 0);
         } else {
-            player.anims.play('jasonLeft', true);
             player.setSize(20, 64);
             player.setOffset(29, 0);
         }
@@ -84,10 +83,12 @@ function playerMovement() {
     if (cursors.left.isDown) {
         tempVelocityX -= playerWalkVelocity;
         playerFacingRight = false; 
+        player.originX = 0.65;
     }
     if (cursors.right.isDown) {
         tempVelocityX += playerWalkVelocity;
         playerFacingRight = true;
+        player.originX = 0.35;  
     }
     player.setVelocityX(tempVelocityX);
     
