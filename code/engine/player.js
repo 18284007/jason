@@ -50,20 +50,32 @@ function playerMovement() {
     if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
         if (playerFacingRight) {
             player.anims.play('jasonIdleRight', true);
+            player.setSize(20, 64);
+            player.setOffset(0, 0);
         } else {
             player.anims.play('jasonIdleLeft', true);
+            player.setSize(20, 64);
+            player.setOffset(29, 0);
         }
     } else if (playerSwingSword) {
         if (playerFacingRight) {
             player.anims.play('jasonAttackRight', true);
+            player.setSize(60, 64);
+            player.setOffset(0, 0);
         } else {
             player.anims.play('jasonAttackLeft', true);
+            player.setSize(60, 64);
+            player.setOffset(-12, 0);
         }
     } else {
     	if (playerFacingRight) {
             player.anims.play('jasonRight', true);
+            player.setSize(20, 64);
+            player.setOffset(0, 0);
         } else {
             player.anims.play('jasonLeft', true);
+            player.setSize(20, 64);
+            player.setOffset(29, 0);
         }
     }
     
