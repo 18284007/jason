@@ -28,7 +28,7 @@ class endCutscene extends Phaser.Scene{
 		this.processDialogue();
         gameWidth = createThis.map.widthInPixels;
         gameHeight = createThis.map.heightInPixels;
-        createThis.physics.world.setBounds(0, 0, gameWidth, gameHeight, 64, true, true, false, false);
+        createThis.physics.world.setBounds(0, 0, gameWidth + 300, gameHeight, 64, true, true, false, false);
     }
 
     update()
