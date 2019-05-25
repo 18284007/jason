@@ -225,15 +225,17 @@ class bullBoss extends enemyBase {
 	}
 	
 	movement() {
-		//An offset is derived from the enemyId so that the bulls have slightly different movement and do not stack on top of each other. 
-		if (((player.x - 60 + (this.enemyId * 30)) < this.x) && ((player.x + 60 + (this.enemyId * 50)) > this.x)) {
-			//var tempVelocityX = -50 +(Math.random() * 100);
-			this.body.setVelocityX(0);
-		} else if (player.x < this.x) {
-			this.body.setVelocityX(-this.xVel - (this.enemyId * 30));
-		} else if (player.x > this.x) {
-			this.body.setVelocityX(this.xVel + (this.enemyId * 30));
-		} 
+		if (!plow.stuck) {
+			//An offset is derived from the enemyId so that the bulls have slightly different movement and do not stack on top of each other. 
+			if (((player.x - 60 + (this.enemyId * 30)) < this.x) && ((player.x + 60 + (this.enemyId * 50)) > this.x)) {
+				//var tempVelocityX = -50 +(Math.random() * 100);
+				this.body.setVelocityX(0);
+			} else if (player.x < this.x) {
+				this.body.setVelocityX(-this.xVel - (this.enemyId * 30));
+			} else if (player.x > this.x) {
+				this.body.setVelocityX(this.xVel + (this.enemyId * 30));
+			} 
+		}
 	}			
 	
 
