@@ -13,6 +13,7 @@ class projectile extends Phaser.GameObjects.Sprite {
         this.body.allowGravity = false; 
         this.projectileId = parameter.projectileId;
         this.damage = parameter.damage; 
+        this.velocityAimed = parameter.velocityAimed;
 
         //Collision
         createThis.physics.add.overlap(this, player, this.playerDamage);
@@ -53,12 +54,13 @@ class dragonFire extends projectile {
             y: parameter.y, 
             key: 'fireballSprite', //temp
             velocityX: -150,
+            velocityAimed: parameter.velocityAimed,
             projectileId: parameter.projectileId,
             damage: 25
         })
 
         if (parameter.aimed){
-            createThis.physics.accelerateToObject(this, player, 600);
+            createThis.physics.accelerateToObject(this, player, this.velocityAimed);
         }
     }
 }

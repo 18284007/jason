@@ -232,23 +232,27 @@ class bullBoss extends enemyBase {
 	}
 	
 	movement() {
+		var tempVelocity = (this.body.velocity.x);
+
 		if (!plow.stuck) {
 			//An offset is derived from the enemyId so that the bulls have slightly different movement and do not stack on top of each other. 
 			if (((player.x - 60 + (this.enemyId * 30)) < this.x) && ((player.x + 60 + (this.enemyId * 50)) > this.x)) {
-				//var tempVelocityX = -50 +(Math.random() * 100);
 				this.body.setVelocityX(0);
 			} else if (player.x < this.x) {
 				this.body.setVelocityX(-this.xVel - (this.enemyId * 30));
 			} else if (player.x > this.x) {
 				this.body.setVelocityX(this.xVel + (this.enemyId * 30));
 			} 
+		
+			this.flipX = (tempVelocity > 0);
 		} else {
 			this.body.setVelocityX(-this.xVel);
+			this.flipX = false; 
 			if (this.x < -200) {
 				this.alive = false; 
 				enemies[this.enemyId].destroy();
 			}
-		}
+		} 
 	}			
 	
 
@@ -257,9 +261,11 @@ class bullBoss extends enemyBase {
 			projectiles[currentProjectile] = new dragonFire({
 	        	x: tempBull.x, 
 	        	y: tempBull.y,
-	        	projectileId: currentProjectile
+	        	projectileId: currentProjectile, 
+	        	aimed: true, 
+	        	velocityAimed: 100
 	    	});
-	    	setTimeout(tempBull.shoot, 1500, tempBull);
+	    	setTimeout(tempBull.shoot, 2500, tempBull);
 		}
 	}
 	
@@ -425,7 +431,8 @@ class dragonBoss extends enemyBase {
 	        x: this.x, 
 	        y: this.y,
 	        projectileId: currentProjectile,
-	        aimed: (this.checkPhase() > 0)
+	        aimed: (this.checkPhase() > 0), 
+	        velocityAimed: 400
     	});
 
     	if (this.checkPhase() == 2) {
@@ -439,7 +446,8 @@ class dragonBoss extends enemyBase {
 	        x: tempDragon.x, 
 	        y: tempDragon.y,
 	        projectileId: currentProjectile,
-	        aimed: true
+	        aimed: (tempDragon.checkPhase() > 0), 
+	        velocityAimed: 400
     	});
 	}
 }
