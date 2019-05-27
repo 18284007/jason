@@ -227,6 +227,12 @@
                  "id":16,
                  "name":"signShrine",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signShrine"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -256,7 +262,7 @@
  "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {

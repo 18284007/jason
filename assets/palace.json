@@ -156,6 +156,12 @@
                  "id":15,
                  "name":"signMarket",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signMarket"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -168,6 +174,12 @@
                  "id":16,
                  "name":"signColchisFields",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signColchisFields"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,

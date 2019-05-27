@@ -133,6 +133,12 @@
                  "id":7,
                  "name":"signR2C",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signR2C"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -145,6 +151,12 @@
                  "id":8,
                  "name":"signShrineForest",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signShrineForest"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
