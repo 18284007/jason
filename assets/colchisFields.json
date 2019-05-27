@@ -104,7 +104,7 @@
                          "value":"riverCrossing"
                         }, 
                         {
-                         "name":"spawnAfterBossBattle",
+                         "name":"spawnAfterPlow",
                          "type":"bool",
                          "value":true
                         }],
@@ -185,7 +185,7 @@
                  "visible":true,
                  "width":0,
                  "x":1564,
-                 "y":1732
+                 "y":1745
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -197,7 +197,7 @@
  "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {
