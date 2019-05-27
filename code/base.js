@@ -103,7 +103,10 @@ class controller extends Phaser.Scene
 	{
 		userIntThis.scene.bringToTop('controller');
 	}
-		
+
+        this.ritualItemText = userIntThis.add.text(800, 50, '0/x Ritual Items', undefined);
+        this.ritualItemText.alpha = 0; 
+
     }
 
     update()
@@ -130,6 +133,21 @@ class controller extends Phaser.Scene
             musicPlaying = true;
         }
 	
+    }
+
+    updateRitualItemText() {
+        var tempCount = 0; 
+        for (i = 0; i < ritualItemCount; i++){
+            tempCount += (1 * inventory[i]);
+        } 
+        
+        //Update the text. 
+        if (tempCount != ritualItemCount){
+            userIntThis.ritualItemText.setText(tempCount + '/' + ritualItemCount + " Ritual Items.");
+            userIntThis.ritualItemText.alpha = 1; 
+        } else {
+            userIntThis.ritualItemText.alpha = 0; 
+        }
     }
 }
 

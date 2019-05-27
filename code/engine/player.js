@@ -194,6 +194,10 @@ function gameOver() {
         inventory[j] = (resetInventory[j]);
     }
     
+    if (userIntThis.ritualItemText.alpha > 0){
+        userIntThis.updateRitualItemText();
+    }
+
     createThis.scene.restart(currentLevelID);
 }
 
