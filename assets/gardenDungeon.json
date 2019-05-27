@@ -184,24 +184,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":18,
-                 "name":"portal",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"portalMap",
-                         "type":"string",
-                         "value":"gardenEntrance"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":4125,
-                 "y":1493
-                }, 
-                {
-                 "height":0,
                  "id":19,
                  "name":"ritualItem",
                  "point":true,
@@ -325,6 +307,42 @@
                  "width":0,
                  "x":4043,
                  "y":1497
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"gardenEntrance"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":4125,
+                 "y":1493
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"portal",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"portalMap",
+                         "type":"string",
+                         "value":"gardenEntrance"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":74,
+                 "y":416
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -333,10 +351,10 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":27,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {

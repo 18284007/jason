@@ -104,7 +104,7 @@
                          "value":"riverCrossing"
                         }, 
                         {
-                         "name":"spawnAfterBossBattle",
+                         "name":"spawnAfterPlow",
                          "type":"bool",
                          "value":true
                         }],

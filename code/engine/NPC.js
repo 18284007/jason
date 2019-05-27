@@ -56,20 +56,14 @@ class artemisNPC extends npcBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y, 
-			key: 'medeaSprite',
+			key: 'artemisSprite',
 			dialogueKey: parameter.dialogueKey,
 			npcId: parameter.npcId, 
 			gravity: true
 		})
 	}
 
-	update () 
-	{
-		if (player.x < this.x && this.active) {
-			this.anims.play('medeaIdleLeft', true);
-		} else if (player.x > this.x && this.active) {
-			this.anims.play('medeaIdleRight', true);
-		}
+	update () {
 	}
 }
 

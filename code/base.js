@@ -47,6 +47,7 @@ class controller extends Phaser.Scene
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
+	this.load.image('artemisSprite','assets/NPC/artemis.png');
         this.load.image('bonfireSprite','assets/bonfire.png');
 	this.load.image('fireballSprite','assets/fireball.png');
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
@@ -67,7 +68,7 @@ class controller extends Phaser.Scene
         this.load.image('bgForest', 'assets/background/forest.png');
         this.load.image('bgMarket', 'assets/background/market.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
-	this.load.image('plowSprite','assets/items/plow.png');
+        this.load.image('plowSprite','assets/items/plow.png');
         this.load.image('maxHealthItemSprite', 'assets/items/maxHealth.png');
         this.load.image('healthItemSprite', 'assets/items/health.png');
         this.load.image('damageIncreaseItemSprite', 'assets/items/damageIncrease.png');
@@ -148,7 +149,7 @@ function commonPreload()
 
 function loadMap()
 {
-    createThis.physics.world.tileBias = 64; 
+    createThis.physics.world.TILE_BIAS = 64; 
 
 	var currentTilemapKey = currentLevelID + 'Tilemap';
 
@@ -185,33 +186,15 @@ function loadMap()
 
     //Player sprite stuff. 
     createThis.anims.create({
-        key: 'jasonLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 41 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'jasonRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 0, end: 11 }),
         frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({
-        key: 'jasonAttackLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 42, end: 59 }),
-        frameRate: 30,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'jasonAttackRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 12, end: 29 }),
         frameRate: 30,
-        repeat: -1
-    });
-    createThis.anims.create({
-        key: 'jasonIdleLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 30 }),
-        frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({

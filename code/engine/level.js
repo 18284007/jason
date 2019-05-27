@@ -246,6 +246,7 @@ function spawnObjects() {
                     spawnAfterSpiderFlower: tempProperties['spawnAfterSpiderFlower'],
                     spawnAfterBossBattle: tempProperties['spawnAfterBossBattle'],
                     spawnAfterTalkAetios: tempProperties['spawnAfterTalkAetios'],
+                    spawnAfterPlow: tempProperties['spawnAfterPlow'],
                     spawnAfterRitual: tempProperties['spawnAfterRitual']
                 });
                 portalCount++;
@@ -302,9 +303,11 @@ function spawnObjects() {
                 createThis.physics.add.collider(signGardenForest, mapLayer);
                 break; 
 			
-				case 'plow':
-                plow = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'plowSprite');
-                createThis.physics.add.collider(plow, mapLayer);
+			case 'plow':
+                plow = new plowItem({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y
+                });
                 break; 
         }
     }
