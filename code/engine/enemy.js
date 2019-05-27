@@ -303,26 +303,28 @@ class bullBoss extends enemyBase {
 	
 	movement() {
 		var tempVelocity = (this.body.velocity.x);
-
-		if (!plow.stuck) {
-			//An offset is derived from the enemyId so that the bulls have slightly different movement and do not stack on top of each other. 
-			if (((player.x - 60 + (this.enemyId * 30)) < this.x) && ((player.x + 60 + (this.enemyId * 50)) > this.x)) {
-				this.body.setVelocityX(0);
-			} else if (player.x < this.x) {
-				this.body.setVelocityX(-this.xVel - (this.enemyId * 30));
-			} else if (player.x > this.x) {
-				this.body.setVelocityX(this.xVel + (this.enemyId * 30));
-			} 
+		if(this.body !== undefined)
+		{
+			if (!plow.stuck) {
+				//An offset is derived from the enemyId so that the bulls have slightly different movement and do not stack on top of each other. 
+				if (((player.x - 60 + (this.enemyId * 30)) < this.x) && ((player.x + 60 + (this.enemyId * 50)) > this.x)) {
+					this.body.setVelocityX(0);
+				} else if (player.x < this.x) {
+					this.body.setVelocityX(-this.xVel - (this.enemyId * 30));
+				} else if (player.x > this.x) {
+					this.body.setVelocityX(this.xVel + (this.enemyId * 30));
+				} 
 		
-			this.flipX = (tempVelocity > 0);
-		} else {
-			this.body.setVelocityX(-this.xVel);
-			this.flipX = false; 
-			if (this.x < -200) {
-				this.alive = false; 
-				enemies[this.enemyId].destroy();
+				this.flipX = (tempVelocity > 0);
+			} else {
+				this.body.setVelocityX(-this.xVel);
+				this.flipX = false; 
+				if (this.x < -200) {
+					this.alive = false; 
+					enemies[this.enemyId].destroy();
+				}
 			}
-		} 
+		}
 	}			
 	
 
