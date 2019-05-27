@@ -38,6 +38,8 @@ class controller extends Phaser.Scene
            { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('jason','assets/player/jason.png', 
            { frameWidth: 76, frameHeight: 64 });
+	this.load.spritesheet('kingSprite','assets/NPC/king.png', 
+           { frameWidth: 40, frameHeight: 64 });
 
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
