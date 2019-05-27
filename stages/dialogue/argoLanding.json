@@ -38,5 +38,15 @@
 			"char":"",
 			"speech":"" 
 		}
+	],
+	"signR2C": [
+		{
+			"char":"To the road to Colchis",
+			"speech":" "
+		},
+		{ 
+			"char":"",
+			"speech":"" 
+		}
 	]
 }

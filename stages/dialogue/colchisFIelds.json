@@ -22,8 +22,8 @@
 		}
 	],
 	"palaceSign":[
-		{ "char":"Sign",
-			"speech":"To King Aetios' Palace" 
+		{ "char":"To King Aetios' Palace",
+			"speech":" " 
 		},
 		{
 			"char":"",
@@ -31,8 +31,8 @@
 		}
 	],
 	"riverSign":[
-		{ "char":"Sign",
-			"speech":"To the river crossing" 
+		{ "char":"To the river crossing",
+			"speech":" " 
 		},
 		{
 			"char":"",
