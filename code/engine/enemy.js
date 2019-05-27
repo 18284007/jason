@@ -242,6 +242,12 @@ class bullBoss extends enemyBase {
 			} else if (player.x > this.x) {
 				this.body.setVelocityX(this.xVel + (this.enemyId * 30));
 			} 
+		} else {
+			this.body.setVelocityX(-this.xVel);
+			if (this.x < -200) {
+				this.alive = false; 
+				enemies[this.enemyId].destroy();
+			}
 		}
 	}			
 	
