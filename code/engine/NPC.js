@@ -56,20 +56,14 @@ class artemisNPC extends npcBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y, 
-			key: 'medeaSprite',
+			key: 'artemisSprite',
 			dialogueKey: parameter.dialogueKey,
 			npcId: parameter.npcId, 
 			gravity: true
 		})
 	}
 
-	update () 
-	{
-		if (player.x < this.x && this.active) {
-			this.anims.play('medeaIdleLeft', true);
-		} else if (player.x > this.x && this.active) {
-			this.anims.play('medeaIdleRight', true);
-		}
+	update () {
 	}
 }
 
@@ -267,7 +261,7 @@ class iphiclusNPC extends npcBase {
  * If the text is blank, a box will not appear. 
  */
 function processNPCdialogue () {
-	if (talkKey.isDown) {
+	if (talkKey.isDown && typeof dialogue !== 'undefined') {
 		if (!dialogueAlreadyEngaged) {
 	    	//Some NPCs react to flags in dialogue.
 	    	for (i = 0; i < npcCount; i++){

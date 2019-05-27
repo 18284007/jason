@@ -46,27 +46,7 @@ function playerMovement() {
     if (player.body.velocity.y > playerVelocityYMax) {
         player.body.velocity.y = playerVelocityYMax; 
     }
-    
-    if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
-        if (playerFacingRight) {
-            player.anims.play('jasonIdleRight', true);
-        } else {
-            player.anims.play('jasonIdleLeft', true);
-        }
-    } else if (playerSwingSword) {
-        if (playerFacingRight) {
-            player.anims.play('jasonAttackRight', true);
-        } else {
-            player.anims.play('jasonAttackLeft', true);
-        }
-    } else {
-    	if (playerFacingRight) {
-            player.anims.play('jasonRight', true);
-        } else {
-            player.anims.play('jasonLeft', true);
-        }
-    }
-    
+
     //Horizontal movement 
     var tempVelocityX = 0; 
     if (cursors.left.isDown) {
@@ -78,6 +58,26 @@ function playerMovement() {
         playerFacingRight = true;
     }
     player.setVelocityX(tempVelocityX);
+    
+    player.flipX = !(playerFacingRight); 
+
+    if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
+        player.anims.play('jasonIdleRight', true);
+        player.setSize(20, 64);
+        player.setOffset(28, 0);
+    } else if (playerSwingSword) {
+        player.anims.play('jasonAttackRight', true);
+        player.setSize(60, 64);
+        if (playerFacingRight) {
+            player.setOffset(28, 0);
+        } else {
+            player.setOffset(-12, 0);
+        }
+    } else {
+        player.anims.play('jasonRight', true);
+        player.setSize(20, 64);
+        player.setOffset(28, 0);
+    }
     
     //Vertical movement
     if (jumpKey.isDown) {
@@ -186,10 +186,18 @@ function gameOver() {
     currentHealth = maxHealth;
     healthBarReset();
 
+    for (i = 0; i < enemyCount; i++){
+        enemies[i].alive = false; 
+    }
+
     for (j = 0; j < inventory.length; j++) {
         inventory[j] = (resetInventory[j]);
     }
     
+    if (userIntThis.ritualItemText.alpha > 0){
+        userIntThis.updateRitualItemText();
+    }
+
     createThis.scene.restart(currentLevelID);
 }
 

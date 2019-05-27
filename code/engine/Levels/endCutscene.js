@@ -26,7 +26,9 @@ class endCutscene extends Phaser.Scene{
         dialogue = levelJSON['narration'];
 		dialogueMax = dialogue.length - 1;
 		this.processDialogue();
-		this.physics.world.setBounds(0, 0, boundaryEdge.x + 100, boundaryEdge.y, 64, true, true, false, false);
+        gameWidth = createThis.map.widthInPixels;
+        gameHeight = createThis.map.heightInPixels;
+        createThis.physics.world.setBounds(0, 0, gameWidth + 300, gameHeight, 64, true, true, false, false);
     }
 
     update()

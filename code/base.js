@@ -37,7 +37,7 @@ class controller extends Phaser.Scene
         this.load.spritesheet('medeaSprite','assets/NPC/medea.png', 
            { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('jason','assets/player/jason.png', 
-           { frameWidth: 50, frameHeight: 64 });
+           { frameWidth: 76, frameHeight: 64 });
 
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
@@ -47,6 +47,7 @@ class controller extends Phaser.Scene
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
+	this.load.image('artemisSprite','assets/NPC/artemis.png');
         this.load.image('bonfireSprite','assets/bonfire.png');
 	this.load.image('fireballSprite','assets/fireball.png');
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
@@ -64,7 +65,7 @@ class controller extends Phaser.Scene
         this.load.image('bgForest', 'assets/background/forest.png');
         this.load.image('bgMarket', 'assets/background/market.png');
         this.load.image("tiles", "assets/tilesheet-extruded.png");
-	this.load.image('plowSprite','assets/items/plow.png');
+        this.load.image('plowSprite','assets/items/plow.png');
         this.load.image('maxHealthItemSprite', 'assets/items/maxHealth.png');
         this.load.image('healthItemSprite', 'assets/items/health.png');
         this.load.image('damageIncreaseItemSprite', 'assets/items/damageIncrease.png');
@@ -99,7 +100,10 @@ class controller extends Phaser.Scene
 	{
 		userIntThis.scene.bringToTop('controller');
 	}
-		
+
+        this.ritualItemText = userIntThis.add.text(800, 50, '0/x Ritual Items', undefined);
+        this.ritualItemText.alpha = 0; 
+
     }
 
     update()
@@ -127,6 +131,21 @@ class controller extends Phaser.Scene
         }
 	
     }
+
+    updateRitualItemText() {
+        var tempCount = 0; 
+        for (i = 0; i < ritualItemCount; i++){
+            tempCount += (1 * inventory[i]);
+        } 
+        
+        //Update the text. 
+        if (tempCount != ritualItemCount){
+            userIntThis.ritualItemText.setText(tempCount + '/' + ritualItemCount + " Ritual Items.");
+            userIntThis.ritualItemText.alpha = 1; 
+        } else {
+            userIntThis.ritualItemText.alpha = 0; 
+        }
+    }
 }
 
 function commonPreload()
@@ -145,7 +164,8 @@ function commonPreload()
 
 function loadMap()
 {
-    createThis.physics.world.tileBias = 64; 
+    destroyOldObjects();
+    createThis.physics.world.TILE_BIAS = 64; 
 
 	var currentTilemapKey = currentLevelID + 'Tilemap';
 
@@ -182,33 +202,15 @@ function loadMap()
 
     //Player sprite stuff. 
     createThis.anims.create({
-        key: 'jasonLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 41 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'jasonRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 0, end: 11 }),
         frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({
-        key: 'jasonAttackLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 42, end: 59 }),
-        frameRate: 30,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'jasonAttackRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 12, end: 29 }),
         frameRate: 30,
-        repeat: -1
-    });
-    createThis.anims.create({
-        key: 'jasonIdleLeft',
-        frames: createThis.anims.generateFrameNumbers('jason', { start: 30, end: 30 }),
-        frameRate: 10,
         repeat: -1
     });
     createThis.anims.create({
@@ -321,6 +323,21 @@ function changeLevel(tempNewLevelID) {
     game.scene.stop(oldLevelID);
 }
 
+function destroyOldObjects() {
+    for (i = 0; i < enemyCount; i++){
+        enemies[i].destroy();
+    }
+    for (i = 0; i < npcCount; i++){
+        npcs[i].destroy();
+    }
+    for (i = 0; i < portalCount; i++){
+        portals[i].destroy();
+    }
+    for (i = 0; i < itemCount; i++){
+        items[i].destroy();
+    }
+}
+
 var config = {
     type: Phaser.AUTO,
     width: 1024,
@@ -340,7 +357,7 @@ var config = {
     },
     scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
-            placeholdertestmap, endCutscene, endScreen, siren, pause]
+            placeholdertestmap, endCutscene, endScreen, siren, pause, mapMenu]
 };
 
 var game = new Phaser.Game(config);
