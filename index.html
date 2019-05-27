@@ -1,0 +1,51 @@
+<html> 
+    <meta charset="UTF-8"> 
+    <head>
+        <style>
+            body {margin: auto, background-color: black}
+        </style>
+    </head>
+    <body>        
+        <script>
+            var currentLevelID;
+            var playerShip; 
+            var playerSprite; 
+            function loadLevel(tempLevel, tempShip, tempPlayerSprite){
+                currentLevelID = tempLevel;
+                playerShip = tempShip;
+                playerSprite = tempPlayerSprite;
+                var gameScript = document.createElement("script");
+                gameScript.src = "code/base.js"; 
+                document.getElementsByTagName("head")[0].appendChild(gameScript);
+            }
+            loadLevel('titleScreen', false, 'jason');
+        </script>
+        <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
+        <script src="code/engine/level.js" type="text/javascript"></script>
+        <script src="code/engine/player.js" type="text/javascript"></script>
+        <script src="code/engine/enemy.js" type="text/javascript"></script>
+        <script src="code/engine/items.js" type="text/javascript"></script>
+        <script src="code/engine/projectile.js" type="text/javascript"></script>
+        <script src="code/engine/dialogue.js" type="text/javascript"></script>
+        <script src="code/engine/healthBar.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/titleScreen.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/argoLanding.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/roadToColchis.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/marketplace.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/palace.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/shrine.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/shrineForest.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/colchisFields.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/riverCrossing.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/gardenEntrance.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/gardenForest.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/gardenDungeon.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/gardenFleece.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/endScreen.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/endCutscene.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/pause.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/placeholdertestmap.js" type="text/javascript"></script>
+        <script src="code/engine/Levels/siren.js" type="text/javascript"></script>
+        <script src="code/engine/NPC.js" type="text/javascript"></script>
+    </body>
+</html>
