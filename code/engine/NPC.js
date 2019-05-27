@@ -263,6 +263,168 @@ class iphiclusNPC extends npcBase {
 	}
 }
 
+/* Signs */
+class signR2CNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signR2CSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signMarketNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signMarketSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signShrineNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signShrineSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signShrineForestNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signShrineForestSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signPalaceNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signPalaceSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signColchisFieldsNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signColchisFieldsSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signRiverCrossingNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signRiverCrossingSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signGardenEntranceNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signGardenEntranceSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signDungeonNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signDungeonSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+class signGardenForestNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signGardenForestSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+
+	update () {
+	}
+}
+
 /* Process NPC dialogue. 
  * The game will display one entry for char and speech in dialogue[currentDialogue]. 
  * Doing this repeatedly will cycle through the contents of dialogue[currentDialogue].
