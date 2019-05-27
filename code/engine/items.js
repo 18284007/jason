@@ -145,7 +145,8 @@ class ritualItemFind extends itemBase {
 	}
 
 	collision (tempItem){
-		inventory[tempItem.inventoryKey] = true; 
+		inventory[tempItem.inventoryKey] = true;
+		userIntThis.updateRitualItemText(); 
 		tempItem.destroy();
 	}
 }
@@ -248,8 +249,8 @@ class portal extends Phaser.GameObjects.Sprite {
         } else {
         	this.spawnAfterSpiderFlower = false; 
         }
-		
-	if (typeof parameter.spawnAfterTalkAetios !== 'undefined') {
+
+        if (typeof parameter.spawnAfterTalkAetios !== 'undefined') {
         	this.spawnAfterTalkAetios = true;
 			this.spawnAfterTalkAetiosWaiting = true; 
         } else {
@@ -262,6 +263,12 @@ class portal extends Phaser.GameObjects.Sprite {
         	this.remainingPortals = ritualItemCount;
         } else {
         	this.spawnAfterRitual = false; 
+        }
+
+        if (typeof parameter.spawnAfterPlow !== 'undefined') {
+        	this.spawnAfterPlow = parameter.spawnAfterPlow;
+        } else {
+        	this.spawnAfterPlow = false; 
         }
 
         this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower || this.spawnAfterTalkAetios);
@@ -300,6 +307,10 @@ class portal extends Phaser.GameObjects.Sprite {
 			tempPortalActive = (this.remainingPortals <= 0);
 		}
 
+		if (tempPortalActive && this.spawnAfterPlow) {
+			tempPortalActive = plow.stuck;
+		}
+
 		if (tempPortalActive) {
 			this.activePortal = true; 
 			this.alpha = 1; 
@@ -315,133 +326,30 @@ class portal extends Phaser.GameObjects.Sprite {
 	}
 }
 
+class plowItem extends Phaser.GameObjects.Sprite {
+	constructor(parameter){
+		super(createThis, parameter.x, parameter.y, 'plowSprite');
+        createThis.physics.world.enable(this);
+        createThis.add.existing(this);
+        this.body.allowGravity = false;
+        this.setDepth(-45);
+		this.stuck = false; 
+	} 	
 
-//SIGNS
+	update() {
+		for (i = 0; i < enemyCount; i++){
+			if (Phaser.Geom.Intersects.RectangleToRectangle(this.getBounds(), enemies[i].getBounds()) && 
+				enemies[i].body.velocity.x < 0 && 
+				(enemies[i].x + 100) < this.x) {
+				this.x -= 5;
+			}
+		}
 
-class signR2C extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signR2CSprite',
-			gravity: false
-		})
+		if (this.x < 250) {
+			this.stuck = true;
+		} 
 	}
 }
-class signMarket extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signMarketSprite',
-			gravity: false
-		})
-	}
-}
-class signShrine extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signShrineSprite',
-			gravity: false
-		})
-	}
-}
-class signShrineForest extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signShrineForestSprite',
-			gravity: false
-		})
-	}
-}
-class signPalace extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signPalaceSprite',
-			gravity: false
-		})
-	}
-}
-class signColchisFields extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signColchisFieldsSprite',
-			gravity: false
-		})
-	}
-}
-class signRiverCrossing extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signRiverCrossingSprite',
-			gravity: false
-		})
-	}
-}
-class signGardenEntrance extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signGardenEntranceSprite',
-			gravity: false
-		})
-	}
-}
-class signDungeon extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signDungeonSprite',
-			gravity: false
-		})
-	}
-}
-class signGardenForest extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'signGardenForestSprite',
-			gravity: false
-		})
-	}
-}
-
-class plow extends Phaser.GameObjects.Sprite {
-	constructor(parameter){
-		super({
-			scene: createThis,
-			x: parameter.x, 
-			y: parameter.y,
-			key: 'plowSprite',
-			gravity: false
-		})
-	}
-}
-
-
 
 function portalUpdate() {
 	for (i = 0; i < portalCount; i++) {

@@ -21,5 +21,8 @@ class colchisFields extends Phaser.Scene{
     update()
     {
         callUpdateFuncs();
+        if (!plow.stuck){
+            plow.update();    
+        }
     }
 }

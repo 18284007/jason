@@ -261,7 +261,7 @@ class iphiclusNPC extends npcBase {
  * If the text is blank, a box will not appear. 
  */
 function processNPCdialogue () {
-	if (talkKey.isDown) {
+	if (talkKey.isDown && typeof dialogue !== 'undefined') {
 		if (!dialogueAlreadyEngaged) {
 	    	//Some NPCs react to flags in dialogue.
 	    	for (i = 0; i < npcCount; i++){
