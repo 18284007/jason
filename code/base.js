@@ -89,6 +89,8 @@ class controller extends Phaser.Scene
 
     create()
     {
+        destroyOldObjects();
+
     	firstInitHealthBar();
 	pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 	initDialogueBox();
@@ -305,6 +307,21 @@ function changeLevel(tempNewLevelID) {
 	}
     game.scene.run(tempNewLevelID);
     game.scene.stop(oldLevelID);
+}
+
+function destroyOldObjects() {
+    for (i = 0; i < enemyCount; i++){
+        enemies[i].destroy();
+    }
+    for (i = 0; i < npcCount; i++){
+        npcs[i].destroy();
+    }
+    for (i = 0; i < portalCount; i++){
+        portals[i].destroy();
+    }
+    for (i = 0; i < itemCount; i++){
+        items[i].destroy();
+    }
 }
 
 var config = {
