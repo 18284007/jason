@@ -199,6 +199,10 @@ function gameOver() {
     currentHealth = maxHealth;
     healthBarReset();
 
+    for (i = 0; i < enemyCount; i++){
+        enemies[i].alive = false; 
+    }
+
     for (j = 0; j < inventory.length; j++) {
         inventory[j] = (resetInventory[j]);
     }
