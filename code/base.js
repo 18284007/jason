@@ -89,8 +89,6 @@ class controller extends Phaser.Scene
 
     create()
     {
-        destroyOldObjects();
-
     	firstInitHealthBar();
 	pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 	initDialogueBox();
@@ -151,6 +149,7 @@ function commonPreload()
 
 function loadMap()
 {
+    destroyOldObjects();
     createThis.physics.world.TILE_BIAS = 64; 
 
 	var currentTilemapKey = currentLevelID + 'Tilemap';
