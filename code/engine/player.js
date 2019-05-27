@@ -46,51 +46,38 @@ function playerMovement() {
     if (player.body.velocity.y > playerVelocityYMax) {
         player.body.velocity.y = playerVelocityYMax; 
     }
-    
-    player.flipX = !(playerFacingRight); 
 
-    if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
-        player.anims.play('jasonIdleRight', true);
-        if (playerFacingRight) {
-            player.setSize(20, 64);
-            player.setOffset(0, 0);
-        } else {
-            player.setSize(20, 64);
-            player.setOffset(29, 0);
-        }
-    } else if (playerSwingSword) {
-        player.anims.play('jasonAttackRight', true);
-        if (playerFacingRight) {
-            player.setSize(60, 64);
-            player.setOffset(0, 0);
-        } else {
-            player.setSize(60, 64);
-            player.setOffset(-12, 0);
-        }
-    } else {
-        player.anims.play('jasonRight', true);
-        if (playerFacingRight) {
-            player.setSize(20, 64);
-            player.setOffset(0, 0);
-        } else {
-            player.setSize(20, 64);
-            player.setOffset(29, 0);
-        }
-    }
-    
     //Horizontal movement 
     var tempVelocityX = 0; 
     if (cursors.left.isDown) {
         tempVelocityX -= playerWalkVelocity;
         playerFacingRight = false; 
-        player.originX = 0.65;
     }
     if (cursors.right.isDown) {
         tempVelocityX += playerWalkVelocity;
         playerFacingRight = true;
-        player.originX = 0.35;  
     }
     player.setVelocityX(tempVelocityX);
+    
+    player.flipX = !(playerFacingRight); 
+
+    if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
+        player.anims.play('jasonIdleRight', true);
+        player.setSize(20, 64);
+        player.setOffset(28, 0);
+    } else if (playerSwingSword) {
+        player.anims.play('jasonAttackRight', true);
+        player.setSize(60, 64);
+        if (playerFacingRight) {
+            player.setOffset(28, 0);
+        } else {
+            player.setOffset(-12, 0);
+        }
+    } else {
+        player.anims.play('jasonRight', true);
+        player.setSize(20, 64);
+        player.setOffset(28, 0);
+    }
     
     //Vertical movement
     if (jumpKey.isDown) {
@@ -199,10 +186,18 @@ function gameOver() {
     currentHealth = maxHealth;
     healthBarReset();
 
+    for (i = 0; i < enemyCount; i++){
+        enemies[i].alive = false; 
+    }
+
     for (j = 0; j < inventory.length; j++) {
         inventory[j] = (resetInventory[j]);
     }
     
+    if (userIntThis.ritualItemText.alpha > 0){
+        userIntThis.updateRitualItemText();
+    }
+
     createThis.scene.restart(currentLevelID);
 }
 

@@ -145,7 +145,8 @@ class ritualItemFind extends itemBase {
 	}
 
 	collision (tempItem){
-		inventory[tempItem.inventoryKey] = true; 
+		inventory[tempItem.inventoryKey] = true;
+		userIntThis.updateRitualItemText(); 
 		tempItem.destroy();
 	}
 }

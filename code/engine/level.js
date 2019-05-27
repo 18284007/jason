@@ -1,6 +1,16 @@
 var enemyCount;
 var enemies;
 
+//Arrays that store appropriate objects and a corresponding counter.
+enemies = []; //Enemy array
+enemyCount = 0; //Enemy counter
+portals = []; //Portal array
+portalCount = 0; //Portal counter
+npcs = []; //NPC array
+npcCount = 0; //NPC counter
+items = []; //Item array
+itemCount = 0; //Items counter
+
 function spawnObjects() {
     //Arrays that store appropriate objects and a corresponding counter.
     enemies = []; //Enemy array

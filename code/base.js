@@ -37,7 +37,7 @@ class controller extends Phaser.Scene
         this.load.spritesheet('medeaSprite','assets/NPC/medea.png', 
            { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('jason','assets/player/jason.png', 
-           { frameWidth: 50, frameHeight: 64 });
+           { frameWidth: 76, frameHeight: 64 });
 
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
@@ -103,7 +103,10 @@ class controller extends Phaser.Scene
 	{
 		userIntThis.scene.bringToTop('controller');
 	}
-		
+
+        this.ritualItemText = userIntThis.add.text(800, 50, '0/x Ritual Items', undefined);
+        this.ritualItemText.alpha = 0; 
+
     }
 
     update()
@@ -131,6 +134,21 @@ class controller extends Phaser.Scene
         }
 	
     }
+
+    updateRitualItemText() {
+        var tempCount = 0; 
+        for (i = 0; i < ritualItemCount; i++){
+            tempCount += (1 * inventory[i]);
+        } 
+        
+        //Update the text. 
+        if (tempCount != ritualItemCount){
+            userIntThis.ritualItemText.setText(tempCount + '/' + ritualItemCount + " Ritual Items.");
+            userIntThis.ritualItemText.alpha = 1; 
+        } else {
+            userIntThis.ritualItemText.alpha = 0; 
+        }
+    }
 }
 
 function commonPreload()
@@ -149,6 +167,7 @@ function commonPreload()
 
 function loadMap()
 {
+    destroyOldObjects();
     createThis.physics.world.TILE_BIAS = 64; 
 
 	var currentTilemapKey = currentLevelID + 'Tilemap';
@@ -305,6 +324,21 @@ function changeLevel(tempNewLevelID) {
 	}
     game.scene.run(tempNewLevelID);
     game.scene.stop(oldLevelID);
+}
+
+function destroyOldObjects() {
+    for (i = 0; i < enemyCount; i++){
+        enemies[i].destroy();
+    }
+    for (i = 0; i < npcCount; i++){
+        npcs[i].destroy();
+    }
+    for (i = 0; i < portalCount; i++){
+        portals[i].destroy();
+    }
+    for (i = 0; i < itemCount; i++){
+        items[i].destroy();
+    }
 }
 
 var config = {

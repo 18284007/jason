@@ -35,6 +35,12 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		this.playerDamageCollision = 20;
 		this.playerDamageSword = 40; 
 
+		if (typeof parameter.invulnerabilityAlways !== 'undefined'){ 
+			this.invulnerabilityAlways = parameter.invulnerabilityAlways; 
+		} else {
+			this.invulnerabilityAlways = false; 
+		}
+
 		if (typeof parameter.spiderBoss !== 'undefined'){ 
 			this.spiderBoss = parameter.spiderBoss; 
 		} else {
@@ -78,7 +84,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	collision(tempEnemy) {
 		if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
 			enemies[tempEnemy.enemyId].destroy();  
-		} else if (playerSwingSword && !tempEnemy.invulnerability) {
+		} else if (playerSwingSword && !tempEnemy.invulnerability && !tempEnemy.invulnerabilityAlways) {
 			enemies[tempEnemy.enemyId].health -= playerDamagePoints;
 			enemies[tempEnemy.enemyId].invulnerability = true; 
 			enemies[tempEnemy.enemyId].alpha = 0.3; 
@@ -219,7 +225,8 @@ class bullBoss extends enemyBase {
 			enemyId: parameter.enemyId, 
 			gravity: false, 
 			health: 250, 
-			boss: true
+			boss: true, 
+			invulnerabilityAlways: true
         });
 		this.shoot(this);
 	}
@@ -235,6 +242,12 @@ class bullBoss extends enemyBase {
 			} else if (player.x > this.x) {
 				this.body.setVelocityX(this.xVel + (this.enemyId * 30));
 			} 
+		} else {
+			this.body.setVelocityX(-this.xVel);
+			if (this.x < -200) {
+				this.alive = false; 
+				enemies[this.enemyId].destroy();
+			}
 		}
 	}			
 	
