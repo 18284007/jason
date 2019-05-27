@@ -37,7 +37,7 @@ class controller extends Phaser.Scene
         this.load.spritesheet('medeaSprite','assets/NPC/medea.png', 
            { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('jason','assets/player/jason.png', 
-           { frameWidth: 50, frameHeight: 64 });
+           { frameWidth: 76, frameHeight: 64 });
 
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
