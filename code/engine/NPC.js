@@ -213,6 +213,14 @@ class kingAetiosNPC extends npcBase {
 	}
 
 	update () {
+		if (currentLevelID == 'colchisFields')
+		{
+			if (player.x < this.x && this.active) {
+				this.anims.play('kingIdleLeft', true);
+			} else if (player.x > this.x && this.active) {
+				this.anims.play('kingIdleRight', true);
+			}
+		}
 	}
 }
 class oileusNPC extends npcBase {
