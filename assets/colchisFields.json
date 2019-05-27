@@ -89,7 +89,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":65,
+                 "x":48,
                  "y":1426
                 }, 
                 {
@@ -160,8 +160,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":152,
-                 "y":1426
+                 "x":104,
+                 "y":1430
                 }, 
                 {
                  "height":0,
@@ -185,7 +185,19 @@
                  "visible":true,
                  "width":0,
                  "x":1564,
-                 "y":1745
+                 "y":1750
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"kingAetios",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":166,
+                 "y":1430
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -194,10 +206,10 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":19,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {
