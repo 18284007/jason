@@ -145,6 +145,12 @@
                  "id":12,
                  "name":"signR2C",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signR2C"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,

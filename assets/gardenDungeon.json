@@ -301,6 +301,12 @@
                  "id":26,
                  "name":"signGardenEntrance",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signGardenEntrance"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -354,7 +360,7 @@
  "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {

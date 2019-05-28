@@ -12,8 +12,6 @@ class palace extends Phaser.Scene{
         backgroundLayer0 = 'bgSky';
         commonPreload();
 
-        this.load.spritesheet('kingSprite','assets/NPC/king.png', 
-           { frameWidth: 40, frameHeight: 64 });
 
         createThis.anims.create({
             key: 'kingIdleLeft',

@@ -1,7 +1,50 @@
 {
-	"dialogue":[
+	"signRiverCrossing":[
+		{ "char":"To the road to river crossing",
+			"speech":" " 
+		},
+		{ "char":"",
+			"speech":"" 
+		}
+	],
+	"signDungeon":[
+		{ "char":"Danger: Underground area",
+			"speech":"It is said unspeakable horrors lurk beneath the surface" 
+		},
+		{ "char":"",
+			"speech":"" 
+		}
+	],
+	"signGardenForest":[
+		{ "char":"Danger: Forest area",
+			"speech":"Many noises can be heard echoing through the trees, only the bravest enter" 
+		},
+		{ "char":"",
+			"speech":"" 
+		}
+	],
+	"medea3":[
+		{ "char":"Medea",
+			"speech":"My father is both amazed and fearful of your recent accomplishments, Out of respect he will allow you to complete your challenge but we must hurry" 
+		},
+		{ "char":"Medea",
+			"speech":"Artemis is guarding the gateway to the garden, she will only allow access with a worthy sacrifice" 
+		},
+		{ "char":"Medea",
+			"speech":"Orpheus, please go to the forest and the dungeon nearby, you will need to gather ingredients. Bring them to the garden's gate and throw them into the fire" 
+		},
+		{ "char":"Medea",
+			"speech":"With your soothing voice and talent with the lyre, impress Artemis and allow Jason to fulfil his destiny!" 
+		},
+		{ "char":"Orpheus",
+			"speech":"I will try my best my lady" 
+		},
 		{ "char":"",
 			"speech":"" 
 		}
 	]
+
+
+
+
 }
