@@ -11,6 +11,10 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 
         //Set variables. 
         this.body.allowGravity = parameter.gravity;
+        if (parameter.gravity) {
+        	createThis.physics.add.collider(this, mapLayer);
+        }
+
         if (typeof parameter.xMove !== 'undefined'){ 
         	this.moveRight = true; 
 	        this.xMin = parameter.x; 
@@ -34,6 +38,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		this.alive = true;
 		this.playerDamageCollision = 20;
 		this.playerDamageSword = 40; 
+
+		this.knockback = false; 
+		this.knockedBack = false;
 
 		if (typeof parameter.invulnerabilityAlways !== 'undefined'){ 
 			this.invulnerabilityAlways = parameter.invulnerabilityAlways; 
@@ -87,7 +94,10 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		} else if (playerSwingSword && !tempEnemy.invulnerability && !tempEnemy.invulnerabilityAlways) {
 			enemies[tempEnemy.enemyId].health -= playerDamagePoints;
 			enemies[tempEnemy.enemyId].invulnerability = true; 
-			enemies[tempEnemy.enemyId].alpha = 0.3; 
+			enemies[tempEnemy.enemyId].alpha = 0.3;
+			if (enemies[tempEnemy.enemyId].body.allowGravity) {
+				enemies[tempEnemy.enemyId].knockback = true;
+			}
 			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
 		} else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
 			playerDamage(tempEnemy.playerDamageCollision);
@@ -126,6 +136,29 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	}
 
 	movement() {
+		if (this.knockback) {
+			this.knockback = false;
+			if (playerFacingRight) {
+				this.body.setVelocityX(100);
+			} else {
+				this.body.setVelocityX(-100);
+			}
+			this.body.setVelocityY(-300);
+			this.knockedBack = true; 
+		} 
+
+		if (this.knockedBack) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 
+				this.knockedBack = false;	
+			} else if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+				this.knockedBack = false;	
+			}
+		}
+
 		if (this.moveRight) {
 			if (this.x > this.xMax) {
 				this.body.setVelocityX(-this.xVel);
