@@ -425,7 +425,7 @@ class minotaurBoss extends enemyBase {
 			xVel: 130, 
 			scale: 1, 
 			enemyId: parameter.enemyId, 
-			gravity: false, 
+			gravity: true, 
 			health: 250, 
 			damageTouch: false,
 			hasSword: true, 
@@ -436,6 +436,29 @@ class minotaurBoss extends enemyBase {
 	}
 
 	movement() {
+		if (this.knockback) {
+			this.knockback = false;
+			if (playerFacingRight) {
+				this.body.setVelocityX(100);
+			} else {
+				this.body.setVelocityX(-100);
+			}
+			this.body.setVelocityY(-300);
+			this.knockedBack = true; 
+		} 
+
+		if (this.knockedBack) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 
+				this.knockedBack = false;	
+			} else if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+				this.knockedBack = false;	
+			}
+		}
+
 		if (this.charging && !this.swingSword) {
 			this.body.setVelocityX(-this.xVel);
 			if (this.x < this.xMin) {
