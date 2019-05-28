@@ -359,7 +359,7 @@ class bullBoss extends enemyBase {
 	
 
 	shoot(tempBull) {
-		if (tempBull.alive){
+		if (tempBull.body !== undefined && tempBull.alive){
 			projectiles[currentProjectile] = new dragonFire({
 	        	x: tempBull.x, 
 	        	y: tempBull.y,
