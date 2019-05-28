@@ -205,8 +205,8 @@ class fox extends enemyBase {
 			xVel: 130, 
 			scale: 0.45, 
 			enemyId: parameter.enemyId, 
-			gravity: false, 
-			health: 1
+			gravity: true, 
+			health: 200
         });
 	}
 	update ()
