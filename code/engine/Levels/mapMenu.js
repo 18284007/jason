@@ -10,17 +10,6 @@ class mapMenu extends Phaser.Scene {
 		//end game image
 		this.load.image('mapbg1', 'assets/stage/background/mapcolchis/mapbg1.png');
 		this.load.image('dot1', 'assets/stage/background/mapcolchis/dot1.png');
-		this.load.image('dot2', 'assets/stage/background/mapcolchis/dot2.png');
-		this.load.image('dot3', 'assets/stage/background/mapcolchis/dot3.png');
-		this.load.image('dot4', 'assets/stage/background/mapcolchis/dot4.png');
-		this.load.image('dot5', 'assets/stage/background/mapcolchis/dot5.png');
-		this.load.image('dot6', 'assets/stage/background/mapcolchis/dot6.png');
-		this.load.image('dot7', 'assets/stage/background/mapcolchis/dot7.png');
-		this.load.image('dot8', 'assets/stage/background/mapcolchis/dot8.png');
-		this.load.image('dot9', 'assets/stage/background/mapcolchis/dot9.png');
-		this.load.image('dot10', 'assets/stage/background/mapcolchis/dot10.png');
-		this.load.image('dot11', 'assets/stage/background/mapcolchis/dot11.png');
-		this.load.image('dot12', 'assets/stage/background/mapcolchis/dot12.png');
 		
 	}
 	
@@ -28,18 +17,19 @@ class mapMenu extends Phaser.Scene {
 		//images
 		
 		this.add.image(0,0, "mapbg1").setOrigin(0).setDepth(0);
-		let toDot1 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot1").setDepth(1).setInteractive();
-		let toDot2 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot2").setDepth(1).setInteractive();		
-		let toDot3 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot3").setDepth(1).setInteractive();		
-		let toDot4 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot4").setDepth(1).setInteractive();
-		let toDot5 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot5").setDepth(1).setInteractive();
-		let toDot6 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot6").setDepth(1).setInteractive();
-		let toDot7 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot7").setDepth(1).setInteractive();
-		let toDot8 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot8").setDepth(1).setInteractive();
-		let toDot9 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot9").setDepth(1).setInteractive();
-		let toDot10 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot10").setDepth(1).setInteractive();
-		let toDot11 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot11").setDepth(1).setInteractive();
-		let toDot12 = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "dot12").setDepth(1).setInteractive();
+		
+		let toDot1 = this.add.image(this.game.renderer.width*0.295, this.game.renderer.height*0.88, "dot1").setDepth(1).setInteractive();
+		let toDot2 = this.add.image(this.game.renderer.width*0.35, this.game.renderer.height*0.64, "dot1").setDepth(1).setInteractive();		
+		let toDot3 = this.add.image(this.game.renderer.width*0.495, this.game.renderer.height*0.66, "dot1").setDepth(1).setInteractive();		
+		let toDot4 = this.add.image(this.game.renderer.width*0.6, this.game.renderer.height*0.86, "dot1").setDepth(1).setInteractive();
+		let toDot5 = this.add.image(this.game.renderer.width*0.648, this.game.renderer.height*0.495, "dot1").setDepth(1).setInteractive();
+		let toDot6 = this.add.image(this.game.renderer.width*0.73, this.game.renderer.height*0.67, "dot1").setDepth(1).setInteractive();
+		let toDot7 = this.add.image(this.game.renderer.width*0.9, this.game.renderer.height*0.88, "dot1").setDepth(1).setInteractive();
+		let toDot8 = this.add.image(this.game.renderer.width*0.89, this.game.renderer.height*0.65, "dot1").setDepth(1).setInteractive();
+		let toDot9 = this.add.image(this.game.renderer.width*0.815, this.game.renderer.height*0.33, "dot1").setDepth(1).setInteractive();
+		let toDot10 = this.add.image(this.game.renderer.width*0.6, this.game.renderer.height*0.23, "dot1").setDepth(1).setInteractive();
+		let toDot11 = this.add.image(this.game.renderer.width*0.93, this.game.renderer.height*0.48, "dot1").setDepth(1).setInteractive();
+		let toDot12 = this.add.image(this.game.renderer.width*0.81, this.game.renderer.height*0.05, "dot1").setDepth(1).setInteractive();
 
 		
 		toDot1.on("pointerup", ()=>{ changeLevel('argoLanding');
@@ -54,8 +44,8 @@ class mapMenu extends Phaser.Scene {
 		toDot4.on("pointerup", ()=>{changeLevel('palace');
 			});
 
-		toDot5.on("pointerup", ()=>{changeLevel('shrine')
-			;});
+		toDot5.on("pointerup", ()=>{changeLevel('shrine');
+			});
 
 		toDot6.on("pointerup", ()=>{changeLevel('shrineForest');
 			});
@@ -76,8 +66,7 @@ class mapMenu extends Phaser.Scene {
 			});
 
 		toDot12.on("pointerup", ()=>{changeLevel('gardenFleece');
-			});			
-	
+			});		
 	}
 }
 
