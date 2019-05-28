@@ -95,6 +95,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			enemies[tempEnemy.enemyId].health -= playerDamagePoints;
 			enemies[tempEnemy.enemyId].invulnerability = true; 
 			enemies[tempEnemy.enemyId].alpha = 0.3;
+			enemies[tempEnemy.enemyId].setTint(0xFF0000);
 			if (enemies[tempEnemy.enemyId].body.allowGravity) {
 				enemies[tempEnemy.enemyId].knockback = true;
 			}
@@ -117,6 +118,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	invulnerabilityStop(tempEnemyId) {
 		enemies[tempEnemyId].invulnerability = false; 
 		enemies[tempEnemyId].alpha = 1; 
+		enemies[tempEnemyId].clearTint();
 	}
 
 	//Enemy update routine. 
