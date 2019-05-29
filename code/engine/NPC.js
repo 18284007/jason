@@ -1,4 +1,6 @@
 var medeaActive = false;
+var thoughtBubbleRadius = 75; 
+
 /* NPC Base.  
  * This is used as the base for several NPC classes. 
  * Do not create this object directly. 
@@ -46,7 +48,20 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 
 	update () {
+		this.updateThoughtBubble();
+	}
 
+	updateThoughtBubble () {
+		if (player.x - thoughtBubbleRadius < this.x && player.x + thoughtBubbleRadius > this.x) {
+			if (this.thoughtBubble == undefined && this.hasDialogue && typeof levelJSON[this.dialogueKey] !== 'undefined') {
+				this.thoughtBubble = createThis.physics.add.sprite(this.x - 20, this.y - 50, 'thoughtBubbleSprite');
+				this.thoughtBubble.body.allowGravity = false; 
+				this.thoughtBubble.setDepth(-50);
+			}
+		} else if (this.thoughtBubble !== undefined) {
+			this.thoughtBubble.destroy(); 
+			this.thoughtBubble = undefined;
+		}
 	}
 }
 
@@ -61,9 +76,6 @@ class artemisNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-	}
-
-	update () {
 	}
 }
 
@@ -82,6 +94,7 @@ class artemisDogNPC extends npcBase {
 
 	update () 
 	{
+		this.updateThoughtBubble();
 		if (player.x < this.x && this.active) {
 			this.anims.play('medeaIdleLeft', true);
 		} else if (player.x > this.x && this.active) {
@@ -149,6 +162,7 @@ class medeaNPC extends npcBase {
 
 	update () 
 	{
+		this.updateThoughtBubble();
 		if (!medeaActive)
 		{
 			if (player.x < this.x && this.active) {
@@ -213,6 +227,7 @@ class kingAetiosNPC extends npcBase {
 	}
 
 	update () {
+		this.updateThoughtBubble();
 		if (currentLevelID == 'colchisFields')
 		{
 			if (player.x < this.x && this.active) {
@@ -237,10 +252,6 @@ class oileusNPC extends npcBase {
 		//this.scaleX = playerScale; 
 		//this.scaleY = playerScale;
 	}
-
-	update () {
-		
-	}
 }
 
 class iphiclusNPC extends npcBase {
@@ -257,10 +268,6 @@ class iphiclusNPC extends npcBase {
 		//this.scaleX = playerScale; 
 		//this.scaleY = playerScale;
 	}
-
-	update () {
-		
-	}
 }
 
 /* Signs */
@@ -276,10 +283,8 @@ class signR2CNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signMarketNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -292,10 +297,8 @@ class signMarketNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signShrineNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -308,10 +311,8 @@ class signShrineNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signShrineForestNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -324,10 +325,8 @@ class signShrineForestNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signPalaceNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -340,10 +339,8 @@ class signPalaceNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signColchisFieldsNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -356,10 +353,8 @@ class signColchisFieldsNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signRiverCrossingNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -372,10 +367,8 @@ class signRiverCrossingNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signGardenEntranceNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -388,10 +381,8 @@ class signGardenEntranceNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signDungeonNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -404,10 +395,8 @@ class signDungeonNPC extends npcBase {
 			gravity: true
 		})
 	}
-
-	update () {
-	}
 }
+
 class signGardenForestNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -419,9 +408,6 @@ class signGardenForestNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-	}
-
-	update () {
 	}
 }
 

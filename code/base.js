@@ -60,6 +60,8 @@ class controller extends Phaser.Scene
         this.load.image('bullBossSprite','assets/enemy/bullBoss.png');
         //Items (must be constantly loaded for inventory)
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
+        this.load.image('thoughtBubbleSprite', 'assets/npc/thought.png');
+
         //LEVEL STUFF
         //Environment sprites - PLACEHOLDERS.
         this.load.image('bgSky', 'assets/background/sky.png');
