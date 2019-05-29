@@ -138,6 +138,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	}
 
 	movement() {
+		//If the enemy has been knocked back, their movement should be adjusted. 
 		if (this.knockback) {
 			this.knockback = false;
 			if (playerFacingRight) {
@@ -149,7 +150,8 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			this.knockedBack = true; 
 		} 
 
-		if (this.knockedBack) {
+		//Movement logic. 
+		if (this.knockedBack && this.body.blocked.down) {
 			if (this.x > this.xMax) {
 				this.body.setVelocityX(-this.xVel);
 				this.moveRight = false; 
@@ -159,19 +161,15 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 				this.moveRight = true; 
 				this.knockedBack = false;	
 			}
-		}
-
-		if (this.moveRight) {
-			if (this.x > this.xMax) {
+		} else if (!this.knockedBack){
+			if (this.moveRight && this.x > this.xMax) {
 				this.body.setVelocityX(-this.xVel);
 				this.moveRight = false; 	
-			}
-		} else {
-			if (this.x < this.xMin) {
+			} else if (this.x < this.xMin) {
 				this.body.setVelocityX(this.xVel);
 				this.moveRight = true; 
 			}
-		} 
+		}
 	}
 }
 
