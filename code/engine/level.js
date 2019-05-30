@@ -256,6 +256,7 @@ function spawnObjects() {
                     spawnAfterSpiderFlower: tempProperties['spawnAfterSpiderFlower'],
                     spawnAfterBossBattle: tempProperties['spawnAfterBossBattle'],
                     spawnAfterTalkAetios: tempProperties['spawnAfterTalkAetios'],
+                    spawnAfterMeetAetios: tempProperties['spawnAfterMeetAetios'],
                     spawnAfterPlow: tempProperties['spawnAfterPlow'],
                     spawnAfterRitual: tempProperties['spawnAfterRitual']
                 });

@@ -1,5 +1,5 @@
 {
-	"aetios2":[
+	"aetios3":[
 		{ "char":"King Aetios",
 			"speech":"I wish thee luck, but none can withstand the mighty beasts of Colchis" 
 		},
@@ -8,7 +8,7 @@
 			"speech":""
 		}
 	],
-	"aetios3":[
+	"aetios4":[
 		{ "char":"King Aetios",
 			"speech":"A mighty show! I cannot believe my eyes!" 
 		},

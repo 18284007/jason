@@ -16,7 +16,7 @@ class colchisFields extends Phaser.Scene{
 	create()
 	{
         loadMap();
-	createThis.anims.create({
+        createThis.anims.create({
             key: 'kingIdleLeft',
             frames: createThis.anims.generateFrameNumbers('kingSprite', { start: 0, end: 0 }),
             frameRate: 10,

@@ -120,6 +120,11 @@
                          "name":"portalMap",
                          "type":"string",
                          "value":"shrine"
+                        }, 
+                        {
+                         "name":"spawnAfterMeetAetios",
+                         "type":"bool",
+                         "value":true
                         }],
                  "rotation":0,
                  "type":"",

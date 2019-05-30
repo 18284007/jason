@@ -1,5 +1,5 @@
 {
-	"medea1":[
+	"medea2":[
 		{ "char":"Jason",
 			"speech":"I am full of glee that thee has summoned me, come tell me, what is on your mind?" 
 		},
@@ -16,7 +16,7 @@
 			"speech":"" 
 		}
 	],
-	"medea2":[
+	"medea3":[
 		{
 			"char":"Medea",
 			"speech":"*Prepares ointment*",
