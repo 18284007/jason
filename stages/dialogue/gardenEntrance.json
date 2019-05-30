@@ -23,7 +23,7 @@
 			"speech":"" 
 		}
 	],
-	"medea3":[
+	"medea4":[
 		{ "char":"Medea",
 			"speech":"My father is both amazed and fearful of your recent accomplishments, Out of respect he will allow you to complete your challenge but we must hurry" 
 		},
@@ -41,6 +41,30 @@
 		},
 		{ "char":"",
 			"speech":"" 
+		}
+	],
+	"medeaA5":[
+		{
+		  "char":"Medea",
+			"speech":"Orpheus, throw the ingredients into the fire! Open up the garden and let Jason fulfil his destiny!"
+		},
+		{
+			"char":"Orpheus",
+			"speech":"It would be my honour"
+		},
+		{
+			"char":"",
+			"speech":""
+		}
+	],
+	"medeaA6":[
+		{
+		  "char":"Medea",
+		  "Speech":"Grab the fleece for glory!"
+		},
+		{
+			"char":"",
+			"speech":""
 		}
 	]
 
