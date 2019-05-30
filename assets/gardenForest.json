@@ -283,6 +283,12 @@
                  "id":24,
                  "name":"signGardenEntrance",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signGardenEntrance"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,

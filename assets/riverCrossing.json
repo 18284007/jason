@@ -297,6 +297,11 @@
                  "point":true,
                  "properties":[
                         {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signColchisFields"
+                        }, 
+                        {
                          "name":"xMove",
                          "type":"int",
                          "value":70
@@ -314,6 +319,11 @@
                  "name":"signGardenEntrance",
                  "point":true,
                  "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signGardenEntrance"
+                        }, 
                         {
                          "name":"xMove",
                          "type":"int",
@@ -342,7 +352,7 @@
  "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2019.04.03",
+ "tiledversion":"1.2.3",
  "tileheight":64,
  "tilesets":[
         {

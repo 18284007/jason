@@ -1,7 +1,19 @@
 {
-	"dialogue":[
+	"signR2C":[
+		{ "char":"To the road to Colchis",
+			"speech":" " 
+		},
+		{ "char":"",
+			"speech":"" 
+		}
+	],
+	"signPalace":[
+		{ "char":"To King Aetios' Palace",
+			"speech":" " 
+		},
 		{ "char":"",
 			"speech":"" 
 		}
 	]
+
 }

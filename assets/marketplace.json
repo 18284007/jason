@@ -115,6 +115,12 @@
                  "id":14,
                  "name":"signR2C",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signR2C"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -127,6 +133,12 @@
                  "id":15,
                  "name":"signPalace",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signPalace"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,

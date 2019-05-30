@@ -77,13 +77,13 @@
                 {
                  "height":0,
                  "id":11,
-                 "name":"minotaur",
+                 "name":"minotaurBoss",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3981.48484848485,
+                 "x":3800.48484848485,
                  "y":1500.18181818182
                 }, 
                 {
@@ -301,6 +301,12 @@
                  "id":26,
                  "name":"signGardenEntrance",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signGardenEntrance"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -318,6 +324,11 @@
                          "name":"portalMap",
                          "type":"string",
                          "value":"gardenEntrance"
+                        }, 
+                        {
+                         "name":"spawnAfterBossBattle",
+                         "type":"bool",
+                         "value":true
                         }],
                  "rotation":0,
                  "type":"",
