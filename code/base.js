@@ -45,7 +45,8 @@ class controller extends Phaser.Scene
         this.load.image('portalSprite','assets/items/portal.png');
 	//music
         this.load.audio('female', ['assets/stage/background/female.mp3']);
-        this.load.audio('water', ['assets/stage/background/water.mp3']); 
+        this.load.audio('water', ['assets/stage/background/water.mp3']);
+        this.load.audio('male',['assets/stage/background/male.mp3']);
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
@@ -96,7 +97,7 @@ class controller extends Phaser.Scene
         parseCharacterMetaJSON();
 
     	game.scene.run(currentLevelID);
-	if (currentLevelID == 'titleScreen' || currentLevelID == 'endScreen')
+	if (['endScreen','titleScreen'].includes(currentLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
@@ -119,13 +120,14 @@ class controller extends Phaser.Scene
 	/*Music*/
         if(!musicPlaying)
         {
-             if (currentLevelID == 'endScreen' || currentLevelID == 'titleScreen')
+             if (['endScreen','titleScreen'].includes(currentLevelID))
             {
                 music = this.sound.add('water', {loop: true});
                 music.play();
-            }else if (currentLevelID == 'siren' || currentLevelID == 'endCutscene')
+            }else if(['colchisFields','gardenFleece'].includes(currentLevelID))
             {
-                //empty for now
+            	music = this.sound.add('male', {loop: true})
+                music.play();
             }else
             {
                 music = this.sound.add('female', {loop: true});
@@ -248,7 +250,9 @@ function loadMap()
     }
 
     parseLevelDialogue();
-    parseHealthBar();
+    if (currentLevelID != 'endCutscene'){
+    	parseHealthBar();
+    }
 
     spawnObjects();
 
@@ -308,14 +312,15 @@ function shipUpdate()
 function changeLevel(tempNewLevelID) {
 	oldLevelID = currentLevelID;
 	playerShip = false;
-    if (tempNewLevelID == 'argoLanding' && currentLevelID == 'titleScreen')
+    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece'].includes(currentLevelID)) ||
+    		(['endScreen','titleScreen','colchisFields', 'gardenFleece'].includes(tempNewLevelID)))
     {
         musicPlaying = false;
         music.stop();
     }
     clearDialogueBox();
     npcDialogue.text = '';
-	if (tempNewLevelID == 'titleScreen' || tempNewLevelID == 'endScreen')
+	if (['endScreen','titleScreen'].includes(tempNewLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
