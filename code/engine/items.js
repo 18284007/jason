@@ -250,6 +250,17 @@ class portal extends Phaser.GameObjects.Sprite {
         	this.spawnAfterSpiderFlower = false; 
         }
 
+        if (typeof parameter.spawnAfterMeetAetios !== 'undefined')
+        {
+        	this.spawnAfterMeetAetios = true;
+        }else if ((currentLevelID == 'roadToColchis') && (levelProgress >= 2))
+        {
+        	this.spawnAfterMeetAetios = true;
+        }else
+        {
+        	this.spawnAfterMeetAetios = false;
+        }
+
         if (typeof parameter.spawnAfterTalkAetios !== 'undefined') {
         	this.spawnAfterTalkAetios = true;
 			this.spawnAfterTalkAetiosWaiting = true; 
@@ -271,7 +282,8 @@ class portal extends Phaser.GameObjects.Sprite {
         	this.spawnAfterPlow = false; 
         }
 
-        this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower || this.spawnAfterTalkAetios);
+        this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower || this.spawnAfterTalkAetios 
+        	|| this.spawnAfterMeetAetios);
 
         //Collision detection between the player and item. 
         createThis.physics.add.overlap(this, player, this.collision);
@@ -285,6 +297,13 @@ class portal extends Phaser.GameObjects.Sprite {
 		if (typeof dialogue !== 'undefined' && 
 			typeof dialogue[currentDialogue]._SPAWNAFTERTALKAETIOS !== 'undefined') {
 			this.spawnAfterTalkAetiosWaiting = false;
+		}
+		if (typeof dialogue !== 'undefined' && 
+			typeof dialogue[currentDialogue]._SPAWNAFTERMEETAETIOS !== 'undefined') {
+			if (levelProgress == 1)
+			{
+				levelProgress++;
+			}
 		}
 	}
 
@@ -300,6 +319,11 @@ class portal extends Phaser.GameObjects.Sprite {
 		} 
 		
 		if (tempPortalActive && this.spawnAfterTalkAetios && this.spawnAfterTalkAetiosWaiting) {
+			tempPortalActive = false;
+		}
+
+		if (tempPortalActive && this.spawnAfterMeetAetios)
+		{
 			tempPortalActive = false;
 		}
 
@@ -319,7 +343,7 @@ class portal extends Phaser.GameObjects.Sprite {
 			this.alpha = 0; 
 		}
 
-		if (this.spawnAfterSpiderFlower && this.spawnAfterBossBattle && levelProgress == 1)
+		if (this.spawnAfterSpiderFlower && this.spawnAfterBossBattle && levelProgress == 2)
 		{
 			levelProgress++;
 		}

@@ -256,6 +256,7 @@ function spawnObjects() {
                     spawnAfterSpiderFlower: tempProperties['spawnAfterSpiderFlower'],
                     spawnAfterBossBattle: tempProperties['spawnAfterBossBattle'],
                     spawnAfterTalkAetios: tempProperties['spawnAfterTalkAetios'],
+                    spawnAfterMeetAetios: tempProperties['spawnAfterMeetAetios'],
                     spawnAfterPlow: tempProperties['spawnAfterPlow'],
                     spawnAfterRitual: tempProperties['spawnAfterRitual']
                 });
@@ -263,55 +264,95 @@ function spawnObjects() {
                 break; 
                 
                 //SIGNS
-				case 'signR2C':
-                signR2C = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signR2CSprite');
-                createThis.physics.add.collider(signR2C, mapLayer);
-                break; 
+		case 'signR2C':
+                npcs[npcCount] = new signR2CNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
+                break;
 				
 				case 'signMarket':
-                signMarket = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signMarketSprite');
-                createThis.physics.add.collider(signMarket, mapLayer);
+                npcs[npcCount] = new signMarketNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break; 
 				
 				case 'signShrine':
-                signShrine = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signShrineSprite');
-                createThis.physics.add.collider(signShrine, mapLayer);
+                npcs[npcCount] = new signShrineNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break; 
 				
 				case 'signShrineForest':
-                signShrineForest = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signShrineForestSprite');
-                createThis.physics.add.collider(signShrineForest, mapLayer);
+                npcs[npcCount] = new signShrineForestNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break; 
 				
 				case 'signPalace':
-                signPalace = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signPalaceSprite');
-                createThis.physics.add.collider(signPalace, mapLayer);
-                break; 
+                npcs[npcCount] = new signPalaceNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
+                break;
 				
 				case 'signColchisFields':
-                signColchisFields = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signColchisFieldsSprite');
-                createThis.physics.add.collider(signColchisFields, mapLayer);
+                npcs[npcCount] = new signColchisFieldsNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break; 
 				
 				case 'signRiverCrossing':
-                signRiverCrossing = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signRiverCrossingSprite');
-                createThis.physics.add.collider(signRiverCrossing, mapLayer);
+                npcs[npcCount] = new signRiverCrossingNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break; 
 				
 				case 'signGardenEntrance':
-                signGardenEntrance = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signGardenEntranceSprite');
-                createThis.physics.add.collider(signGardenEntrance, mapLayer);
+                npcs[npcCount] = new signGardenEntranceNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break; 
 				
 				case 'signDungeon':
-                signDungeon = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signDungeonSprite');
-                createThis.physics.add.collider(signDungeon, mapLayer);
+                npcs[npcCount] = new signDungeonNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
                 break; 
 				
 				case 'signGardenForest':
-                signGardenForest = createThis.physics.add.sprite(mapObjectArray[i].x, mapObjectArray[i].y, 'signGardenForestSprite');
-                createThis.physics.add.collider(signGardenForest, mapLayer);
-                break; 
+                npcs[npcCount] = new signGardenForestNPC({
+                    x: mapObjectArray[i].x, 
+                    y: mapObjectArray[i].y, 
+                    dialogueKey: tempProperties['dialogueKey']
+                });
+                npcCount++; 
+                break;
 			
 			case 'plow':
                 plow = new plowItem({

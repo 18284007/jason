@@ -1,4 +1,6 @@
 var medeaActive = false;
+var thoughtBubbleRadius = 75; 
+
 /* NPC Base.  
  * This is used as the base for several NPC classes. 
  * Do not create this object directly. 
@@ -46,7 +48,20 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 
 	update () {
+		this.updateThoughtBubble();
+	}
 
+	updateThoughtBubble () {
+		if (player.x - thoughtBubbleRadius < this.x && player.x + thoughtBubbleRadius > this.x) {
+			if (this.thoughtBubble == undefined && this.hasDialogue && typeof levelJSON[this.dialogueKey] !== 'undefined') {
+				this.thoughtBubble = createThis.physics.add.sprite(this.x - 20, this.y - 50, 'thoughtBubbleSprite');
+				this.thoughtBubble.body.allowGravity = false; 
+				this.thoughtBubble.setDepth(-50);
+			}
+		} else if (this.thoughtBubble !== undefined) {
+			this.thoughtBubble.destroy(); 
+			this.thoughtBubble = undefined;
+		}
 	}
 }
 
@@ -61,9 +76,6 @@ class artemisNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-	}
-
-	update () {
 	}
 }
 
@@ -82,6 +94,7 @@ class artemisDogNPC extends npcBase {
 
 	update () 
 	{
+		this.updateThoughtBubble();
 		if (player.x < this.x && this.active) {
 			this.anims.play('medeaIdleLeft', true);
 		} else if (player.x > this.x && this.active) {
@@ -149,6 +162,7 @@ class medeaNPC extends npcBase {
 
 	update () 
 	{
+		this.updateThoughtBubble();
 		if (!medeaActive)
 		{
 			if (player.x < this.x && this.active) {
@@ -213,6 +227,15 @@ class kingAetiosNPC extends npcBase {
 	}
 
 	update () {
+		this.updateThoughtBubble();
+		if (currentLevelID == 'colchisFields')
+		{
+			if (player.x < this.x && this.active) {
+				this.anims.play('kingIdleLeft', true);
+			} else if (player.x > this.x && this.active) {
+				this.anims.play('kingIdleRight', true);
+			}
+		}
 	}
 }
 class oileusNPC extends npcBase {
@@ -228,10 +251,6 @@ class oileusNPC extends npcBase {
 		})
 		//this.scaleX = playerScale; 
 		//this.scaleY = playerScale;
-	}
-
-	update () {
-		
 	}
 }
 
@@ -249,9 +268,146 @@ class iphiclusNPC extends npcBase {
 		//this.scaleX = playerScale; 
 		//this.scaleY = playerScale;
 	}
+}
 
-	update () {
-		
+/* Signs */
+class signR2CNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signR2CSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signMarketNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signMarketSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signShrineNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signShrineSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signShrineForestNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signShrineForestSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signPalaceNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signPalaceSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signColchisFieldsNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signColchisFieldsSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signRiverCrossingNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signRiverCrossingSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signGardenEntranceNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signGardenEntranceSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signDungeonNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signDungeonSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
+	}
+}
+
+class signGardenForestNPC extends npcBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y, 
+			key: 'signGardenForestSprite',
+			dialogueKey: parameter.dialogueKey,
+			npcId: parameter.npcId, 
+			gravity: true
+		})
 	}
 }
 
