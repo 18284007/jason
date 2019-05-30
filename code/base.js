@@ -149,7 +149,11 @@ class controller extends Phaser.Scene
             userIntThis.ritualItemText.setText(tempCount + '/' + ritualItemCount + " Ritual Items.");
             userIntThis.ritualItemText.alpha = 1; 
         } else {
-            userIntThis.ritualItemText.alpha = 0; 
+            userIntThis.ritualItemText.alpha = 0;
+            if (levelProgress === 4)
+            {
+                levelProgress++;
+            } 
         }
     }
 }
