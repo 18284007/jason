@@ -353,10 +353,13 @@ class plowItem extends Phaser.GameObjects.Sprite {
 
 	update() {
 		for (i = 0; i < enemyCount; i++){
-			if (Phaser.Geom.Intersects.RectangleToRectangle(this.getBounds(), enemies[i].getBounds()) && 
-				enemies[i].body.velocity.x < 0 && 
-				(enemies[i].x + 100) < this.x) {
-				this.x -= 5;
+			if(enemies[i].body !== undefined)
+			{
+				if (Phaser.Geom.Intersects.RectangleToRectangle(this.getBounds(), enemies[i].getBounds()) && 
+					enemies[i].body.velocity.x < 0 && 
+					(enemies[i].x + 100) < this.x) {
+					this.x -= 5;
+				}
 			}
 		}
 
