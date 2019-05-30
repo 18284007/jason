@@ -53,13 +53,14 @@
 			"_KINGAETIOSWALKAWAY":"" 
 		},
 		{ "char":"Medea",
-			"speech":"Meet me at the shrine of Hecate outside the city" 
+			"speech":"Meet me at the shrine of Hecate outside the city",
+			"_SPAWNAFTERMEETAETIOS":"" 
 		},
 		{ "char":"",
 			"speech":""
 		}
 	],
-	"aetios2":[
+	"aetios3":[
 		{
 		  "char":"King Aetios",
 			"speech":"I see you have come to fulfil your challenge, very well to the fields! The bulls await!",
@@ -69,5 +70,23 @@
 			"char":"",
 			"speech":""
 		}
+	],
+	"signMarket":[
+		{ "char":"To the Marketplace",
+			"speech":" " 
+		},
+		{ "char":"",
+			"speech":"" 
+		}
+	],
+	"signColchisFields":[
+		{ "char":"To the fields of Colchis",
+			"speech":" " 
+		},
+		{ "char":"",
+			"speech":"" 
+		}
 	]
+
+
 }

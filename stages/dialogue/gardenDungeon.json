@@ -1,5 +1,8 @@
 {
-	"dialogue":[
+	"signGardenEntrance":[
+		{ "char":"To the garden's gate",
+			"speech":" " 
+		},
 		{ "char":"",
 			"speech":"" 
 		}

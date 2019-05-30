@@ -1,7 +1,42 @@
 {
-	"dialogue":[
-		{ "char":"",
-			"speech":"" 
+	"aetios3":[
+		{ "char":"King Aetios",
+			"speech":"I wish thee luck, but none can withstand the mighty beasts of Colchis" 
+		},
+		{
+			"char":"",
+			"speech":""
+		}
+	],
+	"aetios4":[
+		{ "char":"King Aetios",
+			"speech":"A mighty show! I cannot believe my eyes!" 
+		},
+		{
+			"char":"Jason",
+			"speech":"Zues shines glory upon this day"
+		},
+		{
+			"char":"",
+			"speech":""
+		}
+	],
+	"palaceSign":[
+		{ "char":"To King Aetios' Palace",
+			"speech":" " 
+		},
+		{
+			"char":"",
+			"speech":""
+		}
+	],
+	"riverSign":[
+		{ "char":"To the river crossing",
+			"speech":" " 
+		},
+		{
+			"char":"",
+			"speech":""
 		}
 	]
 }
