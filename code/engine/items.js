@@ -250,17 +250,8 @@ class portal extends Phaser.GameObjects.Sprite {
         	this.spawnAfterSpiderFlower = false; 
         }
 
-        if (typeof parameter.spawnAfterMeetAetios !== 'undefined')
-        {
-        	this.spawnAfterMeetAetios = true;
-        }else if ((currentLevelID == 'roadToColchis') && (levelProgress >= 2))
-        {
-        	this.spawnAfterMeetAetios = true;
-        }else
-        {
-        	this.spawnAfterMeetAetios = false;
-        }
-
+        this.spawnAfterMeetAetios = (typeof parameter.spawnAfterMeetAetios !== 'undefined' && (levelProgress < 2));
+        
         if (typeof parameter.spawnAfterTalkAetios !== 'undefined') {
         	this.spawnAfterTalkAetios = true;
 			this.spawnAfterTalkAetiosWaiting = true; 
