@@ -79,12 +79,18 @@
                  "id":13,
                  "name":"medea",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"medea"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3154.54545454545,
-                 "y":1724.24242424242
+                 "x":320,
+                 "y":1725
                 }, 
                 {
                  "height":0,
@@ -204,6 +210,12 @@
                  "id":21,
                  "name":"signRiverCrossing",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signRiverCrossing"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -216,6 +228,12 @@
                  "id":22,
                  "name":"signGardenForest",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signGardenForest"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -228,6 +246,12 @@
                  "id":23,
                  "name":"signDungeon",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"dialogueKey",
+                         "type":"string",
+                         "value":"signDungeon"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
