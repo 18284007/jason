@@ -97,7 +97,7 @@ class controller extends Phaser.Scene
         parseCharacterMetaJSON();
 
     	game.scene.run(currentLevelID);
-	if (['endScreen','titleScreen'].includes(currentLevelID))
+	if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
@@ -120,7 +120,7 @@ class controller extends Phaser.Scene
 	/*Music*/
         if(!musicPlaying)
         {
-             if (['endScreen','titleScreen'].includes(currentLevelID))
+             if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID))
             {
                 music = this.sound.add('water', {loop: true});
                 music.play();
@@ -316,15 +316,15 @@ function shipUpdate()
 function changeLevel(tempNewLevelID) {
 	oldLevelID = currentLevelID;
 	playerShip = false;
-    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece'].includes(currentLevelID)) ||
-    		(['endScreen','titleScreen','colchisFields', 'gardenFleece'].includes(tempNewLevelID)))
+    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu'].includes(currentLevelID)) ||
+    		(['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu'].includes(tempNewLevelID)))
     {
         musicPlaying = false;
         music.stop();
     }
     clearDialogueBox();
     npcDialogue.text = '';
-	if (['endScreen','titleScreen'].includes(tempNewLevelID))
+	if (['endScreen','titleScreen','mapMenu'].includes(tempNewLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
