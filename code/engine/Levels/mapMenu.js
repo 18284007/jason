@@ -34,39 +34,51 @@ class mapMenu extends Phaser.Scene {
 		
 		toDot1.on("pointerup", ()=>{ changeLevel('argoLanding');
 			});
-		
-		toDot2.on("pointerup", ()=>{ changeLevel('roadToColchis');
+		if (levelProgress > 1)
+		{
+			toDot2.on("pointerup", ()=>{ changeLevel('roadToColchis');
+				});
+
+			toDot3.on("pointerup", ()=>{changeLevel('marketplace');
+				});
+
+			toDot4.on("pointerup", ()=>{changeLevel('palace');
+				});
+		}
+
+		if (levelProgress > 2)
+		{
+			toDot5.on("pointerup", ()=>{changeLevel('shrine');
 			});
 
-		toDot3.on("pointerup", ()=>{changeLevel('marketplace');
+			toDot6.on("pointerup", ()=>{changeLevel('shrineForest');
 			});
+		}
+		if (levelProgress > 3)
+		{
+			toDot7.on("pointerup", ()=>{changeLevel('colchisFields');
+				});
 
-		toDot4.on("pointerup", ()=>{changeLevel('palace');
-			});
+			toDot8.on("pointerup", ()=>{changeLevel('riverCrossing');
+				});
 
-		toDot5.on("pointerup", ()=>{changeLevel('shrine');
-			});
+			toDot9.on("pointerup", ()=>{changeLevel('gardenEntrance');
+				});
 
-		toDot6.on("pointerup", ()=>{changeLevel('shrineForest');
-			});
+			toDot10.on("pointerup", ()=>{changeLevel('gardenForest');
+				});
 
-		toDot7.on("pointerup", ()=>{changeLevel('colchisFields');
-			});
+			toDot11.on("pointerup", ()=>{changeLevel('gardenDungeon');
+				});
+		}
 
-		toDot8.on("pointerup", ()=>{changeLevel('riverCrossing');
-			});
+		if (levelProgress > 5)
+		{
+			toDot12.on("pointerup", ()=>{changeLevel('gardenFleece');
+			});	
+		}
 
-		toDot9.on("pointerup", ()=>{changeLevel('gardenEntrance');
-			});
 
-		toDot10.on("pointerup", ()=>{changeLevel('gardenForest');
-			});
-
-		toDot11.on("pointerup", ()=>{changeLevel('gardenDungeon');
-			});
-
-		toDot12.on("pointerup", ()=>{changeLevel('gardenFleece');
-			});		
 	}
 }
 
