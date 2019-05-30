@@ -215,6 +215,10 @@ class ritualFire extends itemBase {
                 inventoryKey: tempProperties[i]
             });
 		}
+		if (levelProgress == 5)
+		{
+			levelProgress++;
+		}
 	}
 
 	collision (tempItem) {
@@ -252,7 +256,7 @@ class portal extends Phaser.GameObjects.Sprite {
 
         this.spawnAfterMeetAetios = (typeof parameter.spawnAfterMeetAetios !== 'undefined' && (levelProgress < 2));
         
-        if (typeof parameter.spawnAfterTalkAetios !== 'undefined') {
+        if (typeof parameter.spawnAfterTalkAetios !== 'undefined'&& (levelProgress < 4)) {
         	this.spawnAfterTalkAetios = true;
 			this.spawnAfterTalkAetiosWaiting = true; 
         } else {
@@ -260,14 +264,14 @@ class portal extends Phaser.GameObjects.Sprite {
 			this.spawnAfterTalkAetiosWaiting = false; 
         }
 
-        if (typeof parameter.spawnAfterRitual !== 'undefined') {
+        if (typeof parameter.spawnAfterRitual !== 'undefined'&& (levelProgress < 6)) {
         	this.spawnAfterRitual = parameter.spawnAfterRitual;
         	this.remainingPortals = ritualItemCount;
         } else {
         	this.spawnAfterRitual = false; 
         }
 
-        if (typeof parameter.spawnAfterPlow !== 'undefined') {
+        if (typeof parameter.spawnAfterPlow !== 'undefined'&& (levelProgress < 4)) {
         	this.spawnAfterPlow = parameter.spawnAfterPlow;
         } else {
         	this.spawnAfterPlow = false; 
@@ -365,6 +369,10 @@ class plowItem extends Phaser.GameObjects.Sprite {
 
 		if (this.x < 250) {
 			this.stuck = true;
+			if(levelProgress === 3)
+			{
+				levelProgress++;
+			}
 		} 
 	}
 }
