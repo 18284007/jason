@@ -137,14 +137,12 @@ class medeaNPC extends npcBase {
 	walk (tempNPC)
 	{
 		tempNPC.anims.play('medeaWalkRight', true);
-		this.flipX = true; 
 		tempNPC.body.setVelocityX(-150);
 		tempNPC.isWalking = true;
 	}
 
 	walkBack (tempNPC)
 	{
-		this.flipX = false; 
 		tempNPC.anims.play('medeaWalkRight', true);
 		tempNPC.body.setVelocity(150);
 		tempNPC.isWalking = true;
