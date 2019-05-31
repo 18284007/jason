@@ -130,18 +130,22 @@ class medeaNPC extends npcBase {
 
 	stopWalk (tempNPC) {
 		tempNPC.body.setVelocityX(0);
+		tempNPC.anims.play('medeaIdleRight', true);
 		tempNPC.isWalking = false;
 	}
 
 	walk (tempNPC)
 	{
+		tempNPC.anims.play('medeaWalkRight', true);
+		this.flipX = true; 
 		tempNPC.body.setVelocityX(-150);
 		tempNPC.isWalking = true;
 	}
 
 	walkBack (tempNPC)
 	{
-		tempNPC.anims.play('medeaIdleRight', true);
+		this.flipX = false; 
+		tempNPC.anims.play('medeaWalkRight', true);
 		tempNPC.body.setVelocity(150);
 		tempNPC.isWalking = true;
 	}
@@ -151,7 +155,7 @@ class medeaNPC extends npcBase {
 			typeof dialogue[currentDialogue]._MEDEAPREPAREOINTMENT !== 'undefined' && 
 			!medeaActive) {
 				medeaActive = true;
-				this.anims.play('medeaIdleLeft', true);
+				this.anims.play('medeaWalkRight', true);
 				this.walk(this);
 				setTimeout(this.stopWalk, 1000, this);
 				setTimeout(this.walkBack,2000,this);
@@ -163,13 +167,10 @@ class medeaNPC extends npcBase {
 	update () 
 	{
 		this.updateThoughtBubble();
-		if (!medeaActive)
-		{
-			if (player.x < this.x && this.active) {
-				this.anims.play('medeaIdleLeft', true);
-			} else if (player.x > this.x && this.active) {
-				this.anims.play('medeaIdleRight', true);
-			}
+		if (this.active && this.body.velocity.x == 0) {
+			this.flipX = (player.x < this.x);
+		} else {
+			this.flipX = (this.body.velocity.x < 0);
 		}
 	}
 }
