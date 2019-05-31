@@ -75,7 +75,7 @@ class maxHealthItem extends itemBase {
 			gravity: false
 		})
 
-		this.boostValue = 50; 
+		this.boostValue = 10; 
 	}
 
 	collision (tempItem){
