@@ -496,12 +496,12 @@ class dragonBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
+			key: 'dragonSprite', 
 			xMove: parameter.xMove,
 			xVel: 300, 
 			yMove: parameter.yMove, 
 			yVel: 300,
-			scale: 3, 
+			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
 			health: 1000, 
@@ -512,6 +512,8 @@ class dragonBoss extends enemyBase {
         this.moveDirection = 0; 
         this.body.setVelocityY(0);
         this.invulnerabilityWait = 3000; 
+        this.anims.play('dragonSpriteRight', true);
+        this.body.setSize(140,70);
 	}	
 
 	checkPhase() {
@@ -547,6 +549,8 @@ class dragonBoss extends enemyBase {
 				this.moveUp = !this.moveUp; 
 			}
 		}
+
+		this.flipX = (this.body.velocity.x <= 0);
 	}
 
 	shoot() {
