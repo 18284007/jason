@@ -1,10 +1,10 @@
-var medeaActive = false;
-var thoughtBubbleRadius = 75; 
+var medeaActive = false; //Is Medea currently in an active cutscene?
+var thoughtBubbleRadius = 75; //The radius used in updateThoughtBubble() to calculate whether the player is near an enemy. 
 
 /* NPC Base.  
  * This is used as the base for several NPC classes. 
  * Do not create this object directly. 
- * Required parameters: scene, x, y, key, npcId.
+ * Required parameters: scene, x, y, key, npcId
  * Optional parameters: dialogueKey, gravity
  */
 class npcBase extends Phaser.GameObjects.Sprite {
@@ -33,6 +33,7 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 
 	collision (tempNPC){
+		//If the NPC has dialogue and it is not undefined, run the processNPCdialogue() function and set the dialogueMax variable. 
 		if (tempNPC.hasDialogue){ 
 			dialogue = levelJSON[tempNPC.dialogueKey];
 			if (dialogue !== undefined)
@@ -43,14 +44,26 @@ class npcBase extends Phaser.GameObjects.Sprite {
 		}
 	}
 
+	/* dialogueUpdate 
+	 * This is used to check if the dialogue has a flag relevant for a particular NPC. 
+	 * There are currently no flags used for every enemy, so this should be left blank. 
+	 */
 	dialogueUpdate () {
 
 	}
 
+	/* update 
+	 * This is run every time the game's update() function is run. 
+	 * By default, updateThoughtBubble is run but child classes often have more code. 
+	 */
 	update () {
 		this.updateThoughtBubble();
 	}
 
+	/* updateThoughtBubble
+	 * If the player is in range, spawn a thought bubble if one does not already exist.
+	 * If the player is not in range and the thought bubble exists, destroy it. 
+	 */
 	updateThoughtBubble () {
 		if (player.x - thoughtBubbleRadius < this.x && player.x + thoughtBubbleRadius > this.x) {
 			if (this.thoughtBubble == undefined && this.hasDialogue && typeof levelJSON[this.dialogueKey] !== 'undefined') {
@@ -65,6 +78,10 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 }
 
+/* Artemis. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class artemisNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -79,6 +96,10 @@ class artemisNPC extends npcBase {
 	}
 }
 
+/* Artemis' Dog. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class artemisDogNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -104,7 +125,7 @@ class artemisDogNPC extends npcBase {
 }
 
 /* Medea. 
- * Required attributes: x, y. 
+ * Required attributes: x, y, npcId.
  * Optional attributes: dialogueKey. 
  */
 class medeaNPC extends npcBase {
@@ -118,8 +139,6 @@ class medeaNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-		//this.scaleX = playerScale; 
-		//this.scaleY = playerScale;
 		this.medeaActive = false;
 	}
 
@@ -174,7 +193,7 @@ class medeaNPC extends npcBase {
 }
 
 /* King Aetios. 
- * Required attributes: x, y. 
+ * Required attributes: x, y, npcId.
  * Optional attributes: dialogueKey. 
  */
 class kingAetiosNPC extends npcBase {
@@ -237,6 +256,11 @@ class kingAetiosNPC extends npcBase {
 		}
 	}
 }
+
+/* Oileus. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class oileusNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -248,11 +272,13 @@ class oileusNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-		//this.scaleX = playerScale; 
-		//this.scaleY = playerScale;
 	}
 }
 
+/* Iphiclus. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class iphiclusNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -264,8 +290,6 @@ class iphiclusNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-		//this.scaleX = playerScale; 
-		//this.scaleY = playerScale;
 	}
 }
 
@@ -435,11 +459,14 @@ function processNPCdialogue () {
         	drawDialogueBox(); 
             npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
             dialoguex = player.x; //dialoguex is used to check if the player walks away. 
+
+            //Iterate through dialogue, looping back to 0 if there are no more lines of dialogue. 
             if (currentDialogue == dialogueMax) {
                 currentDialogue = 0;
             } else {
                 currentDialogue++; 
 	        } 
+
             dialogueAlreadyEngaged = true;
             dialogueActive = true;  
 	    }
@@ -453,7 +480,7 @@ function processNPCdialogue () {
 	} 
 }
 
-
+//Run the update(); command of each NPC.
 function npcUpdate() {
 	for (i = 0; i < npcCount; i++) {
 		npcs[i].update();
