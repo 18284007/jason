@@ -5,3 +5,6 @@ Credits to http://www.buko-studios.com/ Commissioned by PlayCraft: www.playcraft
 Spider 
 CC BY 3.0 https://creativecommons.org/licenses/by/3.0/
 Taken from '5 Static Enemy Sprites' by Beast from https://opengameart.org/content/5-static-enemy-sprites.
+
+Minotaur
+Animated Minotaur by Calciumtrice, usable under Creative Commons Attribution 3.0 license.

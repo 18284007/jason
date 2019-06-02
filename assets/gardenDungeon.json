@@ -79,11 +79,17 @@
                  "id":11,
                  "name":"minotaurBoss",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"xMove",
+                         "type":"int",
+                         "value":300
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3800.48484848485,
+                 "x":3400.48484848485,
                  "y":1500.18181818182
                 }, 
                 {
@@ -145,24 +151,6 @@
                  "width":0,
                  "x":2312.12121212121,
                  "y":672.727272727273
-                }, 
-                {
-                 "height":0,
-                 "id":16,
-                 "name":"bats",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"xMove",
-                         "type":"int",
-                         "value":120
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":3433.33333333333,
-                 "y":1512.12121212122
                 }, 
                 {
                  "height":0,
@@ -365,7 +353,7 @@
  "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"2019.04.03",
  "tileheight":64,
  "tilesets":[
         {
