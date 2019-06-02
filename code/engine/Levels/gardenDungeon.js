@@ -36,8 +36,8 @@ class gardenDungeon extends Phaser.Scene{
         });
 
         createThis.anims.create({
-            key: 'minotaurIdleLeft',
-            frames: createThis.anims.generateFrameNumbers('minotaurSprite', { start: 0, end: 0 }),
+            key: 'minotaurWalkLeft',
+            frames: createThis.anims.generateFrameNumbers('minotaurSprite', { start: 20, end: 29 }),
             frameRate: 10,
             repeat: -1
         });
