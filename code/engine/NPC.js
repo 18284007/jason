@@ -292,8 +292,11 @@ class iphiclusNPC extends npcBase {
 	}
 }
 
-/* Signs */
-class signNPC extends npcBase {
+/* Sign. 
+ * Required attributes: x, y, npcId, key
+ * Optional attributes: dialogueKey. 
+ */
+ class signNPC extends npcBase {
 	constructor (parameter) {
 		super({
 			scene: createThis, 
