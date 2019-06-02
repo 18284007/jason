@@ -1,6 +1,10 @@
+//Base stats, used when starting a new game. 
+const maxHealthInit = 100;
+const playerDamgePointsInit = 50; 
+
 //Game variables relating to the player on all levels.
-var maxHealth = 100;
-var currentHealth = 100;
+var maxHealth = maxHealthInit;
+var currentHealth = maxHealthInit;
 var playerAlive = true;
 // variables relating to normal levels
 var playerJumpVelocity = 500; 
@@ -9,7 +13,7 @@ var playerFacingRight = true;
 var playerHasWings = false; //Can the player fly?
 var playerSwingSword = false;
 var playerSwungSword = false; 
-var playerDamagePoints = 50;
+var playerDamagePoints = playerDamgePointsInit;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
 
