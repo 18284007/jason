@@ -478,8 +478,12 @@ class minotaurBoss extends enemyBase {
 
 		if (this.swingSword) {
 			this.anims.play('minotaurSwingLeft', true);
+			this.body.setSize(48,35);
+			this.body.setOffset(0,14);
 		} else {
 			this.anims.play('minotaurIdleLeft', true);
+			this.body.setSize(26,35);
+			this.body.setOffset(11,14);
 		}
 	}
 
