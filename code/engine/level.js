@@ -1,6 +1,3 @@
-var enemyCount;
-var enemies;
-
 //Arrays that store appropriate objects and a corresponding counter.
 enemies = []; //Enemy array
 enemyCount = 0; //Enemy counter
