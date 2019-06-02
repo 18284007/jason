@@ -111,16 +111,15 @@ class artemisDogNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
+		this.anims.play('medeaIdleRight', true);
 	}
 
 	update () 
 	{
 		this.updateThoughtBubble();
-		if (player.x < this.x && this.active) {
-			this.anims.play('medeaIdleLeft', true);
-		} else if (player.x > this.x && this.active) {
-			this.anims.play('medeaIdleRight', true);
-		}
+		if (this.active) {
+			this.flipX = (player.x < this.x); 
+		} 
 	}
 }
 
