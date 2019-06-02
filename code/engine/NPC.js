@@ -482,6 +482,8 @@ function processNPCdialogue () {
 //Run the update(); command of each NPC.
 function npcUpdate() {
 	for (i = 0; i < npcCount; i++) {
-		npcs[i].update();
+		if (npcs[i] !== undefined && npcs[i].active !== undefined && npcs[i].active) {
+			npcs[i].update();
+		}	
 	}
 }
