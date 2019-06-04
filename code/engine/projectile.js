@@ -52,15 +52,20 @@ class dragonFire extends projectile {
             scene: createThis,
             x: parameter.x,
             y: parameter.y, 
-            key: 'fireballSprite', //temp
+            key: 'fireballSprite',
             velocityX: -150,
             velocityAimed: parameter.velocityAimed,
             projectileId: parameter.projectileId,
             damage: 25
         })
 
-        if (parameter.aimed){
+        this.hugeFireMovement = parameter.hugeFireMovement !== undefined && parameter.hugeFireMovement;
+
+        if (this.aimed){
             createThis.physics.accelerateToObject(this, player, this.velocityAimed);
+        } else if (this.hugeFireMovement) {
+            this.body.velocity.x = Math.random() * 200 - 100; 
+            this.body.velocity.y = Math.random() * 200 - 100;
         }
     }
 }

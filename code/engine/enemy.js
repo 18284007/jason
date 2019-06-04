@@ -83,12 +83,16 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         createThis.physics.add.overlap(this, player, this.collision);
 	}
 
+	collision(tempEnemy) {
+		tempEnemy.collisionBase(tempEnemy);
+	}
+
 	/* If the enemy is in a state of temporary invulnerability, nothing happens. 
 	 * Otherwise, the player will damage the enemy if the sword is swung and the 
 	 * enemy will damage the player if the sword is not being swung. 
 	 * tempEnemy refers to the enemy object. 
 	 */
-	collision(tempEnemy) {
+	collisionBase(tempEnemy) {
 		if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
 			enemies[tempEnemy.enemyId].destroy();  
 		} else if (playerSwingSword && !tempEnemy.invulnerability && !tempEnemy.invulnerabilityAlways) {
@@ -531,6 +535,14 @@ class dragonBoss extends enemyBase {
         this.body.setSize(140,70);
 	}	
 
+	collision (tempEnemy) {
+		var tempOldPhase = tempEnemy.checkPhase(); 
+		tempEnemy.collisionBase(tempEnemy);
+		if (tempOldPhase !== tempEnemy.checkPhase()) {
+			setTimeout(tempEnemy.hugeFire, 2000, tempEnemy);
+		}
+	}
+
 	checkPhase() {
 		if (this.health <= 300){
 			return 2;
@@ -538,6 +550,18 @@ class dragonBoss extends enemyBase {
 			return 1; 
 		} else {
 			return 0; 
+		}
+	}
+
+	hugeFire (tempDragon) {
+		for (i = 0; i < 8; i++) {
+			projectiles[currentProjectile] = new dragonFire({
+	        	x: tempDragon.x, 
+	        	y: tempDragon.y,
+	        	projectileId: currentProjectile,
+	        	aimed: false, 
+	        	hugeFireMovement: true
+    		});
 		}
 	}
 
