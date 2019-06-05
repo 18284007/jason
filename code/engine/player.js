@@ -84,12 +84,15 @@ function playerMovement() {
             (!playerFacingRight && tempCheckLeftTile !== null && tempCheckLeftTile.collides) || 
             (playerFacingRight && tempCheckRightTile2 !== null && tempCheckRightTile2.collides) || 
             (!playerFacingRight && tempCheckLeftTile2 !== null && tempCheckLeftTile2.collides)) {
+            //Smaller hitbox
             player.setSize(20, 64);
             player.setOffset(28, 0);     
         } else if (playerFacingRight) {
+            //Expand hitbox to right 
             player.setSize(60, 64);
             player.setOffset(28, 0);
         } else {
+            //Expand hitbox to left
             player.setSize(60, 64);
             player.setOffset(-12, 0);
         } 
