@@ -71,19 +71,28 @@ function playerMovement() {
         player.setOffset(28, 0);
     } else if (playerSwingSword) {
         player.anims.play('jasonAttackRight', true);
-        player.setSize(60, 64);
 
         /* If the player is facing a wall and close to it, the game will use the default hitbox size. 
          * If the player is not near a wall, a larger hitbox will be used.  
          */
-        if (playerFacingRight && !createThis.map.getTileAtWorldXY(player.x + 50, player.y + 32)) {
-            player.setOffset(28, 0);
-        } else if (!createThis.map.getTileAtWorldXY(player.x - 11, player.y + 32)) {
-            player.setOffset(-12, 0);
-        } else {
+        var tempCheckRightTile = createThis.map.getTileAtWorldXY(player.x + 50, player.y + 31); 
+        var tempCheckLeftTile = createThis.map.getTileAtWorldXY(player.x - 11, player.y + 31);
+        var tempCheckRightTile2 = createThis.map.getTileAtWorldXY(player.x + 50, player.y); 
+        var tempCheckLeftTile2 = createThis.map.getTileAtWorldXY(player.x - 11, player.y);
+
+        if ((playerFacingRight && tempCheckRightTile !== null && tempCheckRightTile.collides) || 
+            (!playerFacingRight && tempCheckLeftTile !== null && tempCheckLeftTile.collides) || 
+            (playerFacingRight && tempCheckRightTile2 !== null && tempCheckRightTile2.collides) || 
+            (!playerFacingRight && tempCheckLeftTile2 !== null && tempCheckLeftTile2.collides)) {
             player.setSize(20, 64);
-            player.setOffset(28, 0);            
-        }
+            player.setOffset(28, 0);     
+        } else if (playerFacingRight) {
+            player.setSize(60, 64);
+            player.setOffset(28, 0);
+        } else {
+            player.setSize(60, 64);
+            player.setOffset(-12, 0);
+        } 
 
     } else {
         player.anims.play('jasonRight', true);
