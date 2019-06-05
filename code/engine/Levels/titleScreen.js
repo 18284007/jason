@@ -23,7 +23,7 @@ class titleScreen extends Phaser.Scene{
 			
 		startGame.on("pointerup", ()=>{
 			playerSprite = 'ship';
-			changeLevel('siren');
+			changeLevel('introCutscene');
 		});
 			
 		
