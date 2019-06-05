@@ -47,7 +47,8 @@ class controller extends Phaser.Scene
         this.load.audio('female', ['assets/stage/background/female.mp3']);
         this.load.audio('water', ['assets/stage/background/water.mp3']);
         this.load.audio('male',['assets/stage/background/male.mp3']);
-	this.load.audio('upbeat', ['assets/stage/background/upbeat.mp3']);
+	   this.load.audio('upbeat', ['assets/stage/background/upbeat.mp3']);
+       this.load.audio('jasonIntro', ['assets/stage/background/jasonIntro.mp3']);
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
@@ -132,6 +133,10 @@ class controller extends Phaser.Scene
             }else if(['siren'].includes(currentLevelID))
             {
                 music = this.sound.add('upbeat', {loop: true})
+                music.play();
+            }else if(['introCutscene'].includes(currentLevelID))
+            {
+                music = this.sound.add('jasonIntro', {loop: true})
                 music.play();
             }else
             {
@@ -321,8 +326,8 @@ function shipUpdate()
 function changeLevel(tempNewLevelID) {
 	oldLevelID = currentLevelID;
 	playerShip = false;
-    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren'].includes(currentLevelID)) ||
-    		(['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren'].includes(tempNewLevelID)))
+    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren','introCutscene'].includes(currentLevelID)) ||
+    		(['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren','introCutscene'].includes(tempNewLevelID)))
     {
         musicPlaying = false;
         music.stop();
@@ -375,7 +380,7 @@ var config = {
     },
     scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
-            placeholdertestmap, endCutscene, endScreen, siren, pause, mapMenu]
+            placeholdertestmap, endCutscene, endScreen, siren, pause, mapMenu, introCutscene]
 };
 
 var game = new Phaser.Game(config);
