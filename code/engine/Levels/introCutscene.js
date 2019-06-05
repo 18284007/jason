@@ -7,7 +7,10 @@ class introCutscene extends Phaser.Scene{
 	preload()
 	{
         createThis = this;
-        currentLevelID = 'introCutscene'; 
+        currentLevelID = 'introCutscene';
+        /*variable re-use, used for performance enhancement in this case*/
+        talkKeyPressed = false;
+
         this.load.image('introSlide1', 'assets/background/introSlide1.jpg');
         this.load.image('introSlide2', 'assets/background/introSlide2.jpg');
         this.load.image('introSlide3', 'assets/background/introSlide3.jpg');
@@ -30,49 +33,60 @@ class introCutscene extends Phaser.Scene{
     update()
     {
     	//Control movement based on the phase.
-    	if (endCutscenePhase == 0){
-    		endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide1');
-                    endCutsceneStillImg.setOrigin(1,1);
-                    endCutsceneStillImg.scrollFactorX = 0;
-                    endCutsceneStillImg.scrollFactorY = 0;
-                    endCutsceneStillImg.setDepth(100);
-    	} else if (endCutscenePhase == 1){
-    		endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide2');
-                    endCutsceneStillImg.setOrigin(1,1);
-                    endCutsceneStillImg.scrollFactorX = 0;
-                    endCutsceneStillImg.scrollFactorY = 0;
-                    endCutsceneStillImg.setDepth(100);
-    	} else if (endCutscenePhase == 2){
-    		endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide3');
-                    endCutsceneStillImg.setOrigin(1,1);
-                    endCutsceneStillImg.scrollFactorX = 0;
-                    endCutsceneStillImg.scrollFactorY = 0;
-                    endCutsceneStillImg.setDepth(100);
-    	} else if (endCutscenePhase == 3){
-            endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide4');
-                    endCutsceneStillImg.setOrigin(1,1);
-                    endCutsceneStillImg.scrollFactorX = 0;
-                    endCutsceneStillImg.scrollFactorY = 0;
-                    endCutsceneStillImg.setDepth(100);
-        } else if (endCutscenePhase == 4){
-            endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide5');
-                    endCutsceneStillImg.setOrigin(1,1);
-                    endCutsceneStillImg.scrollFactorX = 0;
-                    endCutsceneStillImg.scrollFactorY = 0;
-                    endCutsceneStillImg.setDepth(100);
-        } else if (endCutscenePhase == 5){
-            endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide6');
-                    endCutsceneStillImg.setOrigin(1,1);
-                    endCutsceneStillImg.scrollFactorX = 0;
-                    endCutsceneStillImg.scrollFactorY = 0;
-                    endCutsceneStillImg.setDepth(100);
-        }else{
+        if (!talkKeyPressed)
+        {
+            if (endCutscenePhase == 0){
+                endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide1');
+                endCutsceneStillImg.setOrigin(1,1);
+                endCutsceneStillImg.scrollFactorX = 0;
+                endCutsceneStillImg.scrollFactorY = 0;
+                endCutsceneStillImg.setDepth(100);
+                talkKeyPressed = true;
+            } else if (endCutscenePhase == 1){
+                endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide2');
+                endCutsceneStillImg.setOrigin(1,1);
+                endCutsceneStillImg.scrollFactorX = 0;
+                endCutsceneStillImg.scrollFactorY = 0;
+                endCutsceneStillImg.setDepth(100);
+                talkKeyPressed = true;
+            } else if (endCutscenePhase == 2){
+                endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide3');
+                endCutsceneStillImg.setOrigin(1,1);
+                endCutsceneStillImg.scrollFactorX = 0;
+                endCutsceneStillImg.scrollFactorY = 0;
+                endCutsceneStillImg.setDepth(100);
+                talkKeyPressed = true;
+            } else if (endCutscenePhase == 3){
+                endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide4');
+                endCutsceneStillImg.setOrigin(1,1);
+                endCutsceneStillImg.scrollFactorX = 0;
+                endCutsceneStillImg.scrollFactorY = 0;
+                endCutsceneStillImg.setDepth(100);
+                talkKeyPressed = true;
+            } else if (endCutscenePhase == 4){
+                endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide5');
+                endCutsceneStillImg.setOrigin(1,1);
+                endCutsceneStillImg.scrollFactorX = 0;
+                endCutsceneStillImg.scrollFactorY = 0;
+                endCutsceneStillImg.setDepth(100);
+                talkKeyPressed = true;
+            } else if (endCutscenePhase == 5){
+                endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide6');
+                endCutsceneStillImg.setOrigin(1,1);
+                endCutsceneStillImg.scrollFactorX = 0;
+                endCutsceneStillImg.scrollFactorY = 0;
+                endCutsceneStillImg.setDepth(100);
+                talkKeyPressed = true;
+            }else{
             changeLevel('siren');
-        }  
+            }
+        }
+    	  
     }
 
     updateProgress()
     {
         endCutscenePhase++;
+        talkKeyPressed = false;
     }
 }
