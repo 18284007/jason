@@ -72,10 +72,13 @@ function playerMovement() {
     } else if (playerSwingSword) {
         player.anims.play('jasonAttackRight', true);
         player.setSize(60, 64);
-        if (playerFacingRight) {
+        if (playerFacingRight && !createThis.map.getTileAtWorldXY(player.x + 50, player.y)) {
             player.setOffset(28, 0);
-        } else {
+        } else if (!createThis.map.getTileAtWorldXY(player.x - 11, player.y)) {
             player.setOffset(-12, 0);
+        } else {
+            player.setSize(20, 64);
+            player.setOffset(28, 0);            
         }
     } else {
         player.anims.play('jasonRight', true);
