@@ -47,6 +47,7 @@ class controller extends Phaser.Scene
         this.load.audio('female', ['assets/stage/background/female.mp3']);
         this.load.audio('water', ['assets/stage/background/water.mp3']);
         this.load.audio('male',['assets/stage/background/male.mp3']);
+	this.load.audio('upbeat', ['assets/stage/background/upbeat.mp3']);
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
@@ -127,6 +128,10 @@ class controller extends Phaser.Scene
             }else if(['colchisFields','gardenFleece'].includes(currentLevelID))
             {
             	music = this.sound.add('male', {loop: true})
+                music.play();
+            }else if(['siren'].includes(currentLevelID))
+            {
+                music = this.sound.add('upbeat', {loop: true})
                 music.play();
             }else
             {
@@ -316,8 +321,8 @@ function shipUpdate()
 function changeLevel(tempNewLevelID) {
 	oldLevelID = currentLevelID;
 	playerShip = false;
-    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu'].includes(currentLevelID)) ||
-    		(['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu'].includes(tempNewLevelID)))
+    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren'].includes(currentLevelID)) ||
+    		(['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren'].includes(tempNewLevelID)))
     {
         musicPlaying = false;
         music.stop();
