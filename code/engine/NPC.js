@@ -1,10 +1,10 @@
-var medeaActive = false;
-var thoughtBubbleRadius = 75; 
+var medeaActive = false; //Is Medea currently in an active cutscene?
+var thoughtBubbleRadius = 75; //The radius used in updateThoughtBubble() to calculate whether the player is near an enemy. 
 
 /* NPC Base.  
  * This is used as the base for several NPC classes. 
  * Do not create this object directly. 
- * Required parameters: scene, x, y, key, npcId.
+ * Required parameters: scene, x, y, key, npcId
  * Optional parameters: dialogueKey, gravity
  */
 class npcBase extends Phaser.GameObjects.Sprite {
@@ -33,6 +33,7 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 
 	collision (tempNPC){
+		//If the NPC has dialogue and it is not undefined, run the processNPCdialogue() function and set the dialogueMax variable. 
 		if (tempNPC.hasDialogue){ 
 			dialogue = levelJSON[tempNPC.dialogueKey];
 			if (dialogue !== undefined)
@@ -43,14 +44,26 @@ class npcBase extends Phaser.GameObjects.Sprite {
 		}
 	}
 
+	/* dialogueUpdate 
+	 * This is used to check if the dialogue has a flag relevant for a particular NPC. 
+	 * There are currently no flags used for every enemy, so this should be left blank. 
+	 */
 	dialogueUpdate () {
 
 	}
 
+	/* update 
+	 * This is run every time the game's update() function is run. 
+	 * By default, updateThoughtBubble is run but child classes often have more code. 
+	 */
 	update () {
 		this.updateThoughtBubble();
 	}
 
+	/* updateThoughtBubble
+	 * If the player is in range, spawn a thought bubble if one does not already exist.
+	 * If the player is not in range and the thought bubble exists, destroy it. 
+	 */
 	updateThoughtBubble () {
 		if (player.x - thoughtBubbleRadius < this.x && player.x + thoughtBubbleRadius > this.x) {
 			if (this.thoughtBubble == undefined && this.hasDialogue && typeof levelJSON[this.dialogueKey] !== 'undefined') {
@@ -65,6 +78,10 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	}
 }
 
+/* Artemis. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class artemisNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -79,6 +96,10 @@ class artemisNPC extends npcBase {
 	}
 }
 
+/* Artemis' Dog. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class artemisDogNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -90,21 +111,20 @@ class artemisDogNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
+		this.anims.play('medeaIdleRight', true);
 	}
 
 	update () 
 	{
 		this.updateThoughtBubble();
-		if (player.x < this.x && this.active) {
-			this.anims.play('medeaIdleLeft', true);
-		} else if (player.x > this.x && this.active) {
-			this.anims.play('medeaIdleRight', true);
-		}
+		if (this.active) {
+			this.flipX = (player.x < this.x); 
+		} 
 	}
 }
 
 /* Medea. 
- * Required attributes: x, y. 
+ * Required attributes: x, y, npcId.
  * Optional attributes: dialogueKey. 
  */
 class medeaNPC extends npcBase {
@@ -118,8 +138,6 @@ class medeaNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-		//this.scaleX = playerScale; 
-		//this.scaleY = playerScale;
 		this.medeaActive = false;
 	}
 
@@ -130,18 +148,20 @@ class medeaNPC extends npcBase {
 
 	stopWalk (tempNPC) {
 		tempNPC.body.setVelocityX(0);
+		tempNPC.anims.play('medeaIdleRight', true);
 		tempNPC.isWalking = false;
 	}
 
 	walk (tempNPC)
 	{
+		tempNPC.anims.play('medeaWalkRight', true);
 		tempNPC.body.setVelocityX(-150);
 		tempNPC.isWalking = true;
 	}
 
 	walkBack (tempNPC)
 	{
-		tempNPC.anims.play('medeaIdleRight', true);
+		tempNPC.anims.play('medeaWalkRight', true);
 		tempNPC.body.setVelocity(150);
 		tempNPC.isWalking = true;
 	}
@@ -151,7 +171,7 @@ class medeaNPC extends npcBase {
 			typeof dialogue[currentDialogue]._MEDEAPREPAREOINTMENT !== 'undefined' && 
 			!medeaActive) {
 				medeaActive = true;
-				this.anims.play('medeaIdleLeft', true);
+				this.anims.play('medeaWalkRight', true);
 				this.walk(this);
 				setTimeout(this.stopWalk, 1000, this);
 				setTimeout(this.walkBack,2000,this);
@@ -163,19 +183,16 @@ class medeaNPC extends npcBase {
 	update () 
 	{
 		this.updateThoughtBubble();
-		if (!medeaActive)
-		{
-			if (player.x < this.x && this.active) {
-				this.anims.play('medeaIdleLeft', true);
-			} else if (player.x > this.x && this.active) {
-				this.anims.play('medeaIdleRight', true);
-			}
+		if (this.active && this.body.velocity.x == 0) {
+			this.flipX = (player.x < this.x);
+		} else {
+			this.flipX = (this.body.velocity.x < 0);
 		}
 	}
 }
 
 /* King Aetios. 
- * Required attributes: x, y. 
+ * Required attributes: x, y, npcId.
  * Optional attributes: dialogueKey. 
  */
 class kingAetiosNPC extends npcBase {
@@ -238,6 +255,11 @@ class kingAetiosNPC extends npcBase {
 		}
 	}
 }
+
+/* Oileus. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class oileusNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -249,11 +271,13 @@ class oileusNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-		//this.scaleX = playerScale; 
-		//this.scaleY = playerScale;
 	}
 }
 
+/* Iphiclus. 
+ * Required attributes: x, y, npcId.
+ * Optional attributes: dialogueKey. 
+ */
 class iphiclusNPC extends npcBase {
 	constructor (parameter) {
 		super({
@@ -265,145 +289,20 @@ class iphiclusNPC extends npcBase {
 			npcId: parameter.npcId, 
 			gravity: true
 		})
-		//this.scaleX = playerScale; 
-		//this.scaleY = playerScale;
 	}
 }
 
-/* Signs */
-class signR2CNPC extends npcBase {
+/* Sign. 
+ * Required attributes: x, y, npcId, key
+ * Optional attributes: dialogueKey. 
+ */
+ class signNPC extends npcBase {
 	constructor (parameter) {
 		super({
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y, 
-			key: 'signR2CSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signMarketNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signMarketSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signShrineNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signShrineSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signShrineForestNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signShrineForestSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signPalaceNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signPalaceSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signColchisFieldsNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signColchisFieldsSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signRiverCrossingNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signRiverCrossingSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signGardenEntranceNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signGardenEntranceSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signDungeonNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signDungeonSprite',
-			dialogueKey: parameter.dialogueKey,
-			npcId: parameter.npcId, 
-			gravity: true
-		})
-	}
-}
-
-class signGardenForestNPC extends npcBase {
-	constructor (parameter) {
-		super({
-			scene: createThis, 
-			x: parameter.x, 
-			y: parameter.y, 
-			key: 'signGardenForestSprite',
+			key: parameter.key,
 			dialogueKey: parameter.dialogueKey,
 			npcId: parameter.npcId, 
 			gravity: true
@@ -436,11 +335,14 @@ function processNPCdialogue () {
         	drawDialogueBox(); 
             npcDialogue.setText(dialogue[currentDialogue].char + '\n' + dialogue[currentDialogue].speech);
             dialoguex = player.x; //dialoguex is used to check if the player walks away. 
+
+            //Iterate through dialogue, looping back to 0 if there are no more lines of dialogue. 
             if (currentDialogue == dialogueMax) {
                 currentDialogue = 0;
             } else {
                 currentDialogue++; 
 	        } 
+
             dialogueAlreadyEngaged = true;
             dialogueActive = true;  
 	    }
@@ -454,9 +356,11 @@ function processNPCdialogue () {
 	} 
 }
 
-
+//Run the update(); command of each NPC.
 function npcUpdate() {
 	for (i = 0; i < npcCount; i++) {
-		npcs[i].update();
+		if (npcs[i] !== undefined && npcs[i].active !== undefined && npcs[i].active) {
+			npcs[i].update();
+		}	
 	}
 }

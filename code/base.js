@@ -247,17 +247,18 @@ function loadMap()
     });
 
     createThis.anims.create({
-        key: 'medeaIdleLeft',
-        frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 8, end: 8 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'medeaIdleRight',
         frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 0, end: 0 }),
         frameRate: 10,
         repeat: -1
     });
+    createThis.anims.create({
+        key: 'medeaWalkRight',
+        frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 0, end: 7 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
 
     //Keyboard input.
     cursors = createThis.input.keyboard.createCursorKeys();

@@ -83,12 +83,16 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         createThis.physics.add.overlap(this, player, this.collision);
 	}
 
+	collision(tempEnemy) {
+		tempEnemy.collisionBase(tempEnemy);
+	}
+
 	/* If the enemy is in a state of temporary invulnerability, nothing happens. 
 	 * Otherwise, the player will damage the enemy if the sword is swung and the 
 	 * enemy will damage the player if the sword is not being swung. 
 	 * tempEnemy refers to the enemy object. 
 	 */
-	collision(tempEnemy) {
+	collisionBase(tempEnemy) {
 		if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
 			enemies[tempEnemy.enemyId].destroy();  
 		} else if (playerSwingSword && !tempEnemy.invulnerability && !tempEnemy.invulnerabilityAlways) {
@@ -420,19 +424,22 @@ class minotaurBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'tempEnemy', //temp sprite 
-			xMove: 200,//parameter.xMove,
-			xVel: 130, 
-			scale: 1, 
+			key: 'minotaurSprite', 
+			xMove: 400,
+			xVel: 200, 
+			scale: 3, 
 			enemyId: parameter.enemyId, 
 			gravity: true, 
-			health: 250, 
-			damageTouch: false,
+			health: 500, 
+			damageTouch: true,
 			hasSword: true, 
 			boss: true
         });
         this.swingSword = false; 
         this.charging = false; //Is the minotaur charging at the player? 
+
+        this.body.setSize(48,35);
+        this.body.setOffset(0,13);
 	}
 
 	movement() {
@@ -463,13 +470,25 @@ class minotaurBoss extends enemyBase {
 			this.body.setVelocityX(-this.xVel);
 			if (this.x < this.xMin) {
 				this.sword(); 
+				this.flipX = true;
 			}
 		} else if (!this.charging && !this.swingSword) {
 			this.body.setVelocityX(this.xVel);
 			if (this.x > this.xMax) {
 				this.sword(); 
+				this.flipX = false;
 			}
-		}	
+		}
+
+		if (this.swingSword) {
+			this.anims.play('minotaurSwingLeft', true);
+			this.body.setSize(48,35);
+			this.body.setOffset(0,14);
+		} else {
+			this.anims.play('minotaurWalkLeft', true);
+			this.body.setSize(26,35);
+			this.body.setOffset(11,14);
+		}
 	}
 
 	sword () {
@@ -496,12 +515,12 @@ class dragonBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
+			key: 'dragonSprite', 
 			xMove: parameter.xMove,
 			xVel: 300, 
 			yMove: parameter.yMove, 
 			yVel: 300,
-			scale: 3, 
+			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
 			health: 1000, 
@@ -512,7 +531,17 @@ class dragonBoss extends enemyBase {
         this.moveDirection = 0; 
         this.body.setVelocityY(0);
         this.invulnerabilityWait = 3000; 
+        this.anims.play('dragonSpriteRight', true);
+        this.body.setSize(140,70);
 	}	
+
+	collision (tempEnemy) {
+		var tempOldPhase = tempEnemy.checkPhase(); 
+		tempEnemy.collisionBase(tempEnemy);
+		if (tempOldPhase !== tempEnemy.checkPhase()) {
+			setTimeout(tempEnemy.hugeFire, 2000, tempEnemy);
+		}
+	}
 
 	checkPhase() {
 		if (this.health <= 300){
@@ -521,6 +550,18 @@ class dragonBoss extends enemyBase {
 			return 1; 
 		} else {
 			return 0; 
+		}
+	}
+
+	hugeFire (tempDragon) {
+		for (i = 0; i < 8; i++) {
+			projectiles[currentProjectile] = new dragonFire({
+	        	x: tempDragon.x, 
+	        	y: tempDragon.y,
+	        	projectileId: currentProjectile,
+	        	aimed: false, 
+	        	hugeFireMovement: true
+    		});
 		}
 	}
 
@@ -547,6 +588,8 @@ class dragonBoss extends enemyBase {
 				this.moveUp = !this.moveUp; 
 			}
 		}
+
+		this.flipX = (this.body.velocity.x <= 0);
 	}
 
 	shoot() {

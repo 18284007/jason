@@ -21,6 +21,11 @@ class titleScreen extends Phaser.Scene{
 		
 		let startGame = this.add.image(this.game.renderer.width / 2, this.game.renderer.height *0.80, "playbut").setDepth(1).setInteractive();
 			
+		maxHealth = maxHealthInit;
+		currentHealth = maxHealthInit;
+		playerDamagePoints = playerDamgePointsInit;
+		parseHealthBarAnimate();
+
 		startGame.on("pointerup", ()=>{
 			playerSprite = 'ship';
 			changeLevel('introCutscene');

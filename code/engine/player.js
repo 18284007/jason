@@ -1,6 +1,10 @@
+//Base stats, used when starting a new game. 
+const maxHealthInit = 100;
+const playerDamgePointsInit = 50; 
+
 //Game variables relating to the player on all levels.
-var maxHealth = 100;
-var currentHealth = 100;
+var maxHealth = maxHealthInit;
+var currentHealth = maxHealthInit;
 var playerAlive = true;
 // variables relating to normal levels
 var playerJumpVelocity = 500; 
@@ -9,7 +13,7 @@ var playerFacingRight = true;
 var playerHasWings = false; //Can the player fly?
 var playerSwingSword = false;
 var playerSwungSword = false; 
-var playerDamagePoints = 50;
+var playerDamagePoints = playerDamgePointsInit;
 var playerInvulnerabilityWait = 1000; 
 var playerInvulnerability = false;
 
@@ -67,12 +71,32 @@ function playerMovement() {
         player.setOffset(28, 0);
     } else if (playerSwingSword) {
         player.anims.play('jasonAttackRight', true);
-        player.setSize(60, 64);
-        if (playerFacingRight) {
+
+        /* If the player is facing a wall and close to it, the game will use the default hitbox size. 
+         * If the player is not near a wall, a larger hitbox will be used.  
+         */
+        var tempCheckRightTile = createThis.map.getTileAtWorldXY(player.x + 50, player.y + 31); 
+        var tempCheckLeftTile = createThis.map.getTileAtWorldXY(player.x - 11, player.y + 31);
+        var tempCheckRightTile2 = createThis.map.getTileAtWorldXY(player.x + 50, player.y); 
+        var tempCheckLeftTile2 = createThis.map.getTileAtWorldXY(player.x - 11, player.y);
+
+        if ((playerFacingRight && tempCheckRightTile !== null && tempCheckRightTile.collides) || 
+            (!playerFacingRight && tempCheckLeftTile !== null && tempCheckLeftTile.collides) || 
+            (playerFacingRight && tempCheckRightTile2 !== null && tempCheckRightTile2.collides) || 
+            (!playerFacingRight && tempCheckLeftTile2 !== null && tempCheckLeftTile2.collides)) {
+            //Smaller hitbox
+            player.setSize(20, 64);
+            player.setOffset(28, 0);     
+        } else if (playerFacingRight) {
+            //Expand hitbox to right 
+            player.setSize(60, 64);
             player.setOffset(28, 0);
         } else {
+            //Expand hitbox to left
+            player.setSize(60, 64);
             player.setOffset(-12, 0);
-        }
+        } 
+
     } else {
         player.anims.play('jasonRight', true);
         player.setSize(20, 64);
