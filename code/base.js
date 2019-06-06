@@ -100,7 +100,7 @@ class controller extends Phaser.Scene
         parseCharacterMetaJSON();
 
     	game.scene.run(currentLevelID);
-	if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID))
+	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(currentLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
@@ -341,7 +341,7 @@ function changeLevel(tempNewLevelID) {
     }
     clearDialogueBox();
     npcDialogue.text = '';
-	if (['endScreen','titleScreen','mapMenu'].includes(tempNewLevelID))
+	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(tempNewLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
