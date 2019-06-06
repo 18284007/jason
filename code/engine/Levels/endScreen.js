@@ -17,7 +17,7 @@ class endScreen extends Phaser.Scene {
 		//images
 		
 		this.add.image(0,0, "endbg").setOrigin(0).setDepth(0);
-		let toMenuButton = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height*0.5, "menubut").setDepth(1).setInteractive();
+		let toMenuButton = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height * 0.8, "menubut").setDepth(1).setInteractive();
 		
 		
 		toMenuButton.on("pointerup", ()=>{
