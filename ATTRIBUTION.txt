@@ -9,3 +9,6 @@ Taken from '5 Static Enemy Sprites' by Beast from https://opengameart.org/conten
 Minotaur
 CC BY 3.0 https://creativecommons.org/licenses/by/3.0/
 Animated Minotaur by Calciumtrice, usable under Creative Commons Attribution 3.0 license.
+
+Skeleton Army
+https://jesse-m.itch.io/skeleton-pack
