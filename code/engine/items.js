@@ -75,7 +75,7 @@ class maxHealthItem extends itemBase {
 			gravity: false
 		})
 
-		this.boostValue = 50; 
+		this.boostValue = 10; 
 	}
 
 	collision (tempItem){
@@ -210,10 +210,14 @@ class ritualFire extends itemBase {
 	ritual() {
 		for (i = 0; i < ritualItemCount; i++) {
 			new ritualItemCutscene({
-                x: this.x, 
+                x: this.x + (Math.random() * 100 - 200), 
                 y: this.y - (100 * (i + 1)),
                 inventoryKey: tempProperties[i]
             });
+		}
+		if (levelProgress == 5)
+		{
+			levelProgress++;
 		}
 	}
 
@@ -252,7 +256,7 @@ class portal extends Phaser.GameObjects.Sprite {
 
         this.spawnAfterMeetAetios = (typeof parameter.spawnAfterMeetAetios !== 'undefined' && (levelProgress < 2));
         
-        if (typeof parameter.spawnAfterTalkAetios !== 'undefined') {
+        if (typeof parameter.spawnAfterTalkAetios !== 'undefined'&& (levelProgress < 4)) {
         	this.spawnAfterTalkAetios = true;
 			this.spawnAfterTalkAetiosWaiting = true; 
         } else {
@@ -260,14 +264,14 @@ class portal extends Phaser.GameObjects.Sprite {
 			this.spawnAfterTalkAetiosWaiting = false; 
         }
 
-        if (typeof parameter.spawnAfterRitual !== 'undefined') {
+        if (typeof parameter.spawnAfterRitual !== 'undefined'&& (levelProgress < 6)) {
         	this.spawnAfterRitual = parameter.spawnAfterRitual;
         	this.remainingPortals = ritualItemCount;
         } else {
         	this.spawnAfterRitual = false; 
         }
 
-        if (typeof parameter.spawnAfterPlow !== 'undefined') {
+        if (typeof parameter.spawnAfterPlow !== 'undefined'&& (levelProgress < 4)) {
         	this.spawnAfterPlow = parameter.spawnAfterPlow;
         } else {
         	this.spawnAfterPlow = false; 
@@ -353,15 +357,22 @@ class plowItem extends Phaser.GameObjects.Sprite {
 
 	update() {
 		for (i = 0; i < enemyCount; i++){
-			if (Phaser.Geom.Intersects.RectangleToRectangle(this.getBounds(), enemies[i].getBounds()) && 
-				enemies[i].body.velocity.x < 0 && 
-				(enemies[i].x + 100) < this.x) {
-				this.x -= 5;
+			if(enemies[i].body !== undefined)
+			{
+				if (Phaser.Geom.Intersects.RectangleToRectangle(this.getBounds(), enemies[i].getBounds()) && 
+					enemies[i].body.velocity.x < 0 && 
+					(enemies[i].x + 100) < this.x) {
+					this.x -= 5;
+				}
 			}
 		}
 
 		if (this.x < 250) {
 			this.stuck = true;
+			if(levelProgress === 3)
+			{
+				levelProgress++;
+			}
 		} 
 	}
 }

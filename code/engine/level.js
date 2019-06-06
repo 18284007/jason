@@ -1,6 +1,3 @@
-var enemyCount;
-var enemies;
-
 //Arrays that store appropriate objects and a corresponding counter.
 enemies = []; //Enemy array
 enemyCount = 0; //Enemy counter
@@ -10,6 +7,7 @@ npcs = []; //NPC array
 npcCount = 0; //NPC counter
 items = []; //Item array
 itemCount = 0; //Items counter
+mapObjectArray = [];
 
 function spawnObjects() {
     //Arrays that store appropriate objects and a corresponding counter.
@@ -27,7 +25,11 @@ function spawnObjects() {
     /* Run through the list of objects in the map and spawn the appropriate object. 
      * Object properties (xMove, yMove) and co-ordinates (x, y) are used.  
      */
-    mapObjectArray = createThis.map.objects[0].objects;
+    if (mapObjectArray.length === 0)
+     {
+        mapObjectArray = createThis.map.objects[0].objects;
+     }
+     console.log(mapObjectArray.length);
     for (i = 0; i < mapObjectArray.length; i++){
         //if item not in picked up array for level 
         //if item's levelPhase == 0 || levelPhase == currentLevelPhase
@@ -177,6 +179,15 @@ function spawnObjects() {
                 enemyCount++; 
                 break;
 
+            case 'skeleton': 
+                enemies[enemyCount] = new skeleton({
+                    x: Math.floor((Math.random() * 1918)+1), 
+                    y: 1750, 
+                    enemyId: enemyCount
+                });
+                enemyCount++; 
+                break;
+
             case 'medusaBoss': 
                 enemies[enemyCount] = new medusaBoss({
                     x: mapObjectArray[i].x, 
@@ -264,97 +275,107 @@ function spawnObjects() {
                 break; 
                 
                 //SIGNS
-		case 'signR2C':
-                npcs[npcCount] = new signR2CNPC({
+            case 'signR2C':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    key: 'signR2CSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break;
-				
-				case 'signMarket':
-                npcs[npcCount] = new signMarketNPC({
+                
+            case 'signMarket':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    key: 'signMarketSprite', 
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break; 
-				
-				case 'signShrine':
-                npcs[npcCount] = new signShrineNPC({
+                
+            case 'signShrine':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
+                    y: mapObjectArray[i].y,  
+                    key: 'signShrineSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break; 
-				
-				case 'signShrineForest':
-                npcs[npcCount] = new signShrineForestNPC({
+                
+            case 'signShrineForest':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
+                    y: mapObjectArray[i].y,  
+                    key: 'signShrineForestSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break; 
-				
-				case 'signPalace':
-                npcs[npcCount] = new signPalaceNPC({
+                
+            case 'signPalace':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    key: 'signPalaceSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break;
-				
-				case 'signColchisFields':
-                npcs[npcCount] = new signColchisFieldsNPC({
+                
+            case 'signColchisFields':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
-                    y: mapObjectArray[i].y, 
+                    y: mapObjectArray[i].y,  
+                    key: 'signColchisFieldsSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break; 
-				
-				case 'signRiverCrossing':
-                npcs[npcCount] = new signRiverCrossingNPC({
+                
+            case 'signRiverCrossing':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    key: 'signRiverCrossingSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break; 
-				
-				case 'signGardenEntrance':
-                npcs[npcCount] = new signGardenEntranceNPC({
+                
+            case 'signGardenEntrance':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    key: 'signGardenEntranceSprite', 
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break; 
-				
-				case 'signDungeon':
-                npcs[npcCount] = new signDungeonNPC({
+                
+            case 'signDungeon':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    key: 'signDungeonSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break; 
-				
-				case 'signGardenForest':
-                npcs[npcCount] = new signGardenForestNPC({
+                
+            case 'signGardenForest':
+                npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
+                    key: 'signGardenForestSprite',
                     dialogueKey: tempProperties['dialogueKey']
                 });
                 npcCount++; 
                 break;
-			
-			case 'plow':
+            
+            case 'plow':
                 plow = new plowItem({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y

@@ -2,6 +2,10 @@
  * This should not be spawned directly. 
  * Required parameters: scene, x, y, key, xMove/yMove, xVel/yVel, scale, enemyId, gravity, health.
  */
+ skelesRemain = 0;
+ skeleSpawn = 0;
+ skelesActive = false;
+ skeleInterval = undefined;
 
 class enemyBase extends Phaser.GameObjects.Sprite {
 	constructor (parameter) {
@@ -83,32 +87,39 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         createThis.physics.add.overlap(this, player, this.collision);
 	}
 
+	collision(tempEnemy) {
+		tempEnemy.collisionBase(tempEnemy);
+	}
+
 	/* If the enemy is in a state of temporary invulnerability, nothing happens. 
 	 * Otherwise, the player will damage the enemy if the sword is swung and the 
 	 * enemy will damage the player if the sword is not being swung. 
 	 * tempEnemy refers to the enemy object. 
 	 */
-	collision(tempEnemy) {
-		if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
+	collisionBase(tempEnemy) {
+		if (enemies[tempEnemy.enemyID] !== undefined)
+		{
+			if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
 			enemies[tempEnemy.enemyId].destroy();  
-		} else if (playerSwingSword && !tempEnemy.invulnerability && !tempEnemy.invulnerabilityAlways) {
-			enemies[tempEnemy.enemyId].health -= playerDamagePoints;
-			enemies[tempEnemy.enemyId].invulnerability = true; 
-			enemies[tempEnemy.enemyId].alpha = 0.3;
-			enemies[tempEnemy.enemyId].setTint(0xFF0000);
+			} else if (playerSwingSword && !tempEnemy.invulnerability && !tempEnemy.invulnerabilityAlways) {
+				enemies[tempEnemy.enemyId].health -= playerDamagePoints;
+				enemies[tempEnemy.enemyId].invulnerability = true; 
+				enemies[tempEnemy.enemyId].alpha = 0.3;
+				enemies[tempEnemy.enemyId].setTint(0xFF0000);
 			if (enemies[tempEnemy.enemyId].body.allowGravity) {
 				enemies[tempEnemy.enemyId].knockback = true;
 			}
-			setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
-		} else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
-			playerDamage(tempEnemy.playerDamageCollision);
-		} else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
-			playerDamage(tempEnemy.playerDamageSword);
-		}
+				setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
+			} else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
+				playerDamage(tempEnemy.playerDamageCollision);
+			} else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
+				playerDamage(tempEnemy.playerDamageSword);
+			}
 
-		//If the attacks are inactive and the spider is attacked, it will become active.
-		if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
-			spiderBossActive = true;
+			//If the attacks are inactive and the spider is attacked, it will become active.
+			if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
+				spiderBossActive = true;
+			}
 		}
 	}
 
@@ -132,7 +143,12 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			if (this.spiderBoss) {
 				this.webGraphics.alpha = 0;
 			}
-
+			/*
+			if (this.skeleton && skelesRemain > 0)
+			{
+				skelesRemain--;
+			}
+			*/
 			enemies[this.enemyId].destroy(); 
 		}
 	}
@@ -245,8 +261,8 @@ class snake extends enemyBase {
 			xVel: 130, 
 			scale: 0.45, 
 			enemyId: parameter.enemyId, 
-			gravity: false, 
-			health: 1
+			gravity: true, 
+			health: 150
         });
 	}
 	update ()
@@ -353,6 +369,14 @@ class bullBoss extends enemyBase {
 			if (this.x < -200) {
 				this.alive = false; 
 				enemies[this.enemyId].destroy();
+				if (skelesActive)
+				{
+					skeleArmySpawn();
+				}else
+				{
+					skelesActive = true;
+				}
+
 			}
 		}
 	}			
@@ -420,19 +444,22 @@ class minotaurBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'tempEnemy', //temp sprite 
-			xMove: 200,//parameter.xMove,
-			xVel: 130, 
-			scale: 1, 
+			key: 'minotaurSprite', 
+			xMove: 400,
+			xVel: 200, 
+			scale: 3, 
 			enemyId: parameter.enemyId, 
 			gravity: true, 
-			health: 250, 
-			damageTouch: false,
+			health: 500, 
+			damageTouch: true,
 			hasSword: true, 
 			boss: true
         });
         this.swingSword = false; 
         this.charging = false; //Is the minotaur charging at the player? 
+
+        this.body.setSize(48,35);
+        this.body.setOffset(0,13);
 	}
 
 	movement() {
@@ -463,13 +490,25 @@ class minotaurBoss extends enemyBase {
 			this.body.setVelocityX(-this.xVel);
 			if (this.x < this.xMin) {
 				this.sword(); 
+				this.flipX = true;
 			}
 		} else if (!this.charging && !this.swingSword) {
 			this.body.setVelocityX(this.xVel);
 			if (this.x > this.xMax) {
 				this.sword(); 
+				this.flipX = false;
 			}
-		}	
+		}
+
+		if (this.swingSword) {
+			this.anims.play('minotaurSwingLeft', true);
+			this.body.setSize(48,35);
+			this.body.setOffset(0,14);
+		} else {
+			this.anims.play('minotaurWalkLeft', true);
+			this.body.setSize(26,35);
+			this.body.setOffset(11,14);
+		}
 	}
 
 	sword () {
@@ -496,12 +535,12 @@ class dragonBoss extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'spiderBossSprite', 
+			key: 'dragonSprite', 
 			xMove: parameter.xMove,
 			xVel: 300, 
 			yMove: parameter.yMove, 
 			yVel: 300,
-			scale: 3, 
+			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: false, 
 			health: 1000, 
@@ -512,7 +551,17 @@ class dragonBoss extends enemyBase {
         this.moveDirection = 0; 
         this.body.setVelocityY(0);
         this.invulnerabilityWait = 3000; 
+        this.anims.play('dragonSpriteRight', true);
+        this.body.setSize(140,70);
 	}	
+
+	collision (tempEnemy) {
+		var tempOldPhase = tempEnemy.checkPhase(); 
+		tempEnemy.collisionBase(tempEnemy);
+		if (tempOldPhase !== tempEnemy.checkPhase()) {
+			setTimeout(tempEnemy.hugeFire, 2000, tempEnemy);
+		}
+	}
 
 	checkPhase() {
 		if (this.health <= 300){
@@ -521,6 +570,18 @@ class dragonBoss extends enemyBase {
 			return 1; 
 		} else {
 			return 0; 
+		}
+	}
+
+	hugeFire (tempDragon) {
+		for (i = 0; i < 8; i++) {
+			projectiles[currentProjectile] = new dragonFire({
+	        	x: tempDragon.x, 
+	        	y: tempDragon.y,
+	        	projectileId: currentProjectile,
+	        	aimed: false, 
+	        	hugeFireMovement: true
+    		});
 		}
 	}
 
@@ -547,6 +608,8 @@ class dragonBoss extends enemyBase {
 				this.moveUp = !this.moveUp; 
 			}
 		}
+
+		this.flipX = (this.body.velocity.x <= 0);
 	}
 
 	shoot() {
@@ -643,12 +706,75 @@ class spiderBoss extends enemyBase {
 	}
 }
 
+class skeleton extends enemyBase
+{
+	constructor (parameter) {
+		
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'spiderBossSprite', 
+			yMove: 0,//parameter.yMove,
+			yVel: 0, 
+			scale: 1, 
+			enemyId: parameter.enemyId, 
+			gravity: true, 
+			health: 150,
+			//skeleton: true, 
+			boss: true
+        });
+
+	}
+
+	
+
+	
+}
+
+function skeleArmySpawn()
+{
+	skelesActive = false;
+	skelesRemain = 28;
+	skeleSpawn = 1;
+	this.activeSkeles = 0;
+	this.skeleDelay = 4000;
+	//Activate skeleton counter
+	skeleInterval = setTimeout(delayedSkeleSpawn,4000);
+	//Deactivate skeleton counter
+	//open portal, set progression
+
+}
+
+function delayedSkeleSpawn()
+{
+	mapObjectArray.length = 0;
+	enemies.length = 0;
+	enemyCount = 0;
+	let skeletonUnit = {name: 'skeleton'};
+	this.skeleDelay = 4000;
+	for (this.i = 0; this.i < skeleSpawn; this.i++)
+	{
+		//input skeles into mapObjectArray
+		mapObjectArray.push(skeletonUnit);
+	}
+	if (skeleSpawn < 7)
+	{
+		skeleInterval = setTimeout(delayedSkeleSpawn,this.skeleDelay*skeleSpawn );
+	}
+	spawnObjects();
+	skeleSpawn++;
+}
+
 function enemyMovement() {
 	if (enemyCount > 0){
 		for (i = 0; i < enemyCount; i++){
 			if (enemies[i].alive && enemies[i].body !== undefined){
-				enemies[i].movement();	
-				enemies[i].update();
+				enemies[i].movement();
+				if (enemies[i] !== undefined)
+				{
+					enemies[i].update();
+				}
 			}
 		}
 	}
