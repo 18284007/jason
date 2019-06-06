@@ -13,6 +13,7 @@ var userIntThis;
 var currentLevelDialogueJSON;
 var levelProgress = 1;
 var music;
+var musicMuted = false;
 var musicPlaying = false;
 //var currentLevelID;
 /*variables relating to moving between levels*/
@@ -126,22 +127,27 @@ class controller extends Phaser.Scene
             {
                 music = this.sound.add('water', {loop: true});
                 music.play();
+                music.setVolume(1);
             }else if(['colchisFields','gardenFleece'].includes(currentLevelID))
             {
             	music = this.sound.add('male', {loop: true})
                 music.play();
+                music.setVolume(0.8);
             }else if(['siren'].includes(currentLevelID))
             {
                 music = this.sound.add('upbeat', {loop: true})
                 music.play();
+                music.setVolume(1);
             }else if(['introCutscene'].includes(currentLevelID))
             {
                 music = this.sound.add('jasonIntro', {loop: true})
                 music.play();
+                music.setVolume(1);
             }else
             {
                 music = this.sound.add('female', {loop: true});
                 music.play();
+                music.setVolume(0.8);
             }
             musicPlaying = true;
         }
