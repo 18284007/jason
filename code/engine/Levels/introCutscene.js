@@ -17,6 +17,7 @@ class introCutscene extends Phaser.Scene{
         this.load.image('introSlide4', 'assets/background/introSlide4.jpg');
         this.load.image('introSlide5', 'assets/background/introSlide5.jpg');
         this.load.image('introSlide6', 'assets/background/introSlide6.jpg');
+		this.load.image('introSlide7', 'assets/background/introSlide7.jpg');
 	}
 
 	create()
@@ -27,6 +28,7 @@ class introCutscene extends Phaser.Scene{
         setTimeout(this.updateProgress,39000);
         setTimeout(this.updateProgress,52000);
         setTimeout(this.updateProgress,68000);
+		setTimeout(this.updateProgress,75000);
         setTimeout(this.updateProgress,86000);
     }
 
@@ -72,6 +74,13 @@ class introCutscene extends Phaser.Scene{
                 talkKeyPressed = true;
             } else if (endCutscenePhase == 5){
                 endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide6');
+                endCutsceneStillImg.setOrigin(1,1);
+                endCutsceneStillImg.scrollFactorX = 0;
+                endCutsceneStillImg.scrollFactorY = 0;
+                endCutsceneStillImg.setDepth(100);
+                talkKeyPressed = true;
+            }else if (endCutscenePhase == 6){
+                endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide7');
                 endCutsceneStillImg.setOrigin(1,1);
                 endCutsceneStillImg.scrollFactorX = 0;
                 endCutsceneStillImg.scrollFactorY = 0;
