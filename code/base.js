@@ -13,6 +13,7 @@ var userIntThis;
 var currentLevelDialogueJSON;
 var levelProgress = 1;
 var music;
+var musicMuted = false;
 var musicPlaying = false;
 //var currentLevelID;
 /*variables relating to moving between levels*/
@@ -47,6 +48,8 @@ class controller extends Phaser.Scene
         this.load.audio('female', ['assets/stage/background/female.mp3']);
         this.load.audio('water', ['assets/stage/background/water.mp3']);
         this.load.audio('male',['assets/stage/background/male.mp3']);
+	   this.load.audio('upbeat', ['assets/stage/background/upbeat.mp3']);
+       this.load.audio('jasonIntro', ['assets/stage/background/jasonIntro.mp3']);
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
@@ -74,6 +77,11 @@ class controller extends Phaser.Scene
         this.load.image('maxHealthItemSprite', 'assets/items/maxHealth.png');
         this.load.image('healthItemSprite', 'assets/items/health.png');
         this.load.image('damageIncreaseItemSprite', 'assets/items/damageIncrease.png');
+        //Pause screen
+        this.load.image('resumebut', 'assets/stage/background/resumebut.png');
+		this.load.image('pausebg', 'assets/stage/background/pausebg.png');
+		this.load.image('mapMenu', 'assets/stage/background/mapMenu.png');
+		this.load.image('mutebtn', 'assets/stage/background/mutebtn.png');
 	    
 	//SIGNS
 	this.load.image('signR2CSprite','assets/items/signR2C.png');
@@ -97,7 +105,7 @@ class controller extends Phaser.Scene
         parseCharacterMetaJSON();
 
     	game.scene.run(currentLevelID);
-	if (['endScreen','titleScreen'].includes(currentLevelID))
+	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(currentLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
@@ -120,18 +128,31 @@ class controller extends Phaser.Scene
 	/*Music*/
         if(!musicPlaying)
         {
-             if (['endScreen','titleScreen'].includes(currentLevelID))
+             if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID))
             {
                 music = this.sound.add('water', {loop: true});
                 music.play();
+                music.setVolume(1);
             }else if(['colchisFields','gardenFleece'].includes(currentLevelID))
             {
             	music = this.sound.add('male', {loop: true})
                 music.play();
+                music.setVolume(0.8);
+            }else if(['siren'].includes(currentLevelID))
+            {
+                music = this.sound.add('upbeat', {loop: true})
+                music.play();
+                music.setVolume(1);
+            }else if(['introCutscene'].includes(currentLevelID))
+            {
+                music = this.sound.add('jasonIntro', {loop: true})
+                music.play();
+                music.setVolume(1);
             }else
             {
                 music = this.sound.add('female', {loop: true});
                 music.play();
+                music.setVolume(0.8);
             }
             musicPlaying = true;
         }
@@ -149,7 +170,11 @@ class controller extends Phaser.Scene
             userIntThis.ritualItemText.setText(tempCount + '/' + ritualItemCount + " Ritual Items.");
             userIntThis.ritualItemText.alpha = 1; 
         } else {
-            userIntThis.ritualItemText.alpha = 0; 
+            userIntThis.ritualItemText.alpha = 0;
+            if (levelProgress === 4)
+            {
+                levelProgress++;
+            } 
         }
     }
 }
@@ -227,17 +252,18 @@ function loadMap()
     });
 
     createThis.anims.create({
-        key: 'medeaIdleLeft',
-        frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 8, end: 8 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    createThis.anims.create({
         key: 'medeaIdleRight',
         frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 0, end: 0 }),
         frameRate: 10,
         repeat: -1
     });
+    createThis.anims.create({
+        key: 'medeaWalkRight',
+        frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 0, end: 7 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
 
     //Keyboard input.
     cursors = createThis.input.keyboard.createCursorKeys();
@@ -312,15 +338,15 @@ function shipUpdate()
 function changeLevel(tempNewLevelID) {
 	oldLevelID = currentLevelID;
 	playerShip = false;
-    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece'].includes(currentLevelID)) ||
-    		(['endScreen','titleScreen','colchisFields', 'gardenFleece'].includes(tempNewLevelID)))
+    if ((['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren','introCutscene'].includes(currentLevelID)) ||
+    		(['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren','introCutscene'].includes(tempNewLevelID)))
     {
         musicPlaying = false;
         music.stop();
     }
     clearDialogueBox();
     npcDialogue.text = '';
-	if (['endScreen','titleScreen'].includes(tempNewLevelID))
+	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(tempNewLevelID))
 	{
 		userIntThis.scene.sendToBack('controller');	
 	}
@@ -366,7 +392,7 @@ var config = {
     },
     scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
     		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
-            placeholdertestmap, endCutscene, endScreen, siren, pause]
+            placeholdertestmap, endCutscene, endScreen, siren, pause, mapMenu, introCutscene]
 };
 
 var game = new Phaser.Game(config);
