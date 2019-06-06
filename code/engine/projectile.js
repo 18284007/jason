@@ -61,7 +61,7 @@ class dragonFire extends projectile {
 
         this.hugeFireMovement = parameter.hugeFireMovement !== undefined && parameter.hugeFireMovement;
 
-        if (this.aimed){
+        if (parameter.aimed){
             createThis.physics.accelerateToObject(this, player, this.velocityAimed);
         } else if (this.hugeFireMovement) {
             this.body.velocity.x = Math.random() * 200 - 100; 
