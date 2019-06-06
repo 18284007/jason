@@ -83,7 +83,8 @@ function playerMovement() {
         if ((playerFacingRight && tempCheckRightTile !== null && tempCheckRightTile.collides) || 
             (!playerFacingRight && tempCheckLeftTile !== null && tempCheckLeftTile.collides) || 
             (playerFacingRight && tempCheckRightTile2 !== null && tempCheckRightTile2.collides) || 
-            (!playerFacingRight && tempCheckLeftTile2 !== null && tempCheckLeftTile2.collides)) {
+            (!playerFacingRight && tempCheckLeftTile2 !== null && tempCheckLeftTile2.collides) || 
+            (player.x + 50 > gameWidth) || (player.x - 11 < 0)) {
             //Smaller hitbox
             player.setSize(20, 64);
             player.setOffset(28, 0);     
