@@ -249,8 +249,8 @@ class snake extends enemyBase {
 			xVel: 130, 
 			scale: 0.45, 
 			enemyId: parameter.enemyId, 
-			gravity: false, 
-			health: 1
+			gravity: true, 
+			health: 150
         });
 	}
 	update ()
