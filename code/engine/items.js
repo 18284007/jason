@@ -210,7 +210,7 @@ class ritualFire extends itemBase {
 	ritual() {
 		for (i = 0; i < ritualItemCount; i++) {
 			new ritualItemCutscene({
-                x: this.x + (Math.random() * 100 - 200), 
+                x: this.x + (Math.random() * 200 - 100), 
                 y: this.y - (100 * (i + 1)),
                 inventoryKey: tempProperties[i]
             });
