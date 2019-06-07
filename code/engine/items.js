@@ -272,10 +272,12 @@ class portal extends Phaser.GameObjects.Sprite {
         }
 
         if (typeof parameter.spawnAfterPlow !== 'undefined'&& (levelProgress < 4)) {
-        	this.spawnAfterPlow = parameter.spawnAfterPlow;
+        	this.spawnAfterPlow = true;
         } else {
         	this.spawnAfterPlow = false; 
         }
+
+
 
         this.activePortal = !(this.spawnAfterBossBattle || this.spawnAfterSpiderFlower || this.spawnAfterTalkAetios 
         	|| this.spawnAfterMeetAetios);
@@ -326,8 +328,8 @@ class portal extends Phaser.GameObjects.Sprite {
 			tempPortalActive = (this.remainingPortals <= 0);
 		}
 
-		if (tempPortalActive && this.spawnAfterPlow) {
-			tempPortalActive = plow.stuck;
+		if (tempPortalActive && this.spawnAfterPlow && levelProgress < 4) {
+			tempPortalActive = false;
 		}
 
 		if (tempPortalActive) {
@@ -369,10 +371,6 @@ class plowItem extends Phaser.GameObjects.Sprite {
 
 		if (this.x < 250) {
 			this.stuck = true;
-			if(levelProgress === 3)
-			{
-				levelProgress++;
-			}
 		} 
 	}
 }

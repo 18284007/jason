@@ -2,7 +2,7 @@
  * This should not be spawned directly. 
  * Required parameters: scene, x, y, key, xMove/yMove, xVel/yVel, scale, enemyId, gravity, health.
  */
- skelesRemain = 0;
+ skelesRemain = 1;
  skeleSpawn = 0;
  skelesActive = false;
  skeleInterval = undefined;
@@ -21,8 +21,19 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 
         if (typeof parameter.xMove !== 'undefined'){ 
         	this.moveRight = true; 
-	        this.xMin = parameter.x; 
-	        this.xMax = parameter.x + parameter.xMove; 
+	        this.xMin = parameter.x;
+	        this.findBounds = createThis.map.objects[0].objects;
+	        this.maxXBound = this.findBounds.find(function(disc) {
+	        	return disc.name == 'farBoundary';
+	        });
+	        if (parameter.x + parameter.xMove > this.maxXBound.x)
+	        {
+	        	this.xMax = this.maxXBound.x-50;
+	        }else
+	        {
+	        	this.xMax = parameter.x + parameter.xMove; 
+	        }
+	        //this.xMax = parameter.x + parameter.xMove;
 	        this.xVel = parameter.xVel; 
 	        this.body.setVelocityX(this.xVel);
         } 
@@ -56,6 +67,12 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			this.spiderBoss = parameter.spiderBoss; 
 		} else {
 			this.spiderBoss = false; 
+		}
+
+		if (typeof parameter.skeleton !== 'undefined'){ 
+			this.skeleton = parameter.skeleton; 
+		} else {
+			this.skeleton = false; 
 		}
 
 		if (typeof parameter.boss !== 'undefined'){ 
@@ -115,9 +132,13 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 		}
 
 		//If the attacks are inactive and the spider is attacked, it will become active.
-		if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
+		if (enemies[tempEnemy.enemyId] !== undefined)
+		{
+			if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
 			spiderBossActive = true;
+			}
 		}
+		
 	}
 
 	/* Stop enemy invulnerability. 
@@ -140,12 +161,24 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			if (this.spiderBoss) {
 				this.webGraphics.alpha = 0;
 			}
-			/*
+			
 			if (this.skeleton && skelesRemain > 0)
 			{
 				skelesRemain--;
+				userIntThis.updateSkeletonText();
+				if (skelesRemain === 0)
+				{
+					userIntThis.ritualItemText.alpha = 0;
+					if(levelProgress === 3)
+					{
+						levelProgress++;
+					}
+					console.log(levelProgress);
+					//reset
+					skelesRemain = 1;
+				}
 			}
-			*/
+			
 			enemies[this.enemyId].destroy(); 
 		}
 	}
@@ -162,6 +195,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			this.body.setVelocityY(-300);
 			this.knockedBack = true; 
 		} 
+		
 
 		//Movement logic. 
 		if (this.knockedBack && this.body.blocked.down) {
@@ -713,7 +747,8 @@ class skeleton extends enemyBase {
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: true, 
-			health: 150, 
+			health: 100,
+			skeleton:true, 
 			boss: true
         });
 	}
@@ -727,26 +762,51 @@ function skeleArmySpawn()
 	this.activeSkeles = 0;
 	this.skeleDelay = 4000;
 	//Activate skeleton counter
+	userIntThis.updateSkeletonText();
 	skeleInterval = setTimeout(delayedSkeleSpawn,4000);
 	//Deactivate skeleton counter
 	//open portal, set progression
 
 }
 
+function spawnSkeleton()
+{
+	enemies[enemyCount] = new skeleton({
+    x: Math.floor(200 + (Math.random() * (gameWidth - 400))), 
+    y: 1750, 
+     enemyId: enemyCount
+    });
+    enemyCount++;
+}
+
 function delayedSkeleSpawn()
 {
 	this.skeleDelay = 500;
 
-	//Spawn new skeleton. 
-	enemies[enemyCount] = new skeleton({
-        x: Math.floor(200 + (Math.random() * (gameWidth - 400))), 
-        y: 1750, 
-        enemyId: enemyCount
-    });
-    enemyCount++; 
+	//Spawn new skeleton.
+	if (skeleSpawn > 7)
+	{
+		if (skeleSpawn%2 === 0)
+		{
+			for (this.i = 0; this.i < skeleSpawn/2; this.i++)
+			{
+				spawnSkeleton();
+			}
+		}else
+		{
+			for (this.i = 0; this.i < 3; this.i++)
+			{
+				spawnSkeleton();
+			}
+		}
+	}else
+	{
+		spawnSkeleton();
+	}
+	
 
     //Spawn skeleton later if needed. 
-	if (skeleSpawn < 7) {
+	if (skeleSpawn < 12) {
 		skeleInterval = setTimeout(delayedSkeleSpawn, this.skeleDelay*skeleSpawn);
 	}
 	skeleSpawn++;

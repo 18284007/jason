@@ -210,6 +210,10 @@ function gameOver() {
     playerAlive = false; 
     currentHealth = maxHealth;
     healthBarReset();
+    if (skeleInterval !== undefined)
+    {
+        clearInterval(skeleInterval);
+    }
 
     for (i = 0; i < enemyCount; i++){
         enemies[i].alive = false; 
@@ -218,8 +222,10 @@ function gameOver() {
     for (j = 0; j < inventory.length; j++) {
         inventory[j] = (resetInventory[j]);
     }
-    
-    if (userIntThis.ritualItemText.alpha > 0){
+    if (currentLevelID === 'colchisFields' && userIntThis.ritualItemText.alpha > 0)
+    {
+        userIntThis.ritualItemText.alpha = 0;
+    }else if (userIntThis.ritualItemText.alpha > 0){
         userIntThis.updateRitualItemText();
     }
 
