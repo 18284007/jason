@@ -77,6 +77,12 @@ class controller extends Phaser.Scene
         this.load.image('maxHealthItemSprite', 'assets/items/maxHealth.png');
         this.load.image('healthItemSprite', 'assets/items/health.png');
         this.load.image('damageIncreaseItemSprite', 'assets/items/damageIncrease.png');
+
+        //Pause
+        this.load.image('resumebut', 'assets/stage/background/resumebut.png');
+        this.load.image('pausebg', 'assets/stage/background/pausebg.png');
+        this.load.image('mapMenu', 'assets/stage/background/mapMenu.png');
+        this.load.image('mutebtn', 'assets/stage/background/mutebtn.png');  
 	    
 	//SIGNS
 	this.load.image('signR2CSprite','assets/items/signR2C.png');
@@ -171,6 +177,14 @@ class controller extends Phaser.Scene
                 levelProgress++;
             } 
         }
+    }
+
+    updateSkeletonText() {
+        //Update the text.
+        //Variable Re-use
+        userIntThis.ritualItemText.setText(skelesRemain  + " skeletons remain");
+        userIntThis.ritualItemText.alpha = 1;
+
     }
 }
 
