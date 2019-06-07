@@ -21,7 +21,8 @@ class endCutscene extends Phaser.Scene{
 	create()
 	{
         loadMap();
-        endCutscenePhase = 0; 
+        endCutscenePhase = 0;
+        levelProgress = 1;
         player.anims.play('jasonRight', true);
         dialogue = levelJSON['narration'];
 		dialogueMax = dialogue.length - 1;
