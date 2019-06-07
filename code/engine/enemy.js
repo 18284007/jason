@@ -2,6 +2,10 @@
  * This should not be spawned directly. 
  * Required parameters: scene, x, y, key, xMove/yMove, xVel/yVel, scale, enemyId, gravity, health.
  */
+ skelesRemain = 0;
+ skeleSpawn = 0;
+ skelesActive = false;
+ skeleInterval = undefined;
 
 class enemyBase extends Phaser.GameObjects.Sprite {
 	constructor (parameter) {
@@ -136,7 +140,12 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 			if (this.spiderBoss) {
 				this.webGraphics.alpha = 0;
 			}
-
+			/*
+			if (this.skeleton && skelesRemain > 0)
+			{
+				skelesRemain--;
+			}
+			*/
 			enemies[this.enemyId].destroy(); 
 		}
 	}
@@ -357,6 +366,12 @@ class bullBoss extends enemyBase {
 			if (this.x < -200) {
 				this.alive = false; 
 				enemies[this.enemyId].destroy();
+				if (skelesActive) {
+					skeleArmySpawn();
+				} else {
+					skelesActive = true;
+				}
+
 			}
 		}
 	}			
@@ -686,11 +701,62 @@ class spiderBoss extends enemyBase {
 	}
 }
 
+class skeleton extends enemyBase {
+	constructor (parameter) {
+		super({
+			scene: createThis, 
+			x: parameter.x, 
+			y: parameter.y,
+			key: 'tempEnemy', 
+			xMove: 300,
+			xVel: 130, 
+			scale: 1, 
+			enemyId: parameter.enemyId, 
+			gravity: true, 
+			health: 150, 
+			boss: true
+        });
+	}
+}
+
+function skeleArmySpawn()
+{
+	skelesActive = false;
+	skelesRemain = 28;
+	skeleSpawn = 1;
+	this.activeSkeles = 0;
+	this.skeleDelay = 4000;
+	//Activate skeleton counter
+	skeleInterval = setTimeout(delayedSkeleSpawn,4000);
+	//Deactivate skeleton counter
+	//open portal, set progression
+
+}
+
+function delayedSkeleSpawn()
+{
+	this.skeleDelay = 500;
+
+	//Spawn new skeleton. 
+	enemies[enemyCount] = new skeleton({
+        x: Math.floor(200 + (Math.random() * (gameWidth - 400))), 
+        y: 1750, 
+        enemyId: enemyCount
+    });
+    enemyCount++; 
+
+    //Spawn skeleton later if needed. 
+	if (skeleSpawn < 7) {
+		skeleInterval = setTimeout(delayedSkeleSpawn, this.skeleDelay*skeleSpawn);
+	}
+	skeleSpawn++;
+}
+
 function enemyMovement() {
 	if (enemyCount > 0){
 		for (i = 0; i < enemyCount; i++){
 			if (enemies[i].alive && enemies[i].body !== undefined){
-				enemies[i].movement();	
+				enemies[i].movement();
 				enemies[i].update();
 			}
 		}
