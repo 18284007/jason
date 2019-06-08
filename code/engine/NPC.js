@@ -32,7 +32,7 @@ class npcBase extends Phaser.GameObjects.Sprite {
         createThis.physics.add.overlap(this, player, this.collision);
 
         //Widen hitbox
-        this.body.setSize(80, this.height);
+        this.body.setSize(this.width + 40, this.height);
 	}
 
 	collision (tempNPC){
