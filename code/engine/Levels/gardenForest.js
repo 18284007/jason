@@ -9,7 +9,8 @@ class gardenForest extends Phaser.Scene{
 	{
         createThis = this;
         currentLevelID = 'gardenForest';
-        backgroundLayer0 = 'bgForest';
+        backgroundLayer0 = 'bgSky';
+        backgroundLayer1 = 'bgForest';
         commonPreload();
 		
 		this.load.spritesheet('snake','assets/enemy/snake.png',
