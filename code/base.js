@@ -227,7 +227,7 @@ function loadMap()
     background.scrollFactorY = 0;
     background.setDepth(-100);
 
-    if (backgroundLayer0 = 'bgSky') {
+    if (backgroundLayer0 == 'bgSky') {
         backgroundClouds = createThis.add.image(0, 576, 'bgClouds');
         backgroundClouds.setOrigin(0,1);
         backgroundClouds.scrollFactorX = 0.2;
