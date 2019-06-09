@@ -129,7 +129,7 @@ class controller extends Phaser.Scene
 	game.scene.run('pause');
 	}
 	/*Music*/
-        if(!musicPlaying)
+        if(!musicPlaying && !musicMuted)
         {
              if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID))
             {
