@@ -696,6 +696,8 @@ class spiderBoss extends enemyBase {
 
 		this.spiderBossAlive = true; 
 
+		this.flipX = true; 
+
 		//Create a white line that represents the spider web. 
 	    this.webLine = new Phaser.Geom.Line(parameter.x, parameter.y, parameter.x, parameter.y + parameter.yMove);
 	    this.webGraphics = createThis.add.graphics({lineStyle: {width: 3, color: 0xFFFFFF}});
