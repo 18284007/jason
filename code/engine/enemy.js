@@ -270,19 +270,12 @@ class fox extends enemyBase {
 	{			
 		if (this.body.velocity.x < 0) {
 			this.anims.play('foxLeft', true);
+		} else if (this.body.velocity.x > 0) {
 			this.anims.play('foxRight', true);
-			}
+		}
 			
-			if (this.alive && this.health <= 0) {
+		if (this.alive && this.health <= 0) {
 			this.alive = false; 
-			if (this.boss) {
-				activeBosses--;
-			}
-
-			if (this.spiderBoss) {
-				this.webGraphics.alpha = 0;
-			}
-
 			enemies[this.enemyId].destroy(); 
 		}
 	}	
@@ -308,21 +301,12 @@ class snake extends enemyBase {
 		
 		if (this.body.velocity.x < 0) {
 			this.anims.play('snakeLeft', true);
-		}
-		else if (this.body.velocity.x > 0) {
+		} else if (this.body.velocity.x > 0) {
 			this.anims.play('snakeRight', true);
-			}
+		}
 			
-			if (this.alive && this.health <= 0) {
+		if (this.alive && this.health <= 0) {
 			this.alive = false; 
-			if (this.boss) {
-				activeBosses--;
-			}
-
-			if (this.spiderBoss) {
-				this.webGraphics.alpha = 0;
-			}
-
 			enemies[this.enemyId].destroy(); 
 		}
 	}
@@ -343,30 +327,19 @@ class bats extends enemyBase {
 			health: 150
         });
 	}	
-	update ()
-	{		
-		
+
+	update () {		
 		if (this.body.velocity.x < 0) {
 			this.anims.play('batsLeft', true);
-		}
-		else if (this.body.velocity.x > 0) {
+		} else if (this.body.velocity.x > 0) {
 			this.anims.play('batsRight', true);
-			}
-			
-			if (this.alive && this.health <= 0) {
+		}
+		
+		if (this.alive && this.health <= 0) {
 			this.alive = false; 
-			if (this.boss) {
-				activeBosses--;
-			}
-
-			if (this.spiderBoss) {
-				this.webGraphics.alpha = 0;
-			}
-
 			enemies[this.enemyId].destroy(); 
 		}
 	}	
-	
 }
 
 class bullBoss extends enemyBase { 
@@ -416,7 +389,6 @@ class bullBoss extends enemyBase {
 			}
 		}
 	}			
-	
 
 	shoot(tempBull) {
 		if (tempBull.body !== undefined && tempBull.alive){
