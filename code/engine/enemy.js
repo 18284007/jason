@@ -265,13 +265,11 @@ class fox extends enemyBase {
 			health: 200
         });
 	}
+
 	update ()
-	{		
-		
+	{			
 		if (this.body.velocity.x < 0) {
 			this.anims.play('foxLeft', true);
-		}
-		else if (this.body.velocity.x > 0) {
 			this.anims.play('foxRight', true);
 			}
 			
