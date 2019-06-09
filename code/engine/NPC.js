@@ -68,7 +68,7 @@ class npcBase extends Phaser.GameObjects.Sprite {
 	 * If the player is not in range and the thought bubble exists, destroy it. 
 	 */
 	updateThoughtBubble () {
-		if (player.x - thoughtBubbleRadius < this.x && player.x + thoughtBubbleRadius > this.x) {
+		if (!medeaActive && (player.x - thoughtBubbleRadius < this.x && player.x + thoughtBubbleRadius > this.x)) {
 			if (this.thoughtBubble == undefined && this.hasDialogue && typeof levelJSON[this.dialogueKey] !== 'undefined') {
 				this.thoughtBubble = createThis.physics.add.sprite(this.x - 20, this.y - 50, 'thoughtBubbleSprite');
 				this.thoughtBubble.body.allowGravity = false; 
