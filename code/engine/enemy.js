@@ -239,6 +239,15 @@ class spiderMini extends enemyBase {
 			stompable: true
         });
 	}
+
+	update () {
+		if (this.alive && this.health <= 0) {
+			this.alive = false; 
+			enemies[this.enemyId].destroy(); 
+		} else if (this.alive) {
+			this.flipX = (this.body.velocity.x < 0);
+		}
+	}
 }
 
 class fox extends enemyBase { 
