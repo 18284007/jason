@@ -199,6 +199,7 @@ function commonPreload()
 	currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
 	loadLevelDialogue();
 
+    //Update resetInventory. 
     for (j = 0; j < inventory.length; j++) {
         resetInventory[j] = (inventory[j]);
     }
@@ -214,13 +215,11 @@ function loadMap()
     createThis.map = createThis.make.tilemap({ key: currentTilemapKey });
     
     //set Boundary
-    //boundaryEdge = createThis.map.findObject("Objects", obj => obj.name === "farBoundary");
     gameWidth = createThis.map.widthInPixels;
     gameHeight = createThis.map.heightInPixels;
     createThis.physics.world.setBounds(0, 0, gameWidth + (200 * playerShip), gameHeight, 64, true, true, false, false);
 
     //Render background. 
-    //bganchor = createThis.map.findObject("Objects", obj => obj.name === "bganchor");
     background = createThis.add.image(1024, 576, backgroundLayer0);
     background.setOrigin(1,1);
     background.scrollFactorX = 0;
@@ -373,12 +372,9 @@ function changeLevel(tempNewLevelID) {
     }
     clearDialogueBox();
     npcDialogue.text = '';
-	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(tempNewLevelID))
-	{
+	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(tempNewLevelID)) {
 		userIntThis.scene.sendToBack('controller');	
-	}
-	else
-	{
+	} else {
 		userIntThis.scene.bringToTop('controller');
 	}
 
