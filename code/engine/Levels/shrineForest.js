@@ -9,7 +9,8 @@ class shrineForest extends Phaser.Scene{
     {
         createThis = this;
         currentLevelID = 'shrineForest';
-        backgroundLayer0 = 'bgForest';
+        backgroundLayer0 = 'bgSky';
+        backgroundLayer1 = 'bgForest';
         commonPreload();
 
         //spiderBoss

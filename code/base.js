@@ -20,6 +20,7 @@ var musicPlaying = false;
 var portalMap;
 
 var backgroundLayer0;
+var backgroundLayer1;
 
 class controller extends Phaser.Scene
 {
@@ -69,6 +70,7 @@ class controller extends Phaser.Scene
         //LEVEL STUFF
         //Environment sprites - PLACEHOLDERS.
         this.load.image('bgSky', 'assets/background/sky.png');
+        this.load.image('bgClouds', 'assets/background/clouds.png');
         this.load.image('bgDungeon', 'assets/background/dungeon.png');
         this.load.image('bgForest', 'assets/background/forest.png');
         this.load.image('bgMarket', 'assets/background/market.png');
@@ -127,7 +129,7 @@ class controller extends Phaser.Scene
 	game.scene.run('pause');
 	}
 	/*Music*/
-        if(!musicPlaying)
+        if(!musicPlaying && !musicMuted)
         {
              if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID))
             {
@@ -224,6 +226,22 @@ function loadMap()
     background.scrollFactorX = 0;
     background.scrollFactorY = 0;
     background.setDepth(-100);
+
+    if (backgroundLayer0 == 'bgSky') {
+        backgroundClouds = createThis.add.image(0, 576, 'bgClouds');
+        backgroundClouds.setOrigin(0,1);
+        backgroundClouds.scrollFactorX = 0.2;
+        backgroundClouds.scrollFactorY = 0;
+        backgroundClouds.setDepth(-95);
+    }
+
+    if (backgroundLayer1 !== undefined) {
+        backgroundLayer1Image = createThis.add.image(0, 576, backgroundLayer1);
+        backgroundLayer1Image.setOrigin(0,1);
+        backgroundLayer1Image.scrollFactorX = 0.4;
+        backgroundLayer1Image.scrollFactorY = 0;
+        backgroundLayer1Image.setDepth(-95);
+    }
 
     //Draw tileset/objects
     var tileset = createThis.map.addTilesetImage("tilesheet-extruded", "tiles", 64, 64, 1, 2);
@@ -363,6 +381,8 @@ function changeLevel(tempNewLevelID) {
 	{
 		userIntThis.scene.bringToTop('controller');
 	}
+
+    backgroundLayer1 = undefined; 
     game.scene.run(tempNewLevelID);
     game.scene.stop(oldLevelID);
 }
