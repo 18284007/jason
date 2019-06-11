@@ -71,9 +71,11 @@ class dragonFire extends projectile {
 
         this.hugeFireMovement = parameter.hugeFireMovement !== undefined && parameter.hugeFireMovement;
 
+        //If aimed is true, accelerate towards the player. 
         if (parameter.aimed){
             createThis.physics.accelerateToObject(this, player, this.velocityAimed);
         } else if (this.hugeFireMovement) {
+            //If they are put of the dragon's 'huge fire', move in a random direction. 
             this.body.velocity.x = Math.random() * 200 - 100; 
             this.body.velocity.y = Math.random() * 200 - 100;
         }
