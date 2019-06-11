@@ -1,6 +1,11 @@
-var currentProjectile = 0;
-var projectiles = [];
+var currentProjectile = 0; //The current projectile. Used for the projectileId.  
+var projectiles = []; //Array storing all projectiles. 
 
+/* Projectile base class. 
+ * This is used to create other projectiles, so this should not be spawned directly. 
+ * Required parameters: x, y, scene, key, velocityX, projectileId, damage. 
+ * Optional parameters: velocityAimed. 
+ */
 class projectile extends Phaser.GameObjects.Sprite {
     constructor (parameter) {
         //Create object. 
@@ -22,19 +27,24 @@ class projectile extends Phaser.GameObjects.Sprite {
         currentProjectile++;
     }
 
+    //Damage the player's health when plyaer collides into this projectile.
     playerDamage(tempProjectile) {
         playerDamage(tempProjectile.damage);
         projectiles[tempProjectile.projectileId].destroy();
     }
 }
 
+/* Spider web. 
+ * Used in the shrine forest level. 
+ * Required parameters: x, y, projectileId.
+ */
 class spiderBossWeb extends projectile {
     constructor (parameter) {
         super({
             scene: createThis,
             x: parameter.x,
             y: parameter.y, 
-            key: 'spiderBossWebSprite', //temp
+            key: 'spiderBossWebSprite',
             velocityX: -100,
             projectileId: parameter.projectileId,
             damage: 10
