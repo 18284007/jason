@@ -6,52 +6,44 @@ const playerDamgePointsInit = 50;
 var maxHealth = maxHealthInit;
 var currentHealth = maxHealthInit;
 var playerAlive = true;
-// variables relating to normal levels
-var playerJumpVelocity = 500; 
-var playerWalkVelocity = 200; 
-var playerFacingRight = true;
+
+//Variables relating to normal levels
+var playerJumpVelocity = 500; //Jumping Y velocity
+var playerWalkVelocity = 200; //Walking X velocity
+var playerFacingRight = true; //Is the player facing right?
 var playerHasWings = false; //Can the player fly?
-var playerSwingSword = false;
-var playerSwungSword = false; 
-var playerDamagePoints = playerDamgePointsInit;
-var playerInvulnerabilityWait = 1000; 
-var playerInvulnerability = false;
-
-// variables relating to siren level
-var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
-var playerShip = false; //Is the player a ship or a person?
-var playerShipVelocity = 300;
-
+var playerSwingSword = false; //Is the player swinging their sword?
+var playerSwungSword = false; //Has the player swung their sword?
+var playerDamagePoints = playerDamgePointsInit; //Current damage inflicted upon enemies. 
+var playerInvulnerabilityWait = 1000; //How long the player should be invulnerable.
+var playerInvulnerability = false; //Is the player invulnerable?
 var playerVelocityYMax = 1350; //Maximum Y velocity - prevents clipping through floor when falling. 
 
-/* This function would be used for importing player data from a JSON file. 
- * It is currently not working, so please do not use it. 
- */
-function loadCharacterMetaJSON() {
-    createThis.load.json('characterMetaJSON', 'code/engine/player.json');
-}
+//Variables relating to siren level
+var playerShipOffsetX = 300; //Camera offset for playerShip mode. 
+var playerShip = false; //Is the player a ship or a person?
+var playerShipVelocity = 300; //X velocity used in playerShip mode. 
 
-function parseCharacterMetaJSON() {
-    characterMetaJSON = createThis.cache.json.get('characterMetaJSON');
-    characterMeta = characterMetaJSON.characters;
-}
 
 /* Player movement. 
  * This is used when controlling a person. 
  * This is not used for controlling a ship. 
  */
 function playerMovement() {
+    //If the attack key is held, swing the player's sword. 
     if (attackKey.isDown && !playerSwingSword && !playerSwungSword) {
         playerSword();
+    //If the player's sword has been swung and the player isn't currently in a swing, allow the player to swing their sword again. 
     } else if (!attackKey.isDown && !playerSwingSword && playerSwungSword) {
         playerSwungSword = false; 
     }
 
+    //Cap the player's Y velocity. 
     if (player.body.velocity.y > playerVelocityYMax) {
         player.body.velocity.y = playerVelocityYMax; 
     }
 
-    //Horizontal movement 
+    //Horizontal movement. tempVelocityX is modified and then used as the horizontal velocity of the player. 
     var tempVelocityX = 0; 
     if (cursors.left.isDown) {
         tempVelocityX -= playerWalkVelocity;
@@ -63,23 +55,29 @@ function playerMovement() {
     }
     player.setVelocityX(tempVelocityX);
     
+    //Flip the player if they are facing left. 
     player.flipX = !(playerFacingRight); 
 
+    //Animations. 
     if (!playerSwingSword && !cursors.left.isDown && !cursors.right.isDown) {
+        //Play idle animation. 
         player.anims.play('jasonIdleRight', true);
         player.setSize(20, 64);
         player.setOffset(28, 0);
     } else if (playerSwingSword) {
+        //Play attack animation. 
         player.anims.play('jasonAttackRight', true);
 
         /* If the player is facing a wall and close to it, the game will use the default hitbox size. 
          * If the player is not near a wall, a larger hitbox will be used.  
          */
+        //Check nearby tiles. 
         var tempCheckRightTile = createThis.map.getTileAtWorldXY(player.x + 50, player.y + 31); 
         var tempCheckLeftTile = createThis.map.getTileAtWorldXY(player.x - 11, player.y + 31);
         var tempCheckRightTile2 = createThis.map.getTileAtWorldXY(player.x + 50, player.y); 
         var tempCheckLeftTile2 = createThis.map.getTileAtWorldXY(player.x - 11, player.y);
 
+        //Check nearly tiles. The last two check whether the player is near the edge of the map.  
         if ((playerFacingRight && tempCheckRightTile !== null && tempCheckRightTile.collides) || 
             (!playerFacingRight && tempCheckLeftTile !== null && tempCheckLeftTile.collides) || 
             (playerFacingRight && tempCheckRightTile2 !== null && tempCheckRightTile2.collides) || 
@@ -97,8 +95,8 @@ function playerMovement() {
             player.setSize(60, 64);
             player.setOffset(-12, 0);
         } 
-
     } else {
+        //Play walk animation. 
         player.anims.play('jasonRight', true);
         player.setSize(20, 64);
         player.setOffset(28, 0);
@@ -106,9 +104,9 @@ function playerMovement() {
     
     //Vertical movement
     if (jumpKey.isDown) {
-    	if (playerHasWings || player.body.blocked.down){
-    		player.setVelocityY(-playerJumpVelocity);
-    	}
+        if (playerHasWings || player.body.blocked.down){
+            player.setVelocityY(-playerJumpVelocity);
+        }
     }
     
     /* If there are portals in the map, iterate through them to check collision 
@@ -133,7 +131,10 @@ function playerMovement() {
  */
 
 function playerShipMovement() {
+    //Set X velocity to playerShipVelocity. 
     player.setVelocityX(playerShipVelocity);
+
+    //Set Y velocity. 
     var tempVelocityY = 0; 
     if (cursors.up.isDown) {
         tempVelocityY -= playerShipVelocity;
@@ -143,6 +144,7 @@ function playerShipMovement() {
     }
     player.setVelocityY(tempVelocityY);
 
+    //If the player's ship hits something, they should die. 
     if (player.body.blocked.right) {
         playerAlive = false;
         //Disabling collision prevents an issue where the ship can get stuck on a rock when falling.
@@ -169,11 +171,17 @@ function playerShipSink() {
     parseHealthBarAnimate();
 }
 
+/* Stops a period of playerInvulnerability triggered upon hitting an enemy. 
+ * It is assumed that the player is in an invulnerable state .
+ */
 function playerInvulnerabilityStop() {
     playerInvulnerability = false; 
     player.alpha = 1; 
 }
 
+/* Damage the player. 
+ * Required parameters: tempHealth.
+ */
 function playerDamage(tempHealth) {
     if (!playerInvulnerability){
         playerInvulnerability = true; 
@@ -187,7 +195,7 @@ function playerDamage(tempHealth) {
     }
 }
 
-// Boosts max health by the number stated in tempHealth.
+//Boosts max health by the number stated in tempHealth.
 function maxHealthBoost(tempHealth) {
     maxHealth += tempHealth; 
     currentHealth = maxHealth;
@@ -206,40 +214,57 @@ function playerHeal(tempHealth){
     parseHealthBarAnimate();
 }
 
+/* gameOver() is called when the player dies and the level should reset.  
+ * The player's health can not exceed maxHealth. 
+ */
 function gameOver() {
     playerAlive = false; 
+
+    //Reset health and the health bar.
     currentHealth = maxHealth;
     healthBarReset();
-    if (skeleInterval !== undefined)
-    {
+
+    //Clear skeleton interval if applicable. 
+    if (skeleInterval !== undefined) {
         clearInterval(skeleInterval);
     }
 
+    //Kill all enemeis on the level to prevent bugs when resetting. 
     for (i = 0; i < enemyCount; i++){
         enemies[i].alive = false; 
     }
 
+    //Reset inventory to a prior state (stored in resetInventory)
     for (j = 0; j < inventory.length; j++) {
         inventory[j] = (resetInventory[j]);
     }
-    if (currentLevelID === 'colchisFields' && userIntThis.ritualItemText.alpha > 0)
-    {
+
+    if (currentLevelID === 'colchisFields' && userIntThis.ritualItemText.alpha > 0) {
         userIntThis.ritualItemText.alpha = 0;
-    }else if (userIntThis.ritualItemText.alpha > 0){
+    } else if (userIntThis.ritualItemText.alpha > 0){
         userIntThis.updateRitualItemText();
     }
 
+    //Restart the level. 
     createThis.scene.restart(currentLevelID);
 }
 
+/* Check if the player has fallen off the map. 
+ * If they have, they should die.  
+ */
 function playerCheckForFall() {
     if (player.y > gameHeight + 100 ) {
         gameOver();
     }
 }
 
+/* This is used when the player spawns into a level. 
+ * The game checks if there is a portal linked to the level the player came out of. 
+ * If there is, the player is moved there, rather than spawning from the spawn point defined in Tiled.
+ * oldLevelID refers to the levelID of the previous level.  
+ */
 function playerCheckForPortal() {
-    if (typeof oldLevelID !== 'undefined'){
+    if (typeof oldLevelID !== 'undefined'){ 
         for (i = 0; i < portalCount; i++) {
             if (portals[i].portalMap == oldLevelID) {
                 player.x = portals[i].x;
@@ -249,6 +274,9 @@ function playerCheckForPortal() {
     }
 }
 
+/* Check if the player has walked away from a portal. 
+ * The radius is defined by dialogueWalkAway. 
+ */
 function playerCheckDialogueWalkAway(){
     if ((player.x > dialoguex + dialogueWalkAway) || (player.x < dialoguex - dialogueWalkAway)) {
         dialogueAlreadyEngaged = false; 
@@ -259,12 +287,20 @@ function playerCheckDialogueWalkAway(){
     }
 }
 
+/* The player swings their sword. 
+ * This only handles the playerSwingSword and playerSwungSword variables. 
+ * It does not affect animation or damage.  
+ */
 function playerSword () {
     playerSwingSword = true; 
     playerSwungSword = true; 
     setTimeout(playerSwordStop, 500);
 }
 
+/* The player stops swinging their sword. 
+ * This only handles the playerSwingSword variable. 
+ * It does not affect animation or damage.  
+ */
 function playerSwordStop () {
     playerSwingSword = false; 
 }
