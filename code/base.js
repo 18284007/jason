@@ -97,7 +97,6 @@ class controller extends Phaser.Scene
         this.load.image('signGardenEntranceSprite','assets/items/signGardenEntrance.png');
         this.load.image('signDungeonSprite','assets/items/signDungeon.png');
         this.load.image('signGardenForestSprite','assets/items/signGardenForest.png');
-        loadCharacterMetaJSON();
     }
 
     create()
@@ -105,7 +104,6 @@ class controller extends Phaser.Scene
         firstInitHealthBar();
         pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         initDialogueBox();
-        parseCharacterMetaJSON();
 
         game.scene.run(currentLevelID);
 
