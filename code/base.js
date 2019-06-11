@@ -24,13 +24,11 @@ var backgroundLayer1;
 
 class controller extends Phaser.Scene
 {
-    constructor()
-    {
+    constructor() {
         super({key: 'controller'});
     }
 
-    preload()
-    {
+    preload() {
         //Load assets used in all levels
         createThis = this;
         userIntThis = this;
@@ -99,8 +97,7 @@ class controller extends Phaser.Scene
         this.load.image('signGardenForestSprite','assets/items/signGardenForest.png');
     }
 
-    create()
-    {
+    create() {
         firstInitHealthBar();
         pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         initDialogueBox();
@@ -177,8 +174,7 @@ class controller extends Phaser.Scene
     }
 }
 
-function commonPreload()
-{
+function commonPreload() {
     //load map
     createThis.load.tilemapTiledJSON(currentLevelID + 'Tilemap', 'assets/'+ currentLevelID + '.json');
 
@@ -192,8 +188,7 @@ function commonPreload()
     }
 }
 
-function loadMap()
-{
+function loadMap() {
     destroyOldObjects();
     createThis.physics.world.TILE_BIAS = 64; 
 
@@ -311,8 +306,7 @@ function loadMap()
     playerAlive = true;
 }
 
-function callUpdateFuncs()
-{
+function callUpdateFuncs() {
     //Use the appropriate movement function for the level. 
     playerMovement();
     
@@ -327,8 +321,7 @@ function callUpdateFuncs()
     
     if (dialogueActive) {
         playerCheckDialogueWalkAway(); 
-    }
-    
+    }   
 }
 
 function shipUpdate() {
