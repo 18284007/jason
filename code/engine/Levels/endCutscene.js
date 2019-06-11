@@ -21,12 +21,14 @@ class endCutscene extends Phaser.Scene{
 	create()
 	{
         loadMap();
+        currentDialogue = 0;
         endCutscenePhase = 0;
         levelProgress = 1;
         player.anims.play('jasonRight', true);
         dialogue = levelJSON['narration'];
 		dialogueMax = dialogue.length - 1;
 		this.processDialogue();
+        player.body.allowGravity = true;
         gameWidth = createThis.map.widthInPixels;
         gameHeight = createThis.map.heightInPixels;
         createThis.physics.world.setBounds(0, 0, gameWidth + 300, gameHeight, 64, true, true, false, false);
