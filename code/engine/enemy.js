@@ -28,7 +28,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 	        });
 	        if (parameter.x + parameter.xMove > this.maxXBound.x)
 	        {
-	        	this.xMax = this.maxXBound.x-50;
+	        	this.xMax = this.maxXBound.x-100;
 	        }else
 	        {
 	        	this.xMax = parameter.x + parameter.xMove; 
@@ -173,7 +173,7 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 					{
 						levelProgress++;
 					}
-					console.log(levelProgress);
+					
 					//reset
 					skelesRemain = 1;
 				}
@@ -216,6 +216,13 @@ class enemyBase extends Phaser.GameObjects.Sprite {
 				this.body.setVelocityX(this.xVel);
 				this.moveRight = true; 
 			}
+		}
+
+		if (this.body.velocity.x === 0 && this.xMove !== undefined)
+		{
+			//prevents sprite from getting 'stuck'
+			this.body.setVelocityX(this.xVel);
+			this.moveRight = true;
 		}
 	}
 }
@@ -722,9 +729,9 @@ class skeleton extends enemyBase {
 			scene: createThis, 
 			x: parameter.x, 
 			y: parameter.y,
-			key: 'tempEnemy', 
+			key: 'skeleSprite', 
 			xMove: 300,
-			xVel: 130, 
+			xVel: Math.round((Math.random() * 40) + 110), 
 			scale: 1, 
 			enemyId: parameter.enemyId, 
 			gravity: true, 
@@ -732,6 +739,59 @@ class skeleton extends enemyBase {
 			skeleton:true, 
 			boss: true
         });
+        this.anims.play('skeleRight', true);
+        console.log(this.xVel);
+	}
+
+	movement()
+	{
+		//If the enemy has been knocked back, their movement should be adjusted. 
+		if (this.knockback) {
+			this.knockback = false;
+			if (playerFacingRight) {
+				this.body.setVelocityX(100);
+				this.anims.play('skeleRight', true);
+			} else {
+				this.body.setVelocityX(-100);
+				this.anims.play('skeleLeft', true);
+			}
+			this.body.setVelocityY(-300);
+			this.knockedBack = true; 
+		} 
+		
+
+		//Movement logic. 
+		if (this.knockedBack && this.body.blocked.down) {
+			if (this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false; 
+				this.knockedBack = false;
+				this.anims.play('skeleLeft', true);	
+			} else if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true; 
+				this.knockedBack = false;
+				this.anims.play('skeleRight', true);	
+			}
+		} else if (!this.knockedBack){
+			if (this.moveRight && this.x > this.xMax) {
+				this.body.setVelocityX(-this.xVel);
+				this.moveRight = false;
+				this.anims.play('skeleLeft', true);
+			} else if (this.x < this.xMin) {
+				this.body.setVelocityX(this.xVel);
+				this.moveRight = true;
+				this.anims.play('skeleRight', true);
+			} 
+		}
+
+		if (this.body.velocity.x === 0)
+		{
+			//prevents sprite from getting 'stuck'
+			this.body.setVelocityX(50);
+			this.moveRight = true;
+			this.anims.play('skeleRight', true);
+		}
 	}
 }
 
