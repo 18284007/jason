@@ -8,6 +8,7 @@ npcCount = 0; //NPC counter
 items = []; //Item array
 itemCount = 0; //Items counter
 
+//Read through the list of objects in the current map and spawn them. 
 function spawnObjects() {
     //Arrays that store appropriate objects and a corresponding counter.
     enemies = []; //Enemy array
@@ -26,9 +27,6 @@ function spawnObjects() {
      */
     mapObjectArray = createThis.map.objects[0].objects;
     for (i = 0; i < mapObjectArray.length; i++){
-        //if item not in picked up array for level 
-        //if item's levelPhase == 0 || levelPhase == currentLevelPhase
-
         /* Reads the properties of the current object and copies them to tempProperties. 
          * This allows a property to be addressed by name (e.g. tempProperties['xMove']) rather than by position. 
          */
@@ -270,8 +268,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break;
-				
-			case 'signMarket':
+                
+            case 'signMarket':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
@@ -280,8 +278,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break; 
-				
-			case 'signShrine':
+                
+            case 'signShrine':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y,  
@@ -290,8 +288,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break; 
-				
-			case 'signShrineForest':
+                
+            case 'signShrineForest':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y,  
@@ -300,8 +298,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break; 
-				
-			case 'signPalace':
+                
+            case 'signPalace':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
@@ -310,8 +308,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break;
-				
-			case 'signColchisFields':
+                
+            case 'signColchisFields':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y,  
@@ -320,8 +318,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break; 
-				
-			case 'signRiverCrossing':
+                
+            case 'signRiverCrossing':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
@@ -330,8 +328,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break; 
-				
-			case 'signGardenEntrance':
+                
+            case 'signGardenEntrance':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
@@ -340,8 +338,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break; 
-				
-			case 'signDungeon':
+                
+            case 'signDungeon':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
@@ -350,8 +348,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break; 
-				
-			case 'signGardenForest':
+                
+            case 'signGardenForest':
                 npcs[npcCount] = new signNPC({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y, 
@@ -360,8 +358,8 @@ function spawnObjects() {
                 });
                 npcCount++; 
                 break;
-			
-			case 'plow':
+            
+            case 'plow':
                 plow = new plowItem({
                     x: mapObjectArray[i].x, 
                     y: mapObjectArray[i].y
