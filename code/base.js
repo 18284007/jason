@@ -31,8 +31,8 @@ class controller extends Phaser.Scene
 
     preload()
     {
-    	//Load assets used in all levels
-    	createThis = this;
+        //Load assets used in all levels
+        createThis = this;
         userIntThis = this;
 
         //main characters
@@ -40,29 +40,29 @@ class controller extends Phaser.Scene
            { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('jason','assets/player/jason.png', 
            { frameWidth: 76, frameHeight: 64 });
-	this.load.spritesheet('kingSprite','assets/NPC/king.png', 
+        this.load.spritesheet('kingSprite','assets/NPC/king.png', 
            { frameWidth: 40, frameHeight: 64 });
 
         //portal
         this.load.image('portalSprite','assets/items/portal.png');
-	//music
+        //music
         this.load.audio('female', ['assets/stage/background/female.mp3']);
         this.load.audio('water', ['assets/stage/background/water.mp3']);
         this.load.audio('male',['assets/stage/background/male.mp3']);
-	   this.load.audio('upbeat', ['assets/stage/background/upbeat.mp3']);
-       this.load.audio('jasonIntro', ['assets/stage/background/jasonIntro.mp3']);
+        this.load.audio('upbeat', ['assets/stage/background/upbeat.mp3']);
+        this.load.audio('jasonIntro', ['assets/stage/background/jasonIntro.mp3']);
+        
         //other/Placeholders (may move/remove later)
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
-	this.load.image('artemisSprite','assets/NPC/artemis.png');
+        this.load.image('artemisSprite','assets/NPC/artemis.png');
         this.load.image('bonfireSprite','assets/bonfire.png');
-	this.load.image('fireballSprite','assets/fireball.png');
+        this.load.image('fireballSprite','assets/fireball.png');
         this.load.image('spiderBossSprite','assets/enemy/spiderBoss.png');
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
-        //medusaBoss
         this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
-        //bullBoss
         this.load.image('bullBossSprite','assets/enemy/bullBoss.png');
+        
         //Items (must be constantly loaded for inventory)
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
         this.load.image('thoughtBubbleSprite', 'assets/npc/thought.png');
@@ -85,81 +85,70 @@ class controller extends Phaser.Scene
         this.load.image('pausebg', 'assets/stage/background/pausebg.png');
         this.load.image('mapMenu', 'assets/stage/background/mapMenu.png');
         this.load.image('mutebtn', 'assets/stage/background/mutebtn.png');  
-	    
-	//SIGNS
-	this.load.image('signR2CSprite','assets/items/signR2C.png');
-	this.load.image('signMarketSprite','assets/items/signMarket.png');
-	this.load.image('signShrineSprite','assets/items/signShrine.png');
-	this.load.image('signShrineForestSprite','assets/items/signShrineForest.png');
-	this.load.image('signPalaceSprite','assets/items/signPalace.png');
-	this.load.image('signColchisFieldsSprite','assets/items/signColchisFields.png');
-	this.load.image('signRiverCrossingSprite','assets/items/signRiverCrossing.png');
-	this.load.image('signGardenEntranceSprite','assets/items/signGardenEntrance.png');
-	this.load.image('signDungeonSprite','assets/items/signDungeon.png');
-	this.load.image('signGardenForestSprite','assets/items/signGardenForest.png');
+
+        //SIGNS
+        this.load.image('signR2CSprite','assets/items/signR2C.png');
+        this.load.image('signMarketSprite','assets/items/signMarket.png');
+        this.load.image('signShrineSprite','assets/items/signShrine.png');
+        this.load.image('signShrineForestSprite','assets/items/signShrineForest.png');
+        this.load.image('signPalaceSprite','assets/items/signPalace.png');
+        this.load.image('signColchisFieldsSprite','assets/items/signColchisFields.png');
+        this.load.image('signRiverCrossingSprite','assets/items/signRiverCrossing.png');
+        this.load.image('signGardenEntranceSprite','assets/items/signGardenEntrance.png');
+        this.load.image('signDungeonSprite','assets/items/signDungeon.png');
+        this.load.image('signGardenForestSprite','assets/items/signGardenForest.png');
         loadCharacterMetaJSON();
     }
 
     create()
     {
-    	firstInitHealthBar();
-	pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-	initDialogueBox();
+        firstInitHealthBar();
+        pauseKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+        initDialogueBox();
         parseCharacterMetaJSON();
 
-    	game.scene.run(currentLevelID);
-	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(currentLevelID))
-	{
-		userIntThis.scene.sendToBack('controller');	
-	}
-	else
-	{
-		userIntThis.scene.bringToTop('controller');
-	}
+        game.scene.run(currentLevelID);
+
+        if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(currentLevelID)) {
+            userIntThis.scene.sendToBack('controller');    
+        } else {
+            userIntThis.scene.bringToTop('controller');
+        }
 
         this.ritualItemText = userIntThis.add.text(800, 50, '0/x Ritual Items', undefined);
         this.ritualItemText.alpha = 0; 
-
     }
 
-    update()
-    {
-	if (pauseKey.isDown) {
-				
-	game.scene.run('pause');
-	}
-	/*Music*/
-        if(!musicPlaying && !musicMuted)
-        {
-             if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID))
-            {
+    update() {
+        if (pauseKey.isDown) {
+            game.scene.run('pause');
+        }
+
+        /*Music*/
+        if(!musicPlaying && !musicMuted) {
+            if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID)) {
                 music = this.sound.add('water', {loop: true});
                 music.play();
                 music.setVolume(1);
-            }else if(['colchisFields','gardenFleece'].includes(currentLevelID))
-            {
-            	music = this.sound.add('male', {loop: true})
+            } else if (['colchisFields','gardenFleece'].includes(currentLevelID)) {
+                music = this.sound.add('male', {loop: true})
                 music.play();
                 music.setVolume(0.8);
-            }else if(['siren'].includes(currentLevelID))
-            {
+            } else if (['siren'].includes(currentLevelID)) {
                 music = this.sound.add('upbeat', {loop: true})
                 music.play();
                 music.setVolume(1);
-            }else if(['introCutscene'].includes(currentLevelID))
-            {
+            } else if (['introCutscene'].includes(currentLevelID)) {
                 music = this.sound.add('jasonIntro', {loop: true})
                 music.play();
                 music.setVolume(1);
-            }else
-            {
+            } else {
                 music = this.sound.add('female', {loop: true});
                 music.play();
                 music.setVolume(0.8);
             }
             musicPlaying = true;
         }
-	
     }
 
     updateRitualItemText() {
@@ -192,12 +181,12 @@ class controller extends Phaser.Scene
 
 function commonPreload()
 {
-	//load map
-	createThis.load.tilemapTiledJSON(currentLevelID + 'Tilemap', 'assets/'+ currentLevelID + '.json');
+    //load map
+    createThis.load.tilemapTiledJSON(currentLevelID + 'Tilemap', 'assets/'+ currentLevelID + '.json');
 
-	//load dialogue
-	currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
-	loadLevelDialogue();
+    //load dialogue
+    currentLevelDialogueJSON = 'stages/dialogue/' + currentLevelID + '.json';
+    loadLevelDialogue();
 
     //Update resetInventory. 
     for (j = 0; j < inventory.length; j++) {
@@ -210,7 +199,7 @@ function loadMap()
     destroyOldObjects();
     createThis.physics.world.TILE_BIAS = 64; 
 
-	var currentTilemapKey = currentLevelID + 'Tilemap';
+    var currentTilemapKey = currentLevelID + 'Tilemap';
 
     createThis.map = createThis.make.tilemap({ key: currentTilemapKey });
     
@@ -257,7 +246,7 @@ function loadMap()
     mapLayer.setCollisionByProperty({ collides: true });
     createThis.physics.add.collider(player, mapLayer);
 
-    //Player sprite stuff. 
+    //Player animations. 
     createThis.anims.create({
         key: 'jasonRight',
         frames: createThis.anims.generateFrameNumbers('jason', { start: 0, end: 11 }),
@@ -277,6 +266,7 @@ function loadMap()
         repeat: -1
     });
 
+    //Medea animations. 
     createThis.anims.create({
         key: 'medeaIdleRight',
         frames: createThis.anims.generateFrameNumbers('medeaSprite', { start: 0, end: 0 }),
@@ -290,7 +280,6 @@ function loadMap()
         repeat: -1
     });
 
-
     //Keyboard input.
     cursors = createThis.input.keyboard.createCursorKeys();
     attackKey = createThis.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
@@ -303,7 +292,7 @@ function loadMap()
 
     parseLevelDialogue();
     if (currentLevelID != 'endCutscene'){
-    	parseHealthBar();
+        parseHealthBar();
     }
 
     spawnObjects();
@@ -326,7 +315,7 @@ function loadMap()
 
 function callUpdateFuncs()
 {
-	//Use the appropriate movement function for the level. 
+    //Use the appropriate movement function for the level. 
     playerMovement();
     
     //Enemy Movement
@@ -344,39 +333,35 @@ function callUpdateFuncs()
     
 }
 
-function shipUpdate()
-{
-	if (playerAlive)
-	{
-		playerShipMovement();
-	}
-	else
-	{
-		playerShipSink();
-	}
+function shipUpdate() {
+    if (playerAlive) {
+        playerShipMovement();
+    } else {
+        playerShipSink();
+    }
 
-	playerOffset.x = player.x + playerShipOffsetX; 
+    playerOffset.x = player.x + playerShipOffsetX; 
     playerOffset.y = player.y;
 
-	playerCheckForFall();
+    playerCheckForFall();
 }
 
 function changeLevel(tempNewLevelID) {
-	oldLevelID = currentLevelID;
-	playerShip = false;
+    oldLevelID = currentLevelID;
+    playerShip = false;
     if ((['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren','introCutscene'].includes(currentLevelID)) ||
-    		(['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren','introCutscene'].includes(tempNewLevelID)))
+            (['endScreen','titleScreen','colchisFields', 'gardenFleece','mapMenu','siren','introCutscene'].includes(tempNewLevelID)))
     {
         musicPlaying = false;
         music.stop();
     }
     clearDialogueBox();
     npcDialogue.text = '';
-	if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(tempNewLevelID)) {
-		userIntThis.scene.sendToBack('controller');	
-	} else {
-		userIntThis.scene.bringToTop('controller');
-	}
+    if (['endScreen','titleScreen','mapMenu','introCutscene'].includes(tempNewLevelID)) {
+        userIntThis.scene.sendToBack('controller');    
+    } else {
+        userIntThis.scene.bringToTop('controller');
+    }
 
     backgroundLayer1 = undefined; 
     game.scene.run(tempNewLevelID);
@@ -416,7 +401,7 @@ var config = {
         }
     },
     scene: [controller, titleScreen, argoLanding, roadToColchis, marketplace, palace, shrine, shrineForest,
-    		colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
+            colchisFields, riverCrossing, gardenEntrance, gardenForest, gardenDungeon, gardenFleece, 
             placeholdertestmap, endCutscene, endScreen, siren, pause, mapMenu, introCutscene]
 };
 
