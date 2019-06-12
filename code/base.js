@@ -1,39 +1,40 @@
-/*variables relating to user controls*/
-var cursors;
-var attackKey;
-var jumpKey;
-var talkKey;
-var pauseKey;
-/*variables relating to the players character*/
-var player;
-/*variables relating to map generation*/
-var mapLayer;
+//Variables for controls
+var cursors; //Arrow Keys
+var attackKey; //Attack key (default is Z)
+var jumpKey; //Jump key (default is X)
+var talkKey; //Talk key (default is C)
+var pauseKey; //Pause key (default is P)
+//Player character
+var player; //Player sprite 
+//Map variables
+var mapLayer; //Layer with tiles. 
 var createThis;
 var userIntThis;
-var currentLevelDialogueJSON;
-var levelProgress = 1;
+var currentLevelDialogueJSON; //Current level's JSON dialogue file. 
+var levelProgress = 1; //Level progress. Used to control NPCs and portals. 
 var music;
-var musicMuted = false;
-var musicPlaying = false;
-//var currentLevelID;
-/*variables relating to moving between levels*/
-var portalMap;
-
-var backgroundLayer0;
+var musicMuted = false; //Is the music muted?
+var musicPlaying = false; //Is music playing?
+var portalMap; //Which map should a portal warp into? 
+//Background layers
+var backgroundLayer0; 
 var backgroundLayer1;
 
-class controller extends Phaser.Scene
-{
+/* Controller. 
+ * Handles the entire game. 
+ */
+class controller extends Phaser.Scene {
     constructor() {
         super({key: 'controller'});
     }
 
+    //Preload common assets. 
     preload() {
         //Load assets used in all levels
         createThis = this;
         userIntThis = this;
 
-        //main characters
+        //Main characters
         this.load.spritesheet('medeaSprite','assets/NPC/medea.png', 
            { frameWidth: 32, frameHeight: 64 });
         this.load.spritesheet('jason','assets/player/jason.png', 
@@ -41,16 +42,17 @@ class controller extends Phaser.Scene
         this.load.spritesheet('kingSprite','assets/NPC/king.png', 
            { frameWidth: 40, frameHeight: 64 });
 
-        //portal
+        //Portal
         this.load.image('portalSprite','assets/items/portal.png');
-        //music
+
+        //Music
         this.load.audio('female', ['assets/stage/background/female.mp3']);
         this.load.audio('water', ['assets/stage/background/water.mp3']);
         this.load.audio('male',['assets/stage/background/male.mp3']);
         this.load.audio('upbeat', ['assets/stage/background/upbeat.mp3']);
         this.load.audio('jasonIntro', ['assets/stage/background/jasonIntro.mp3']);
         
-        //other/Placeholders (may move/remove later)
+        //Other/Placeholders
         this.load.spritesheet('tempEnemy','assets/enemy/eviljason.png', 
            { frameWidth: 48, frameHeight: 48 });
         this.load.image('artemisSprite','assets/NPC/artemis.png');
@@ -60,15 +62,14 @@ class controller extends Phaser.Scene
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
         this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
         this.load.image('bullBossSprite','assets/enemy/bullBoss.png');
-        //Skeletons
         this.load.spritesheet('skeleSprite','assets/enemy/skeleton.png',
             { frameWidth: 30, frameHeight: 45 });
+
         //Items (must be constantly loaded for inventory)
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
         this.load.image('thoughtBubbleSprite', 'assets/npc/thought.png');
 
         //LEVEL STUFF
-        //Environment sprites - PLACEHOLDERS.
         this.load.image('bgSky', 'assets/background/sky.png');
         this.load.image('bgClouds', 'assets/background/clouds.png');
         this.load.image('bgDungeon', 'assets/background/dungeon.png');
@@ -117,12 +118,13 @@ class controller extends Phaser.Scene
     }
 
     update() {
+        //Pause the game if the pause key is held down. 
         if (pauseKey.isDown) {
             game.scene.run('pause');
         }
 
-        /*Music*/
-        if(!musicPlaying && !musicMuted) {
+        //Music 
+        if (!musicPlaying && !musicMuted) {
             if (['endScreen','titleScreen','mapMenu'].includes(currentLevelID)) {
                 music = this.sound.add('water', {loop: true});
                 music.play();
@@ -176,6 +178,7 @@ class controller extends Phaser.Scene
     }
 }
 
+//Preload code common to all levels. 
 function commonPreload() {
     //load map
     createThis.load.tilemapTiledJSON(currentLevelID + 'Tilemap', 'assets/'+ currentLevelID + '.json');
@@ -190,6 +193,9 @@ function commonPreload() {
     }
 }
 
+/* Load the level specified in currentLevelID. 
+ * It is assumed that currentLevelID is a valid value. 
+ */
 function loadMap() {
     destroyOldObjects();
     createThis.physics.world.TILE_BIAS = 64; 
@@ -308,6 +314,7 @@ function loadMap() {
     playerAlive = true;
 }
 
+//Call update functions. 
 function callUpdateFuncs() {
     //Use the appropriate movement function for the level. 
     playerMovement();
@@ -315,30 +322,39 @@ function callUpdateFuncs() {
     //Enemy Movement
     enemyMovement();
      
+    //Check if a player has fallen.  
     playerCheckForFall(); 
 
+    //Run the update() function of each portal. 
     portalUpdate();
 
+    //Run the update() function of each NPC. 
     npcUpdate();
     
+    //Check if the player has walked away from dialogue. 
     if (dialogueActive) {
         playerCheckDialogueWalkAway(); 
     }   
 }
 
+//Ship update function. 
 function shipUpdate() {
+    //Should the player move or sink?
     if (playerAlive) {
         playerShipMovement();
     } else {
         playerShipSink();
     }
 
+    //Player offset calculation. Used for the camera offset. 
     playerOffset.x = player.x + playerShipOffsetX; 
     playerOffset.y = player.y;
 
+    //Check if the player has fallen. 
     playerCheckForFall();
 }
 
+//Change level to tempNewLevelID (which is required and assumed to be valid).
 function changeLevel(tempNewLevelID) {
     oldLevelID = currentLevelID;
     playerShip = false;
@@ -361,6 +377,7 @@ function changeLevel(tempNewLevelID) {
     game.scene.stop(oldLevelID);
 }
 
+//Destroy objects in a map. Used when switching to a new map. 
 function destroyOldObjects() {
     for (i = 0; i < enemyCount; i++){
         enemies[i].destroy();
