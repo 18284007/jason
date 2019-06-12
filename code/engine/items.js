@@ -99,7 +99,7 @@ class damageIncreaseItem extends itemBase {
             gravity: false
         })
 
-        this.boostValue = 50; 
+        this.boostValue = 25; 
     }
 
     collision (tempItem){
