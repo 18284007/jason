@@ -1,12 +1,9 @@
-class siren extends Phaser.Scene{
-
-    constructor()
-    {
+class siren extends Phaser.Scene {
+    constructor() {
         super({key: 'siren', active: false });
     }
 
-    preload()
-    {
+    preload() {
         createThis = this;
         currentLevelID = 'siren';
         playerShip = true;
@@ -14,17 +11,13 @@ class siren extends Phaser.Scene{
         backgroundLayer0 = 'bgSky';
         this.load.image('ship','assets/player/ship.png');
         commonPreload();
-        
     }
 
-    create()
-    {
-    	loadMap();
-        
+    create() {
+        loadMap();
     }
 
-    update()
-    {
+    update() {
         shipUpdate();
     }
 }

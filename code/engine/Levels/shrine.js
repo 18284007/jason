@@ -1,27 +1,20 @@
-class shrine extends Phaser.Scene{
-
-    constructor()
-	{
+class shrine extends Phaser.Scene {
+    constructor() {
         super({key: 'shrine', active: false });
-	}
+    }
 
-	preload()
-	{
+    preload() {
         createThis = this;
         currentLevelID = 'shrine';
         backgroundLayer0 = 'bgSky';
         commonPreload();
-	}
-
-	create()
-	{
-
-        loadMap();
-        
     }
 
-    update()
-    {
+    create() {
+        loadMap();
+    }
+
+    update() {
         callUpdateFuncs();
     }
 }

@@ -1,25 +1,20 @@
 class placeholdertestmap extends Phaser.Scene{
-
-    constructor()
-    {
+    constructor() {
         super({key: 'placeholdertestmap', active: false });
     }
 
-    preload()
-    {
+    preload() {
         createThis = this;
         currentLevelID = 'placeholdertestmap';
         backgroundLayer0 = 'bgSky';
         commonPreload();
     }
 
-    create()
-    {
+    create() {
         loadMap();
     }
 
-    update()
-    {
+    update() {
         callUpdateFuncs();   
     }
 }

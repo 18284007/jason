@@ -1,26 +1,21 @@
-class marketplace extends Phaser.Scene{
-
-    constructor()
-	{
+class marketplace extends Phaser.Scene {
+    constructor() {
         super({key: 'marketplace', active: false });
-	}
+    }
 
-	preload()
-	{
+    preload() {
         createThis = this;
         currentLevelID = 'marketplace';
         backgroundLayer0 = 'bgSky';
         backgroundLayer1 = 'bgMarket';
         commonPreload();
-	}
+    }
 
-	create()
-	{
+    create() {
         loadMap();
     }
 
-    update()
-    {
+    update() {
         callUpdateFuncs();
     }
 }

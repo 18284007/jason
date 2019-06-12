@@ -1,25 +1,21 @@
-class gardenDungeon extends Phaser.Scene{
-
-    constructor()
-	{
+class gardenDungeon extends Phaser.Scene {
+    constructor() {
         super({key: 'gardenDungeon', active: false });
-	}
+    }
 
-	preload()
-	{
+    preload() {
         createThis = this;
         currentLevelID = 'gardenDungeon';
         backgroundLayer0 = 'bgDungeon';
         commonPreload();
-		
-		this.load.spritesheet('bats','assets/enemy/bats.png',
-		{	frameWidth: 100, frameHeight: 140});	
+        
+        this.load.spritesheet('bats','assets/enemy/bats.png',
+        {    frameWidth: 100, frameHeight: 140});    
         this.load.spritesheet('minotaurSprite', 'assets/enemy/minotaur.png',
-        {frameWidth: 48, frameHeight: 48});	
-	}
+        {frameWidth: 48, frameHeight: 48});    
+    }
 
-	create()
-	{
+    create() {
         loadMap();
 
         createThis.anims.create({
@@ -28,6 +24,7 @@ class gardenDungeon extends Phaser.Scene{
             frameRate: 10,
             repeat: -1
         });
+
         createThis.anims.create({
             key: 'batsRight',
             frames: createThis.anims.generateFrameNumbers('bats', { start: 1, end: 1 }),
@@ -41,6 +38,7 @@ class gardenDungeon extends Phaser.Scene{
             frameRate: 10,
             repeat: -1
         });
+
         createThis.anims.create({
             key: 'minotaurSwingLeft',
             frames: createThis.anims.generateFrameNumbers('minotaurSprite', { start: 30, end: 39}),
@@ -49,8 +47,7 @@ class gardenDungeon extends Phaser.Scene{
         });
     }
 
-    update()
-    {
+    update() {
         callUpdateFuncs();
     }
 }

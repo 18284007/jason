@@ -1,25 +1,20 @@
-class roadToColchis extends Phaser.Scene{
-
-    constructor()
-	{
+class roadToColchis extends Phaser.Scene {
+    constructor() {
         super({key: 'roadToColchis', active: false });
-	}
+    }
 
-	preload()
-	{
+    preload() {
         createThis = this;
         currentLevelID = 'roadToColchis';
         backgroundLayer0 = 'bgSky';
         commonPreload();
-	}
+    }
 
-	create()
-	{
+    create() {
         loadMap();   
     }
 
-    update()
-    {
+    update() {
         callUpdateFuncs();
     }
 }

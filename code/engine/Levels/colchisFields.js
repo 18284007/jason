@@ -1,21 +1,19 @@
 class colchisFields extends Phaser.Scene{
-
-    constructor()
-	{
+    constructor() {
         super({key: 'colchisFields', active: false });
-	}
+    }
 
-	preload()
-	{
+    preload() {
         createThis = this;
         currentLevelID = 'colchisFields';
         backgroundLayer0 = 'bgSky';
         commonPreload();
-	}
+    }
 
-	create()
-	{
+    create() {
         loadMap();
+        
+        //King animations. 
         createThis.anims.create({
             key: 'kingIdleLeft',
             frames: createThis.anims.generateFrameNumbers('kingSprite', { start: 0, end: 0 }),
@@ -29,6 +27,7 @@ class colchisFields extends Phaser.Scene{
             repeat: -1
         });
 
+        //Skeleton animations. 
         createThis.anims.create({
             key: 'skeleIdle',
             frames: createThis.anims.generateFrameNumbers('skeleSprite', { start: 0, end: 0 }),
@@ -47,14 +46,12 @@ class colchisFields extends Phaser.Scene{
             frameRate: 10,
             repeat: -1
         });
-    
     }
 
-
-
-    update()
-    {
+    update() {
         callUpdateFuncs();
+
+        //Update the plow if it is not stuck.
         if (!plow.stuck){
             plow.update();    
         }

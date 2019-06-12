@@ -1,11 +1,9 @@
-class introCutscene extends Phaser.Scene{
-    constructor()
-	{
+class introCutscene extends Phaser.Scene {
+    constructor() {
         super({key: 'introCutscene', active: false });
-	}
+    }
 
-	preload()
-	{
+    preload() {
         createThis = this;
         currentLevelID = 'introCutscene';
         /*variable re-use, used for performance enhancement in this case*/
@@ -17,26 +15,23 @@ class introCutscene extends Phaser.Scene{
         this.load.image('introSlide4', 'assets/background/introSlide4.jpg');
         this.load.image('introSlide5', 'assets/background/introSlide5.jpg');
         this.load.image('introSlide6', 'assets/background/introSlide6.jpg');
-		this.load.image('introSlide7', 'assets/background/introSlide7.jpg');
-	}
+        this.load.image('introSlide7', 'assets/background/introSlide7.jpg');
+    }
 
-	create()
-	{
+    create() {
         endCutscenePhase = 0;
         setTimeout(this.updateProgress,15000);
         setTimeout(this.updateProgress,26000);
         setTimeout(this.updateProgress,39000);
         setTimeout(this.updateProgress,52000);
         setTimeout(this.updateProgress,68000);
-		setTimeout(this.updateProgress,75000);
+        setTimeout(this.updateProgress,75000);
         setTimeout(this.updateProgress,86000);
     }
 
-    update()
-    {
-    	//Control movement based on the phase.
-        if (!talkKeyPressed)
-        {
+    update() {
+        //Control movement based on the phase.
+        if (!talkKeyPressed) {
             if (endCutscenePhase == 0){
                 endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide1');
                 endCutsceneStillImg.setOrigin(1,1);
@@ -79,22 +74,21 @@ class introCutscene extends Phaser.Scene{
                 endCutsceneStillImg.scrollFactorY = 0;
                 endCutsceneStillImg.setDepth(100);
                 talkKeyPressed = true;
-            }else if (endCutscenePhase == 6){
+            } else if (endCutscenePhase == 6){
                 endCutsceneStillImg = createThis.add.image(1024, 576, 'introSlide7');
                 endCutsceneStillImg.setOrigin(1,1);
                 endCutsceneStillImg.scrollFactorX = 0;
                 endCutsceneStillImg.scrollFactorY = 0;
                 endCutsceneStillImg.setDepth(100);
                 talkKeyPressed = true;
-            }else{
-            changeLevel('siren');
+            } else {
+                changeLevel('siren');
             }
         }
-    	  
+          
     }
 
-    updateProgress()
-    {
+    updateProgress() {
         endCutscenePhase++;
         talkKeyPressed = false;
     }

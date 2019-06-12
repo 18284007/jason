@@ -1,34 +1,20 @@
-class argoLanding extends Phaser.Scene{
-
-    constructor()
-	{
+class argoLanding extends Phaser.Scene {
+    constructor() {
         super({key: 'argoLanding', active: false });
-	}
+    }
 
-	preload()
-	{
-        
+    preload() {
         createThis = this;
         currentLevelID = 'argoLanding';
         backgroundLayer0 = 'bgSky';
         commonPreload();
-
-		
-		
-        //Placeholder
-        //this.load.image('bonfireSprite','assets/bonfire.png');
-        
-	}
-
-	create()
-	{
-
-        loadMap();
-        
     }
 
-    update()
-    {
+    create() {
+        loadMap();
+    }
+
+    update() {
         callUpdateFuncs();
     }
 }

@@ -1,25 +1,20 @@
-class gardenEntrance extends Phaser.Scene{
-
-    constructor()
-	{
+class gardenEntrance extends Phaser.Scene {
+    constructor() {
         super({key: 'gardenEntrance', active: false });
-	}
+    }
 
-	preload()
-	{
+    preload() {
         createThis = this;
         currentLevelID = 'gardenEntrance';
         backgroundLayer0 = 'bgSky';
         commonPreload();
-	}
+    }
 
-	create()
-	{
+    create() {
         loadMap();
     }
 
-    update()
-    {
+    update() {
         callUpdateFuncs();
     }
 }
