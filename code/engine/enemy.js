@@ -740,7 +740,6 @@ class skeleton extends enemyBase {
 			boss: true
         });
         this.anims.play('skeleRight', true);
-        console.log(this.xVel);
 	}
 
 	movement()
