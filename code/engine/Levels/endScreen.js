@@ -19,6 +19,11 @@ class endScreen extends Phaser.Scene {
         let toMenuButton = this.add.image(this.game.renderer.width*0.5, this.game.renderer.height * 0.8, "menubut").setDepth(1).setInteractive();
         
         toMenuButton.on("pointerup", ()=>{
+            //Reset inventory. 
+            inventory = [false, false, false, false, false, false, false, false, false]; 
+            resetInventory = [false, false, false, false, false, false, false, false, false]; 
+
+            //Go back to the title screen.
             changeLevel('titleScreen');
         });
     }
