@@ -1,14 +1,15 @@
-var healthBar;
-var oldHealth;
-var healthDif;
-var hbX;
-var hbY;
-var hbWidth;
-var hbHeight;
-var hbIncrement;
-var hbReady;
-var intervalVar;
+var healthBar; //Health bar.
+var oldHealth; //Old health value. 
+var healthDif; //Difference 
+var hbX; //Health bar x. 
+var hbY; //Health bar y. 
+var hbWidth; //Health bar width. 
+var hbHeight; //Health bar height. 
+var hbIncrement; //Health increments .
+var hbReady; //Is the health bar ready? 
+var intervalVar; //Interval. 
 
+//Initialise health bar. 
 function firstInitHealthBar() {
     hbWidth = userIntThis.sys.game.config.width*0.20;
     hbHeight = userIntThis.sys.game.config.height*0.05;
@@ -19,10 +20,12 @@ function firstInitHealthBar() {
     healthBar.setDepth(500);
 }
 
+//Update the maximum health value of the health bar. 
 function maxHealthUpdate() {
     hbIncrement = hbWidth/maxHealth;    
 }
 
+//Reset the health bar. 
 function healthBarReset() {
     oldHealth = maxHealth;
     healthDif = 0;
@@ -31,6 +34,7 @@ function healthBarReset() {
     }
 }
 
+//Animate the health bar. 
 function parseHealthBarAnimate() {
     hbReady = true;
     healthDif = oldHealth - currentHealth;
@@ -53,6 +57,7 @@ function oldHealthCtr() {
     drawHealthBar();
 }
 
+//Parse the health bar. 
 function parseHealthBar() {
     if (hbReady) {
         hbReady = false;
@@ -61,6 +66,7 @@ function parseHealthBar() {
     }
 }
 
+//Draw the health bar. 
 function drawHealthBar() {
     healthBar.clear();
     hbX = userIntThis.cameras.main.scrollX + userIntThis.sys.game.config.width*0.775;
@@ -74,6 +80,7 @@ function drawHealthBar() {
     }
 }
 
+//Set the health bar to being ready. 
 function setHBReady() {
     hbReady = true;
 }
