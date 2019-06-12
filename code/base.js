@@ -60,7 +60,9 @@ class controller extends Phaser.Scene
         this.load.image('spiderBossWebSprite','assets/enemy/spiderBossWeb.png');
         this.load.image('medusaBossSprite','assets/enemy/medusaBoss.png');
         this.load.image('bullBossSprite','assets/enemy/bullBoss.png');
-        
+        //Skeletons
+        this.load.spritesheet('skeleSprite','assets/enemy/skeleton.png',
+            { frameWidth: 30, frameHeight: 45 });
         //Items (must be constantly loaded for inventory)
         this.load.image('spiderFlowerSprite', 'assets/items/flower.png');
         this.load.image('thoughtBubbleSprite', 'assets/npc/thought.png');

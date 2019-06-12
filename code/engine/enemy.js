@@ -26,11 +26,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
             this.maxXBound = this.findBounds.find(function(disc) {
                 return disc.name == 'farBoundary';
             });
-            if (parameter.x + parameter.xMove > this.maxXBound.x)
-            {
-                this.xMax = this.maxXBound.x-50;
-            }else
-            {
+            if (parameter.x + parameter.xMove > this.maxXBound.x) {
+                this.xMax = this.maxXBound.x-100;
+            } else {
                 this.xMax = parameter.x + parameter.xMove; 
             }
             //this.xMax = parameter.x + parameter.xMove;
@@ -132,10 +130,9 @@ class enemyBase extends Phaser.GameObjects.Sprite {
         }
 
         //If the attacks are inactive and the spider is attacked, it will become active.
-        if (enemies[tempEnemy.enemyId] !== undefined)
-        {
+        if (enemies[tempEnemy.enemyId] !== undefined) {
             if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
-            spiderBossActive = true;
+                spiderBossActive = true;
             }
         }
         
@@ -162,18 +159,14 @@ class enemyBase extends Phaser.GameObjects.Sprite {
                 this.webGraphics.alpha = 0;
             }
             
-            if (this.skeleton && skelesRemain > 0)
-            {
+            if (this.skeleton && skelesRemain > 0) {
                 skelesRemain--;
                 userIntThis.updateSkeletonText();
-                if (skelesRemain === 0)
-                {
+                if (skelesRemain === 0) {
                     userIntThis.ritualItemText.alpha = 0;
-                    if(levelProgress === 3)
-                    {
+                    if (levelProgress === 3) {
                         levelProgress++;
                     }
-                    console.log(levelProgress);
                     //reset
                     skelesRemain = 1;
                 }
@@ -216,6 +209,122 @@ class enemyBase extends Phaser.GameObjects.Sprite {
                 this.body.setVelocityX(this.xVel);
                 this.moveRight = true; 
             }
+        }
+    }
+
+    collision(tempEnemy) {
+        tempEnemy.collisionBase(tempEnemy);
+    }
+
+    /* If the enemy is in a state of temporary invulnerability, nothing happens. 
+     * Otherwise, the player will damage the enemy if the sword is swung and the 
+     * enemy will damage the player if the sword is not being swung. 
+     * tempEnemy refers to the enemy object. 
+     */
+    collisionBase(tempEnemy) {
+        if (tempEnemy.stompable && player.body.velocity['y'] >= 200) {
+            enemies[tempEnemy.enemyId].destroy();  
+        } else if (playerSwingSword && !tempEnemy.invulnerability && !tempEnemy.invulnerabilityAlways) {
+            enemies[tempEnemy.enemyId].health -= playerDamagePoints;
+            enemies[tempEnemy.enemyId].invulnerability = true; 
+            enemies[tempEnemy.enemyId].alpha = 0.3;
+            enemies[tempEnemy.enemyId].setTint(0xFF0000);
+            if (enemies[tempEnemy.enemyId].body.allowGravity) {
+                enemies[tempEnemy.enemyId].knockback = true;
+            }
+            setTimeout(tempEnemy.invulnerabilityStop, 500, tempEnemy.enemyId);
+        } else if (!playerSwingSword && !tempEnemy.invulnerability && tempEnemy.damageTouch) {
+            playerDamage(tempEnemy.playerDamageCollision);
+        } else if (!playerSwingSword && tempEnemy.hasSword && tempEnemy.swingSword) {
+            playerDamage(tempEnemy.playerDamageSword);
+        }
+
+        //If the attacks are inactive and the spider is attacked, it will become active.
+        if (enemies[tempEnemy.enemyId] !== undefined) {
+            if (enemies[tempEnemy.enemyId].spiderBoss == true && !spiderBossActive) {
+            spiderBossActive = true;
+            }
+        }
+    }
+
+    /* Stop enemy invulnerability. 
+     * tempEnemyId refers to the enemy ID. 
+     */
+    invulnerabilityStop(tempEnemyId) {
+        enemies[tempEnemyId].invulnerability = false; 
+        enemies[tempEnemyId].alpha = 1; 
+        enemies[tempEnemyId].clearTint();
+    }
+
+    //Enemy update routine. 
+    update() {
+        if (this.alive && this.health <= 0) {
+            this.alive = false; 
+            if (this.boss) {
+                activeBosses--;
+            }
+
+            if (this.spiderBoss) {
+                this.webGraphics.alpha = 0;
+            }
+            
+            if (this.skeleton && skelesRemain > 0) {
+                skelesRemain--;
+                userIntThis.updateSkeletonText();
+                if (skelesRemain === 0) {
+                    userIntThis.ritualItemText.alpha = 0;
+                    if (levelProgress === 3) {
+                        levelProgress++;
+                    }
+                    
+                    //reset
+                    skelesRemain = 1;
+                }
+            }
+            
+            enemies[this.enemyId].destroy(); 
+        }
+    }
+
+    movement() {
+        //If the enemy has been knocked back, their movement should be adjusted. 
+        if (this.knockback) {
+            this.knockback = false;
+            if (playerFacingRight) {
+                this.body.setVelocityX(100);
+            } else {
+                this.body.setVelocityX(-100);
+            }
+            this.body.setVelocityY(-300);
+            this.knockedBack = true; 
+        } 
+        
+
+        //Movement logic. 
+        if (this.knockedBack && this.body.blocked.down) {
+            if (this.x > this.xMax) {
+                this.body.setVelocityX(-this.xVel);
+                this.moveRight = false; 
+                this.knockedBack = false;    
+            } else if (this.x < this.xMin) {
+                this.body.setVelocityX(this.xVel);
+                this.moveRight = true; 
+                this.knockedBack = false;    
+            }
+        } else if (!this.knockedBack) {
+            if (this.moveRight && this.x > this.xMax) {
+                this.body.setVelocityX(-this.xVel);
+                this.moveRight = false;     
+            } else if (this.x < this.xMin) {
+                this.body.setVelocityX(this.xVel);
+                this.moveRight = true; 
+            }
+        }
+
+        if (this.body.velocity.x === 0 && this.xMove !== undefined) {
+            //prevents sprite from getting 'stuck'
+            this.body.setVelocityX(this.xVel);
+            this.moveRight = true;
         }
     }
 }
@@ -266,8 +375,7 @@ class fox extends enemyBase {
         });
     }
 
-    update ()
-    {            
+    update () {            
         if (this.body.velocity.x < 0) {
             this.anims.play('foxLeft', true);
         } else if (this.body.velocity.x > 0) {
@@ -296,9 +404,7 @@ class snake extends enemyBase {
             health: 150
         });
     }
-    update ()
-    {        
-        
+    update () {        
         if (this.body.velocity.x < 0) {
             this.anims.play('snakeLeft', true);
         } else if (this.body.velocity.x > 0) {
@@ -722,9 +828,9 @@ class skeleton extends enemyBase {
             scene: createThis, 
             x: parameter.x, 
             y: parameter.y,
-            key: 'tempEnemy', 
+            key: 'skeleSprite', 
             xMove: 300,
-            xVel: 130, 
+            xVel: Math.round((Math.random() * 40) + 110), 
             scale: 1, 
             enemyId: parameter.enemyId, 
             gravity: true, 
@@ -732,11 +838,60 @@ class skeleton extends enemyBase {
             skeleton:true, 
             boss: true
         });
+        this.anims.play('skeleRight', true);
+    }
+
+    movement() {
+        //If the enemy has been knocked back, their movement should be adjusted. 
+        if (this.knockback) {
+            this.knockback = false;
+            if (playerFacingRight) {
+                this.body.setVelocityX(100);
+                this.anims.play('skeleRight', true);
+            } else {
+                this.body.setVelocityX(-100);
+                this.anims.play('skeleLeft', true);
+            }
+            this.body.setVelocityY(-300);
+            this.knockedBack = true; 
+        } 
+        
+
+        //Movement logic. 
+        if (this.knockedBack && this.body.blocked.down) {
+            if (this.x > this.xMax) {
+                this.body.setVelocityX(-this.xVel);
+                this.moveRight = false; 
+                this.knockedBack = false;
+                this.anims.play('skeleLeft', true);    
+            } else if (this.x < this.xMin) {
+                this.body.setVelocityX(this.xVel);
+                this.moveRight = true; 
+                this.knockedBack = false;
+                this.anims.play('skeleRight', true);    
+            }
+        } else if (!this.knockedBack){
+            if (this.moveRight && this.x > this.xMax) {
+                this.body.setVelocityX(-this.xVel);
+                this.moveRight = false;
+                this.anims.play('skeleLeft', true);
+            } else if (this.x < this.xMin) {
+                this.body.setVelocityX(this.xVel);
+                this.moveRight = true;
+                this.anims.play('skeleRight', true);
+            } 
+        }
+
+        if (this.body.velocity.x === 0) {
+            //prevents sprite from getting 'stuck'
+            this.body.setVelocityX(50);
+            this.moveRight = true;
+            this.anims.play('skeleRight', true);
+        }
     }
 }
 
-function skeleArmySpawn()
-{
+function skeleArmySpawn() {
     skelesActive = false;
     skelesRemain = 28;
     skeleSpawn = 1;
@@ -747,11 +902,9 @@ function skeleArmySpawn()
     skeleInterval = setTimeout(delayedSkeleSpawn,4000);
     //Deactivate skeleton counter
     //open portal, set progression
-
 }
 
-function spawnSkeleton()
-{
+function spawnSkeleton() {
     enemies[enemyCount] = new skeleton({
     x: Math.floor(200 + (Math.random() * (gameWidth - 400))), 
     y: 1750, 
@@ -760,32 +913,24 @@ function spawnSkeleton()
     enemyCount++;
 }
 
-function delayedSkeleSpawn()
-{
+function delayedSkeleSpawn() {
     this.skeleDelay = 500;
 
     //Spawn new skeleton.
-    if (skeleSpawn > 7)
-    {
-        if (skeleSpawn%2 === 0)
-        {
-            for (this.i = 0; this.i < skeleSpawn/2; this.i++)
-            {
+    if (skeleSpawn > 7) {
+        if (skeleSpawn%2 === 0) {
+            for (this.i = 0; this.i < skeleSpawn/2; this.i++) {
                 spawnSkeleton();
             }
-        }else
-        {
-            for (this.i = 0; this.i < 3; this.i++)
-            {
+        } else {
+            for (this.i = 0; this.i < 3; this.i++) {
                 spawnSkeleton();
             }
         }
-    }else
-    {
+    } else {
         spawnSkeleton();
     }
     
-
     //Spawn skeleton later if needed. 
     if (skeleSpawn < 12) {
         skeleInterval = setTimeout(delayedSkeleSpawn, this.skeleDelay*skeleSpawn);

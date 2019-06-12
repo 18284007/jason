@@ -28,7 +28,29 @@ class colchisFields extends Phaser.Scene{
             frameRate: 10,
             repeat: -1
         });
+
+        createThis.anims.create({
+            key: 'skeleIdle',
+            frames: createThis.anims.generateFrameNumbers('skeleSprite', { start: 0, end: 0 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        createThis.anims.create({
+            key: 'skeleLeft',
+            frames: createThis.anims.generateFrameNumbers('skeleSprite', { start: 0, end: 12 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        createThis.anims.create({
+            key: 'skeleRight',
+            frames: createThis.anims.generateFrameNumbers('skeleSprite', { start: 13, end: 25 }),
+            frameRate: 10,
+            repeat: -1
+        });
+    
     }
+
+
 
     update()
     {
