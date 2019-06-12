@@ -389,6 +389,9 @@ class fox extends enemyBase {
     }    
 }
 
+/* Snake.
+ * Required parameters: x, y, xMove, enemyId
+ */
 class snake extends enemyBase { 
     constructor (parameter) {
         super({
@@ -418,6 +421,9 @@ class snake extends enemyBase {
     }
 }
 
+/* Bats.
+ * Required parameters: x, y, xMove, enemyId
+ */
 class bats extends enemyBase { 
     constructor (parameter) {
         super({
@@ -448,6 +454,9 @@ class bats extends enemyBase {
     }    
 }
 
+/* Bull boss.
+ * Required parameters: x, y, xMove, enemyId
+ */
 class bullBoss extends enemyBase { 
     constructor (parameter) {
         super({
@@ -511,6 +520,9 @@ class bullBoss extends enemyBase {
     
 }
 
+/* Medusa Boss.
+ * Required parameters: x, y, enemyId
+ */
 class medusaBoss extends enemyBase { 
     constructor (parameter) {
         super({
@@ -552,6 +564,9 @@ class medusaBoss extends enemyBase {
     }
 }
 
+/* Minotaur Boss.
+ * Required parameters: x, y, enemyId
+ */
 class minotaurBoss extends enemyBase { 
     constructor (parameter) {
         super({
@@ -569,9 +584,10 @@ class minotaurBoss extends enemyBase {
             hasSword: true, 
             boss: true
         });
-        this.swingSword = false; 
+        this.swingSword = false; //Is the minotaur swinging a sword?
         this.charging = false; //Is the minotaur charging at the player? 
 
+        //Hitboxes
         this.body.setSize(48,35);
         this.body.setOffset(0,13);
     }
@@ -822,6 +838,9 @@ class spiderBoss extends enemyBase {
     }
 }
 
+/* Skeleton.
+ * Required parameters: x, y, enemyId.
+ */
 class skeleton extends enemyBase {
     constructor (parameter) {
         super({
@@ -891,6 +910,7 @@ class skeleton extends enemyBase {
     }
 }
 
+//Spawn a skeleton army. 
 function skeleArmySpawn() {
     skelesActive = false;
     skelesRemain = 28;
@@ -904,6 +924,7 @@ function skeleArmySpawn() {
     //open portal, set progression
 }
 
+//Spawn a skeleton. 
 function spawnSkeleton() {
     enemies[enemyCount] = new skeleton({
     x: Math.floor(200 + (Math.random() * (gameWidth - 400))), 
@@ -913,6 +934,7 @@ function spawnSkeleton() {
     enemyCount++;
 }
 
+//Delayed spawn of a skeleton. 
 function delayedSkeleSpawn() {
     this.skeleDelay = 500;
 
@@ -938,6 +960,9 @@ function delayedSkeleSpawn() {
     skeleSpawn++;
 }
 
+/* Runs the movement() and update() functions of each enemy. 
+ * The enemy must be alive and not undefined. 
+ */
 function enemyMovement() {
     if (enemyCount > 0){
         for (i = 0; i < enemyCount; i++){
